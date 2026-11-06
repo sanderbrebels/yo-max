@@ -50,11 +50,19 @@ class AIEnhancementService: ObservableObject {
             self.customPrompts = []
         }
 
-        // Yo Max: always offer the Dutch cleanup prompt.
-        if !customPrompts.contains(where: { $0.id == PromptTemplates.dutchPromptId }),
-            let dutchPrompt = PromptTemplates.seedPrompts.first(where: { $0.id == PromptTemplates.dutchPromptId })
-        {
-            customPrompts.append(dutchPrompt)
+        // Yo Max: always offer the Dutch cleanup prompt, and refresh the stored copy
+        // whenever the built-in version is bumped (PromptTemplates.dutchPromptVersion).
+        if let dutchPrompt = PromptTemplates.seedPrompts.first(where: { $0.id == PromptTemplates.dutchPromptId }) {
+            let versionKey = "YoMaxDutchPromptVersion"
+            if let index = customPrompts.firstIndex(where: { $0.id == PromptTemplates.dutchPromptId }) {
+                if UserDefaults.standard.integer(forKey: versionKey) < PromptTemplates.dutchPromptVersion {
+                    customPrompts[index] = dutchPrompt
+                }
+            } else {
+                customPrompts.append(dutchPrompt)
+            }
+            savePrompts()  // didSet does not fire during init
+            UserDefaults.standard.set(PromptTemplates.dutchPromptVersion, forKey: versionKey)
         }
 
         repairModePromptSelections()
