@@ -172,6 +172,14 @@ final class TranscriptionDelivery {
         SoundManager.shared.playStopSound()
         await actions.dismiss()
 
+        // Yo Max: no text field to paste into → put the text on the clipboard and show it in a copy card.
+        if YoMaxDefaults.showCopyPanel, YoMaxTextFieldDetector.focusedElementState() == .notEditable {
+            logger.notice("No editable focus; showing the Yo Max copy panel instead of pasting")
+            _ = ClipboardManager.copyToClipboard(textToPaste)
+            YoMaxCopyPanelController.shared.show(text: textToPaste)
+            return
+        }
+
         let pasteTask = CursorPaster.startPasteAtCursor(pastedText, sendKey: sendKey)
 
         Task { @MainActor in

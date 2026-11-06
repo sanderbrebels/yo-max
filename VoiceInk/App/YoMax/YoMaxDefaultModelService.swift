@@ -25,6 +25,13 @@ enum YoMaxDefaults {
     static var keepModelLoaded: Bool {
         UserDefaults.standard.object(forKey: keepModelLoadedKey) as? Bool ?? true
     }
+
+    /// Show the copy card at the top of the screen when there is no text field (default on).
+    static let copyPanelKey = "YoMaxShowCopyPanelWithoutTextField"
+
+    static var showCopyPanel: Bool {
+        UserDefaults.standard.object(forKey: copyPanelKey) as? Bool ?? true
+    }
 }
 
 @MainActor

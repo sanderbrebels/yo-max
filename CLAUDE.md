@@ -47,6 +47,11 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - Prompt "Nederlands" v2: tijden zoals gezegd ("half tien" blijft), kleine grammaticafouten herstellen, geen komma tussen onderwerp en werkwoord. Verander je de prompttekst, verhoog dan `PromptTemplates.dutchPromptVersion`, anders krijgt de opgeslagen prompt de nieuwe tekst niet.
 - Crash bij afsluiten opgelost: `AppDelegate.applicationShouldTerminate` geeft eerst het Whisper-model vrij (whisper.cpp breekt anders af op zijn Metal-resources).
 
+### Kopieerkader zonder tekstveld (zoals Wispr Flow)
+- Na het dicteren kijkt `YoMaxTextFieldDetector` (`VoiceInk/App/YoMax/`) via Toegankelijkheid of er een tekstveld de focus heeft: `editable`, `notEditable` of `unknown`.
+- Alleen bij `notEditable` (geen focus, of een knop/lijst/venster…) plakt Yo Max niet: de tekst gaat op het klembord en `YoMaxCopyPanelController` toont een Tarmax-kaart bovenaan het scherm met Copy-knop (verdwijnt na 15 s, blijft zolang de muis erop staat). Bij `unknown` (vaak browsers/Electron) wordt gewoon geplakt.
+- Inhaakpunt: `TranscriptionDelivery.paste`. Uitzetten: Settings → "Show Copy Card Without Text Field" (`YoMaxDefaults.copyPanelKey`).
+
 ### Tarmax-stijl (fase 5)
 - Bron: `~/GIT/tarmax/DESIGN_SYSTEMS.md` en `src/ui/theme/tokens.css`. Kleuren staan als palet in `AppTheme.Brand` (`DesignSystem/Theme/AppTheme.swift`); de rest van de app gebruikt alleen de betekenissen.
 - Accent: ink `#0B1F0D` in licht (zoals de hoofdknop van Tarmax), lime `#86F46D` in donker. Zijbalk: brand-dark tegels met lime iconen, gekozen rij = lime pil met ink-tekst.

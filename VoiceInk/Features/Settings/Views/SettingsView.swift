@@ -17,6 +17,7 @@ struct SettingsView: View {
     @AppStorage(OnboardingSettings.completedV2Key) private var hasCompletedOnboardingV2 = true
     @AppStorage("enableAnnouncements") private var enableAnnouncements = false
     @AppStorage(YoMaxDefaults.keepModelLoadedKey) private var keepModelLoaded = true
+    @AppStorage(YoMaxDefaults.copyPanelKey) private var showCopyPanel = true
     @AppStorage("restoreClipboardAfterPaste") private var restoreClipboardAfterPaste = true
     @AppStorage("clipboardRestoreDelay") private var clipboardRestoreDelay = 2.0
     @AppStorage(SmartPunctuation.settingsKey) private var smartPunctuationEnabled = false
@@ -252,6 +253,9 @@ struct SettingsView: View {
 
                 Toggle("Keep Model Loaded", isOn: $keepModelLoaded)
                     .help("Keeps the transcription model in memory between dictations so Yo Max responds faster. Uses more memory.")
+
+                Toggle("Show Copy Card Without Text Field", isOn: $showCopyPanel)
+                    .help("When no text field has focus, Yo Max copies the text and shows it in a card at the top of the screen instead of pasting.")
 
                 // Yo Max: update and announcement controls removed (updates are disabled).
                 HStack {
