@@ -10,11 +10,11 @@ struct ModeIconView: View {
             switch icon.kind {
             case .symbol:
                 Image(systemName: icon.value)
-                    .font(.system(size: size, weight: .medium))
+                    .font(.yoMax(size, weight: .medium))
                     .foregroundStyle(color)
             case .emoji:
                 Text(icon.value)
-                    .font(.system(size: size))
+                    .font(.yoMax(size))
             }
         }
     }
@@ -115,7 +115,7 @@ struct ModeIconPickerView: View {
             HStack(spacing: 8) {
                 TextField("+", text: $newEmojiText)
                     .textFieldStyle(.roundedBorder)
-                    .font(.title2)
+                    .font(.yoMax(17, weight: .medium))
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: 70)
                     .focused($isEmojiTextFieldFocused)
@@ -150,7 +150,7 @@ struct ModeIconPickerView: View {
 
             if !inputFeedbackMessage.isEmpty {
                 Text(inputFeedbackMessage)
-                    .font(.caption)
+                    .font(.yoMax(10))
                     .foregroundColor(AppTheme.Status.error)
             }
         }
@@ -218,7 +218,7 @@ private struct ModeIconButton: View {
                     .overlay(
                         Circle()
                             .strokeBorder(
-                                isSelected ? AppTheme.Accent.primary : Color.gray.opacity(0.25),
+                                isSelected ? AppTheme.Accent.primary : AppTheme.Text.secondary.opacity(0.25),
                                 lineWidth: isSelected ? 2 : 1)
                     )
             }
@@ -229,7 +229,7 @@ private struct ModeIconButton: View {
                     Image(systemName: "xmark.circle.fill")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(Color.white, AppTheme.Status.error)
-                        .font(.caption2)
+                        .font(.yoMax(10))
                         .background(Circle().fill(Color.white.opacity(0.8)))
                 }
                 .buttonStyle(.borderless)
@@ -245,13 +245,13 @@ private struct AddEmojiButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: "plus.circle.fill")
-                .font(.title2)
+                .font(.yoMax(17, weight: .medium))
                 .symbolRenderingMode(.hierarchical)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppTheme.Text.secondary)
                 .frame(width: 44, height: 44)
                 .overlay(
                     Circle()
-                        .strokeBorder(Color.gray.opacity(0.25), lineWidth: 1)
+                        .strokeBorder(AppTheme.Text.secondary.opacity(0.25), lineWidth: 1)
                 )
         }
         .buttonStyle(.plain)

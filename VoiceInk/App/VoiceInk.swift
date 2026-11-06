@@ -299,6 +299,7 @@ struct VoiceInkApp: App {
                 if hasCompletedOnboardingV2 {
                     ContentView()
                         .font(.yoMax(YoMaxTypography.bodySize))  // Yo Max: Aeonik for text without its own font
+                        .buttonBorderShape(.capsule)  // Yo Max: Tarmax pill buttons
                         .environmentObject(engine)
                         .environmentObject(whisperModelManager)
                         .environmentObject(fluidAudioModelManager)

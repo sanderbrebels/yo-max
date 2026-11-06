@@ -6,7 +6,7 @@ struct DashboardTranscriptCards: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             Text("Recent Transcripts")
-                .font(.system(size: 18, weight: .bold, design: .rounded))
+                .font(.yoMax(18, weight: .bold))
                 .foregroundStyle(AppTheme.Text.primary)
                 .lineLimit(1)
 
@@ -114,13 +114,13 @@ private struct DashboardTranscriptCardRow: View {
 
             VStack(alignment: .leading, spacing: 5) {
                 Text(metadataText)
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.yoMax(12, weight: .semibold))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(isExpanded ? copyText : previewText)
-                    .font(.system(size: 13, weight: .regular))
+                    .font(.yoMax(13, weight: .regular))
                     .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(isExpanded ? nil : 2)
                     .frame(maxWidth: .infinity, alignment: .leading)

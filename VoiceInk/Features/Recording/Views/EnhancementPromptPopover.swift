@@ -34,7 +34,7 @@ struct EnhancementPromptPopover: View {
                     )
                 )
                 .foregroundColor(AppTheme.Text.primary)
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
                 .lineLimit(1)
 
                 Spacer()
@@ -100,14 +100,14 @@ struct EnhancementPromptRow: View {
             HStack(spacing: 8) {
                 Text(prompt.title)
                     .foregroundColor(isDisabled ? AppTheme.Text.disabled : AppTheme.Text.primary)
-                    .font(.system(size: 13))
+                    .font(.yoMax(13))
                     .lineLimit(1)
 
                 if isSelected {
                     Spacer()
                     Image(systemName: "checkmark")
                         .foregroundColor(isDisabled ? AppTheme.Status.positive.opacity(0.70) : AppTheme.Status.positive)
-                        .font(.system(size: 10))
+                        .font(.yoMax(10))
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)

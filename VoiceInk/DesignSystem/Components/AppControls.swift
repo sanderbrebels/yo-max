@@ -31,7 +31,7 @@ struct AppIconButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: systemName)
-                .font(.system(size: iconSize, weight: .medium))
+                .font(.yoMax(iconSize, weight: .medium))
                 .foregroundColor(isDisabled ? .secondary.opacity(0.45) : .primary.opacity(0.7))
                 .frame(width: size, height: size)
                 .background(
@@ -84,7 +84,7 @@ private struct AppActionButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.system(size: 12, weight: .semibold))
+            .font(.yoMax(12, weight: .semibold))
             .foregroundStyle(foregroundColor)
             .padding(.horizontal, 14)
             .frame(height: 32)
@@ -129,9 +129,9 @@ struct AppPanelHeader: View {
     var body: some View {
         HStack(spacing: 12) {
             Text(title)
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
                 .fontWeight(.semibold)
-                .foregroundColor(.primary)
+                .foregroundColor(AppTheme.Text.primary)
 
             Spacer()
 
@@ -161,8 +161,8 @@ struct AppScreenHeader<Trailing: View>: View {
         HStack {
             HStack(spacing: 8) {
                 Text(title)
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(.primary)
+                    .font(.yoMax(28, weight: .bold))
+                    .foregroundColor(AppTheme.Text.primary)
 
                 if let infoMessage {
                     if let infoURL {

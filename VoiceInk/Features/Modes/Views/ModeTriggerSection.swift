@@ -84,12 +84,12 @@ struct ModeTriggerSection: View {
     private var emptyTriggerState: some View {
         HStack(spacing: 8) {
             Image(systemName: "circle.dashed")
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(13, weight: .medium))
+                .foregroundStyle(AppTheme.Text.secondary)
 
             Text("No automatic triggers")
-                .font(.system(size: 13))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(13))
+                .foregroundStyle(AppTheme.Text.secondary)
 
             Spacer()
         }

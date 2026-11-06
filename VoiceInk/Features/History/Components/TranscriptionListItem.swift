@@ -22,26 +22,26 @@ struct TranscriptionListItem: View {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text(transcription.timestamp, format: .dateTime.month(.abbreviated).day().hour().minute())
-                        .font(.system(size: 11, weight: .medium))
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(11, weight: .medium))
+                        .foregroundColor(AppTheme.Text.secondary)
                     Spacer()
                     if transcription.duration > 0 {
                         Text(transcription.duration.formatTiming())
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.yoMax(10, weight: .medium))
                             .padding(.horizontal, 6)
                             .padding(.vertical, 3)
                             .background(
                                 RoundedRectangle(cornerRadius: 4, style: .continuous)
                                     .fill(AppTheme.Surface.card)
                             )
-                            .foregroundColor(.secondary)
+                            .foregroundColor(AppTheme.Text.secondary)
                     }
                 }
 
                 Text(transcription.enhancedText ?? transcription.text)
-                    .font(.system(size: 12, weight: .regular))
+                    .font(.yoMax(12, weight: .regular))
                     .lineLimit(2)
-                    .foregroundColor(.primary)
+                    .foregroundColor(AppTheme.Text.primary)
             }
         }
         .padding(10)
@@ -75,7 +75,7 @@ struct CircularCheckboxStyle: ToggleStyle {
             Image(systemName: configuration.isOn ? "checkmark.circle.fill" : "circle")
                 .symbolRenderingMode(.hierarchical)
                 .foregroundColor(configuration.isOn ? AppTheme.Selection.foreground : .secondary)
-                .font(.system(size: 18))
+                .font(.yoMax(18))
         }
         .buttonStyle(.plain)
     }

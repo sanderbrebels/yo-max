@@ -44,7 +44,7 @@ struct AudioFileRow: View {
     private var pendingRow: some View {
         HStack {
             Image(systemName: "clock")
-                .foregroundColor(.secondary)
+                .foregroundColor(AppTheme.Text.secondary)
 
             Text(item.filename)
                 .lineLimit(1)
@@ -53,15 +53,15 @@ struct AudioFileRow: View {
             Spacer()
 
             Text("Waiting")
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .font(.yoMax(10))
+                .foregroundColor(AppTheme.Text.secondary)
 
             Button {
                 onRemove()
             } label: {
                 Image(systemName: "xmark.circle.fill")
                     .symbolRenderingMode(.hierarchical)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppTheme.Text.secondary)
             }
             .buttonStyle(.plain)
         }
@@ -82,7 +82,7 @@ struct AudioFileRow: View {
             Spacer()
 
             Text(LocalizedStringKey(phase.rawValue))
-                .font(.caption)
+                .font(.yoMax(10))
                 .foregroundColor(AppTheme.Accent.primary)
         }
     }
@@ -96,13 +96,13 @@ struct AudioFileRow: View {
                 .foregroundColor(AppTheme.Status.positive)
 
             Text(item.filename)
-                .foregroundColor(.primary)
+                .foregroundColor(AppTheme.Text.primary)
                 .lineLimit(1)
                 .truncationMode(.middle)
 
             if !isExpanded, let transcription = item.transcription {
                 Text(transcription.enhancedText ?? transcription.text)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppTheme.Text.secondary)
                     .lineLimit(1)
             }
 
@@ -120,13 +120,13 @@ struct AudioFileRow: View {
                 if transcription.duration > 0 {
                     Text(formatDuration(transcription.duration))
                         .font(.caption.weight(.medium))
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AppTheme.Text.secondary)
                 }
             }
 
             Image(systemName: "chevron.right")
                 .font(.caption2.weight(.semibold))
-                .foregroundColor(.secondary)
+                .foregroundColor(AppTheme.Text.secondary)
                 .rotationEffect(.degrees(isExpanded ? 90 : 0))
                 .animation(.easeInOut(duration: 0.2), value: isExpanded)
         }
@@ -154,13 +154,13 @@ struct AudioFileRow: View {
             HStack(spacing: 12) {
                 if let model = transcription.transcriptionModelName {
                     Label(model, systemImage: "cpu")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundColor(AppTheme.Text.secondary)
                 }
                 if let prompt = transcription.promptName {
                     Label(prompt, systemImage: "sparkles")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundColor(AppTheme.Text.secondary)
                 }
                 Spacer()
             }
@@ -197,7 +197,7 @@ struct AudioFileRow: View {
                     .truncationMode(.middle)
 
                 Text(message)
-                    .font(.caption)
+                    .font(.yoMax(10))
                     .foregroundColor(AppTheme.Status.error.opacity(0.80))
                     .lineLimit(2)
             }

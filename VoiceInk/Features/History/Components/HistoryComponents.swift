@@ -28,7 +28,7 @@ struct HistorySearchHeader<Accessory: View>: View {
         HStack(spacing: 14) {
             TextField("Search transcriptions...", text: $searchText)
                 .textFieldStyle(.plain)
-                .font(.system(size: 15))
+                .font(.yoMax(15))
                 .focused(searchFocus)
                 .frame(maxWidth: 340)
 
@@ -69,12 +69,12 @@ struct HistoryEmptyState: View {
         VStack(spacing: 10) {
             Spacer()
             Image(systemName: hasSearchQuery ? "magnifyingglass" : "text.bubble")
-                .font(.system(size: 28))
+                .font(.yoMax(28))
                 .foregroundStyle(AppTheme.Text.muted)
             Text(hasSearchQuery ? "No matching transcriptions" : "No transcriptions yet")
-                .font(.system(size: 14, weight: .medium))
+                .font(.yoMax(14, weight: .medium))
             Text(hasSearchQuery ? "Try another search term." : emptyMessage)
-                .font(.system(size: 12))
+                .font(.yoMax(12))
                 .foregroundStyle(AppTheme.Text.secondary)
             Spacer()
         }
@@ -172,13 +172,13 @@ struct HistoryTranscriptionRow: View {
                 }
 
                 Text(transcription.preferredHistoryText)
-                    .font(.system(size: 13))
+                    .font(.yoMax(13))
                     .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(transcription.timestamp, format: .relative(presentation: .named))
-                    .font(.system(size: 10))
+                    .font(.yoMax(10))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)
@@ -212,7 +212,7 @@ struct HistoryIconButton: View {
                         .controlSize(.small)
                 } else {
                     Image(systemName: systemName)
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.yoMax(12, weight: .medium))
                 }
             }
             .foregroundStyle(AppTheme.Text.secondary)
@@ -260,14 +260,14 @@ struct HistoryCommandButton: View {
                     .fixedSize(horizontal: true, vertical: false)
                 if let shortcut {
                     Text(shortcut)
-                        .font(.system(size: 10, weight: .medium, design: .rounded))
+                        .font(.yoMax(10, weight: .medium))
                         .foregroundStyle(AppTheme.Text.muted)
                         .padding(.horizontal, 5)
                         .padding(.vertical, 3)
                         .background(AppTheme.Surface.controlActive, in: RoundedRectangle(cornerRadius: 5))
                 }
             }
-            .font(.system(size: 11, weight: .medium))
+            .font(.yoMax(11, weight: .medium))
             .foregroundStyle(isDestructive ? AppTheme.Status.error : AppTheme.Text.secondary)
             .padding(.horizontal, 10)
             .frame(minWidth: minimumWidth)

@@ -14,14 +14,14 @@ struct ModeSettingsPanelView: View {
         VStack(spacing: 0) {
             HStack(spacing: 12) {
                 Text("Modes Settings")
-                    .font(.headline)
+                    .font(.yoMax(13, weight: .medium))
                     .fontWeight(.semibold)
-                    .foregroundColor(.primary)
+                    .foregroundColor(AppTheme.Text.primary)
                 Spacer()
                 Button(action: onDismiss) {
                     Image(systemName: "xmark")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(14, weight: .medium))
+                        .foregroundColor(AppTheme.Text.secondary)
                         .padding(6)
                         .background(AppTheme.Surface.card)
                         .clipShape(Circle())
@@ -36,11 +36,11 @@ struct ModeSettingsPanelView: View {
 
             HStack {
                 Text("Reorder Modes")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    .font(.yoMax(12, weight: .semibold))
+                    .foregroundStyle(AppTheme.Text.secondary)
                     + Text(" (drag to reorder)")
-                    .font(.system(size: 12))
-                    .foregroundStyle(.tertiary)
+                    .font(.yoMax(12))
+                    .foregroundStyle(AppTheme.Text.muted)
                 Spacer()
             }
             .padding(.horizontal, contentInset)
@@ -134,7 +134,7 @@ private struct ModeReorderRow: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(config.name)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.yoMax(14, weight: .semibold))
                     .lineLimit(1)
                     .truncationMode(.tail)
 
@@ -224,13 +224,13 @@ private struct ModeReorderMeta: View {
     var body: some View {
         HStack(spacing: 4) {
             Image(systemName: icon)
-                .font(.system(size: 9, weight: .medium))
+                .font(.yoMax(9, weight: .medium))
 
             Text(value)
-                .font(.system(size: 11))
+                .font(.yoMax(11))
                 .lineLimit(1)
         }
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppTheme.Text.secondary)
     }
 }
 
@@ -242,14 +242,14 @@ private struct ModeReorderBadge: View {
         HStack(spacing: 5) {
             if let systemImage {
                 Image(systemName: systemImage)
-                    .font(.system(size: 10, weight: .semibold))
+                    .font(.yoMax(10, weight: .semibold))
                     .symbolRenderingMode(.hierarchical)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(AppTheme.Text.primary)
             }
 
             Text(title)
-                .font(.system(size: 11, weight: .medium))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(11, weight: .medium))
+                .foregroundStyle(AppTheme.Text.secondary)
                 .lineLimit(1)
         }
         .padding(.horizontal, 7)
@@ -273,7 +273,7 @@ private struct ModeReorderDragPreview: View {
             ModeIconView(icon: config.icon, size: config.icon.kind == .emoji ? 18 : 14)
 
             Text(config.name)
-                .font(.system(size: 14, weight: .semibold))
+                .font(.yoMax(14, weight: .semibold))
                 .lineLimit(1)
         }
         .padding(.horizontal, 14)

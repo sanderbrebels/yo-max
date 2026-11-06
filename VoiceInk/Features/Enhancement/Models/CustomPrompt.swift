@@ -59,7 +59,7 @@ extension CustomPrompt {
                 .lineLimit(1)
                 .truncationMode(.tail)
         }
-        .font(.system(size: 12, weight: .medium))
+        .font(.yoMax(12, weight: .medium))
         .foregroundStyle(isSelected ? Color.white : Color.primary)
         .frame(maxWidth: .infinity, minHeight: 30)
         .padding(.horizontal, 10)
@@ -116,8 +116,8 @@ extension CustomPrompt {
 
     static func addNewButton(action: @escaping () -> Void) -> some View {
         Label("Add New", systemImage: "plus.circle.fill")
-            .font(.system(size: 12, weight: .medium))
-            .foregroundStyle(.secondary)
+            .font(.yoMax(12, weight: .medium))
+            .foregroundStyle(AppTheme.Text.secondary)
             .lineLimit(1)
             .frame(maxWidth: .infinity, minHeight: 30)
             .padding(.horizontal, 10)

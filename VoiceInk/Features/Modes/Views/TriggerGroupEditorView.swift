@@ -23,11 +23,11 @@ struct TriggerGroupEditorView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(group.name)
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(.primary)
+                .font(.yoMax(14, weight: .semibold))
+                .foregroundStyle(AppTheme.Text.primary)
             Text("Edit the apps and websites in this group.")
-                .font(.system(size: 11))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(11))
+                .foregroundStyle(AppTheme.Text.secondary)
         }
         .padding(12)
     }
@@ -37,8 +37,8 @@ struct TriggerGroupEditorView: View {
             LazyVStack(spacing: 4) {
                 if group.isEmpty {
                     Text("No triggers in this group")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(12, weight: .medium))
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 32)
                 } else {
@@ -59,19 +59,19 @@ struct TriggerGroupEditorView: View {
         VStack(spacing: 6) {
             HStack(spacing: 8) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundStyle(.secondary)
-                    .font(.system(size: 12))
+                    .foregroundStyle(AppTheme.Text.secondary)
+                    .font(.yoMax(12))
 
                 TextField("Add app or website...", text: $searchText)
                     .textFieldStyle(.plain)
-                    .font(.system(size: 13))
+                    .font(.yoMax(13))
                     .onSubmit(addWebsiteIfPossible)
 
                 if !searchText.isEmpty {
                     Button(action: { searchText = "" }) {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundStyle(.secondary)
-                            .font(.system(size: 12))
+                            .foregroundStyle(AppTheme.Text.secondary)
+                            .font(.yoMax(12))
                     }
                     .buttonStyle(.plain)
                 }
@@ -104,8 +104,8 @@ struct TriggerGroupEditorView: View {
                                 .frame(width: 22, height: 22)
                                 .cornerRadius(5)
                             Text(app.name)
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundStyle(.primary)
+                                .font(.yoMax(12, weight: .medium))
+                                .foregroundStyle(AppTheme.Text.primary)
                             Spacer()
                         }
                         .padding(.horizontal, 12)
@@ -123,8 +123,8 @@ struct TriggerGroupEditorView: View {
             HStack(spacing: 8) {
                 TriggerSymbol(systemName: "globe")
                 Text(String(format: String(localized: "Add %@"), websiteCandidate))
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.primary)
+                    .font(.yoMax(12, weight: .medium))
+                    .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
                 Spacer()
             }
@@ -140,8 +140,8 @@ struct TriggerGroupEditorView: View {
         HStack(spacing: 10) {
             TriggerAppIcon(bundleId: appConfig.bundleIdentifier, size: 24)
             Text(appConfig.appName)
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(.primary)
+                .font(.yoMax(13, weight: .medium))
+                .foregroundStyle(AppTheme.Text.primary)
                 .lineLimit(1)
             Spacer()
             TriggerRemoveButton {
@@ -156,8 +156,8 @@ struct TriggerGroupEditorView: View {
         HStack(spacing: 10) {
             TriggerSymbol(systemName: "globe")
             Text(urlConfig.url)
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(.primary)
+                .font(.yoMax(13, weight: .medium))
+                .foregroundStyle(AppTheme.Text.primary)
                 .lineLimit(1)
             Spacer()
             TriggerRemoveButton {

@@ -217,7 +217,7 @@ struct ModelManagementView: View {
                     activePanel = nil
                 }) {
                     Text(filter.title)
-                        .font(.system(size: 14, weight: selectedFilter == filter ? .semibold : .medium))
+                        .font(.yoMax(14, weight: selectedFilter == filter ? .semibold : .medium))
                         .foregroundColor(selectedFilter == filter ? .primary : .primary.opacity(0.7))
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
@@ -297,7 +297,7 @@ struct ModelManagementView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "square.and.arrow.down")
                     Text("Import Local Model…")
-                        .font(.system(size: 12, weight: .semibold))
+                        .font(.yoMax(12, weight: .semibold))
                 }
                 .frame(maxWidth: .infinity)
                 .padding(16)
@@ -316,11 +316,11 @@ struct ModelManagementView: View {
     private var intelMacWarningBanner: some View {
         HStack(spacing: 10) {
             Image(systemName: "exclamationmark.triangle.fill")
-                .font(.system(size: 14, weight: .semibold))
+                .font(.yoMax(14, weight: .semibold))
                 .foregroundColor(AppTheme.Status.warningStrong)
 
             Text("Local models don't work reliably on Intel Macs")
-                .font(.system(size: 13, weight: .medium))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(.primary.opacity(0.85))
 
             Spacer()
@@ -332,9 +332,9 @@ struct ModelManagementView: View {
             }) {
                 HStack(spacing: 4) {
                     Text("Use Cloud")
-                        .font(.system(size: 12, weight: .semibold))
+                        .font(.yoMax(12, weight: .semibold))
                     Image(systemName: "arrow.right")
-                        .font(.system(size: 10, weight: .bold))
+                        .font(.yoMax(10, weight: .bold))
                 }
                 .foregroundColor(AppTheme.Status.warningStrong)
                 .padding(.horizontal, 12)

@@ -169,10 +169,10 @@ struct HistoryDetailActionBar: View {
                 .lineLimit(1)
                 .truncationMode(.tail)
             Image(systemName: "chevron.down")
-                .font(.system(size: 8, weight: .semibold))
+                .font(.yoMax(8, weight: .semibold))
                 .foregroundStyle(AppTheme.Text.muted)
         }
-        .font(.system(size: 11, weight: .medium))
+        .font(.yoMax(11, weight: .medium))
         .foregroundStyle(AppTheme.Text.secondary)
         .padding(.horizontal, 10)
         .frame(maxWidth: 140)
@@ -185,7 +185,7 @@ struct HistoryDetailActionBar: View {
     private var promptPopover: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Select Prompt")
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
                 .padding(.horizontal)
                 .padding(.top, 8)
 
@@ -198,7 +198,7 @@ struct HistoryDetailActionBar: View {
                 VStack(alignment: .leading, spacing: 4) {
                     if promptsUnavailable {
                         Text("Custom prompts aren't available with VoiceInk Refine. Select another mode first.")
-                            .font(.system(size: 12))
+                            .font(.yoMax(12))
                             .foregroundStyle(AppTheme.Text.secondary)
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.horizontal, 8)
@@ -207,7 +207,7 @@ struct HistoryDetailActionBar: View {
 
                     if prompts.isEmpty {
                         Text("No Prompts Available")
-                            .font(.system(size: 13))
+                            .font(.yoMax(13))
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
                     } else {

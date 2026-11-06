@@ -34,12 +34,12 @@ struct GitHubStarPromptCard: View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Help people discover VoiceInk")
-                    .font(.system(size: 14.5, weight: .bold))
-                    .foregroundStyle(.primary)
+                    .font(.yoMax(14.5, weight: .bold))
+                    .foregroundStyle(AppTheme.Text.primary)
 
                 Text("If VoiceInk has been useful, a star on GitHub helps others find it.")
-                    .font(.system(size: 11.5, weight: .regular))
-                    .foregroundStyle(.secondary)
+                    .font(.yoMax(11.5, weight: .regular))
+                    .foregroundStyle(AppTheme.Text.secondary)
                     .lineSpacing(2)
             }
             .fixedSize(horizontal: false, vertical: true)
@@ -53,14 +53,14 @@ struct GitHubStarPromptCard: View {
                                 .tint(.secondary)
                         } else {
                             Image(systemName: openFailed ? "exclamationmark.triangle.fill" : "star")
-                                .font(.system(size: 11, weight: .semibold))
+                                .font(.yoMax(11, weight: .semibold))
                                 .foregroundStyle(openFailed ? .orange : .primary)
                         }
 
                         Text(openFailed ? "Couldn't open — try again" : "Star on GitHub")
-                            .font(.system(size: 12, weight: .semibold))
+                            .font(.yoMax(12, weight: .semibold))
                     }
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(AppTheme.Text.primary)
                     .padding(.horizontal, 11)
                     .frame(height: 28)
                     .background(AppTheme.Surface.controlActive, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
@@ -71,8 +71,8 @@ struct GitHubStarPromptCard: View {
 
                 Button(action: onLater) {
                     Text("Later")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(12, weight: .medium))
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .padding(.horizontal, 10)
                         .frame(height: 28)
                 }
@@ -87,12 +87,12 @@ struct GitHubStarPromptCard: View {
     private var completionContent: some View {
         HStack(spacing: 8) {
             Image(systemName: completionState == .starred ? "checkmark.circle.fill" : "arrow.up.right.circle.fill")
-                .font(.system(size: 15, weight: .semibold))
+                .font(.yoMax(15, weight: .semibold))
                 .foregroundStyle(completionState == .starred ? AppTheme.Sidebar.license : .secondary)
 
             Text(completionState == .starred ? "Starred — thank you!" : "GitHub opened")
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundStyle(.primary)
+                .font(.yoMax(13, weight: .semibold))
+                .foregroundStyle(AppTheme.Text.primary)
 
             Spacer(minLength: 0)
         }

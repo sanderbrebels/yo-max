@@ -8,8 +8,8 @@ enum DashboardHeroHeadline {
 }
 
 struct DashboardHeroCard: View {
-    private static let headlineFont: Font = .system(size: 23, weight: .bold, design: .rounded)
-    private static let highlightedHeadlineFont: Font = .system(size: 30, weight: .black, design: .rounded)
+    private static let headlineFont: Font = .yoMax(23, weight: .medium)  // Yo Max: Tarmax 500
+    private static let highlightedHeadlineFont: Font = .yoMax(30, weight: .medium)  // Yo Max: Tarmax 500
 
     let isLocked: Bool
     let headline: DashboardHeroHeadline
@@ -58,7 +58,7 @@ struct DashboardHeroCard: View {
                 .frame(maxWidth: 720, alignment: .leading)
 
             Text(subtext)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.yoMax(15, weight: .semibold))
                 .foregroundStyle(DashboardMomentumBackground.subtext)
                 .frame(maxWidth: 620, alignment: .leading)
         }
@@ -102,13 +102,13 @@ struct DashboardHeroCard: View {
                     .fill(Color.white.opacity(0.78))
 
                 Image(systemName: "lock.fill")
-                    .font(.system(size: 17, weight: .bold))
+                    .font(.yoMax(17, weight: .bold))
                     .foregroundStyle(DashboardMomentumBackground.accent)
             }
             .frame(width: 42, height: 42)
 
             Text("Continue using Yo Max to unlock stats and insights.")
-                .font(.system(size: 26, weight: .black, design: .rounded))
+                .font(.yoMax(26, weight: .black))
                 .foregroundStyle(DashboardMomentumBackground.headline)
                 .frame(maxWidth: 540, alignment: .leading)
         }
@@ -130,9 +130,9 @@ private struct DashboardMomentumActionLabel: View {
                 .lineLimit(2)
 
             Image(systemName: icon)
-                .font(.system(size: 13, weight: .semibold))
+                .font(.yoMax(13, weight: .semibold))
         }
-        .font(.system(size: 13, weight: .semibold))
+        .font(.yoMax(13, weight: .semibold))
         .foregroundStyle(foregroundColor)
         .padding(.horizontal, 18)
         .frame(minHeight: 40)
@@ -184,8 +184,8 @@ private struct DashboardImpactBackground: View {
             Image("momentum-hero-bg")
                 .resizable()
                 .scaledToFill()
-                .blur(radius: isLocked ? 2.5 : 0)
-                .saturation(isLocked ? 0.78 : 1)
+                .blur(radius: 0)  // Yo Max: the Tarmax banner stays sharp
+                .saturation(1)
 
             if isLocked {
                 Color.white.opacity(0.32)

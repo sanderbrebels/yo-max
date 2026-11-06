@@ -17,7 +17,7 @@ struct ModePopover: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Select Mode")
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
                 .padding(.horizontal)
                 .padding(.top, 8)
@@ -32,10 +32,10 @@ struct ModePopover: View {
                         VStack(alignment: .center, spacing: 8) {
                             Image(systemName: "sparkles")
                                 .foregroundColor(AppTheme.Text.secondary)
-                                .font(.system(size: 16))
+                                .font(.yoMax(16))
                             Text("No Modes Available")
                                 .foregroundColor(AppTheme.Text.primary)
-                                .font(.system(size: 13))
+                                .font(.yoMax(13))
                                 .lineLimit(1)
                                 .truncationMode(.tail)
                         }
@@ -85,14 +85,14 @@ struct ModeRow: View {
 
                 Text(config.name)
                     .foregroundColor(AppTheme.Text.primary)
-                    .font(.system(size: 13))
+                    .font(.yoMax(13))
                     .lineLimit(1)
 
                 if isSelected {
                     Spacer()
                     Image(systemName: "checkmark")
                         .foregroundColor(AppTheme.Status.positive)
-                        .font(.system(size: 10))
+                        .font(.yoMax(10))
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)

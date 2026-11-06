@@ -7,7 +7,7 @@ struct DashboardContent: View {
     private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "DashboardContent")
     private static let fallbackDisplayName = String(localized: "there")
     private static let displayNameFontSize: CGFloat = 28
-    private static let displayNameFontWeight: NSFont.Weight = .bold
+    private static let displayNameFontWeight: NSFont.Weight = .medium  // Yo Max: Tarmax titles are 500
     private static let displayNameMinWidth: CGFloat = 72
     private static let displayNameMaxWidth: CGFloat = 280
     private static let displayNameHorizontalPadding: CGFloat = 8
@@ -286,7 +286,7 @@ struct DashboardContent: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text(greetingEmoji)
-                    .font(.system(size: 25))
+                    .font(.yoMax(25))
                     .accessibilityHidden(true)
 
                 Text("\(greetingText),")
@@ -304,7 +304,7 @@ struct DashboardContent: View {
 
             HStack(alignment: .top, spacing: 0) {
                 Text(headerSubtitle)
-                    .font(.system(size: 13, weight: .medium))
+                    .font(.yoMax(13, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(2)
 
@@ -352,7 +352,7 @@ struct DashboardContent: View {
     }
 
     private var displayNameFont: Font {
-        .system(size: Self.displayNameFontSize, weight: .bold, design: .rounded)
+        .yoMax(Self.displayNameFontSize, weight: .medium)  // Yo Max: Tarmax titles are 500
     }
 
     private var dismissingSpacer: some View {
@@ -596,7 +596,7 @@ struct DashboardContent: View {
             DashboardIconGlyph(systemName: icon, color: color, size: 13, frameSize: 16)
 
             Text(title)
-                .font(.system(size: 13, weight: .medium))
+                .font(.yoMax(13, weight: .medium))
                 .lineLimit(1)
                 .fixedSize(horizontal: true, vertical: false)
         }
@@ -634,7 +634,7 @@ struct DashboardContent: View {
         let name = isEditingDisplayName ? displayNameDraft : defaultedDisplayName
         let measuredWidth = (name as NSString).size(
             withAttributes: [
-                .font: NSFont.systemFont(ofSize: Self.displayNameFontSize, weight: Self.displayNameFontWeight)
+                .font: NSFont.yoMax(Self.displayNameFontSize, weight: Self.displayNameFontWeight)  // Yo Max
             ]
         ).width
         return min(
@@ -839,7 +839,7 @@ private struct DashboardAccessibilityReminder: View {
                     .fill(AppTheme.Accent.fill)
 
                 Image(systemName: "hand.raised")
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.yoMax(15, weight: .medium))
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(AppTheme.Accent.primary)
             }
@@ -847,13 +847,13 @@ private struct DashboardAccessibilityReminder: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text("Enable Accessibility Access")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.primary)
+                    .font(.yoMax(13, weight: .semibold))
+                    .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
 
                 Text("Required for Yo Max shortcuts and app-wide controls to work properly.")
-                    .font(.system(size: 11))
-                    .foregroundStyle(.secondary)
+                    .font(.yoMax(11))
+                    .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(2)
             }
 
@@ -879,7 +879,7 @@ private struct DashboardNoModesReminder: View {
                     .fill(AppTheme.Accent.fill)
 
                 Image(systemName: "square.grid.2x2")
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.yoMax(15, weight: .medium))
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(AppTheme.Accent.primary)
             }
@@ -887,13 +887,13 @@ private struct DashboardNoModesReminder: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text("Set Up a Mode")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.primary)
+                    .font(.yoMax(13, weight: .semibold))
+                    .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
 
                 Text("Yo Max needs at least one mode to record. Create one to start dictating.")
-                    .font(.system(size: 11))
-                    .foregroundStyle(.secondary)
+                    .font(.yoMax(11))
+                    .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(2)
             }
 

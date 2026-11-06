@@ -28,8 +28,8 @@ struct TriggerTemplateRow: View {
                 TriggerSymbol(systemName: template.systemImage)
 
                 Text(template.name)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(.primary)
+                    .font(.yoMax(13, weight: .semibold))
+                    .foregroundColor(AppTheme.Text.primary)
                     .lineLimit(1)
 
                 Spacer()
@@ -41,14 +41,14 @@ struct TriggerTemplateRow: View {
 
                 if isAdded {
                     Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.yoMax(16, weight: .medium))
                         .foregroundStyle(Color.accentColor)
                         .frame(width: 22, height: 22)
                 } else if !isDisabled {
                     Image(systemName: "plus.circle.fill")
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.yoMax(14, weight: .medium))
                         .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .frame(width: 22, height: 22)
                 }
             }
@@ -79,8 +79,8 @@ struct TriggerSymbol: View {
                 .frame(width: 28, height: 28)
 
             Image(systemName: systemName)
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(.primary)
+                .font(.yoMax(13, weight: .medium))
+                .foregroundStyle(AppTheme.Text.primary)
         }
     }
 }

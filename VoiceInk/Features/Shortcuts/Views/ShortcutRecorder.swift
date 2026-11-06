@@ -105,7 +105,7 @@ struct ShortcutVisualization: View {
                 }
             } else {
                 Text(isRecording ? LocalizedStringKey("Press shortcut") : LocalizedStringKey("Record"))
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.yoMax(12, weight: .medium))
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
                     .foregroundStyle(isRecording ? .primary : .secondary)
@@ -132,7 +132,7 @@ private struct ShortcutKeyCap: View {
 
     var body: some View {
         Text(title)
-            .font(.system(size: isCompact ? 9 : 11, weight: .semibold, design: .rounded))
+            .font(.yoMax(isCompact ? 9 : 11, weight: .semibold))
             .lineLimit(1)
             .minimumScaleFactor(0.75)
             .foregroundStyle(foregroundColor)

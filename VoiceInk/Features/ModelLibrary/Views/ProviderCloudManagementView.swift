@@ -58,13 +58,13 @@ struct CloudProviderManagementView: View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 3) {
                 Text("Cloud Providers")
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.yoMax(15, weight: .semibold))
                 HStack(alignment: .firstTextBaseline, spacing: 4) {
                     Text("Cloud providers process audio and text under their own privacy policies.")
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(AppTheme.Text.secondary)
                     Link("Learn more", destination: URL(string: "https://tryvoiceink.com/privacy")!)
                 }
-                .font(.caption)
+                .font(.yoMax(10))
             }
 
             ForEach(providerDescriptors) { descriptor in
@@ -252,12 +252,12 @@ private struct ProviderListRow: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(descriptor.displayName)
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.primary)
+                        .font(.yoMax(13, weight: .semibold))
+                        .foregroundStyle(AppTheme.Text.primary)
 
                     Text(capabilitySummary)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .lineLimit(1)
                 }
 
@@ -266,8 +266,8 @@ private struct ProviderListRow: View {
                 ProviderStatusBadge(title: statusText, color: statusColor)
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    .font(.yoMax(12, weight: .semibold))
+                    .foregroundStyle(AppTheme.Text.secondary)
             }
             .contentShape(Rectangle())
             .padding(14)

@@ -53,7 +53,7 @@ struct ClipboardMessageModifier: ViewModifier {
                 Group {
                     if !message.isEmpty {
                         Text(message)
-                            .font(.caption)
+                            .font(.yoMax(10))
                             .foregroundColor(AppTheme.Status.positive)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)

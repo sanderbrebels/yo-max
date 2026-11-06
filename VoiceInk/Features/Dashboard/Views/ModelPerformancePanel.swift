@@ -87,7 +87,7 @@ private struct ModelPerformanceDetailRow: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(row.name)
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.yoMax(13, weight: .semibold))
                     .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
@@ -95,7 +95,7 @@ private struct ModelPerformanceDetailRow: View {
 
                 if let detail = row.detail {
                     Text(detail)
-                        .font(.system(size: 11))
+                        .font(.yoMax(11))
                         .foregroundStyle(AppTheme.Text.secondary)
                         .lineLimit(1)
                 }

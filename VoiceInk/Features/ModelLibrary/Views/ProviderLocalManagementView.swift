@@ -114,7 +114,7 @@ struct LocalEnhancementServiceManagementView: View {
 
             if let ollamaUserRefreshError {
                 Text(ollamaUserRefreshError)
-                    .font(.caption)
+                    .font(.yoMax(10))
                     .foregroundStyle(AppTheme.Status.error)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.leading, LocalProviderMetrics.labelWidth + 12)
@@ -147,8 +147,8 @@ struct LocalEnhancementServiceManagementView: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(alignment: .firstTextBaseline) {
                     Text("Command")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(12, weight: .medium))
+                        .foregroundStyle(AppTheme.Text.secondary)
 
                     Spacer()
 
@@ -161,7 +161,7 @@ struct LocalEnhancementServiceManagementView: View {
                         }
                     } label: {
                         Label("Template", systemImage: "doc.on.doc")
-                            .font(.system(size: 12, weight: .medium))
+                            .font(.yoMax(12, weight: .medium))
                     }
                     .menuStyle(.button)
                     .buttonStyle(.bordered)
@@ -209,7 +209,7 @@ struct LocalEnhancementServiceManagementView: View {
 
             Text("Variables: VOICEINK_SYSTEM_PROMPT, VOICEINK_USER_PROMPT, VOICEINK_FULL_PROMPT")
                 .font(.system(size: 11, design: .monospaced))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppTheme.Text.secondary)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 2)
         }
@@ -276,9 +276,9 @@ private struct LocalProviderDisclosureRow<Content: View>: View {
             } label: {
                 HStack(spacing: 12) {
                     Image(systemName: systemImage)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.yoMax(14, weight: .medium))
                         .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .frame(width: 30, height: 30)
                         .background(
                             RoundedRectangle(cornerRadius: 7)
@@ -291,25 +291,25 @@ private struct LocalProviderDisclosureRow<Content: View>: View {
 
                     VStack(alignment: .leading, spacing: 2) {
                         title
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(.primary)
+                            .font(.yoMax(13, weight: .semibold))
+                            .foregroundStyle(AppTheme.Text.primary)
 
                         subtitle
-                            .font(.system(size: 11))
-                            .foregroundStyle(.secondary)
+                            .font(.yoMax(11))
+                            .foregroundStyle(AppTheme.Text.secondary)
                             .lineLimit(1)
                     }
 
                     Spacer(minLength: 12)
 
                     statusTitle
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .lineLimit(1)
 
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundStyle(.tertiary)
+                        .font(.yoMax(11, weight: .semibold))
+                        .foregroundStyle(AppTheme.Text.muted)
                         .rotationEffect(.degrees(isExpanded ? 90 : 0))
                 }
                 .contentShape(Rectangle())
@@ -359,8 +359,8 @@ private struct LocalProviderFormRow<Content: View>: View {
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 12) {
             Text(title)
-                .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(12, weight: .medium))
+                .foregroundStyle(AppTheme.Text.secondary)
                 .frame(width: LocalProviderMetrics.labelWidth, alignment: .leading)
 
             content()

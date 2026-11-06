@@ -54,7 +54,11 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - App-icoon: Tarmax-ruit met lime golfvorm op licht (`design/icoon/yo-max-icoon.svg`, exact gecentreerd). Menubalk: dezelfde ruit als template met 3 uitgespaarde streepjes (`design/icoon/menubalk-icoon.svg`). PNG's opnieuw maken: render de SVG naar 16–1024 px in `VoiceInk/Assets.xcassets/AppIcon.appiconset/`.
 - **Lettertype Aeonik** (`Font.yoMax`, `VoiceInk/App/YoMax/YoMaxTypography.swift`): wordt gebruikt als het op de Mac geïnstalleerd is (`~/Library/Fonts`), anders het systeemlettertype. **Aeonik is betaald: nooit in de app bundelen of in git zetten** (de repo is openbaar). Een vriend ziet dus gewoon SF Pro.
 - **Design system via de themalaag (keuze A, 2026-11-06):** de Tarmax-elevation zit in `AppTheme` (Surface, Border, Text, Status, Selection, Insights, Radius) en `AppSurfaces`, die de app al ±650 keer gebruikt. Pagina `#F5F5F5` (donker zwart), kaarten wit zonder rand en schaduw (radius 20), zachte vulling `#F6FAF5`, muted tekst `#657064`, Tarmax-statuskleuren. Het content-gebied is een dekkende pagina (geen doorschijnend materiaal meer). Dashboard-banner: `design/icoon/dashboard-banner.svg` → `momentum-hero-bg`. Schermen die nog "VoiceInk" ogen (losse kleuren in de view-code): één voor één omzetten wanneer nodig. Let op: in SVG-commentaar mag geen dubbel streepje staan, anders laadt macOS het bestand niet.
-- Aeonik zit nu in de zijbalk, de recorder en tekst zonder eigen lettertype. De ±530 vaste `.system(size:)`-letters in VoiceInk zijn bewust niet vervangen: dat zou elke VoiceInk-update laten botsen.
+- **Volledig Tarmax (keuze B, fase 6, 2026-11-06):** Sander koos bewust voor de volledige look, ook al botsen VoiceInk-updates daardoor meer.
+  - Alle lettertypes via `Font.yoMax` (±520 `.system(size:)` en 128 standaardstijlen in 104 bestanden, met een script). Rounded is weg; `monospaced` bleef. Typeschaal: macOS-groottes met Tarmax-gewichten (titels/koppen 500, tekst 400, alleen 400/500/700). Nieuwe code: altijd `.font(.yoMax(…))`, nooit `.system(size:)`.
+  - `.secondary`/`.primary`/`.tertiary` en losse rood/grijs → `AppTheme.Text…`/`AppTheme.Status…` (niet in Recording, Notifications en Licensing: donkere grond). Grafiekkleuren (`AppTheme.Data`) uit het Tarmax-palet.
+  - Zijbalk: zwevende witte kaart (12 pt marge, radius 24, schaduw) op de pagina, gekozen rij = lime pil. Pilknoppen via `.buttonBorderShape(.capsule)` op de root. Dashboard-titels 500 en de banner niet meer wazig.
+  - **VoiceInk-updates:** een merge raakt nu bijna altijd een paar van deze regels. Los conflicten op door hun nieuwe code te nemen en daarna opnieuw de lettertype- en kleurregels toe te passen (zelfde omzetting: `.system(size:` → `.yoMax(`, `.secondary` → `AppTheme.Text.secondary`). Of neem nieuwe VoiceInk-functies met de hand over.
 
 ## Bouwen
 
@@ -125,7 +129,7 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 - [x] Recorder-venster restylen (`Features/Recording/Views/MiniRecorderView.swift`; notch blijft zwart).
 - [x] Tarmax-elevation en tokens via de themalaag (pagina, kaarten, tekst, status).
 - [ ] Schermen met losse kleuren één voor één naar tokens omzetten (screenshot bekijken).
-- [ ] Aeonik in meer schermen (titels, instellingen), als het de moeite is tegenover de merge-conflicten.
+- [x] Aeonik en Tarmax-kleuren in alle schermen (fase 6).
 - [ ] Optioneel: geluidjes bij start/stop van de opname.
 
 ### Functies

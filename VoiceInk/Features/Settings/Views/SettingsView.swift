@@ -63,7 +63,7 @@ struct SettingsView: View {
                                 withAnimation { recordingShortcutManager.secondaryRecordingShortcut = .none }
                             } label: {
                                 Image(systemName: "minus.circle.fill")
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(AppTheme.Text.secondary)
                             }
                             .buttonStyle(.plain)
                         }
@@ -348,8 +348,8 @@ struct SettingsView: View {
 extension Text {
     func settingsDescription() -> some View {
         self
-            .font(.system(size: 12))
-            .foregroundColor(.secondary)
+            .font(.yoMax(12))
+            .foregroundColor(AppTheme.Text.secondary)
             .fixedSize(horizontal: false, vertical: true)
     }
 }

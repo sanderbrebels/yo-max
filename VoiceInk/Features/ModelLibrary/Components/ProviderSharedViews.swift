@@ -29,7 +29,7 @@ struct ProviderBrandIcon: View {
                     .padding(size * 0.24)
             } else {
                 Image(systemName: fallbackSystemImage)
-                    .font(.system(size: iconSize, weight: .semibold))
+                    .font(.yoMax(iconSize, weight: .semibold))
                     .foregroundStyle(isSelected ? AppTheme.Accent.primary : Color.secondary)
             }
         }
@@ -58,10 +58,10 @@ struct ProviderSectionHeader: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
             Text(title)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.yoMax(15, weight: .semibold))
             Text(subtitle)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(.yoMax(10))
+                .foregroundStyle(AppTheme.Text.secondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
     }
@@ -79,8 +79,8 @@ struct ProviderConfigurationGroup<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(12, weight: .semibold))
+                .foregroundStyle(AppTheme.Text.secondary)
 
             content()
         }
@@ -99,8 +99,8 @@ struct ProviderModelListSection<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(12, weight: .semibold))
+                .foregroundStyle(AppTheme.Text.secondary)
 
             VStack(alignment: .leading, spacing: 0) {
                 content()
@@ -133,8 +133,8 @@ struct ProviderStatusBadge: View {
                 .frame(width: 6, height: 6)
 
             Text(title)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(.yoMax(10))
+                .foregroundStyle(AppTheme.Text.secondary)
         }
     }
 }

@@ -61,7 +61,7 @@ struct MenuBarView: View {
 
                 if modeManager.enabledConfigurations.isEmpty {
                     Text("No modes available")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AppTheme.Text.secondary)
                 }
 
                 Divider()
@@ -76,11 +76,11 @@ struct MenuBarView: View {
             } label: {
                 HStack {
                     Image(systemName: "sparkles.square.fill.on.square")
-                        .font(.system(size: 11, weight: .medium))
+                        .font(.yoMax(11, weight: .medium))
                     let activeMode = modeManager.currentEffectiveConfiguration
                     Text(String(format: String(localized: "Mode: %@"), activeMode?.name ?? String(localized: "None")))
                     Image(systemName: "chevron.up.chevron.down")
-                        .font(.system(size: 10))
+                        .font(.yoMax(10))
                 }
             }
 
@@ -96,15 +96,15 @@ struct MenuBarView: View {
 
                 if audioDeviceManager.availableDevices.isEmpty {
                     Text("No devices available")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AppTheme.Text.secondary)
                 }
             } label: {
                 HStack {
                     Image(systemName: "mic.fill")
-                        .font(.system(size: 11, weight: .medium))
+                        .font(.yoMax(11, weight: .medium))
                     Text("Audio Input")
                     Image(systemName: "chevron.up.chevron.down")
-                        .font(.system(size: 10))
+                        .font(.yoMax(10))
                 }
             }
 

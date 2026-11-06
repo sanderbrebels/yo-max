@@ -178,8 +178,8 @@ struct WaveformView: View {
                         ProgressView()
                             .controlSize(.small)
                         Text("Loading...")
-                            .font(.system(size: 10))
-                            .foregroundColor(.secondary)
+                            .font(.yoMax(10))
+                            .foregroundColor(AppTheme.Text.secondary)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
@@ -201,7 +201,7 @@ struct WaveformView: View {
 
                     if isHovering {
                         Text(formatTime(duration * Double(hoverLocation / geometry.size.width)))
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.yoMax(10, weight: .medium))
                             .monospacedDigit()
                             .foregroundColor(AppTheme.Surface.window)
                             .padding(.horizontal, 6)
@@ -288,7 +288,7 @@ private struct CircleIconButton: View {
     let icon: String
     let action: () -> Void
     var fill: Color = AppTheme.Surface.subtle
-    var iconFont: Font = .system(size: 14, weight: .semibold)
+    var iconFont: Font = .yoMax(14, weight: .semibold)
 
     var body: some View {
         Button(action: action) {
@@ -298,7 +298,7 @@ private struct CircleIconButton: View {
                 .overlay(
                     Image(systemName: icon)
                         .font(iconFont)
-                        .foregroundStyle(.primary)
+                        .foregroundStyle(AppTheme.Text.primary)
                 )
         }
         .buttonStyle(.plain)
@@ -323,12 +323,12 @@ private struct AsyncCircleButton: View {
                                 .controlSize(.small)
                         } else if showSuccess {
                             Image(systemName: "checkmark")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.yoMax(14, weight: .semibold))
                                 .foregroundStyle(AppTheme.Status.success)
                         } else {
                             Image(systemName: defaultIcon)
-                                .font(.system(size: 14, weight: .semibold))
-                                .foregroundStyle(.primary)
+                                .font(.yoMax(14, weight: .semibold))
+                                .foregroundStyle(AppTheme.Text.primary)
                         }
                     }
                 )
@@ -396,9 +396,9 @@ struct AudioPlayerView: View {
 
             HStack(spacing: 8) {
                 Text(formatTime(playerManager.currentTime))
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.yoMax(11, weight: .medium))
                     .monospacedDigit()
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppTheme.Text.secondary)
 
                 Spacer()
 
@@ -418,8 +418,8 @@ struct AudioPlayerView: View {
                                     playerManager.playbackRate == 1.0
                                         ? "1×" : playerManager.playbackRate == 1.5 ? "1.5×" : "2×"
                                 )
-                                .font(.system(size: 11, weight: .semibold))
-                                .foregroundStyle(.primary)
+                                .font(.yoMax(11, weight: .semibold))
+                                .foregroundStyle(AppTheme.Text.primary)
                             )
                     }
                     .buttonStyle(.plain)
@@ -470,9 +470,9 @@ struct AudioPlayerView: View {
                 Spacer()
 
                 Text(formatTime(playerManager.duration))
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.yoMax(11, weight: .medium))
                     .monospacedDigit()
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppTheme.Text.secondary)
             }
             .padding(.horizontal, 10)
         }
@@ -502,7 +502,7 @@ struct AudioPlayerView: View {
                         ModeIconView(icon: selectedMode.icon, size: selectedMode.icon.kind == .emoji ? 14 : 12)
                     } else {
                         Image(systemName: "square.grid.2x2")
-                            .font(.system(size: 13, weight: .semibold))
+                            .font(.yoMax(13, weight: .semibold))
                             .foregroundStyle(.primary.opacity(0.6))
                     }
                 }
@@ -525,7 +525,7 @@ struct AudioPlayerView: View {
     private var promptSelectionPopover: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Select Prompt")
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
                 .padding(.horizontal)
                 .padding(.top, 8)
@@ -543,7 +543,7 @@ struct AudioPlayerView: View {
                             "Custom prompts aren't available with VoiceInk Refine. Select a Mode that uses another AI provider."
                         )
                         .foregroundColor(AppTheme.Text.secondary)
-                        .font(.system(size: 12))
+                        .font(.yoMax(12))
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal, 8)
                         .padding(.bottom, 6)
@@ -552,7 +552,7 @@ struct AudioPlayerView: View {
                     if prompts.isEmpty {
                         Text("No Prompts Available")
                             .foregroundColor(AppTheme.Text.primary)
-                            .font(.system(size: 13))
+                            .font(.yoMax(13))
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
                     } else {

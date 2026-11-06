@@ -116,8 +116,8 @@ struct PromptEditorView: View {
                 dismissPanel()
             } label: {
                 Image(systemName: "chevron.left")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.secondary)
+                    .font(.yoMax(14, weight: .semibold))
+                    .foregroundColor(AppTheme.Text.secondary)
                     .frame(width: 28, height: 28)
                     .background(AppTheme.Surface.card)
                     .clipShape(Circle())
@@ -128,7 +128,7 @@ struct PromptEditorView: View {
 
             TextField("Prompt name", text: $title)
                 .textFieldStyle(.plain)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.yoMax(16, weight: .semibold))
 
             Spacer()
         }
@@ -165,8 +165,8 @@ struct PromptEditorView: View {
             }
         } label: {
             Label("Template", systemImage: "sparkles")
-                .font(.system(size: 13, weight: .medium))
-                .foregroundColor(.secondary)
+                .font(.yoMax(13, weight: .medium))
+                .foregroundColor(AppTheme.Text.secondary)
         }
         .menuStyle(.borderlessButton)
         .buttonStyle(.plain)
@@ -186,7 +186,7 @@ struct PromptEditorView: View {
             if promptText.isEmpty {
                 Text("Write prompt instructions")
                     .font(.system(.body, design: .monospaced))
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(AppTheme.Text.muted)
                     .padding(.horizontal, 14)
                     .padding(.top, 10)
                     .allowsHitTesting(false)

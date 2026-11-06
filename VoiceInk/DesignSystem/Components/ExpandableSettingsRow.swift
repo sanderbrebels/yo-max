@@ -61,8 +61,8 @@ struct ExpandableSettingsRow<Content: View>: View {
                 Spacer()
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(.secondary)
+                    .font(.yoMax(12, weight: .semibold))
+                    .foregroundColor(AppTheme.Text.secondary)
                     .rotationEffect(.degrees(rowIsEnabled && isExpanded ? 90 : 0))
                     .opacity(rowIsEnabled ? 1 : 0.4)
             }

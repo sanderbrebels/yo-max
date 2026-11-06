@@ -28,11 +28,11 @@ struct TranscriptionModelDownloadCard: View {
 
                 VStack(alignment: .leading, spacing: 6) {
                     Text(model.displayName)
-                        .font(.system(size: 17, weight: .semibold))
+                        .font(.yoMax(17, weight: .semibold))
                         .foregroundColor(AppTheme.Text.primary)
 
                     Text("Fast multilingual transcription that runs locally on Mac.")
-                        .font(.system(size: 12))
+                        .font(.yoMax(12))
                         .foregroundColor(AppTheme.Text.secondary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.92)
@@ -78,7 +78,7 @@ struct TranscriptionModelDownloadCard: View {
 
     private func metadataPill(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 11, weight: .medium))
+            .font(.yoMax(11, weight: .medium))
             .foregroundColor(AppTheme.Text.secondary)
             .padding(.horizontal, 9)
             .padding(.vertical, 5)
@@ -87,7 +87,7 @@ struct TranscriptionModelDownloadCard: View {
 
     private func localizedMetadataPill(_ text: LocalizedStringKey) -> some View {
         Text(text)
-            .font(.system(size: 11, weight: .medium))
+            .font(.yoMax(11, weight: .medium))
             .foregroundColor(AppTheme.Text.secondary)
             .padding(.horizontal, 9)
             .padding(.vertical, 5)
@@ -111,7 +111,7 @@ struct TranscriptionModelDownloadCard: View {
                 Text(status.fractionCompleted, format: .percent.precision(.fractionLength(0)))
                     .fontDesign(.monospaced)
             }
-            .font(.system(size: 11, weight: .medium))
+            .font(.yoMax(11, weight: .medium))
             .foregroundColor(AppTheme.Text.secondary)
 
             ProgressView(value: status.fractionCompleted)
@@ -126,7 +126,7 @@ struct TranscriptionModelDownloadCard: View {
                 Text(downloadButtonTitle)
                 Image(systemName: isDownloading ? "xmark.circle" : "arrow.down.circle")
             }
-            .font(.system(size: 12, weight: .semibold))
+            .font(.yoMax(12, weight: .semibold))
             .foregroundColor(
                 isDownloading ? AppTheme.Action.destructiveForeground : AppTheme.Action.primaryForeground
             )
@@ -142,7 +142,7 @@ struct TranscriptionModelDownloadCard: View {
 
     private var statusBadge: some View {
         Text("Downloaded")
-            .font(.system(size: 11, weight: .semibold))
+            .font(.yoMax(11, weight: .semibold))
             .foregroundColor(AppTheme.Text.secondary)
             .padding(.horizontal, 9)
             .padding(.vertical, 5)

@@ -610,7 +610,7 @@ struct DownloadProgressView: View {
                 Text(totalProgress, format: .percent.precision(.fractionLength(0)))
                     .fontDesign(.monospaced)
             }
-            .font(.system(size: 12, weight: .medium))
+            .font(.yoMax(12, weight: .medium))
             .foregroundColor(Color(.secondaryLabelColor))
 
             GeometryReader { geometry in

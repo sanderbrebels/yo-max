@@ -26,15 +26,15 @@ struct InfoTip: View {
                 VStack(alignment: .leading, spacing: 0) {
                     if learnMoreLink != nil {
                         (Text(message)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(AppTheme.Text.secondary)
                             + Text(" ")
                             + Text("Learn more")
                             .foregroundColor(AppTheme.Accent.primary))
-                            .font(.callout)
+                            .font(.yoMax(12))
                     } else {
                         Text(message)
-                            .font(.callout)
-                            .foregroundColor(.secondary)
+                            .font(.yoMax(12))
+                            .foregroundColor(AppTheme.Text.secondary)
                     }
                 }
                 .fixedSize(horizontal: false, vertical: true)

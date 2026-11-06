@@ -95,7 +95,7 @@ struct AudioSetupView: View {
     private var priorityOrderRows: some View {
         if prioritizedDevicesInDisplayOrder.isEmpty {
             Text("Add microphones in the order Yo Max should try them.")
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppTheme.Text.secondary)
         } else {
             ForEach(prioritizedDevicesInDisplayOrder) { device in
                 priorityDeviceRow(for: device)
@@ -144,7 +144,7 @@ struct AudioSetupView: View {
                 Spacer()
 
                 Text("Add")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(AppTheme.Text.secondary)
             }
             .contentShape(Rectangle())
         }
@@ -160,7 +160,7 @@ struct AudioSetupView: View {
             HStack(spacing: 8) {
                 Text("\(prioritizedDevice.priority + 1)")
                     .font(.body.monospacedDigit())
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(AppTheme.Text.secondary)
                     .frame(width: 22, alignment: .leading)
 
                 VStack(alignment: .leading, spacing: 2) {
@@ -170,8 +170,8 @@ struct AudioSetupView: View {
 
                     if !isAvailable {
                         Text("Unavailable")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .font(.yoMax(10))
+                            .foregroundStyle(AppTheme.Text.secondary)
                     }
                 }
 
@@ -179,8 +179,8 @@ struct AudioSetupView: View {
 
                 if isActive {
                     Label("Active", systemImage: "checkmark.circle.fill")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .labelStyle(.titleAndIcon)
                 }
 

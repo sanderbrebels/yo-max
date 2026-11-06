@@ -8,7 +8,7 @@ struct VoiceInkButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 12)
@@ -28,15 +28,15 @@ struct ModeEmptyStateView: View {
     var body: some View {
         VStack(spacing: 16) {
             Image(systemName: "bolt.circle.fill")
-                .font(.system(size: 48))
-                .foregroundColor(.secondary)
+                .font(.yoMax(48))
+                .foregroundColor(AppTheme.Text.secondary)
 
             Text("No Modes")
-                .font(.title2)
+                .font(.yoMax(17, weight: .medium))
                 .fontWeight(.semibold)
 
             Text("Add customized modes for different contexts")
-                .foregroundColor(.secondary)
+                .foregroundColor(AppTheme.Text.secondary)
                 .multilineTextAlignment(.center)
 
             VoiceInkButton(
@@ -72,13 +72,13 @@ struct DefaultModeIndicator: View {
     var body: some View {
         HStack(spacing: 5) {
             Image(systemName: "checkmark.seal.fill")
-                .font(.system(size: 11, weight: .semibold))
+                .font(.yoMax(11, weight: .semibold))
                 .symbolRenderingMode(.hierarchical)
-                .foregroundStyle(.primary)
+                .foregroundStyle(AppTheme.Text.primary)
 
             Text("Default")
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(11, weight: .semibold))
+                .foregroundStyle(AppTheme.Text.secondary)
                 .lineLimit(1)
         }
         .padding(.leading, 7)
@@ -241,8 +241,8 @@ struct ConfigurationRow: View {
             onEditConfig(config)
         } label: {
             Text("Edit")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(.yoMax(10))
+                .foregroundStyle(AppTheme.Text.secondary)
                 .padding(.horizontal, 6)
                 .padding(.vertical, 2)
                 .background(
@@ -273,7 +273,7 @@ struct ConfigurationRow: View {
 
                     VStack(alignment: .leading, spacing: 3) {
                         Text(config.name)
-                            .font(.system(size: 15, weight: .semibold))
+                            .font(.yoMax(15, weight: .semibold))
                             .lineLimit(1)
                             .truncationMode(.tail)
 
@@ -281,23 +281,23 @@ struct ConfigurationRow: View {
                             if appCount > 0 {
                                 HStack(spacing: 4) {
                                     Image(systemName: "app.fill")
-                                        .font(.system(size: 10))
+                                        .font(.yoMax(10))
                                     Text(appText)
-                                        .font(.caption2)
+                                        .font(.yoMax(10))
                                 }
                             }
 
                             if websiteCount > 0 {
                                 HStack(spacing: 4) {
                                     Image(systemName: "globe")
-                                        .font(.system(size: 10))
+                                        .font(.yoMax(10))
                                     Text(websiteText)
-                                        .font(.caption2)
+                                        .font(.yoMax(10))
                                 }
                             }
                         }
                         .padding(.top, 2)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AppTheme.Text.secondary)
                     }
 
                     Spacer()
@@ -340,9 +340,9 @@ struct ConfigurationRow: View {
                 let modelMetadata = transcriptionModelMetadata
                 HStack(spacing: 4) {
                     Image(systemName: "waveform")
-                        .font(.system(size: 10))
+                        .font(.yoMax(10))
                     Text(modelMetadata.label)
-                        .font(.caption)
+                        .font(.yoMax(10))
                 }
                 .foregroundStyle(modelMetadata.isWarning ? Color.white : Color.primary)
                 .padding(.horizontal, 6)
@@ -351,13 +351,13 @@ struct ConfigurationRow: View {
                     Capsule()
                         .fill(
                             modelMetadata.isWarning
-                                ? Color.red.opacity(0.80) : AppTheme.Surface.control)
+                                ? AppTheme.Status.error.opacity(0.80) : AppTheme.Surface.control)
                 )
                 .overlay(
                     Capsule()
                         .stroke(
                             modelMetadata.isWarning
-                                ? Color.red.opacity(0.80) : AppTheme.Border.control,
+                                ? AppTheme.Status.error.opacity(0.80) : AppTheme.Border.control,
                             lineWidth: 0.5
                         )
                 )
@@ -365,9 +365,9 @@ struct ConfigurationRow: View {
                 if let language = selectedLanguage, language != "Default" {
                     HStack(spacing: 4) {
                         Image(systemName: "globe")
-                            .font(.system(size: 10))
+                            .font(.yoMax(10))
                         Text(language)
-                            .font(.caption)
+                            .font(.yoMax(10))
                     }
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -388,9 +388,9 @@ struct ConfigurationRow: View {
                 {
                     HStack(spacing: 4) {
                         Image(systemName: "cpu")
-                            .font(.system(size: 10))
+                            .font(.yoMax(10))
                         Text(modelName.count > 20 ? String(modelName.prefix(18)) + "..." : modelName)
-                            .font(.caption)
+                            .font(.yoMax(10))
                     }
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -407,9 +407,9 @@ struct ConfigurationRow: View {
                 if config.outputMode != .paste {
                     HStack(spacing: 4) {
                         Image(systemName: config.outputMode.iconName)
-                            .font(.system(size: 10))
+                            .font(.yoMax(10))
                         Text(config.outputMode.displayName)
-                            .font(.caption)
+                            .font(.yoMax(10))
                     }
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -426,9 +426,9 @@ struct ConfigurationRow: View {
                 if config.outputMode == .paste && config.autoSendKey.isEnabled {
                     HStack(spacing: 4) {
                         Image(systemName: "keyboard")
-                            .font(.system(size: 10))
+                            .font(.yoMax(10))
                         Text(config.autoSendKey.displayName)
-                            .font(.caption)
+                            .font(.yoMax(10))
                     }
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -444,13 +444,13 @@ struct ConfigurationRow: View {
                 if config.isAIEnhancementEnabled {
                     HStack(spacing: 4) {
                         Image(systemName: "sparkles")
-                            .font(.system(size: 10))
+                            .font(.yoMax(10))
                         Text(
                             config.selectedAIProvider == AIProvider.voiceInkRefine.rawValue
                                 ? VoiceInkRefineService.providerName
                                 : selectedPrompt?.title ?? "AI"
                         )
-                            .font(.caption)
+                            .font(.yoMax(10))
                     }
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -537,8 +537,8 @@ struct ModeAppIcon: View {
                 .frame(width: 20, height: 20)
         } else {
             Image(systemName: "app.fill")
-                .font(.system(size: 14))
-                .foregroundColor(.secondary)
+                .font(.yoMax(14))
+                .foregroundColor(AppTheme.Text.secondary)
                 .frame(width: 20, height: 20)
         }
     }
@@ -558,7 +558,7 @@ struct AppGridItem: View {
                     .cornerRadius(8)
                     .shadow(color: Color(NSColor.shadowColor).opacity(0.1), radius: 2, x: 0, y: 1)
                 Text(app.name)
-                    .font(.system(size: 10))
+                    .font(.yoMax(10))
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
                     .frame(height: 28)

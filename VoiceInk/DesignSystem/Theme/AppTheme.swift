@@ -101,12 +101,13 @@ enum AppTheme {
     }
 
     enum Data {
-        static let transcript = Color.indigo
-        static let audio = Color.teal
-        static let enhancement = Color.mint
-        static let purple = Color(nsColor: .systemPurple)
-        static let yellow = Color(nsColor: .systemYellow)
-        static let orange = Color(nsColor: .systemOrange)
+        // Yo Max: chart colours from the Tarmax palette.
+        static let transcript = Brand.accent
+        static let audio = Color(nsColor: Brand.rgb(0x5FAD4D))  // --green-525
+        static let enhancement = Color(nsColor: Brand.rgb(0x39D29E))  // --teal-475
+        static let purple = Color(nsColor: Brand.rgb(0x2F80ED))  // --blue-500
+        static let yellow = Color(nsColor: Brand.rgb(0xE8A735))  // --amber-450
+        static let orange = Color(nsColor: Brand.rgb(0xE8913A))  // --orange-425
     }
 
     enum Insights {

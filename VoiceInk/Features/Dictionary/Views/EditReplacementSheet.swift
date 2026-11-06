@@ -45,7 +45,7 @@ struct EditReplacementSheet: View {
             Spacer()
 
             Text("Edit Word Replacement")
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
 
             Spacer()
 
@@ -72,8 +72,8 @@ struct EditReplacementSheet: View {
 
     private var descriptionSection: some View {
         Text("Update the word or phrase that should be automatically replaced.")
-            .font(.subheadline)
-            .foregroundColor(.secondary)
+            .font(.yoMax(11))
+            .foregroundColor(AppTheme.Text.secondary)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal)
             .padding(.top, 8)
@@ -85,10 +85,10 @@ struct EditReplacementSheet: View {
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
                     Text("Original Text")
-                        .font(.headline)
+                        .font(.yoMax(13, weight: .medium))
                     Text("Required")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundColor(AppTheme.Text.secondary)
                 }
                 TextField("Enter word or phrase to replace (use commas for multiple)", text: $originalWord)
                     .textFieldStyle(.roundedBorder)
@@ -100,13 +100,13 @@ struct EditReplacementSheet: View {
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
                     Text("Replacement Text")
-                        .font(.headline)
+                        .font(.yoMax(13, weight: .medium))
                     Text("Required")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundColor(AppTheme.Text.secondary)
                 }
                 TextEditor(text: $replacementWord)
-                    .font(.body)
+                    .font(.yoMax(13))
                     .frame(height: 100)
                     .padding(8)
                     .background(Color(.textBackgroundColor))

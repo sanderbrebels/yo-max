@@ -116,7 +116,7 @@ struct DictionaryQuickAddView: View {
                 inputArea
                 if let errorMessage {
                     Text(errorMessage)
-                        .font(.caption)
+                        .font(.yoMax(10))
                         .foregroundColor(AppTheme.Status.error)
                         .padding(.horizontal, 16)
                         .padding(.bottom, 6)
@@ -169,9 +169,9 @@ struct DictionaryQuickAddView: View {
                 } label: {
                     HStack(spacing: 5) {
                         Image(systemName: m.icon)
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.yoMax(10, weight: .medium))
                         Text(m.label)
-                            .font(.system(size: 12, weight: .medium))
+                            .font(.yoMax(12, weight: .medium))
                     }
                     .foregroundStyle(mode == m ? .primary : .secondary)
                     .padding(.horizontal, 10)
@@ -208,11 +208,11 @@ struct DictionaryQuickAddView: View {
     private var vocabularyInput: some View {
         HStack(spacing: 11) {
             Image(systemName: "character.book.closed.fill")
-                .font(.system(size: 14))
-                .foregroundStyle(.secondary)
-            TextField("", text: $wordInput, prompt: Text("e.g. Prakash, Yo Max").foregroundColor(.secondary))
+                .font(.yoMax(14))
+                .foregroundStyle(AppTheme.Text.secondary)
+            TextField("", text: $wordInput, prompt: Text("e.g. Prakash, Yo Max").foregroundColor(AppTheme.Text.secondary))
                 .textFieldStyle(.roundedBorder)
-                .font(.system(size: 14))
+                .font(.yoMax(14))
                 .focused($focusedField, equals: .word)
                 .onSubmit { submitVocabulary() }
         }
@@ -224,27 +224,27 @@ struct DictionaryQuickAddView: View {
         VStack(spacing: 8) {
             HStack(spacing: 10) {
                 Text("Replace")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.secondary)
+                    .font(.yoMax(12, weight: .medium))
+                    .foregroundStyle(AppTheme.Text.secondary)
                     .frame(width: 56, alignment: .trailing)
-                TextField("", text: $originalInput, prompt: Text("e.g. my email, my mail").foregroundColor(.secondary))
+                TextField("", text: $originalInput, prompt: Text("e.g. my email, my mail").foregroundColor(AppTheme.Text.secondary))
                     .textFieldStyle(.roundedBorder)
-                    .font(.system(size: 14))
+                    .font(.yoMax(14))
                     .focused($focusedField, equals: .original)
                     .onSubmit { focusedField = .replacement }
             }
 
             HStack(spacing: 10) {
                 Text("With")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.secondary)
+                    .font(.yoMax(12, weight: .medium))
+                    .foregroundStyle(AppTheme.Text.secondary)
                     .frame(width: 56, alignment: .trailing)
                 TextField(
                     "", text: $replacementInput,
-                    prompt: Text("e.g. support@tryvoiceink.com").foregroundColor(.secondary)
+                    prompt: Text("e.g. support@tryvoiceink.com").foregroundColor(AppTheme.Text.secondary)
                 )
                 .textFieldStyle(.roundedBorder)
-                .font(.system(size: 14))
+                .font(.yoMax(14))
                 .focused($focusedField, equals: .replacement)
                 .onSubmit { submitReplacement() }
             }
@@ -263,13 +263,13 @@ struct DictionaryQuickAddView: View {
                 HStack(spacing: 7) {
                     Text("Add Now")
                     Text("↵")
-                        .font(.system(size: 10, weight: .medium, design: .rounded))
+                        .font(.yoMax(10, weight: .medium))
                         .foregroundStyle(AppTheme.Text.muted)
                         .padding(.horizontal, 5)
                         .padding(.vertical, 3)
                         .background(AppTheme.Surface.controlActive, in: RoundedRectangle(cornerRadius: 5))
                 }
-                .font(.system(size: 11, weight: .medium))
+                .font(.yoMax(11, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
                 .padding(.horizontal, 10)
                 .frame(height: 32)

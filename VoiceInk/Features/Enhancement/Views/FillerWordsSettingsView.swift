@@ -8,15 +8,15 @@ struct FillerWordChip: View {
     var body: some View {
         HStack(spacing: 4) {
             Text(word)
-                .font(.system(size: 12))
+                .font(.yoMax(12))
                 .lineLimit(1)
-                .foregroundColor(.primary)
+                .foregroundColor(AppTheme.Text.primary)
 
             Button(action: onDelete) {
                 Image(systemName: "xmark.circle.fill")
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(isHovered ? AppTheme.Status.error : .secondary)
-                    .font(.system(size: 10))
+                    .font(.yoMax(10))
             }
             .buttonStyle(.borderless)
             .onHover { hover in
@@ -83,7 +83,7 @@ struct FillerWordsSettingsSection: View {
     private var addWordPopover: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Add Filler Word")
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
 
             TextField("Filler word", text: $newWord)
                 .textFieldStyle(.roundedBorder)
@@ -91,7 +91,7 @@ struct FillerWordsSettingsSection: View {
 
             if let errorMessage {
                 Text(errorMessage)
-                    .font(.caption)
+                    .font(.yoMax(10))
                     .foregroundStyle(AppTheme.Status.error)
             }
 

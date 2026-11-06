@@ -27,18 +27,23 @@ struct AppSidebar: View {
                 .padding(.bottom, 14)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        // Yo Max: the Tarmax laptop sidebar, a floating card 12 pt from the edges (radius 24, --shadow-float).
+        .background(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(AppTheme.Brand.elevFloat)
+                .shadow(color: AppTheme.Brand.ink.opacity(0.08), radius: 8, y: 4)
+        )
+        .padding(12)
     }
 
+    // Yo Max: the Tarmax page behind the floating sidebar card, and no divider.
     private var sidebarBackground: some View {
-        VisualEffectView(material: .sidebar, blendingMode: .behindWindow)
+        AppTheme.Surface.window
             .ignoresSafeArea(.container, edges: .top)
     }
 
     private var sidebarDivider: some View {
-        Rectangle()
-            .fill(AppTheme.Border.control.opacity(0.55))
-            .frame(width: 1)
-            .ignoresSafeArea(.container, edges: .top)
+        Color.clear.frame(width: 0)
     }
 
     private func sidebarSection(_ items: [ViewType]) -> some View {
@@ -159,13 +164,13 @@ private struct SidebarItemButton: View {
 
                 Spacer(minLength: 0)
             }
-            .foregroundStyle(isSelected ? selectedForegroundColor : Color.primary)
+            .foregroundStyle(isSelected ? selectedForegroundColor : AppTheme.Text.primary)
             .padding(.leading, 8)
             .padding(.trailing, 10)
             .frame(height: 38)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(rowBackground)
-            .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .contentShape(Capsule())  // Yo Max: Tarmax pill
         }
         .buttonStyle(.plain)
         .help(viewType.title)
@@ -175,12 +180,8 @@ private struct SidebarItemButton: View {
     }
 
     private var rowBackground: some View {
-        RoundedRectangle(cornerRadius: 10, style: .continuous)
+        Capsule()  // Yo Max: the lime Tarmax pill
             .fill(rowBackgroundColor)
-            .overlay {
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .strokeBorder(rowBorderColor, lineWidth: 1)
-            }
     }
 
     private var rowBackgroundColor: Color {
@@ -221,7 +222,7 @@ private struct SidebarIconTile: View {
                 .shadow(color: Color.black.opacity(0.18), radius: 1.2, y: 1)
 
             Image(systemName: systemName)
-                .font(.system(size: 14.5, weight: .semibold))
+                .font(.yoMax(14.5, weight: .semibold))
                 .symbolRenderingMode(.monochrome)
                 .foregroundStyle(style.foreground)
                 .shadow(color: Color.black.opacity(0.16), radius: 0.5, y: 0.5)

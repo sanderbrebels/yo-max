@@ -47,11 +47,11 @@ private struct ModelSettingsTabBar: View {
                 } label: {
                     HStack(spacing: 8) {
                         Image(systemName: tab.systemImage)
-                            .font(.system(size: 13, weight: .semibold))
+                            .font(.yoMax(13, weight: .semibold))
                             .symbolRenderingMode(.hierarchical)
 
                         Text(LocalizedStringKey(tab.rawValue))
-                            .font(.system(size: 14, weight: selection == tab ? .semibold : .medium))
+                            .font(.yoMax(14, weight: selection == tab ? .semibold : .medium))
                     }
                     .foregroundStyle(selection == tab ? Color.primary : Color.secondary)
                     .frame(maxWidth: .infinity)
@@ -116,7 +116,7 @@ private struct WhisperPromptSettingsSection: View {
 
                 if promptLanguage != "auto", isEditing {
                     TextEditor(text: $draftPrompt)
-                        .font(.body)
+                        .font(.yoMax(13))
                         .padding(6)
                         .frame(height: 72)
                         .scrollContentBackground(.hidden)
@@ -146,7 +146,7 @@ private struct WhisperPromptSettingsSection: View {
                 } else if promptLanguage != "auto" {
                     if !savedPrompt.isEmpty {
                         Text(savedPrompt)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(AppTheme.Text.secondary)
                             .textSelection(.enabled)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }

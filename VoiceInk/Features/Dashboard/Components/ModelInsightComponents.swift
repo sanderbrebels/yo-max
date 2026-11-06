@@ -11,9 +11,9 @@ struct ModelDetailActionLabel: View {
                 .lineLimit(1)
 
             Image(systemName: icon)
-                .font(.system(size: 10, weight: .bold))
+                .font(.yoMax(10, weight: .bold))
         }
-        .font(.system(size: 12, weight: .semibold))
+        .font(.yoMax(12, weight: .semibold))
         .padding(.horizontal, 12)
         .frame(height: 32)
         .contentShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
@@ -32,7 +32,7 @@ struct InsightPeriodPicker: View {
                         selection = period
                     } label: {
                         Text(period.pickerTitle)
-                            .font(.system(size: 12, weight: .semibold))
+                            .font(.yoMax(12, weight: .semibold))
                             .padding(.horizontal, 16)
                             .frame(height: 34)
                     }
@@ -69,9 +69,9 @@ struct InsightPeriodPicker: View {
                 Image(systemName: "calendar")
                 Text(selection.pickerTitle)
                 Image(systemName: "chevron.down")
-                    .font(.system(size: 9, weight: .semibold))
+                    .font(.yoMax(9, weight: .semibold))
             }
-            .font(.system(size: 12, weight: .semibold))
+            .font(.yoMax(12, weight: .semibold))
             .foregroundStyle(AppTheme.Insights.selectionText)
             .padding(.horizontal, 14)
             .frame(height: 34)
@@ -99,12 +99,12 @@ struct ModelActionLabel: View {
     var body: some View {
         HStack(spacing: 7) {
             Image(systemName: icon)
-                .font(.system(size: 12, weight: .semibold))
+                .font(.yoMax(12, weight: .semibold))
 
             Text(title)
                 .lineLimit(1)
         }
-        .font(.system(size: 12, weight: .semibold))
+        .font(.yoMax(12, weight: .semibold))
         .foregroundStyle(isPrimary ? Color.white : AppTheme.Text.primary)
         .padding(.horizontal, isPrimary ? 14 : 12)
         .frame(height: 34)
@@ -127,11 +127,11 @@ struct InsightEmptyState: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 12, weight: .semibold))
+                .font(.yoMax(12, weight: .semibold))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Text(title)
-                .font(.system(size: 12, weight: .medium))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
                 .lineLimit(1)
         }
@@ -148,7 +148,7 @@ struct ModelPreviewCardHeader: View {
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
             Text(title)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.yoMax(16, weight: .semibold))
                 .foregroundStyle(AppTheme.Text.primary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.84)
@@ -267,13 +267,13 @@ private struct ModelPreviewRowView: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(row.name)
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.yoMax(13, weight: .semibold))
                     .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
                     .truncationMode(.tail)
 
                 Text("\(row.sessionCount) sessions")
-                    .font(.system(size: 11))
+                    .font(.yoMax(11))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(1)
             }
@@ -307,7 +307,7 @@ struct ModelInsightValueText: View {
 
     var body: some View {
         Text(text)
-            .font(.system(size: 13, weight: .semibold))
+            .font(.yoMax(13, weight: .semibold))
             .monospacedDigit()
             .foregroundStyle(AppTheme.Text.primary)
             .lineLimit(1)

@@ -65,7 +65,7 @@ struct ProviderDetailPanel: View {
             )
 
             Text(descriptor.displayName)
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
                 .fontWeight(.semibold)
 
             Spacer()
@@ -102,14 +102,14 @@ struct ProviderDetailPanel: View {
         if let verificationMessage {
             VStack(alignment: .leading, spacing: 3) {
                 Text(verificationMessage)
-                    .font(.caption)
+                    .font(.yoMax(10))
                     .fontWeight(.medium)
                     .foregroundStyle(verificationSucceeded ? AppTheme.Status.positive : AppTheme.Status.error)
                     .fixedSize(horizontal: false, vertical: true)
 
                 if let verificationDetailMessage, !verificationSucceeded {
                     Text(verificationDetailMessage)
-                        .font(.caption)
+                        .font(.yoMax(10))
                         .foregroundStyle(AppTheme.Status.error.opacity(0.82))
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -123,13 +123,13 @@ struct ProviderDetailPanel: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text("Key verified")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.primary)
+                    .font(.yoMax(13, weight: .semibold))
+                    .foregroundStyle(AppTheme.Text.primary)
 
                 if let obfuscatedKey {
                     Text(obfuscatedKey)
                         .font(.system(size: 11, weight: .medium, design: .monospaced))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .lineLimit(1)
                 }
             }
@@ -140,9 +140,9 @@ struct ProviderDetailPanel: View {
                 isShowingRemoveAPIKeyConfirmation = true
             } label: {
                 Image(systemName: "xmark.circle.fill")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.yoMax(13, weight: .semibold))
                     .symbolRenderingMode(.hierarchical)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(AppTheme.Text.secondary)
             }
             .controlSize(.small)
             .buttonStyle(.borderless)
@@ -170,15 +170,15 @@ struct ProviderDetailPanel: View {
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text("API Key")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.primary)
+                        .font(.yoMax(13, weight: .semibold))
+                        .foregroundStyle(AppTheme.Text.primary)
                 }
             }
 
             HStack(spacing: 8) {
                 SecureField("Paste API key", text: $apiKey)
                     .textFieldStyle(.roundedBorder)
-                    .font(.system(size: 12))
+                    .font(.yoMax(12))
                     .disabled(isVerifying)
                     .onChange(of: apiKey) { _, newValue in
                         guard !newValue.isEmpty else { return }
@@ -198,7 +198,7 @@ struct ProviderDetailPanel: View {
                         }
                         Text(isVerifying ? LocalizedStringKey("Verifying") : LocalizedStringKey("Verify"))
                     }
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.yoMax(12, weight: .medium))
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
@@ -210,16 +210,16 @@ struct ProviderDetailPanel: View {
                 Link(destination: consoleURL) {
                     HStack(spacing: 7) {
                         Image(systemName: "link")
-                            .font(.system(size: 11, weight: .semibold))
+                            .font(.yoMax(11, weight: .semibold))
 
                         Text(String(format: String(localized: "Get %@ API Key"), descriptor.displayName))
-                            .font(.system(size: 12, weight: .medium))
+                            .font(.yoMax(12, weight: .medium))
 
                         Image(systemName: "arrow.up.right.square")
-                            .font(.system(size: 11, weight: .medium))
-                            .foregroundStyle(.secondary)
+                            .font(.yoMax(11, weight: .medium))
+                            .foregroundStyle(AppTheme.Text.secondary)
                     }
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(AppTheme.Text.primary)
                     .contentShape(Rectangle())
                     .padding(.horizontal, 10)
                     .padding(.vertical, 8)
@@ -235,8 +235,8 @@ struct ProviderDetailPanel: View {
 
     private func providerDetailIcon(_ systemName: String) -> some View {
         Image(systemName: systemName)
-            .font(.system(size: 14, weight: .semibold))
-            .foregroundStyle(.primary)
+            .font(.yoMax(14, weight: .semibold))
+            .foregroundStyle(AppTheme.Text.primary)
             .frame(width: 30, height: 30)
             .background(
                 RoundedRectangle(cornerRadius: 8)
@@ -281,8 +281,8 @@ struct ProviderDetailPanel: View {
             if models.count > 8 {
                 Divider()
                 Text("+\(models.count - 8) more transcription models available")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(.yoMax(10))
+                    .foregroundStyle(AppTheme.Text.secondary)
                     .padding(.vertical, 8)
             }
         }
@@ -301,8 +301,8 @@ struct ProviderDetailPanel: View {
 
                 if provider != .openRouter && models.isEmpty {
                     Text("No models listed.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .padding(.vertical, 8)
                 } else {
                     ForEach(Array(models.prefix(previewCount).enumerated()), id: \.offset) { index, model in
@@ -321,8 +321,8 @@ struct ProviderDetailPanel: View {
                     if models.count > previewCount {
                         Divider()
                         Text("+\(models.count - previewCount) more enhancement models available")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .font(.yoMax(10))
+                            .foregroundStyle(AppTheme.Text.secondary)
                             .padding(.vertical, 8)
                     }
                 }
@@ -342,7 +342,7 @@ struct ProviderDetailPanel: View {
     private func openRouterCatalogStatus(modelCount: Int) -> some View {
         HStack(spacing: 12) {
             Text(openRouterModelAvailabilityText(for: modelCount))
-                .font(.system(size: 12, weight: .medium))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(modelCount == 0 ? .secondary : .primary)
 
             Spacer()
@@ -359,7 +359,7 @@ struct ProviderDetailPanel: View {
                     }
                     Text(isRefreshingOpenRouterModels ? LocalizedStringKey("Refreshing") : LocalizedStringKey("Refresh"))
                 }
-                .font(.system(size: 12, weight: .medium))
+                .font(.yoMax(12, weight: .medium))
             }
             .buttonStyle(.bordered)
             .controlSize(.small)
@@ -374,13 +374,13 @@ struct ProviderDetailPanel: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(title)
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.yoMax(12, weight: .medium))
                     .lineLimit(1)
 
                 if let subtitle {
                     Text(subtitle)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .lineLimit(1)
                 }
             }
@@ -389,8 +389,8 @@ struct ProviderDetailPanel: View {
 
             if let trailing {
                 Text(trailing)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(.yoMax(10))
+                    .foregroundStyle(AppTheme.Text.secondary)
             }
         }
         .padding(.vertical, 8)
@@ -398,8 +398,8 @@ struct ProviderDetailPanel: View {
 
     private func modelTypeIcon(_ systemName: String) -> some View {
         Image(systemName: systemName)
-            .font(.system(size: 11, weight: .semibold))
-            .foregroundStyle(.primary)
+            .font(.yoMax(11, weight: .semibold))
+            .foregroundStyle(AppTheme.Text.primary)
             .frame(width: 24, height: 24)
             .background(
                 RoundedRectangle(cornerRadius: 6)

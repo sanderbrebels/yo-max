@@ -211,7 +211,7 @@ struct HistoryView: View {
         HStack(spacing: 8) {
             if !selectedTranscriptions.isEmpty {
                 Text(String(format: String(localized: "%lld selected"), Int64(selectedTranscriptions.count)))
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.yoMax(11, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
 
                 Spacer(minLength: 8)

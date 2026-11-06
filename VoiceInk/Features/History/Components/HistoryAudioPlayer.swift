@@ -54,7 +54,7 @@ struct HistoryAudioPlayer: View {
 
             Button(action: player.cyclePlaybackRate) {
                 Text(playbackRateLabel)
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.yoMax(11, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .frame(width: 34, height: HistoryLayout.buttonHeight)
                     .background(QuickPanelButtonBackground(isSelected: player.playbackRate != 1.0))
@@ -74,7 +74,7 @@ struct HistoryAudioPlayer: View {
 
     private func playbackTime(_ time: TimeInterval) -> some View {
         Text(formattedTime(time))
-            .font(.system(size: 11, weight: .medium))
+            .font(.yoMax(11, weight: .medium))
             .monospacedDigit()
             .foregroundStyle(AppTheme.Text.secondary)
     }

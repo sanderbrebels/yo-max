@@ -21,7 +21,7 @@ struct DictionaryPill<Label: View>: View {
     var body: some View {
         HStack(spacing: 5) {
             label
-                .font(.system(size: 12))
+                .font(.yoMax(12))
 
             removeButton
         }

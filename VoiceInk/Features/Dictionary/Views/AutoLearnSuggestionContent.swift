@@ -16,8 +16,8 @@ struct AutoLearnSuggestionContent: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             Text("Learn this correction?")
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(.primary)
+                .font(.yoMax(15, weight: .semibold))
+                .foregroundStyle(AppTheme.Text.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             VStack(alignment: .leading, spacing: 5) {
@@ -36,13 +36,13 @@ struct AutoLearnSuggestionContent: View {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     if originalText != nil {
                         Image(systemName: "arrow.turn.down.right")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundStyle(.secondary)
+                            .font(.yoMax(12, weight: .medium))
+                            .foregroundStyle(AppTheme.Text.secondary)
                             .accessibilityLabel("Replace with")
                     }
                     Text(correctedText)
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(.primary)
+                        .font(.yoMax(18, weight: .semibold))
+                        .foregroundStyle(AppTheme.Text.primary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -51,8 +51,8 @@ struct AutoLearnSuggestionContent: View {
 
             if let errorMessage {
                 Text(errorMessage)
-                    .font(.system(size: 12))
-                    .foregroundStyle(Color(nsColor: .systemRed))
+                    .font(.yoMax(12))
+                    .foregroundStyle(AppTheme.Status.error)
                     .fixedSize(horizontal: false, vertical: true)
             }
 
@@ -76,7 +76,7 @@ struct AutoLearnSuggestionContent: View {
                 .environment(\.controlActiveState, .key)
                 .disabled(!isValid)
             }
-            .font(.system(size: 13, weight: .medium))
+            .font(.yoMax(13, weight: .medium))
             .buttonBorderShape(.capsule)
             .controlSize(.regular)
             .disabled(isApplying)
@@ -99,8 +99,8 @@ struct AutoLearnSuggestionContent: View {
 
     private func originalTerms(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 13))
-            .foregroundStyle(.secondary)
+            .font(.yoMax(13))
+            .foregroundStyle(AppTheme.Text.secondary)
             .fixedSize(horizontal: false, vertical: true)
     }
 }

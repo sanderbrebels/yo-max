@@ -130,20 +130,20 @@ struct TriggerPickerPopover: View {
     private var searchField: some View {
         HStack(spacing: 8) {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.secondary)
-                .font(.system(size: 12))
+                .foregroundColor(AppTheme.Text.secondary)
+                .font(.yoMax(12))
 
             TextField("Search apps, website, or trigger word...", text: $searchText)
                 .textFieldStyle(.plain)
-                .font(.system(size: 13))
+                .font(.yoMax(13))
                 .focused($isSearchFieldFocused)
                 .onSubmit(submitSearch)
 
             if !searchText.isEmpty {
                 Button(action: { searchText = "" }) {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.secondary)
-                        .font(.system(size: 12))
+                        .foregroundColor(AppTheme.Text.secondary)
+                        .font(.yoMax(12))
                 }
                 .buttonStyle(.plain)
             }
@@ -155,8 +155,8 @@ struct TriggerPickerPopover: View {
     private var suggestedGroups: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Suggested")
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(11, weight: .semibold))
+                .foregroundStyle(AppTheme.Text.secondary)
                 .padding(.horizontal, 6)
                 .padding(.top, 2)
 
@@ -249,18 +249,18 @@ struct TriggerPickerPopover: View {
                 VStack(alignment: .leading, spacing: 1) {
                     if isUnavailable, let claimedBy {
                         Text("Already used by \"\(claimedBy.name)\"")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundStyle(.secondary)
+                            .font(.yoMax(12, weight: .medium))
+                            .foregroundStyle(AppTheme.Text.secondary)
                         Text(unavailableMessage)
-                            .font(.system(size: 11))
-                            .foregroundStyle(.secondary)
+                            .font(.yoMax(11))
+                            .foregroundStyle(AppTheme.Text.secondary)
                     } else {
                         Text(isSelected ? removeTitle : addTitle)
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundStyle(.primary)
+                            .font(.yoMax(12, weight: .medium))
+                            .foregroundStyle(AppTheme.Text.primary)
                         Text(detail)
-                            .font(.system(size: 11))
-                            .foregroundStyle(.secondary)
+                            .font(.yoMax(11))
+                            .foregroundStyle(AppTheme.Text.secondary)
                     }
                 }
 
@@ -268,9 +268,9 @@ struct TriggerPickerPopover: View {
 
                 if !isSelected && !isUnavailable {
                     Image(systemName: "plus.circle.fill")
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.yoMax(14, weight: .medium))
                         .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(AppTheme.Text.secondary)
                 }
             }
             .padding(.horizontal, 8)
@@ -298,17 +298,17 @@ struct TriggerPickerPopover: View {
                 if let claimedBy {
                     VStack(alignment: .leading, spacing: 1) {
                         Text(app.name)
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundColor(.secondary)
+                            .font(.yoMax(13, weight: .medium))
+                            .foregroundColor(AppTheme.Text.secondary)
                             .lineLimit(1)
                         Text("Used by \"\(claimedBy.name)\"")
-                            .font(.system(size: 11))
-                            .foregroundStyle(.secondary)
+                            .font(.yoMax(11))
+                            .foregroundStyle(AppTheme.Text.secondary)
                     }
                 } else {
                     Text(app.name)
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundColor(.primary)
+                        .font(.yoMax(13, weight: .medium))
+                        .foregroundColor(AppTheme.Text.primary)
                         .lineLimit(1)
                 }
 
@@ -316,7 +316,7 @@ struct TriggerPickerPopover: View {
 
                 if isSelected {
                     Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.yoMax(14, weight: .semibold))
                         .foregroundStyle(Color.accentColor)
                 }
             }
@@ -333,8 +333,8 @@ struct TriggerPickerPopover: View {
 
     private var emptyState: some View {
         Text(query.isEmpty ? LocalizedStringKey("No apps found") : LocalizedStringKey("No matching apps"))
-            .font(.system(size: 12, weight: .medium))
-            .foregroundStyle(.secondary)
+            .font(.yoMax(12, weight: .medium))
+            .foregroundStyle(AppTheme.Text.secondary)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 32)
     }
@@ -344,8 +344,8 @@ struct TriggerPickerPopover: View {
             ProgressView()
                 .controlSize(.small)
             Text("Loading apps")
-                .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(12, weight: .medium))
+                .foregroundStyle(AppTheme.Text.secondary)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 32)

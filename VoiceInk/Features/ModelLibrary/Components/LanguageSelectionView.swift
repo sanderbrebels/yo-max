@@ -100,7 +100,7 @@ struct LanguageSelectionView: View {
     private var languageSelectionSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Transcription Language")
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
 
             if transcriptionModelManager.currentTranscriptionModel != nil {
                 if hasLanguageChoices() {
@@ -128,21 +128,21 @@ struct LanguageSelectionView: View {
                         Text(
                             "Select a supported transcription language or locale. Automatic multilingual transcription is shown when available."
                         )
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundColor(AppTheme.Text.secondary)
                     }
                 } else {
                     // For English-only models, force set language to English
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Language: English")
-                            .font(.subheadline)
-                            .foregroundColor(.primary)
+                            .font(.yoMax(11))
+                            .foregroundColor(AppTheme.Text.primary)
 
                         Text(
                             "This is an English-optimized model and only supports English transcription."
                         )
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundColor(AppTheme.Text.secondary)
                     }
                     .onAppear {
                         // Ensure English is set when viewing English-only model
@@ -151,8 +151,8 @@ struct LanguageSelectionView: View {
                 }
             } else {
                 Text("No model selected")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .font(.yoMax(11))
+                    .foregroundColor(AppTheme.Text.secondary)
             }
         }
         .padding()
@@ -189,7 +189,7 @@ struct LanguageSelectionView: View {
                         HStack {
                             Text(String(format: String(localized: "Language: %@"), currentLanguageDisplayName()))
                             Image(systemName: "chevron.up.chevron.down")
-                                .font(.system(size: 10))
+                                .font(.yoMax(10))
                         }
                     }
 
@@ -203,7 +203,7 @@ struct LanguageSelectionView: View {
                     // Do nothing, just showing info
                 } label: {
                     Text("Language: English (only)")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AppTheme.Text.secondary)
                 }
                 .disabled(true)
                 .onAppear {

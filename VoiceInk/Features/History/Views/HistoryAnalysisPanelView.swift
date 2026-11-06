@@ -28,7 +28,7 @@ struct HistoryAnalysisPanelView: View {
                     .font(.headline.weight(.semibold))
 
                 Text(String(localized: "\(analysis.totalTranscripts) selected transcripts"))
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.yoMax(11, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
             }
 
@@ -80,11 +80,11 @@ struct HistoryAnalysisPanelView: View {
     private var emptyState: some View {
         VStack(spacing: 8) {
             Image(systemName: "chart.bar.xaxis")
-                .font(.system(size: 32, weight: .light))
+                .font(.yoMax(32, weight: .light))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Text("No model performance in selection")
-                .font(.subheadline)
+                .font(.yoMax(11))
                 .foregroundStyle(AppTheme.Text.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -218,14 +218,14 @@ private struct HistoryPerformanceSection: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(valueTitle)
-                    .font(.system(size: 11, weight: .semibold))
+                    .font(.yoMax(11, weight: .semibold))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.82)
                     .frame(width: 96, alignment: .trailing)
                     .padding(.trailing, 4)
             }
-            .font(.system(size: 13, weight: .semibold))
+            .font(.yoMax(13, weight: .semibold))
             .foregroundStyle(AppTheme.Text.primary)
             .lineLimit(1)
 
@@ -252,7 +252,7 @@ private struct HistoryPerformanceRow: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(row.name)
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.yoMax(12, weight: .semibold))
                     .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
@@ -261,7 +261,7 @@ private struct HistoryPerformanceRow: View {
                 if let detail = row.detail {
                     HStack(spacing: 6) {
                         Text(detail)
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.yoMax(10, weight: .medium))
                             .foregroundStyle(AppTheme.Text.secondary)
                             .lineLimit(1)
                     }
@@ -300,11 +300,11 @@ private struct HistoryPerformanceEmptyRow: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 12, weight: .semibold))
+                .font(.yoMax(12, weight: .semibold))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Text(title)
-                .font(.system(size: 12, weight: .medium))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
                 .lineLimit(1)
         }

@@ -47,8 +47,8 @@ struct APIKeyManagementView: View {
                         .fill(AppTheme.Status.positive)
                         .frame(width: 8, height: 8)
                     Text("Connected")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(11))
+                        .foregroundColor(AppTheme.Text.secondary)
                 } else if aiService.selectedProvider == .ollama {
                     Spacer()
                     if isCheckingOllama {
@@ -59,15 +59,15 @@ struct APIKeyManagementView: View {
                             .fill(AppTheme.Status.positive)
                             .frame(width: 8, height: 8)
                         Text("Connected")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .font(.yoMax(11))
+                            .foregroundColor(AppTheme.Text.secondary)
                     } else {
                         Circle()
                             .fill(AppTheme.Status.error)
                             .frame(width: 8, height: 8)
                         Text("Disconnected")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .font(.yoMax(11))
+                            .foregroundColor(AppTheme.Text.secondary)
                     }
                 }
             }
@@ -95,7 +95,7 @@ struct APIKeyManagementView: View {
                     if aiService.availableModels.isEmpty {
                         HStack {
                             Text("No models loaded")
-                                .foregroundColor(.secondary)
+                                .foregroundColor(AppTheme.Text.secondary)
                             Spacer()
                             Button(action: {
                                 Task {
@@ -190,8 +190,8 @@ struct APIKeyManagementView: View {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
                             Text("Command")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                                .font(.yoMax(11))
+                                .foregroundColor(AppTheme.Text.secondary)
                             Spacer()
                             Menu("Load Template") {
                                 ForEach(LocalCLITemplate.allCases) { template in
@@ -241,25 +241,25 @@ struct APIKeyManagementView: View {
                     Text(
                         "Environment variables available: VOICEINK_SYSTEM_PROMPT, VOICEINK_USER_PROMPT, VOICEINK_FULL_PROMPT. Custom commands can also read VOICEINK_FULL_PROMPT from stdin."
                     )
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .font(.yoMax(10))
+                    .foregroundColor(AppTheme.Text.secondary)
 
                     if !aiService.isAPIKeyValid {
                         Text("Load a template or enter a command to enable Local CLI enhancement.")
-                            .font(.caption)
+                            .font(.yoMax(10))
                             .foregroundColor(AppTheme.Status.warningStrong)
                     }
                 } else if aiService.selectedProvider == .custom {
                     Text("Manage custom enhancement models in the Custom tab.")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundColor(AppTheme.Text.secondary)
                 } else {
                     if aiService.isAPIKeyValid {
                         HStack {
                             Text("API Key")
                             Spacer()
                             Text("••••••••")
-                                .foregroundColor(.secondary)
+                                .foregroundColor(AppTheme.Text.secondary)
                             Button("Remove", role: .destructive) {
                                 aiService.clearAPIKey()
                             }
@@ -275,7 +275,7 @@ struct APIKeyManagementView: View {
                                         Image(systemName: "key.fill")
                                         Text("Get API Key")
                                     }
-                                    .font(.caption)
+                                    .font(.yoMax(10))
                                     .foregroundColor(AppTheme.Status.infoStrong)
                                     .padding(.vertical, 4)
                                     .padding(.horizontal, 8)

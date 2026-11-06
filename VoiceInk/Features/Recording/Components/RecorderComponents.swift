@@ -23,9 +23,9 @@ struct RecorderToggleButton: View {
         Button(action: action) {
             Group {
                 if isEmoji {
-                    Text(icon).font(.system(size: 14))
+                    Text(icon).font(.yoMax(14))
                 } else {
-                    Image(systemName: icon).font(.system(size: 13))
+                    Image(systemName: icon).font(.yoMax(13))
                 }
             }
             .foregroundColor(disabled ? .white.opacity(0.3) : (isEnabled ? .white : .white.opacity(0.6)))
@@ -169,7 +169,7 @@ struct RecorderCloseButton: View {
                     )
 
                 Image(systemName: "xmark")
-                    .font(.system(size: 9, weight: .semibold))
+                    .font(.yoMax(9, weight: .semibold))
                     .foregroundColor(.white.opacity(0.86))
             }
             .frame(width: 21, height: 21)
@@ -309,7 +309,7 @@ struct LiveTranscriptView: View {
         ScrollViewReader { proxy in
             ScrollView(.vertical, showsIndicators: false) {
                 Text(text)
-                    .font(.system(size: 12))
+                    .font(.yoMax(12))
                     .foregroundColor(.white.opacity(0.8))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 16)
@@ -433,7 +433,7 @@ struct AssistantPanelView: View {
 
                     if let statusText {
                         Text(statusText)
-                            .font(.system(size: 11))
+                            .font(.yoMax(11))
                             .foregroundColor(.white.opacity(0.62))
                             .padding(.horizontal, 10)
                             .padding(.vertical, 4)
@@ -463,7 +463,7 @@ struct AssistantPanelView: View {
             ZStack(alignment: .leading) {
                 if shouldShowLiveFollowUpText {
                     Text(liveFollowUpText)
-                        .font(.system(size: 12))
+                        .font(.yoMax(12))
                         .foregroundStyle(followUpTextColor)
                         .lineLimit(1)
                         .truncationMode(.head)
@@ -472,7 +472,7 @@ struct AssistantPanelView: View {
 
                 TextField("", text: $draftMessage)
                     .textFieldStyle(.plain)
-                    .font(.system(size: 12))
+                    .font(.yoMax(12))
                     .foregroundStyle(followUpTextColor)
                     .tint(followUpTextColor)
                     .disabled(!session.canSendFollowUp)
@@ -487,7 +487,7 @@ struct AssistantPanelView: View {
 
             Button(action: sendDraftMessage) {
                 Image(systemName: "paperplane.fill")
-                    .font(.system(size: 10, weight: .semibold))
+                    .font(.yoMax(10, weight: .semibold))
                     .foregroundColor(canSendDraft ? .black : .white.opacity(0.35))
                     .frame(width: 24, height: 24)
                     .background(canSendDraft ? Color.white.opacity(0.88) : Color.white.opacity(0.10))

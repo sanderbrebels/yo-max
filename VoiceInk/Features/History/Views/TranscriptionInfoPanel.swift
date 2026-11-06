@@ -15,7 +15,7 @@ struct TranscriptionInfoSidePanel: View {
     private var header: some View {
         HStack(spacing: 12) {
             Text("Info")
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
                 .fontWeight(.semibold)
 
             Spacer()
@@ -155,7 +155,7 @@ struct TranscriptionInfoPanel: View {
     ) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
-                .font(.system(size: 11, weight: .semibold))
+                .font(.yoMax(11, weight: .semibold))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             content()
@@ -168,12 +168,12 @@ struct TranscriptionInfoPanel: View {
     private var aiRequestTokenEstimate: some View {
         HStack(spacing: 6) {
             Image(systemName: "number")
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(.secondary)
+                .font(.yoMax(11, weight: .medium))
+                .foregroundColor(AppTheme.Text.secondary)
 
             Text("Around \(estimatedAIRequestTokenCount.formatted()) tokens")
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(.secondary)
+                .font(.yoMax(11, weight: .medium))
+                .foregroundColor(AppTheme.Text.secondary)
                 .textSelection(.enabled)
         }
         .help("Token count is estimated from the request text.")
@@ -202,13 +202,13 @@ struct TranscriptionInfoPanel: View {
     private func requestMessageBlock(title: LocalizedStringKey, message: String) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title)
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundColor(.secondary)
+                .font(.yoMax(11, weight: .semibold))
+                .foregroundColor(AppTheme.Text.secondary)
             Text(message)
                 .font(.system(size: 11, weight: .regular, design: .monospaced))
                 .lineSpacing(2)
                 .textSelection(.enabled)
-                .foregroundColor(.primary)
+                .foregroundColor(AppTheme.Text.primary)
         }
     }
 }
@@ -221,13 +221,13 @@ private struct TranscriptionMetadataRow: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(.secondary)
+                .font(.yoMax(11, weight: .medium))
+                .foregroundColor(AppTheme.Text.secondary)
                 .frame(width: 20, height: 20)
 
             Text(label)
-                .font(.system(size: 12, weight: .medium))
-                .foregroundColor(.secondary)
+                .font(.yoMax(12, weight: .medium))
+                .foregroundColor(AppTheme.Text.secondary)
                 .lineLimit(1)
                 .fixedSize(horizontal: true, vertical: false)
                 .layoutPriority(1)
@@ -235,8 +235,8 @@ private struct TranscriptionMetadataRow: View {
             Spacer(minLength: 0)
 
             Text(value)
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(.primary)
+                .font(.yoMax(12, weight: .semibold))
+                .foregroundColor(AppTheme.Text.primary)
                 .lineLimit(1)
                 .truncationMode(.tail)
                 .multilineTextAlignment(.trailing)

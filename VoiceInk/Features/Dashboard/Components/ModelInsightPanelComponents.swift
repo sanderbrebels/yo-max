@@ -13,7 +13,7 @@ struct ModelInsightPanelHeader: View {
 
             Button(action: onClose) {
                 Image(systemName: "xmark")
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.yoMax(12, weight: .semibold))
                     .frame(width: 30, height: 30)
             }
             .buttonStyle(DashboardInsightButtonStyle())
@@ -99,14 +99,14 @@ struct ModelInsightSection<Row: Identifiable, RowContent: View>: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(valueTitle)
-                    .font(.system(size: 11, weight: .semibold))
+                    .font(.yoMax(11, weight: .semibold))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(1)
                     .minimumScaleFactor(presentation == .preview ? 1 : 0.82)
                     .frame(width: valueColumnWidth, alignment: .trailing)
                     .padding(.trailing, ModelInsightRowLayout.horizontalPadding)
             }
-            .font(.system(size: presentation == .preview ? 11 : 13, weight: .semibold))
+            .font(.yoMax(presentation == .preview ? 11 : 13, weight: .semibold))
             .foregroundStyle(presentation == .preview ? AppTheme.Text.secondary : AppTheme.Text.primary)
             .lineLimit(1)
 
@@ -129,12 +129,12 @@ struct ModelInsightPanelEmptyState: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: "chart.bar.xaxis")
-                .font(.system(size: 32, weight: .light))
-                .foregroundColor(.secondary)
+                .font(.yoMax(32, weight: .light))
+                .foregroundColor(AppTheme.Text.secondary)
 
             Text(title)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+                .font(.yoMax(11))
+                .foregroundColor(AppTheme.Text.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

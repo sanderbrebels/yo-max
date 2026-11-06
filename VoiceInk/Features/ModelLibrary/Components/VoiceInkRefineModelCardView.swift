@@ -24,11 +24,11 @@ struct VoiceInkRefineModelCardView: View {
     private var headerSection: some View {
         HStack(alignment: .firstTextBaseline) {
             Text(VoiceInkRefineService.modelName)
-                .font(.system(size: 14, weight: .semibold))
+                .font(.yoMax(14, weight: .semibold))
                 .foregroundStyle(Color(.labelColor))
 
             Text("New")
-                .font(.system(size: 10, weight: .medium))
+                .font(.yoMax(10, weight: .medium))
                 .foregroundColor(.black)
                 .padding(.horizontal, 6)
                 .padding(.vertical, 2)
@@ -48,7 +48,7 @@ struct VoiceInkRefineModelCardView: View {
                 Image(systemName: "internaldrive")
             }
         }
-        .font(.system(size: 11))
+        .font(.yoMax(11))
         .foregroundColor(Color(.secondaryLabelColor))
         .lineLimit(1)
     }
@@ -56,14 +56,14 @@ struct VoiceInkRefineModelCardView: View {
     private var descriptionSection: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Cleans up raw transcripts. Processing stays on your Mac.")
-                .font(.system(size: 11))
+                .font(.yoMax(11))
                 .foregroundColor(Color(.secondaryLabelColor))
                 .lineLimit(2)
                 .fixedSize(horizontal: false, vertical: true)
 
             if let unavailableDescription = service.unavailableDescription {
                 Text(unavailableDescription)
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.yoMax(11, weight: .medium))
                     .foregroundStyle(AppTheme.Status.warningStrong)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -87,7 +87,7 @@ struct VoiceInkRefineModelCardView: View {
                     )
                     .fontDesign(.monospaced)
                 }
-                .font(.system(size: 11, weight: .medium))
+                .font(.yoMax(11, weight: .medium))
                 .foregroundColor(Color(.secondaryLabelColor))
 
                 ProgressView(value: service.downloadProgress)
@@ -101,7 +101,7 @@ struct VoiceInkRefineModelCardView: View {
 
         if let downloadError = service.downloadError {
             Text(downloadError)
-                .font(.system(size: 11, weight: .medium))
+                .font(.yoMax(11, weight: .medium))
                 .foregroundStyle(AppTheme.Status.error)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 4)
@@ -122,7 +122,7 @@ struct VoiceInkRefineModelCardView: View {
                             Text("Cancel")
                             Image(systemName: "xmark.circle")
                         }
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.yoMax(12, weight: .medium))
                         .foregroundColor(.white)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
@@ -149,7 +149,7 @@ struct VoiceInkRefineModelCardView: View {
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
-                            .font(.system(size: 14))
+                            .font(.yoMax(14))
                     }
                     .menuStyle(.borderlessButton)
                     .menuIndicator(.hidden)
@@ -166,7 +166,7 @@ struct VoiceInkRefineModelCardView: View {
                             }
                             Image(systemName: "arrow.down.circle")
                         }
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.yoMax(12, weight: .medium))
                         .foregroundColor(.white)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)

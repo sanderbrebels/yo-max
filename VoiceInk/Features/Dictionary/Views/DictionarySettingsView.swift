@@ -189,11 +189,11 @@ private struct DictionarySectionButtonLabel: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 13, weight: .semibold))
+                .font(.yoMax(13, weight: .semibold))
                 .symbolRenderingMode(.hierarchical)
 
             Text(title)
-                .font(.system(size: 14, weight: isSelected ? .semibold : .medium))
+                .font(.yoMax(14, weight: isSelected ? .semibold : .medium))
         }
         .foregroundStyle(isSelected ? Color.primary : Color.secondary)
         .frame(maxWidth: .infinity)

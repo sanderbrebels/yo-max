@@ -27,7 +27,7 @@ struct DashboardActivityCalendarCard: View {
         VStack(alignment: .leading, spacing: 22) {
             HStack(alignment: .center, spacing: 10) {
                 Text("Consistency, at a glance")
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.yoMax(16, weight: .semibold))
                     .foregroundStyle(AppTheme.Text.primary)
 
                 Spacer()
@@ -42,7 +42,7 @@ struct DashboardActivityCalendarCard: View {
                     legendSwatch(opacity: 0.85)
                     Text("More")
                 }
-                .font(.system(size: 10, weight: .semibold))
+                .font(.yoMax(10, weight: .semibold))
                 .foregroundStyle(AppTheme.Text.secondary)
                 .accessibilityHidden(true)
             }
@@ -228,11 +228,11 @@ struct DashboardActivityCalendarCard: View {
     private func metric(label: LocalizedStringKey, value: String) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             Text(label)
-                .font(.system(size: 12, weight: .semibold))
+                .font(.yoMax(12, weight: .semibold))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Text(value)
-                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                .font(.yoMax(20, weight: .semibold))
                 .foregroundStyle(AppTheme.Text.primary)
                 .monospacedDigit()
                 .lineLimit(1)
@@ -272,11 +272,11 @@ private struct DashboardActivityCalendarTooltip: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(point.accessibilityLabel)
-                .font(.system(size: 10, weight: .bold, design: .rounded))
+                .font(.yoMax(10, weight: .bold))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Text(wordsText)
-                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .font(.yoMax(12, weight: .bold))
                 .foregroundStyle(AppTheme.Text.primary)
                 .monospacedDigit()
         }

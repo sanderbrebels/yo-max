@@ -41,16 +41,16 @@ struct AudioInputChannelsView: View {
 
                 if savedChannels != nil, selectedChannel == nil {
                     Text("Saved input is unavailable. Using Automatic until it returns.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundStyle(AppTheme.Text.secondary)
                 } else if deviceManager.isRecordingActive {
                     Text("Change the input channel after recording stops.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundStyle(AppTheme.Text.secondary)
                 } else {
                     Text("Select the input connected to your microphone. Automatic uses the device’s preferred inputs.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundStyle(AppTheme.Text.secondary)
                 }
             }
         }

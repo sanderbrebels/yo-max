@@ -67,14 +67,14 @@ struct AudioTranscribeView: View {
 
                 VStack(spacing: 14) {
                     Image(systemName: "arrow.down.doc")
-                        .font(.system(size: 32))
+                        .font(.yoMax(32))
                         .foregroundColor(isDropTargeted ? AppTheme.Accent.primary : .gray)
 
                     Text("Drop audio or video files here")
-                        .font(.headline)
+                        .font(.yoMax(13, weight: .medium))
 
                     Text("or")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AppTheme.Text.secondary)
 
                     Button("Choose Files") {
                         selectFiles()
@@ -86,8 +86,8 @@ struct AudioTranscribeView: View {
             .frame(maxWidth: 480, maxHeight: 200)
 
             Text("Supports WAV, MP3, M4A, AIFF, MP4, MOV, AAC, FLAC, CAF, AMR, OGG, OPUS, 3GP")
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .font(.yoMax(10))
+                .foregroundColor(AppTheme.Text.secondary)
                 .padding(.top, 12)
 
             Spacer()
@@ -131,8 +131,8 @@ struct AudioTranscribeView: View {
             .scrollContentBackground(.hidden)
             .safeAreaInset(edge: .bottom) {
                 Text("Drop files anywhere to add more")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .font(.yoMax(10))
+                    .foregroundColor(AppTheme.Text.secondary)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
             }
@@ -145,19 +145,19 @@ struct AudioTranscribeView: View {
         HStack(spacing: 10) {
             let count = transcriptionManager.queue.count
             Text(String(localized: "\(count) files"))
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+                .font(.yoMax(11))
+                .foregroundColor(AppTheme.Text.secondary)
 
             Button {
                 selectFiles()
             } label: {
                 HStack(spacing: 4) {
                     Image(systemName: "plus")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.yoMax(12, weight: .medium))
                     Text("Add")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.yoMax(12, weight: .medium))
                 }
-                .foregroundColor(.secondary)
+                .foregroundColor(AppTheme.Text.secondary)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 .background(
@@ -178,9 +178,9 @@ struct AudioTranscribeView: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "stop.fill")
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.yoMax(10, weight: .medium))
                         Text("Cancel")
-                            .font(.system(size: 12, weight: .medium))
+                            .font(.yoMax(12, weight: .medium))
                     }
                     .foregroundColor(AppTheme.Status.error)
                     .padding(.horizontal, 10)
@@ -198,9 +198,9 @@ struct AudioTranscribeView: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "play.fill")
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.yoMax(10, weight: .medium))
                         Text("Start")
-                            .font(.system(size: 12, weight: .semibold))
+                            .font(.yoMax(12, weight: .semibold))
                     }
                     .foregroundColor(.white)
                     .padding(.horizontal, 12)
@@ -225,11 +225,11 @@ struct AudioTranscribeView: View {
             } label: {
                 HStack(spacing: 4) {
                     Image(systemName: "xmark.bin")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.yoMax(12, weight: .medium))
                     Text("Clear")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.yoMax(12, weight: .medium))
                 }
-                .foregroundColor(.secondary)
+                .foregroundColor(AppTheme.Text.secondary)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 .background(
@@ -247,15 +247,15 @@ struct AudioTranscribeView: View {
     private var modePicker: some View {
         HStack(spacing: 6) {
             Text("Mode")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(.secondary)
+                .font(.yoMax(12, weight: .semibold))
+                .foregroundColor(AppTheme.Text.secondary)
                 .lineLimit(1)
                 .fixedSize(horizontal: true, vertical: false)
 
             if modeManager.enabledConfigurations.isEmpty {
                 Text("None")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.secondary)
+                    .font(.yoMax(12, weight: .medium))
+                    .foregroundColor(AppTheme.Text.secondary)
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)
             } else if let selectedMode {
@@ -266,14 +266,14 @@ struct AudioTranscribeView: View {
                         ModeIconView(icon: selectedMode.icon, size: selectedMode.icon.kind == .emoji ? 13 : 11)
                             .frame(width: 16)
                         Text(selectedMode.name)
-                            .font(.system(size: 12, weight: .medium))
+                            .font(.yoMax(12, weight: .medium))
                             .lineLimit(1)
                             .truncationMode(.tail)
                         Image(systemName: "chevron.up.chevron.down")
-                            .font(.system(size: 9, weight: .semibold))
-                            .foregroundColor(.secondary)
+                            .font(.yoMax(9, weight: .semibold))
+                            .foregroundColor(AppTheme.Text.secondary)
                     }
-                    .foregroundColor(.primary)
+                    .foregroundColor(AppTheme.Text.primary)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
                     .frame(maxWidth: 160, alignment: .leading)

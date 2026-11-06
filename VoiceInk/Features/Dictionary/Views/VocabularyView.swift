@@ -42,7 +42,7 @@ struct VocabularyView: View {
             HStack(spacing: 8) {
                 TextField("", text: $newWord, prompt: Text("Add word to vocabulary"))
                     .textFieldStyle(.roundedBorder)
-                    .font(.system(size: 13))
+                    .font(.yoMax(13))
                     .onSubmit { addWords() }
                     .labelsHidden()
 
@@ -72,12 +72,12 @@ struct VocabularyView: View {
                     Button(action: toggleSort) {
                         HStack(spacing: 4) {
                             Text(String(localized: "Vocabulary Words (\(vocabularyWords.count))"))
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(.secondary)
+                                .font(.yoMax(12, weight: .medium))
+                                .foregroundColor(AppTheme.Text.secondary)
 
                             Image(systemName: sortIconName)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                                .font(.yoMax(10))
+                                .foregroundColor(AppTheme.Text.secondary)
                         }
                     }
                     .buttonStyle(.plain)
@@ -129,28 +129,28 @@ struct VocabularyInfoPopover: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("How to use Vocabulary")
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
 
             Text(
                 "Vocabulary helps supported transcription models and AI enhancement preserve important names, technical terms, and unique spellings."
             )
-            .font(.subheadline)
-            .foregroundColor(.secondary)
+            .font(.yoMax(11))
+            .foregroundColor(AppTheme.Text.secondary)
             .fixedSize(horizontal: false, vertical: true)
 
             Text("Add one entry at a time, or paste multiple entries separated by commas.")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+                .font(.yoMax(11))
+                .foregroundColor(AppTheme.Text.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
             Divider()
 
             Text("Examples")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+                .font(.yoMax(11))
+                .foregroundColor(AppTheme.Text.secondary)
 
             Text(verbatim: "Prakash, Yo Max, SwiftData, WebSocket")
-                .font(.callout)
+                .font(.yoMax(12))
                 .padding(8)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(Color(.textBackgroundColor))

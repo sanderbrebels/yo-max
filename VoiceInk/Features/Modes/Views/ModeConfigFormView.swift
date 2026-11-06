@@ -111,7 +111,7 @@ struct ModeConfigFormView: View {
 
             TextField("Mode name", text: $draft.name)
                 .textFieldStyle(.plain)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.yoMax(16, weight: .semibold))
                 .focused($isNameFieldFocused)
 
             Spacer()
@@ -193,7 +193,7 @@ struct ModeConfigFormView: View {
                 Text(
                     "No transcription models available. Please connect to a cloud service or download a local model in the AI Models tab."
                 )
-                .foregroundColor(.secondary)
+                .foregroundColor(AppTheme.Text.secondary)
             } else {
                 let availableModels = warmupSnapshot.usableTranscriptionModels
                 let openRouterModels = availableModels.filter { $0.provider == .openRouter }
@@ -375,7 +375,7 @@ struct ModeConfigFormView: View {
                 if providerOptions.isEmpty {
                     LabeledContent("AI Provider") {
                         Text("No providers connected")
-                            .foregroundColor(.secondary)
+                            .foregroundColor(AppTheme.Text.secondary)
                             .italic()
                     }
                 } else {
@@ -425,7 +425,7 @@ struct ModeConfigFormView: View {
         if provider == .localCLI {
             LabeledContent("AI Model") {
                 Text("Default")
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppTheme.Text.secondary)
             }
             .onAppear {
                 draft.selectedAIModel = nil
@@ -433,7 +433,7 @@ struct ModeConfigFormView: View {
         } else if provider == .voiceInkRefine {
             LabeledContent("AI Model") {
                 Text(VoiceInkRefineService.modelName)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppTheme.Text.secondary)
             }
             .onAppear {
                 applyVoiceInkRefineRules()
@@ -446,7 +446,7 @@ struct ModeConfigFormView: View {
                         provider == .openRouter
                             ? LocalizedStringKey("No models loaded") : LocalizedStringKey("No models available")
                     )
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppTheme.Text.secondary)
                     .italic()
                 }
             } else {
@@ -508,7 +508,7 @@ struct ModeConfigFormView: View {
 
             if warmupSnapshot.prompts.isEmpty {
                 Text("No prompts available")
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppTheme.Text.secondary)
                     .lineLimit(1)
             } else {
                 Picker("", selection: $draft.selectedPromptId) {
@@ -528,9 +528,9 @@ struct ModeConfigFormView: View {
                     openPromptEditor(.edit(selectedPrompt))
                 } label: {
                     Image(systemName: "pencil.circle.fill")
-                        .font(.system(size: 18))
+                        .font(.yoMax(18))
                         .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(AppTheme.Text.secondary)
                 }
                 .buttonStyle(.plain)
                 .help("Edit prompt")

@@ -233,7 +233,7 @@ struct OnboardingView: View {
                     }
                 }
                 .buttonStyle(.borderless)
-                .font(.system(size: 13, weight: .medium))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundStyle(AppTheme.Action.secondaryForeground)
                 .padding(8)
                 .contentShape(Rectangle())

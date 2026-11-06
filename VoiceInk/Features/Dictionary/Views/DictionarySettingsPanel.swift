@@ -201,10 +201,10 @@ struct DictionarySettingsPanel: View {
             } else if isAutoLearnDictionaryEnabled, hasAutoLearnFailure, repairError == nil {
                 Text(autoLearnFailureMessage.isEmpty
                     ? String(localized: "Auto-Learn is unavailable.") : autoLearnFailureMessage)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(AppTheme.Text.secondary)
             }
             if let repairError {
-                Text(repairError).foregroundStyle(.red)
+                Text(repairError).foregroundStyle(AppTheme.Status.error)
             }
         } header: {
             AutoLearnSectionHeader()
@@ -264,22 +264,22 @@ struct DictionarySettingsPanel: View {
             if let learnedReplacementCount {
                 if learnedReplacementCount == 0 {
                     Label("No new replacements learned", systemImage: "checkmark.circle")
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(AppTheme.Text.secondary)
                 } else {
                     Label {
                         Text("Learned \(learnedReplacementCount) replacements")
                     } icon: {
                         Image(systemName: "checkmark.circle")
                     }
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(AppTheme.Text.secondary)
                 }
             } else {
                 Label("Review complete", systemImage: "checkmark.circle")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(AppTheme.Text.secondary)
             }
         }
         if let reviewError, reviewError != autoLearnFailureMessage {
-            Text(reviewError).foregroundStyle(.red)
+            Text(reviewError).foregroundStyle(AppTheme.Status.error)
         }
     }
 
@@ -353,7 +353,7 @@ struct DictionarySettingsPanel: View {
             }
             if !reviewProviders.contains(provider) {
                 Text("Connect this provider in AI Models to resume Auto-Learn review.")
-                    .font(.caption).foregroundStyle(.secondary)
+                    .font(.yoMax(10)).foregroundStyle(AppTheme.Text.secondary)
             }
             if provider == .openRouter || provider == .ollama {
                 Button("Refresh Models") {
@@ -362,7 +362,7 @@ struct DictionarySettingsPanel: View {
             }
         } else if reviewProviders.isEmpty {
             Text("Connect a provider in AI Models to enable AI review.")
-                .font(.caption).foregroundStyle(.secondary)
+                .font(.yoMax(10)).foregroundStyle(AppTheme.Text.secondary)
         }
     }
 
@@ -433,7 +433,7 @@ struct DictionarySettingsPanel: View {
     private var panelHeader: some View {
         HStack(spacing: 12) {
             Text("Dictionary Settings")
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
                 .fontWeight(.semibold)
 
             Spacer()

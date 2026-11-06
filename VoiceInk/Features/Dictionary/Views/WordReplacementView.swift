@@ -75,18 +75,18 @@ struct WordReplacementView: View {
             HStack(spacing: 8) {
                 TextField("", text: $originalWord, prompt: Text("Original text (use commas for multiple)"))
                     .textFieldStyle(.roundedBorder)
-                    .font(.system(size: 13))
+                    .font(.yoMax(13))
                     .onSubmit { addReplacement() }
                     .labelsHidden()
 
                 Image(systemName: "arrow.right")
-                    .foregroundColor(.secondary)
-                    .font(.system(size: 10))
+                    .foregroundColor(AppTheme.Text.secondary)
+                    .font(.yoMax(10))
                     .frame(width: 10)
 
                 TextField("", text: $replacementWord, prompt: Text("Replacement text"))
                     .textFieldStyle(.roundedBorder)
-                    .font(.system(size: 13))
+                    .font(.yoMax(13))
                     .onSubmit { addReplacement() }
                     .labelsHidden()
 
@@ -117,17 +117,17 @@ struct WordReplacementView: View {
                         Button(action: { toggleSort(for: .original) }) {
                             HStack(spacing: 4) {
                                 Text("Original")
-                                    .font(.system(size: 12, weight: .medium))
-                                    .foregroundColor(.secondary)
+                                    .font(.yoMax(12, weight: .medium))
+                                    .foregroundColor(AppTheme.Text.secondary)
 
                                 if sortMode == .originalAsc || sortMode == .originalDesc {
                                     Image(systemName: sortMode == .originalAsc ? "chevron.up" : "chevron.down")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
+                                        .font(.yoMax(10))
+                                        .foregroundColor(AppTheme.Text.secondary)
                                 } else if let dateSortIconName {
                                     Image(systemName: dateSortIconName)
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
+                                        .font(.yoMax(10))
+                                        .foregroundColor(AppTheme.Text.secondary)
                                 }
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -136,24 +136,24 @@ struct WordReplacementView: View {
                         .help("Sort by original")
 
                         Image(systemName: "arrow.right")
-                            .foregroundColor(.secondary)
-                            .font(.system(size: 10))
+                            .foregroundColor(AppTheme.Text.secondary)
+                            .font(.yoMax(10))
                             .frame(width: 10)
 
                         Button(action: { toggleSort(for: .replacement) }) {
                             HStack(spacing: 4) {
                                 Text("Replacement")
-                                    .font(.system(size: 12, weight: .medium))
-                                    .foregroundColor(.secondary)
+                                    .font(.yoMax(12, weight: .medium))
+                                    .foregroundColor(AppTheme.Text.secondary)
 
                                 if sortMode == .replacementAsc || sortMode == .replacementDesc {
                                     Image(systemName: sortMode == .replacementAsc ? "chevron.up" : "chevron.down")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
+                                        .font(.yoMax(10))
+                                        .foregroundColor(AppTheme.Text.secondary)
                                 } else if let dateSortIconName {
                                     Image(systemName: dateSortIconName)
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
+                                        .font(.yoMax(10))
+                                        .foregroundColor(AppTheme.Text.secondary)
                                 }
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -256,15 +256,15 @@ struct WordReplacementInfoPopover: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("How to use Word Replacements")
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("Separate multiple originals with commas:")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .font(.yoMax(11))
+                    .foregroundColor(AppTheme.Text.secondary)
 
                 Text("Voicing, Voice ink, Voiceing")
-                    .font(.callout)
+                    .font(.yoMax(12))
                     .padding(8)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color(.textBackgroundColor))
@@ -272,35 +272,35 @@ struct WordReplacementInfoPopover: View {
             }
 
             Text("Scroll horizontally to view all phrases.")
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .font(.yoMax(10))
+                .foregroundColor(AppTheme.Text.secondary)
 
             Divider()
 
             Text("Examples")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+                .font(.yoMax(11))
+                .foregroundColor(AppTheme.Text.secondary)
 
             VStack(spacing: 12) {
                 HStack(spacing: 8) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Original:")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                            .font(.yoMax(10))
+                            .foregroundColor(AppTheme.Text.secondary)
                         Text("my website link")
-                            .font(.callout)
+                            .font(.yoMax(12))
                     }
 
                     Image(systemName: "arrow.right")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundColor(AppTheme.Text.secondary)
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Replacement:")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                            .font(.yoMax(10))
+                            .foregroundColor(AppTheme.Text.secondary)
                         Text(verbatim: "https://tryvoiceink.com")
-                            .font(.callout)
+                            .font(.yoMax(12))
                     }
                 }
                 .padding(10)
@@ -311,22 +311,22 @@ struct WordReplacementInfoPopover: View {
                 HStack(spacing: 8) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Original:")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                            .font(.yoMax(10))
+                            .foregroundColor(AppTheme.Text.secondary)
                         Text("Voicing, Voice ink")
-                            .font(.callout)
+                            .font(.yoMax(12))
                     }
 
                     Image(systemName: "arrow.right")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundColor(AppTheme.Text.secondary)
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Replacement:")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                            .font(.yoMax(10))
+                            .foregroundColor(AppTheme.Text.secondary)
                         Text("Yo Max")
-                            .font(.callout)
+                            .font(.yoMax(12))
                     }
                 }
                 .padding(10)
@@ -370,14 +370,14 @@ struct ReplacementRow: View {
             .help(original)
 
             Image(systemName: "arrow.right")
-                .foregroundColor(.secondary)
-                .font(.system(size: 10))
+                .foregroundColor(AppTheme.Text.secondary)
+                .font(.yoMax(10))
                 .frame(width: 10)
 
             HStack(spacing: 6) {
                 ScrollView(.horizontal) {
                     Text(replacement)
-                        .font(.system(size: 13))
+                        .font(.yoMax(13))
                         .lineLimit(1)
                         .fixedSize(horizontal: true, vertical: false)
                 }

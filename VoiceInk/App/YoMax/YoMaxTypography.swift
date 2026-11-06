@@ -43,3 +43,16 @@ enum YoMaxTypography {
         return installed
     }
 }
+
+extension NSFont {
+    /// Yo Max: the AppKit twin of `Font.yoMax`, for measuring text that SwiftUI draws with it.
+    static func yoMax(_ size: CGFloat, weight: NSFont.Weight = .regular) -> NSFont {
+        let name: String
+        switch weight {
+        case .bold, .heavy, .black: name = "Aeonik-Bold"
+        case .medium, .semibold: name = "Aeonik-Medium"
+        default: name = "Aeonik-Regular"
+        }
+        return NSFont(name: name, size: size) ?? .systemFont(ofSize: size, weight: weight)
+    }
+}

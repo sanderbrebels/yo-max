@@ -95,7 +95,7 @@ struct DictionaryImportPreviewSheet: View {
     private var importModeSection: some View {
         HStack(spacing: 4) {
             Text("Import Mode")
-                .font(.system(size: 12, weight: .semibold))
+                .font(.yoMax(12, weight: .semibold))
 
             InfoTip(
                 message: importModeHelp,
@@ -126,7 +126,7 @@ struct DictionaryImportPreviewSheet: View {
     private func summarySection(_ summary: DictionaryImportSummary) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Import Preview")
-                .font(.system(size: 12, weight: .semibold))
+                .font(.yoMax(12, weight: .semibold))
 
             VStack(spacing: 8) {
                 summaryRow(
@@ -189,7 +189,7 @@ struct DictionaryImportPreviewSheet: View {
                 if !hasImportableEntries {
                     Divider()
                     Label("No valid entries are available to import.", systemImage: "exclamationmark.triangle.fill")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.yoMax(12, weight: .medium))
                         .foregroundStyle(AppTheme.Status.warningStrong)
                 }
             }
@@ -201,13 +201,13 @@ struct DictionaryImportPreviewSheet: View {
     private func summaryRow(_ title: LocalizedStringKey, value: String, color: Color = AppTheme.Text.primary) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: 12) {
             Text(title)
-                .font(.system(size: 12))
+                .font(.yoMax(12))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Spacer(minLength: 12)
 
             Text(value)
-                .font(.system(size: 12, weight: .medium))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(color)
                 .multilineTextAlignment(.trailing)
         }
@@ -215,7 +215,7 @@ struct DictionaryImportPreviewSheet: View {
 
     private func errorSection(_ message: String) -> some View {
         Label(message, systemImage: "exclamationmark.triangle.fill")
-            .font(.system(size: 12))
+            .font(.yoMax(12))
             .foregroundStyle(AppTheme.Status.error)
             .frame(maxWidth: .infinity, alignment: .leading)
     }

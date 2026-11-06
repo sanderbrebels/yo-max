@@ -100,13 +100,13 @@ private struct CustomProviderEmptyState: View {
     var body: some View {
         VStack(spacing: 10) {
             Image(systemName: systemImage)
-                .font(.system(size: 32))
+                .font(.yoMax(32))
                 .symbolRenderingMode(.hierarchical)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppTheme.Text.secondary)
 
             Text(title)
                 .font(.subheadline.weight(.medium))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppTheme.Text.secondary)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 22)
@@ -123,8 +123,8 @@ private struct CustomEnhancementModelRow: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: "sparkles")
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(15, weight: .semibold))
+                .foregroundStyle(AppTheme.Text.secondary)
                 .frame(width: 28, height: 28)
                 .background(
                     RoundedRectangle(cornerRadius: 7)
@@ -137,17 +137,17 @@ private struct CustomEnhancementModelRow: View {
 
             VStack(alignment: .leading, spacing: 5) {
                 Text(provider.name)
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.yoMax(13, weight: .semibold))
 
                 if provider.modelName.isEmpty {
                     Text("No model configured")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .lineLimit(1)
                 } else {
                     Text(provider.modelName)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.yoMax(10))
+                        .foregroundStyle(AppTheme.Text.secondary)
                         .lineLimit(1)
                 }
             }
@@ -159,7 +159,7 @@ private struct CustomEnhancementModelRow: View {
                 Button("Delete", role: .destructive, action: onDelete)
             } label: {
                 Image(systemName: "ellipsis.circle")
-                    .font(.system(size: 14))
+                    .font(.yoMax(14))
             }
             .menuStyle(.borderlessButton)
             .menuIndicator(.hidden)
@@ -590,8 +590,8 @@ private struct CustomModelEditorSection<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(.secondary)
+                .font(.yoMax(12, weight: .semibold))
+                .foregroundStyle(AppTheme.Text.secondary)
 
             VStack(spacing: 0) {
                 content()
@@ -611,8 +611,8 @@ private struct CustomModelTextField: View {
     var body: some View {
         HStack(spacing: 12) {
             Text(label)
-                .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(.primary)
+                .font(.yoMax(12, weight: .medium))
+                .foregroundStyle(AppTheme.Text.primary)
                 .lineLimit(1)
                 .frame(width: CustomModelEditorMetrics.labelWidth, alignment: .leading)
 
@@ -624,7 +624,7 @@ private struct CustomModelTextField: View {
                 }
             }
             .textFieldStyle(.roundedBorder)
-            .font(.system(size: 12))
+            .font(.yoMax(12))
             .frame(maxWidth: CustomModelEditorMetrics.fieldMaxWidth, alignment: .trailing)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -659,17 +659,17 @@ private struct ConnectionTestRow: View {
     var body: some View {
         HStack(spacing: 12) {
             Text("Connection")
-                .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(.primary)
+                .font(.yoMax(12, weight: .medium))
+                .foregroundStyle(AppTheme.Text.primary)
                 .lineLimit(1)
                 .frame(width: CustomModelEditorMetrics.labelWidth, alignment: .leading)
 
             Button(action: action) {
                 HStack(spacing: 5) {
                     Image(systemName: "wifi")
-                        .font(.system(size: 11))
+                        .font(.yoMax(11))
                     Text("Test")
-                        .font(.system(size: 12))
+                        .font(.yoMax(12))
                 }
             }
             .disabled(isDisabled || state.isTesting)
@@ -692,11 +692,11 @@ private struct ConnectionTestRow: View {
                     .controlSize(.small)
                 Text("Testing…")
             }
-            .font(.system(size: 12))
+            .font(.yoMax(12))
             .foregroundStyle(AppTheme.Text.secondary)
         case .success:
             Label("Test successful", systemImage: "checkmark.circle")
-                .font(.system(size: 12))
+                .font(.yoMax(12))
                 .foregroundStyle(AppTheme.Status.positive)
                 .lineLimit(1)
         }
@@ -724,8 +724,8 @@ private struct CustomModelToggleRow: View {
     var body: some View {
         HStack(spacing: 12) {
             Text(title)
-                .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(.primary)
+                .font(.yoMax(12, weight: .medium))
+                .foregroundStyle(AppTheme.Text.primary)
                 .frame(width: CustomModelEditorMetrics.labelWidth, alignment: .leading)
 
             Toggle("", isOn: $isOn)
@@ -744,7 +744,7 @@ private struct CustomModelErrorBox: View {
         VStack(alignment: .leading, spacing: 6) {
             ForEach(messages, id: \.self) { message in
                 Text(message)
-                    .font(.caption)
+                    .font(.yoMax(10))
                     .foregroundStyle(AppTheme.Status.error)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -762,9 +762,9 @@ private struct CustomModelEditorHeader: View {
     var body: some View {
         HStack(spacing: 12) {
             Text(title)
-                .font(.headline)
+                .font(.yoMax(13, weight: .medium))
                 .fontWeight(.semibold)
-                .foregroundColor(.primary)
+                .foregroundColor(AppTheme.Text.primary)
 
             Spacer()
 
