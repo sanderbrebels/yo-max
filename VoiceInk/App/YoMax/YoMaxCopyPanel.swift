@@ -2,13 +2,19 @@ import AppKit
 import SwiftUI
 
 /// Yo Max: when there is no text field to paste into, show the transcript in a small
-/// Tarmax card at the top of the screen, with a Copy button (like Wispr Flow).
+/// Tarmax card at the bottom of the screen, just above the recorder, with a Copy button
+/// (like Wispr Flow).
 @MainActor
 final class YoMaxCopyPanelController {
     static let shared = YoMaxCopyPanelController()
 
     private static let width: CGFloat = 540  // the 520 pt card plus room for its shadow
-    private static let topMargin: CGFloat = 12
+    /// The mini recorder sits 24 pt above the bottom with a 40 pt bar (MiniRecorderPanel);
+    /// the card floats 12 pt above that. The card view has 10 pt of room for its shadow.
+    private static let recorderBottomPadding: CGFloat = 24
+    private static let recorderBarHeight: CGFloat = 40
+    private static let gapAboveRecorder: CGFloat = 12
+    private static let shadowInset: CGFloat = 10
     private static let visibleDuration: Duration = .seconds(15)
 
     private var panel: NSPanel?
@@ -52,12 +58,15 @@ final class YoMaxCopyPanelController {
         panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient]
         panel.contentView = hosting
 
-        let screen = NSScreen.screens.first { $0.frame.contains(NSEvent.mouseLocation) } ?? NSScreen.main
+        let screen = RecorderScreenResolver.resolve()
+            ?? NSScreen.screens.first { $0.frame.contains(NSEvent.mouseLocation) }
+            ?? NSScreen.main
         if let visible = screen?.visibleFrame {
             panel.setFrameOrigin(
                 NSPoint(
                     x: visible.midX - size.width / 2,
-                    y: visible.maxY - size.height - Self.topMargin
+                    y: visible.minY + Self.recorderBottomPadding + Self.recorderBarHeight
+                        + Self.gapAboveRecorder - Self.shadowInset
                 )
             )
         }

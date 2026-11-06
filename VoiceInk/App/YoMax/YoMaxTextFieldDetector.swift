@@ -1,11 +1,14 @@
+import AppKit
 import ApplicationServices
 import Foundation
+import os
 
 /// Yo Max: decides whether the focused element can take pasted text.
 ///
-/// It only says `.notEditable` when that is clear (nothing has focus, or the focus is a
-/// button, list, window and so on). Browsers and Electron apps often report a generic
-/// group or web area; then the answer is `.unknown` and Yo Max pastes as before.
+/// It asks the frontmost app (never Yo Max itself: the recorder panel can become key and
+/// would otherwise answer). It only says `.notEditable` when that is clear (nothing has focus,
+/// or the focus is a button, list, window and so on). Browsers and Electron apps often report
+/// a generic group or web area; then the answer is `.unknown` and Yo Max pastes as before.
 enum YoMaxTextFieldDetector {
     enum Result: String {
         case editable
@@ -13,7 +16,13 @@ enum YoMaxTextFieldDetector {
         case unknown
     }
 
+    private static let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "YoMaxTextFieldDetector")
     private static let messagingTimeout: Float = 0.15
+
+    /// Roles that always take typed text.
+    private static let textRoles: Set<String> = [
+        "AXTextField", "AXTextArea", "AXComboBox", "AXSearchField", "AXSecureTextField",
+    ]
 
     /// Roles that never take typed text.
     private static let nonTextRoles: Set<String> = [
@@ -24,25 +33,37 @@ enum YoMaxTextFieldDetector {
     ]
 
     static func focusedElementState() -> Result {
-        guard AXIsProcessTrusted() else { return .unknown }
+        let result = evaluate()
+        logger.notice("Focused element state: \(result.rawValue, privacy: .public)")
+        return result
+    }
 
-        let systemWide = AXUIElementCreateSystemWide()
-        AXUIElementSetMessagingTimeout(systemWide, messagingTimeout)
+    private static func evaluate() -> Result {
+        guard AXIsProcessTrusted(),
+            let app = NSWorkspace.shared.frontmostApplication,
+            app.processIdentifier != ProcessInfo.processInfo.processIdentifier
+        else { return .unknown }
 
-        let read = AccessibilityFocusReader.focusedElement(in: systemWide)
+        let appElement = AXUIElementCreateApplication(app.processIdentifier)
+        AXUIElementSetMessagingTimeout(appElement, messagingTimeout)
+
+        let read = AccessibilityFocusReader.focusedElement(in: appElement)
         guard let element = read.element else {
-            // No focused element at all (desktop, an empty window): nothing to paste into.
+            // The app answers but has nothing focused (Finder desktop, an empty window).
             return read.error == .noValue ? .notEditable : .unknown
         }
         AXUIElementSetMessagingTimeout(element, messagingTimeout)
 
         let role = AccessibilityFocusReader.stringAttribute(kAXRoleAttribute as CFString, from: element)
-        if let editable = AccessibilityFocusReader.editableState(of: element, role: role) {
-            return editable ? .editable : .notEditable
+        if let role, textRoles.contains(role) {
+            return .editable
         }
-
+        if AccessibilityFocusReader.boolAttribute("AXEditable" as CFString, from: element) == true {
+            return .editable
+        }
         // Checked before "settable value": a slider or checkbox has a settable value too.
         if let role, nonTextRoles.contains(role) {
+            logger.notice("Not a text field: role=\(role, privacy: .public) app=\(app.bundleIdentifier ?? "?", privacy: .public)")
             return .notEditable
         }
 
