@@ -84,7 +84,7 @@ enum OnboardingStage: String, CaseIterable {
         case .api:
             return String(
                 localized:
-                    "Yo Max uses LLMs to enhance transcripts and perform AI actions. Set up an API key before continuing."
+                    "Optional: Yo Max can use an LLM to clean up transcripts. Add an API key now, or choose Set It Up Later to use local transcription only."
             )
         case .experience:
             return String(localized: "Try a few short samples and see how Yo Max works before you start.")

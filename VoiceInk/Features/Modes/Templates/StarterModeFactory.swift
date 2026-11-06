@@ -10,7 +10,7 @@ enum StarterModeFactory {
         modelName: String?,
         transcriptionModelName: String = defaultTranscriptionModelName,
         isRealtimeTranscriptionEnabled: Bool = true,
-        selectedLanguage: String = "auto",
+        selectedLanguage: String = YoMaxDefaults.language,
         installedApps: [InstalledAppInfo]? = nil
     ) {
         let manager = ModeManager.shared

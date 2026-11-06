@@ -107,7 +107,8 @@ enum ShortcutMigration {
             return mode
         }
 
-        return .hybrid
+        // Yo Max: hold = push-to-talk, double-tap = hands-free.
+        return .holdOrDoubleTap
     }
 
     private static func shortcutSelection(

@@ -307,8 +307,9 @@ final class OnboardingCoordinator: ObservableObject {
     }
 
     var selectedOnboardingTranscriptionLanguage: String {
-        guard let model = selectedOnboardingTranscriptionModel else { return "auto" }
-        return TranscriptionLanguageSupport.validLanguageOrFallback("auto", for: model)
+        // Yo Max: Dutch by default instead of automatic language detection.
+        guard let model = selectedOnboardingTranscriptionModel else { return YoMaxDefaults.language }
+        return TranscriptionLanguageSupport.validLanguageOrFallback(YoMaxDefaults.language, for: model)
     }
 
     var recommendedOnboardingTranscriptionProvider: (any CloudProvider)? {

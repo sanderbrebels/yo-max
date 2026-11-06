@@ -54,7 +54,7 @@ enum AppDefaults {
             // Recording & Transcription
             "IsTextFormattingEnabled": true,
             "IsVADEnabled": true,
-            "SelectedLanguage": "en",
+            "SelectedLanguage": "nl",  // Yo Max: Dutch by default
             "AppendTrailingSpace": true,
             "RecorderType": "mini",
             RecorderDisplaySettingsKeys.showLiveTranscript: true,
@@ -78,6 +78,7 @@ enum AppDefaults {
 
             // Model
             "PrewarmModelOnWake": true,
+            YoMaxDefaults.keepModelLoadedKey: true,
 
         ])
 

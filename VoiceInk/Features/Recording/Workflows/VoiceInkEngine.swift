@@ -415,7 +415,12 @@ class VoiceInkEngine: NSObject, ObservableObject {
                                         $0.name == model.name
                                     }),
                                         self.whisperModelManager.whisperContext == nil
+                                            || self.whisperModelManager.loadedWhisperModel?.name != model.name
                                     {
+                                        // Yo Max: a different model may still be loaded; swap it out.
+                                        if self.whisperModelManager.whisperContext != nil {
+                                            await self.whisperModelManager.cleanupResources()
+                                        }
                                         do {
                                             try await self.whisperModelManager.loadModel(localWhisperModel)
                                         } catch {
@@ -941,8 +946,13 @@ class VoiceInkEngine: NSObject, ObservableObject {
         activeRecordingStartID = nil
         activeRecordingUseCase = .newSession
         await finishRecorderSession()
-        await whisperModelManager.cleanupResources()
-        await serviceRegistry.cleanup()
+        // Yo Max: keep the model in memory between dictations so the next one starts fast.
+        if YoMaxDefaults.keepModelLoaded {
+            logger.notice("cleanupResources: keeping transcription model loaded")
+        } else {
+            await whisperModelManager.cleanupResources()
+            await serviceRegistry.cleanup()
+        }
         logger.notice("cleanupResources: completed")
     }
 

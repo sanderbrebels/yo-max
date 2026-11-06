@@ -311,6 +311,12 @@ struct VoiceInkApp: App {
                         .modelContainer(container)
                         .onAppear {
                             // Yo Max: VoiceInk announcements are never fetched.
+                            // Yo Max: download Whisper Turbo and make it the Dutch default after onboarding.
+                            YoMaxDefaultModelService.shared.start(whisperModelManager: whisperModelManager)
+                            YoMaxDefaultModelService.shared.preloadCurrentModel(
+                                transcriptionModelManager: transcriptionModelManager,
+                                whisperModelManager: whisperModelManager
+                            )
                             showLaunchRemindersIfNeeded()
 
                             GitHubStarPromptCoordinator.shared.scheduleIfNeeded(modelContainer: container)
@@ -345,7 +351,9 @@ struct VoiceInkApp: App {
                         )
                         .onDisappear {
                             AnnouncementsService.shared.stop()
-                            whisperModelManager.unloadModel()
+                            if !YoMaxDefaults.keepModelLoaded {
+                                whisperModelManager.unloadModel()
+                            }
 
                             // Stop the automatic audio cleanup process
                             audioCleanupManager.stopAutomaticCleanup()

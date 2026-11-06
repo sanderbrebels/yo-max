@@ -1,4 +1,5 @@
 import AppKit
+import Carbon.HIToolbox
 import Foundation
 import os
 
@@ -54,6 +55,8 @@ class RecordingShortcutManager: ObservableObject {
         case pushToTalk = "pushToTalk"
         case hybrid = "hybrid"
         case doubleTap = "doubleTap"
+        /// Yo Max: hold = push-to-talk, double-tap = hands-free, single tap while hands-free = stop.
+        case holdOrDoubleTap = "holdOrDoubleTap"
 
         var displayName: String {
             switch self {
@@ -61,6 +64,7 @@ class RecordingShortcutManager: ObservableObject {
             case .pushToTalk: return String(localized: "Push to Talk")
             case .hybrid: return String(localized: "Hybrid")
             case .doubleTap: return String(localized: "Double Tap")
+            case .holdOrDoubleTap: return String(localized: "Hold or Double-Tap")
             }
         }
     }
@@ -83,6 +87,11 @@ class RecordingShortcutManager: ObservableObject {
 
     init(engine: VoiceInkEngine, recorderUIManager: RecorderUIManager) {
         ShortcutMigration.migrateLegacyShortcutsIfNeeded()
+        // Yo Max: fn is the default recording shortcut (only when none was set or cleared before).
+        ShortcutStore.seedShortcut(
+            .modifierOnly(keyCode: UInt16(kVK_Function), modifierFlags: [.function]),
+            for: .primaryRecording
+        )
 
         self.primaryRecordingShortcut = ShortcutMigration.migrateShortcutSelection(
             action: .primaryRecording,
@@ -361,9 +370,17 @@ final class RecordingShortcutModeHandler {
     private var activeShortcutIsDoubleTap = false
     private var stateRevision: UInt64 = 0
     private var pendingDoubleTapReleaseTimes: [ShortcutAction: TimeInterval] = [:]
+    // Yo Max: holdOrDoubleTap state.
+    private var isSecondTapPress = false
+    private var isHandsFreeStopPress = false
+    private var pendingFirstTapCancelTask: Task<Void, Never>?
 
     private let hybridPressThreshold: TimeInterval = 0.5
     private let doubleTapThreshold: TimeInterval = 0.7
+    /// Yo Max: a press at least this long is push-to-talk.
+    private let holdThreshold: TimeInterval = 0.3
+    /// Yo Max: the second tap must start within this time after the first tap is released.
+    private let secondTapWindow: TimeInterval = 0.35
 
     init(
         canHandleShortcutAction: @escaping @MainActor () -> Bool,
@@ -399,6 +416,14 @@ final class RecordingShortcutModeHandler {
 
     func clearPendingDoubleTaps() {
         pendingDoubleTapReleaseTimes.removeAll()
+        clearHoldOrDoubleTapState()
+    }
+
+    private func clearHoldOrDoubleTapState() {
+        pendingFirstTapCancelTask?.cancel()
+        pendingFirstTapCancelTask = nil
+        isSecondTapPress = false
+        isHandsFreeStopPress = false
     }
 
     func clearPendingDoubleTap(for action: ShortcutAction) {
@@ -423,12 +448,20 @@ final class RecordingShortcutModeHandler {
 
     private func resetShortcutStates(for actions: Set<ShortcutAction>, preservingRecording: Bool) {
         for action in actions {
-            pendingDoubleTapReleaseTimes.removeValue(forKey: action)
+            if pendingDoubleTapReleaseTimes.removeValue(forKey: action) != nil {
+                pendingFirstTapCancelTask?.cancel()
+                pendingFirstTapCancelTask = nil
+            }
             interruptedRecordingActions.removeValue(forKey: action)
+        }
+        if activeRecordingShortcutMode == .holdOrDoubleTap {
+            isSecondTapPress = false
+            isHandsFreeStopPress = false
         }
         guard let activeRecordingShortcutAction, actions.contains(activeRecordingShortcutAction) else { return }
         heldShortcut.withLock { $0 = nil }
         let wasHoldMode = activeRecordingShortcutMode == .pushToTalk || activeRecordingShortcutMode == .hybrid
+            || activeRecordingShortcutMode == .holdOrDoubleTap
         // Finish held recordings when monitoring resets.
         let state = recordingState()
         let shouldFinishHeldRecording = !preservingRecording && isRecorderVisible()
@@ -531,6 +564,123 @@ final class RecordingShortcutModeHandler {
 
         case .doubleTap:
             break
+
+        case .holdOrDoubleTap:
+            await handleHoldOrDoubleTapDown(action: action, eventTime: eventTime, modeId: modeId)
+        }
+    }
+
+    // MARK: - Yo Max: hold or double-tap
+
+    private func handleHoldOrDoubleTapDown(action: ShortcutAction, eventTime: TimeInterval, modeId: UUID?) async {
+        isSecondTapPress = false
+        isHandsFreeStopPress = false
+
+        // Single tap while hands-free: stop and deliver.
+        if isHandsFreeRecording {
+            isHandsFreeRecording = false
+            isHandsFreeStopPress = true
+            guard canHandleShortcutAction() else {
+                logDecision(action, phase: "down", result: "ignored-engine-state", detail: "mode=holdOrDoubleTap")
+                return
+            }
+            logDecision(action, phase: "down", result: "stop-hands-free", detail: "mode=holdOrDoubleTap")
+            await toggleRecorderPanel(modeId)
+            return
+        }
+
+        // Second tap of a double tap: keep the recording that the first tap started.
+        if let firstRelease = pendingDoubleTapReleaseTimes[action],
+            eventTime - firstRelease >= 0,
+            eventTime - firstRelease <= secondTapWindow,
+            isRecorderVisible()
+        {
+            pendingDoubleTapReleaseTimes.removeValue(forKey: action)
+            pendingFirstTapCancelTask?.cancel()
+            pendingFirstTapCancelTask = nil
+            isSecondTapPress = true
+            logDecision(action, phase: "down", result: "second-tap", detail: "interval=\(String(format: "%.3f", eventTime - firstRelease))")
+            return
+        }
+
+        pendingDoubleTapReleaseTimes.removeValue(forKey: action)
+        pendingFirstTapCancelTask?.cancel()
+        pendingFirstTapCancelTask = nil
+
+        // Start recording immediately so the first words are never lost.
+        if !isRecorderVisible() {
+            guard canHandleShortcutAction() else {
+                logDecision(action, phase: "down", result: "ignored-engine-state", detail: "mode=holdOrDoubleTap")
+                return
+            }
+            logDecision(action, phase: "down", result: "start-recording", detail: "mode=holdOrDoubleTap")
+            await toggleRecorderPanel(modeId)
+        } else {
+            logDecision(action, phase: "down", result: "wait-for-release", detail: "mode=holdOrDoubleTap")
+        }
+    }
+
+    private func handleHoldOrDoubleTapUp(
+        action: ShortcutAction,
+        eventTime: TimeInterval,
+        pressDuration: TimeInterval,
+        modeId: UUID?
+    ) async {
+        let durationText = String(format: "%.3f", pressDuration)
+
+        if isHandsFreeStopPress {
+            isHandsFreeStopPress = false
+            logDecision(action, phase: "up", result: "hands-free-stopped", detail: "duration=\(durationText)")
+            return
+        }
+
+        let isRecordingActive = recordingState() == .recording || recordingState() == .starting
+
+        if isSecondTapPress {
+            isSecondTapPress = false
+            if pressDuration < holdThreshold {
+                logDecision(action, phase: "up", result: "hands-free", detail: "mode=holdOrDoubleTap duration=\(durationText)")
+                isHandsFreeRecording = isRecorderVisible()
+            } else if isRecordingActive, canHandleShortcutAction() {
+                // Second press was held: behave like push-to-talk.
+                logDecision(action, phase: "up", result: "stop-recording", detail: "mode=holdOrDoubleTap second-hold duration=\(durationText)")
+                await toggleRecorderPanel(modeId)
+            }
+            return
+        }
+
+        if pressDuration >= holdThreshold {
+            guard isRecordingActive, canHandleShortcutAction() else {
+                logDecision(action, phase: "up", result: "ignored-engine-state", detail: "mode=holdOrDoubleTap duration=\(durationText)")
+                return
+            }
+            logDecision(action, phase: "up", result: "stop-recording", detail: "mode=holdOrDoubleTap duration=\(durationText)")
+            await toggleRecorderPanel(modeId)
+            return
+        }
+
+        // Short first tap: wait for a second tap, otherwise discard the recording.
+        guard isRecorderVisible() else {
+            logDecision(action, phase: "up", result: "short-tap-no-recorder", detail: "duration=\(durationText)")
+            return
+        }
+        logDecision(action, phase: "up", result: "waiting-second-tap", detail: "mode=holdOrDoubleTap duration=\(durationText)")
+        pendingDoubleTapReleaseTimes[action] = eventTime
+        let revision = stateRevision
+        let window = secondTapWindow
+        pendingFirstTapCancelTask?.cancel()
+        pendingFirstTapCancelTask = Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: UInt64((window + 0.05) * 1_000_000_000))
+            guard let self, !Task.isCancelled else { return }
+            guard self.stateRevision == revision,
+                self.pendingDoubleTapReleaseTimes[action] == eventTime,
+                !self.isShortcutPressed,
+                !self.isHandsFreeRecording
+            else { return }
+            self.pendingDoubleTapReleaseTimes.removeValue(forKey: action)
+            self.pendingFirstTapCancelTask = nil
+            self.logDecision(action, phase: "timeout", result: "single-tap-cancel", detail: "mode=holdOrDoubleTap")
+            await self.cancelRecording()
         }
     }
 
@@ -608,6 +758,9 @@ final class RecordingShortcutModeHandler {
                 logDecision(action, phase: "up", result: "waiting-second-tap")
                 pendingDoubleTapReleaseTimes[action] = eventTime
             }
+
+        case .holdOrDoubleTap:
+            await handleHoldOrDoubleTapUp(action: action, eventTime: eventTime, pressDuration: pressDuration, modeId: modeId)
         }
     }
 

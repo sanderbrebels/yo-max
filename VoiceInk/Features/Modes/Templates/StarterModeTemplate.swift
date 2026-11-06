@@ -70,11 +70,12 @@ enum StarterModeCatalog {
             description: "Clean up dictated text while preserving your meaning.",
             guidance:
                 "Use this for everyday writing when you want grammar, flow, and light formatting improved before the result is pasted.",
-            promptId: PromptTemplates.defaultPromptId,
+            // Yo Max: Dutch prompt, and no screen text sent to the AI provider.
+            promptId: PromptTemplates.dutchPromptId,
             outputMode: .paste,
             usesAIEnhancement: true,
             useSelectedTextContext: true,
-            useScreenCapture: true,
+            useScreenCapture: false,
             isDefault: false
         ),
         StarterModeTemplate(

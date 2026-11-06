@@ -50,6 +50,13 @@ class AIEnhancementService: ObservableObject {
             self.customPrompts = []
         }
 
+        // Yo Max: always offer the Dutch cleanup prompt.
+        if !customPrompts.contains(where: { $0.id == PromptTemplates.dutchPromptId }),
+            let dutchPrompt = PromptTemplates.seedPrompts.first(where: { $0.id == PromptTemplates.dutchPromptId })
+        {
+            customPrompts.append(dutchPrompt)
+        }
+
         repairModePromptSelections()
 
         NotificationCenter.default.addObserver(

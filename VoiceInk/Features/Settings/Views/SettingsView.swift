@@ -16,6 +16,7 @@ struct SettingsView: View {
     @ObservedObject private var playbackController = PlaybackController.shared
     @AppStorage(OnboardingSettings.completedV2Key) private var hasCompletedOnboardingV2 = true
     @AppStorage("enableAnnouncements") private var enableAnnouncements = false
+    @AppStorage(YoMaxDefaults.keepModelLoadedKey) private var keepModelLoaded = true
     @AppStorage("restoreClipboardAfterPaste") private var restoreClipboardAfterPaste = true
     @AppStorage("clipboardRestoreDelay") private var clipboardRestoreDelay = 2.0
     @AppStorage(SmartPunctuation.settingsKey) private var smartPunctuationEnabled = false
@@ -249,6 +250,9 @@ struct SettingsView: View {
                 )
                 .disabled(launchAtLoginManager.isUpdating)
 
+                Toggle("Keep Model Loaded", isOn: $keepModelLoaded)
+                    .help("Keeps the transcription model in memory between dictations so Yo Max responds faster. Uses more memory.")
+
                 // Yo Max: update and announcement controls removed (updates are disabled).
                 HStack {
                     Button("Reset Onboarding") {
@@ -310,6 +314,7 @@ struct SettingsView: View {
             Button("Cancel", role: .cancel) {}
             Button("Reset", role: .destructive) {
                 DispatchQueue.main.async {
+                    YoMaxDefaultModelService.resetForNewOnboarding()
                     hasCompletedOnboardingV2 = false
                 }
             }
