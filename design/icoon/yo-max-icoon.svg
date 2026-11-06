@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Yo Max app-icoon: Tarmax-ruit (brand-dark #212520) met lime golfvorm (#86F46D) op de lichte pagina (#F5F5F5). Alles gecentreerd op 512,512. -->
+  <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="#F5F5F5"/>
+  <g transform="translate(512 512) scale(3.05) translate(-90.8575 -90.8575)">
+    <path d="M77.8113 5.40398L5.40398 77.8113C-1.80133 85.0166 -1.80133 96.6987 5.40398 103.904L77.8113 176.311C85.0166 183.517 96.6987 183.517 103.904 176.311L176.311 103.904C183.517 96.6987 183.517 85.0166 176.311 77.8113L103.904 5.40398C96.6987 -1.80133 85.0166 -1.80133 77.8113 5.40398Z" fill="#212520"/>
+  </g>
+  <rect x="382" y="464" width="36" height="96" rx="18" fill="#86F46D"/>
+  <rect x="438" y="424" width="36" height="176" rx="18" fill="#86F46D"/>
+  <rect x="494" y="384" width="36" height="256" rx="18" fill="#86F46D"/>
+  <rect x="550" y="424" width="36" height="176" rx="18" fill="#86F46D"/>
+  <rect x="606" y="464" width="36" height="96" rx="18" fill="#86F46D"/>
+</svg>

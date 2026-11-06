@@ -137,7 +137,7 @@ private extension ViewType {
 
 private struct SidebarIconStyle {
     let background: Color
-    var foreground: Color = .white
+    var foreground: Color = AppTheme.Sidebar.iconForeground  // Yo Max: lime sign on brand-dark
 }
 
 private struct SidebarItemButton: View {
@@ -154,7 +154,7 @@ private struct SidebarItemButton: View {
                 )
 
                 Text(viewType.title)
-                    .font(.system(size: 13.5, weight: isSelected ? .semibold : .medium))
+                    .font(.yoMax(13.5, weight: .medium))  // Yo Max: Aeonik 500
                     .lineLimit(1)
 
                 Spacer(minLength: 0)
@@ -185,7 +185,7 @@ private struct SidebarItemButton: View {
 
     private var rowBackgroundColor: Color {
         if isSelected {
-            return Color(nsColor: .selectedContentBackgroundColor)
+            return AppTheme.Sidebar.selectedRow  // Yo Max: the lime Tarmax pill
         }
 
         return .clear
@@ -196,7 +196,7 @@ private struct SidebarItemButton: View {
     }
 
     private var selectedForegroundColor: Color {
-        Color(nsColor: .alternateSelectedControlTextColor)
+        AppTheme.Sidebar.selectedRowText  // Yo Max: ink on lime
     }
 }
 

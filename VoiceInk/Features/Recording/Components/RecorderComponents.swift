@@ -356,13 +356,13 @@ struct RecorderStatusDisplay: View {
     var body: some View {
         Group {
             if currentState == .enhancing {
-                ProcessingStatusDisplay(mode: .enhancing, color: .white).transition(.opacity)
+                ProcessingStatusDisplay(mode: .enhancing, color: AppTheme.Brand.lime)  // Yo Max.transition(.opacity)
             } else if currentState == .transcribing {
                 ProcessingStatusDisplay(mode: .transcribing, color: .white).transition(.opacity)
             } else if currentState == .recording {
                 AudioVisualizer(
                     audioMeterProvider: audioMeterProvider,
-                    color: .white,
+                    color: AppTheme.Brand.lime,  // Yo Max: lime = action
                     isActive: true
                 )
                     .scaleEffect(y: menuBarHeight != nil ? min(1.0, (menuBarHeight! - 8) / 25) : 1.0, anchor: .center)

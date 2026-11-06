@@ -5,9 +5,10 @@ struct AudioVisualizer: View {
     let color: Color
     let isActive: Bool
 
-    private let barCount = 15
-    private let barWidth: CGFloat = 3
-    private let barSpacing: CGFloat = 2
+    // Yo Max: fewer, rounder bars, symmetric like the app icon.
+    private let barCount = 11
+    private let barWidth: CGFloat = 4
+    private let barSpacing: CGFloat = 3
     private let minHeight: CGFloat = 4
     private let maxHeight: CGFloat = 28
 
@@ -27,7 +28,7 @@ struct AudioVisualizer: View {
             HStack(spacing: barSpacing) {
                 ForEach(0..<barCount, id: \.self) { index in
                     RoundedRectangle(cornerRadius: barWidth / 2)
-                        .fill(color.opacity(0.85))
+                        .fill(color)
                         .frame(
                             width: barWidth,
                             height: barHeight(
@@ -46,9 +47,11 @@ struct AudioVisualizer: View {
 
         let time = date.timeIntervalSince1970
         let amplitude = max(0, min(1, pow(audioMeter.averagePower, 0.7)))  // boosted for visibility
-        let wave = sin(time * 8 + phases[index]) * 0.5 + 0.5
-        let centerDistance = abs(Double(index) - Double(barCount) / 2) / Double(barCount / 2)
-        let centerBoost = 1.0 - (centerDistance * 0.4)
+        // Yo Max: a calmer wave (Tarmax motion) and a stronger peak in the middle.
+        let wave = sin(time * 5 + phases[index]) * 0.35 + 0.65
+        let center = Double(barCount - 1) / 2
+        let centerDistance = abs(Double(index) - center) / center
+        let centerBoost = 1.0 - (centerDistance * 0.6)
 
         return max(minHeight, minHeight + CGFloat(amplitude * wave * centerBoost) * (maxHeight - minHeight))
     }
@@ -56,10 +59,10 @@ struct AudioVisualizer: View {
 
 // Flat bars shown when the recorder is idle (no audio input)
 struct StaticVisualizer: View {
-    private let barCount = 15
-    private let barWidth: CGFloat = 3
+    private let barCount = 11  // Yo Max: matches AudioVisualizer
+    private let barWidth: CGFloat = 4
     private let barHeight: CGFloat = 4
-    private let barSpacing: CGFloat = 2
+    private let barSpacing: CGFloat = 3
     let color: Color
 
     var body: some View {
@@ -102,7 +105,7 @@ struct ProcessingStatusDisplay: View {
         VStack(spacing: 4) {
             Text(label)
                 .foregroundColor(color)
-                .font(.system(size: 11, weight: .medium))
+                .font(.yoMax(11, weight: .medium))  // Yo Max: Aeonik
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
 

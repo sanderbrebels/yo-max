@@ -94,7 +94,7 @@ struct MiniRecorderView<S: RecorderStateProvider & ObservableObject>: View {
             controlBar
         }
         .frame(width: hasAssistantResponse ? assistantWidth : (hasLiveTranscript ? expandedWidth : compactWidth))
-        .background(Color.black)
+        .background(AppTheme.Brand.brandDark)  // Yo Max: Tarmax brand-dark
         .clipShape(
             RoundedRectangle(
                 cornerRadius: hasLiveTranscript || hasAssistantResponse ? expandedCornerRadius : compactCornerRadius,

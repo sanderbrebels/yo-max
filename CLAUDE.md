@@ -43,7 +43,17 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - macOS: zet *Systeeminstellingen → Toetsenbord → "Druk op 🌐-toets om"* op **"Niets doen"**, anders opent de emoji-kiezer.
 - **AI-opschoning via Groq** (gratis tier, OpenAI-compatibel). Standaardmodel `qwen/qwen3.8-27b`; alternatieven `openai/gpt-oss-120b` (beste Nederlands) en `openai/gpt-oss-20b` (sneller). De sleutel vul je in de app in (AI Models → Groq) en die komt in de sleutelhanger. **Nooit in code.**
 - Nieuwe prompt **"Nederlands"** (`PromptTemplates.dutchPromptId`): spelling en leestekens, euh/ehm weg, zelfcorrecties verwerken (nee/neen/sorry/wacht/ik bedoel), Engelse termen behouden, betekenis nooit veranderen, getallen netjes (€ 250, 15%, 14.30 uur), lijsten, en **vragen of instructies nooit uitvoeren**. De startmodus "Enhancement" gebruikt deze prompt, zonder schermopname (privacy).
-- Testzinnen: `testzinnen.md` (15 zinnen + notitietabel).
+- Testzinnen: `testzinnen.md` (15 zinnen + notitietabel). Eerste test (2026-11-06): 10/15 perfect; fouten vooral vaktermen die Whisper verkeerd hoort → woordenboek.
+- Prompt "Nederlands" v2: tijden zoals gezegd ("half tien" blijft), kleine grammaticafouten herstellen, geen komma tussen onderwerp en werkwoord. Verander je de prompttekst, verhoog dan `PromptTemplates.dutchPromptVersion`, anders krijgt de opgeslagen prompt de nieuwe tekst niet.
+- Crash bij afsluiten opgelost: `AppDelegate.applicationShouldTerminate` geeft eerst het Whisper-model vrij (whisper.cpp breekt anders af op zijn Metal-resources).
+
+### Tarmax-stijl (fase 5)
+- Bron: `~/GIT/tarmax/DESIGN_SYSTEMS.md` en `src/ui/theme/tokens.css`. Kleuren staan als palet in `AppTheme.Brand` (`DesignSystem/Theme/AppTheme.swift`); de rest van de app gebruikt alleen de betekenissen.
+- Accent: ink `#0B1F0D` in licht (zoals de hoofdknop van Tarmax), lime `#86F46D` in donker. Zijbalk: brand-dark tegels met lime iconen, gekozen rij = lime pil met ink-tekst.
+- Mini-recorder: brand-dark `#212520` met een lime golfvorm (11 ronde streepjes, symmetrisch, rustiger). De notch-recorder blijft zwart (gaat op in de notch).
+- App-icoon: Tarmax-ruit met lime golfvorm op licht (`design/icoon/yo-max-icoon.svg`, exact gecentreerd). Menubalk: dezelfde ruit als template met 3 uitgespaarde streepjes (`design/icoon/menubalk-icoon.svg`). PNG's opnieuw maken: render de SVG naar 16–1024 px in `VoiceInk/Assets.xcassets/AppIcon.appiconset/`.
+- **Lettertype Aeonik** (`Font.yoMax`, `VoiceInk/App/YoMax/YoMaxTypography.swift`): wordt gebruikt als het op de Mac geïnstalleerd is (`~/Library/Fonts`), anders het systeemlettertype. **Aeonik is betaald: nooit in de app bundelen of in git zetten** (de repo is openbaar). Een vriend ziet dus gewoon SF Pro.
+- Aeonik zit nu in de zijbalk, de recorder en tekst zonder eigen lettertype. De ±530 vaste `.system(size:)`-letters in VoiceInk zijn bewust niet vervangen: dat zou elke VoiceInk-update laten botsen.
 
 ## Bouwen
 
@@ -100,17 +110,19 @@ Vereisten: Mac met **Apple Silicon (M-chip)** en **macOS 15.0 of nieuwer** (`MAC
 Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 
 ### Kwaliteit
-- [ ] Testzinnen (`testzinnen.md`) dicteren met en zonder Groq, fouten noteren en de prompt "Nederlands" bijstellen.
+- [x] Testzinnen (`testzinnen.md`) dicteren met Groq en de prompt "Nederlands" bijstellen (v2).
+- [ ] Testzinnen opnieuw dicteren met prompt v2 en het gevulde woordenboek.
 - [ ] `qwen/qwen3.8-27b` vs. `openai/gpt-oss-120b` vergelijken op Nederlands en snelheid.
 - [ ] Snelheid en kwaliteit vergelijken: Whisper Turbo vs. Parakeet V3.
 - [ ] Woordenboek (Dictionary) vullen met eigen namen en vaktermen (Tarmax, MacBook, staging, …).
 
 ### Branding en design
-- [ ] Eigen app-icoon (`VoiceInk/Assets.xcassets/AppIcon.appiconset`).
-- [ ] Eigen menubalk-icoon (`menuBarIcon.imageset`).
-- [ ] Eigen accentkleur en kleuren (`AccentColor.colorset`, `DesignSystem/Theme/AppTheme.swift`).
-- [ ] Eigen opname-animatie en golfvorm (`Features/Recording/Components/AudioVisualizerView.swift`).
-- [ ] Recorder-venster restylen (`Features/Recording/Views/MiniRecorderView.swift`, `NotchRecorderView.swift`).
+- [x] Eigen app-icoon (`VoiceInk/Assets.xcassets/AppIcon.appiconset`).
+- [x] Eigen menubalk-icoon (`menuBarIcon.imageset`).
+- [x] Eigen accentkleur en kleuren (`AccentColor.colorset`, `DesignSystem/Theme/AppTheme.swift`).
+- [x] Eigen opname-animatie en golfvorm (`Features/Recording/Components/AudioVisualizerView.swift`).
+- [x] Recorder-venster restylen (`Features/Recording/Views/MiniRecorderView.swift`; notch blijft zwart).
+- [ ] Aeonik in meer schermen (titels, instellingen), als het de moeite is tegenover de merge-conflicten.
 - [ ] Optioneel: geluidjes bij start/stop van de opname.
 
 ### Functies

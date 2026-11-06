@@ -1,6 +1,37 @@
 import SwiftUI
 
 enum AppTheme {
+    /// Yo Max: the Tarmax palette (see ~/GIT/tarmax/DESIGN_SYSTEMS.md and tokens.css).
+    /// Screens use the meanings below; only this block holds the colours themselves.
+    enum Brand {
+        static let lime = Color(nsColor: rgb(0x86F46D))  // --lime-400: action and selection
+        static let limeTint = Color(nsColor: rgb(0xE1FCDB))  // --lime-100
+        static let ink = Color(nsColor: rgb(0x0B1F0D))  // --green-950: text and the primary button
+        static let brandDark = Color(nsColor: rgb(0x212520))  // --dark-900: logo, splash, recorder
+        static let textMuted = Color(nsColor: rgb(0x657064))  // --green-500
+        static let selectedBackground = dynamic(light: rgb(0xE9F6E5), dark: rgb(0x2F4A24))  // --green-75 / --green-775
+
+        /// The accent (also in AccentColor.colorset): ink on light, lime on dark.
+        static let accent = dynamic(light: rgb(0x0B1F0D), dark: rgb(0x86F46D))
+        /// Text on the accent: white on ink, ink on lime.
+        static let onAccent = dynamic(light: rgb(0xFFFFFF), dark: rgb(0x0B1F0D))
+
+        static func rgb(_ hex: UInt32) -> NSColor {
+            NSColor(
+                srgbRed: CGFloat((hex >> 16) & 0xFF) / 255,
+                green: CGFloat((hex >> 8) & 0xFF) / 255,
+                blue: CGFloat(hex & 0xFF) / 255,
+                alpha: 1
+            )
+        }
+
+        static func dynamic(light: NSColor, dark: NSColor) -> Color {
+            Color(nsColor: NSColor(name: nil) { appearance in
+                appearance.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua ? dark : light
+            })
+        }
+    }
+
     enum Accent {
         static let primary = Color.accentColor
         static let fillSubtle = primary.opacity(0.10)
@@ -63,13 +94,11 @@ enum AppTheme {
         static let elevated = neutral(light: 1.0, dark: 0.145)
         static let hover = Color.primary.opacity(0.045)
         static let border = AppTheme.Border.tint
-        static let productivity = Color(nsColor: .systemBlue)
-        static let activity = Color(nsColor: .systemTeal)
-        static let selection = productivity.opacity(0.12)
-        static let selectionText = dynamic(
-            light: NSColor(srgbRed: 0.10, green: 0.32, blue: 0.66, alpha: 1),
-            dark: NSColor(srgbRed: 0.42, green: 0.68, blue: 1.0, alpha: 1)
-        )
+        // Yo Max: Tarmax colours instead of system blue/teal.
+        static let productivity = Brand.accent
+        static let activity = Brand.textMuted
+        static let selection = Brand.selectedBackground
+        static let selectionText = Brand.accent
         static let grid = Color.primary.opacity(0.075)
 
         private static func neutral(light: CGFloat, dark: CGFloat) -> Color {
@@ -85,14 +114,18 @@ enum AppTheme {
     }
 
     enum Sidebar {
-        static let dashboard = Color(nsColor: .systemOrange)
-        static let modes = Color(nsColor: .systemIndigo)
-        static let models = Color(nsColor: .systemBrown)
-        static let audio = Color(nsColor: .systemPink)
-        static let dictionary = Color(nsColor: .systemBlue)
-        static let transcribeAudio = Color(red: 0.86, green: 0.32, blue: 0.27)
-        static let fallback = Color(nsColor: .systemGray)
-        static let license = Color(nsColor: .systemGreen)
+        // Yo Max: every tile is the Tarmax brand-dark with a lime sign, like the Tarmax badge.
+        static let dashboard = Brand.brandDark
+        static let modes = Brand.brandDark
+        static let models = Brand.brandDark
+        static let audio = Brand.brandDark
+        static let dictionary = Brand.brandDark
+        static let transcribeAudio = Brand.brandDark
+        static let fallback = Brand.brandDark
+        static let license = Brand.brandDark
+        static let iconForeground = Brand.lime
+        static let selectedRow = Brand.lime
+        static let selectedRowText = Brand.ink
     }
 
     enum Waveform {
@@ -109,7 +142,7 @@ enum AppTheme {
         static let secondary = Color(nsColor: .secondaryLabelColor)
         static let muted = secondary.opacity(0.70)
         static let disabled = Color(nsColor: .disabledControlTextColor)
-        static let onAccent = Color(nsColor: .alternateSelectedControlTextColor)
+        static let onAccent = Brand.onAccent  // Yo Max
     }
 
     enum NativeText {
@@ -128,7 +161,7 @@ enum AppTheme {
 
     enum Radius {
         static let control: CGFloat = 14
-        static let card: CGFloat = 12
+        static let card: CGFloat = 16  // Yo Max: Tarmax --r-card-sm
         static let pill: CGFloat = 22
     }
 }

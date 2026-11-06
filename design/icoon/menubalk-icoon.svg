@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="750" viewBox="0 0 750 750">
+  <!-- Yo Max menubalk-icoon (template): Tarmax-ruit met drie uitgespaarde golfstreepjes. Gecentreerd op 375,375. -->
+  <defs>
+    <mask id="golf">
+      <rect width="750" height="750" fill="white"/>
+      <rect x="259" y="300" width="56" height="150" rx="28" fill="black"/>
+      <rect x="347" y="225" width="56" height="300" rx="28" fill="black"/>
+      <rect x="435" y="300" width="56" height="150" rx="28" fill="black"/>
+    </mask>
+  </defs>
+  <g mask="url(#golf)">
+    <g transform="translate(375 375) scale(4.05) translate(-90.8575 -90.8575)">
+      <path d="M77.8113 5.40398L5.40398 77.8113C-1.80133 85.0166 -1.80133 96.6987 5.40398 103.904L77.8113 176.311C85.0166 183.517 96.6987 183.517 103.904 176.311L176.311 103.904C183.517 96.6987 183.517 85.0166 176.311 77.8113L103.904 5.40398C96.6987 -1.80133 85.0166 -1.80133 77.8113 5.40398Z" fill="black"/>
+    </g>
+  </g>
+</svg>

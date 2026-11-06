@@ -298,6 +298,7 @@ struct VoiceInkApp: App {
             Group {
                 if hasCompletedOnboardingV2 {
                     ContentView()
+                        .font(.yoMax(YoMaxTypography.bodySize))  // Yo Max: Aeonik for text without its own font
                         .environmentObject(engine)
                         .environmentObject(whisperModelManager)
                         .environmentObject(fluidAudioModelManager)
