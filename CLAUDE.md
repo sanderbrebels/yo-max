@@ -95,10 +95,28 @@ git merge upstream/main
 
 Vereisten: Mac met **Apple Silicon (M-chip)** en **macOS 15.0 of nieuwer** (`MACOSX_DEPLOYMENT_TARGET = 15.0`; dat is strenger dan de 14.4 uit het oorspronkelijke plan). Reken op ongeveer 2 GB vrije schijfruimte voor de modellen.
 
-## Ideeën voor later
+## To-do / ideeën voor later
 
-- Eigen app-icoon voor Yo Max.
-- Stijl per app (bv. formeel in Mail, los in Slack/WhatsApp) via de Modes met app-triggers.
-- Snelheid en kwaliteit vergelijken: Whisper Turbo vs. Parakeet V3 (met `testzinnen.md`).
-- Lokale opschoning via Ollama, zodat niets meer naar een cloud gaat.
-- Koppeling met Sanders app **Tarmax**.
+Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
+
+### Kwaliteit
+- [ ] Testzinnen (`testzinnen.md`) dicteren met en zonder Groq, fouten noteren en de prompt "Nederlands" bijstellen.
+- [ ] `qwen/qwen3.8-27b` vs. `openai/gpt-oss-120b` vergelijken op Nederlands en snelheid.
+- [ ] Snelheid en kwaliteit vergelijken: Whisper Turbo vs. Parakeet V3.
+- [ ] Woordenboek (Dictionary) vullen met eigen namen en vaktermen (Tarmax, MacBook, staging, …).
+
+### Branding en design
+- [ ] Eigen app-icoon (`VoiceInk/Assets.xcassets/AppIcon.appiconset`).
+- [ ] Eigen menubalk-icoon (`menuBarIcon.imageset`).
+- [ ] Eigen accentkleur en kleuren (`AccentColor.colorset`, `DesignSystem/Theme/AppTheme.swift`).
+- [ ] Eigen opname-animatie en golfvorm (`Features/Recording/Components/AudioVisualizerView.swift`).
+- [ ] Recorder-venster restylen (`Features/Recording/Views/MiniRecorderView.swift`, `NotchRecorderView.swift`).
+- [ ] Optioneel: geluidjes bij start/stop van de opname.
+
+### Functies
+- [ ] Stijl per app (formeel in Mail, los in Slack/WhatsApp) via Modes met app-triggers.
+- [ ] Lokale opschoning via Ollama, zodat niets meer naar de cloud gaat.
+- [ ] Koppeling met Sanders app **Tarmax**.
+
+### Delen
+- [ ] Branch `yo-max` naar de fork pushen (pas als Sander het vraagt) en de vriend de link geven.
