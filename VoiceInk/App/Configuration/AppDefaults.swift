@@ -34,7 +34,7 @@ enum AppDefaults {
             // Onboarding & General
             OnboardingSettings.completedV2Key: false,
             OnboardingSettings.preparedV2Key: false,
-            "enableAnnouncements": true,
+            "enableAnnouncements": false,
 
             // Clipboard
             "restoreClipboardAfterPaste": true,

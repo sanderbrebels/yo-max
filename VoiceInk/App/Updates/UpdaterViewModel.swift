@@ -21,11 +21,21 @@ final class UpdaterViewModel: NSObject, ObservableObject, SPUUpdaterDelegate {
         userDriverDelegate: nil
     )
 
+    /// Yo Max: Sparkle updates are permanently off (see init).
+    static let updatesEnabled = false
+
     @Published private(set) var canCheckForUpdates = false
     @Published private(set) var automaticallyChecksForUpdates = false
 
     override init() {
         super.init()
+
+        // Yo Max: automatic updates are disabled so a VoiceInk release can never
+        // replace this fork. Sparkle is never started; update by rebuilding from source.
+        guard Self.updatesEnabled else {
+            logger.notice("Updates disabled in Yo Max")
+            return
+        }
 
         let updater = updaterController.updater
 
@@ -56,12 +66,13 @@ final class UpdaterViewModel: NSObject, ObservableObject, SPUUpdaterDelegate {
     }
 
     func setAutomaticallyChecksForUpdates(_ value: Bool) {
+        guard Self.updatesEnabled else { return }
         guard automaticallyChecksForUpdates != value else { return }
         updaterController.updater.automaticallyChecksForUpdates = value
     }
 
     func checkForUpdates() {
-        guard canCheckForUpdates else { return }
+        guard Self.updatesEnabled, canCheckForUpdates else { return }
 
         // This action also brings an existing update/progress window into focus.
         // Manual checks remain available when automatic checks are off.
@@ -70,6 +81,13 @@ final class UpdaterViewModel: NSObject, ObservableObject, SPUUpdaterDelegate {
     }
 
     func updater(_ updater: SPUUpdater, mayPerform updateCheck: SPUUpdateCheck) throws {
+        guard Self.updatesEnabled else {
+            throw NSError(
+                domain: "com.prakashjoshipax.voiceink.updates",
+                code: 2,
+                userInfo: [NSLocalizedDescriptionKey: "Updates are disabled in Yo Max."]
+            )
+        }
         // Protect every non-manual entry point, including a scheduled check
         // queued just before the user disabled automatic checks.
         guard updateCheck == .updates || updater.automaticallyChecksForUpdates else {

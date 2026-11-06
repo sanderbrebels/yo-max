@@ -35,7 +35,7 @@ struct MenuBarView: View {
 
             Divider()
 
-            Button("Quit VoiceInk") {
+            Button("Quit Yo Max") {
                 NSApplication.shared.terminate(nil)
             }
         }
@@ -155,12 +155,7 @@ struct MenuBarView: View {
             }
             .keyboardShortcut(",", modifiers: .command)
 
-            Button("Check for Updates") {
-                updaterViewModel.checkForUpdates()
-            }
-            .disabled(!updaterViewModel.canCheckForUpdates)
-
-            Button("Quit VoiceInk") {
+            Button("Quit Yo Max") {
                 NSApplication.shared.terminate(nil)
             }
         }

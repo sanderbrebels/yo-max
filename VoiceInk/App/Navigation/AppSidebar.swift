@@ -78,10 +78,17 @@ private extension ViewType {
         .audio,
     ]
 
-    static let secondaryItems: [ViewType] = [
-        .settings,
-        .license,
-    ]
+    #if LOCAL_BUILD
+        // Yo Max: local builds are always licensed, so the VoiceInk Pro purchase page is hidden.
+        static let secondaryItems: [ViewType] = [
+            .settings,
+        ]
+    #else
+        static let secondaryItems: [ViewType] = [
+            .settings,
+            .license,
+        ]
+    #endif
 
     static func assertSidebarItemsCoverAllCases() {
         #if DEBUG

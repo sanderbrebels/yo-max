@@ -63,36 +63,36 @@ enum OnboardingStage: String, CaseIterable {
         case .api:
             return String(localized: "Verify API Key")
         case .experience:
-            return String(localized: "Experience VoiceInk")
+            return String(localized: "Experience Yo Max")
         case .contextAwareness:
-            return String(localized: "VoiceInk is Context-Aware")
+            return String(localized: "Yo Max is Context-Aware")
         case .trust:
-            return String(localized: "VoiceInk is Open Source")
+            return String(localized: "Yo Max is Open Source")
         case .license:
-            return String(localized: "Buy VoiceInk License")
+            return String(localized: "Buy Yo Max License")
         }
     }
 
     var subtitle: String {
         switch self {
         case .permissions:
-            return String(localized: "Allow VoiceInk to work across all your apps.")
+            return String(localized: "Allow Yo Max to work across all your apps.")
         case .microphone:
-            return String(localized: "Pick the microphone VoiceInk should use for recordings.")
+            return String(localized: "Pick the microphone Yo Max should use for recordings.")
         case .model:
             return String(localized: "Use NVIDIA's Parakeet model locally, or connect a cloud transcription provider.")
         case .api:
             return String(
                 localized:
-                    "VoiceInk uses LLMs to enhance transcripts and perform AI actions. Set up an API key before continuing."
+                    "Yo Max uses LLMs to enhance transcripts and perform AI actions. Set up an API key before continuing."
             )
         case .experience:
-            return String(localized: "Try a few short samples and see how VoiceInk works before you start.")
+            return String(localized: "Try a few short samples and see how Yo Max works before you start.")
         case .contextAwareness:
             return String(
-                localized: "VoiceInk can select the right mode from the app you are using and the rules you configure.")
+                localized: "Yo Max can select the right mode from the app you are using and the rules you configure.")
         case .trust:
-            return String(localized: "VoiceInk is private by default. No data leaves your device unless you opt in.")
+            return String(localized: "Yo Max is private by default. No data leaves your device unless you opt in.")
         case .license:
             return String(localized: "Activate an existing key, purchase a license, or start a 7-day free trial.")
         }
@@ -123,20 +123,20 @@ enum OnboardingPermissionKind: String, CaseIterable, Identifiable {
         case .microphone:
             return OnboardingPermissionDescriptor(
                 title: "Microphone",
-                subtitle: String(localized: "VoiceInk uses your microphone to capture your voice.")
+                subtitle: String(localized: "Yo Max uses your microphone to capture your voice.")
             )
 
         case .accessibility:
             return OnboardingPermissionDescriptor(
                 title: String(localized: "Accessibility"),
-                subtitle: String(localized: "VoiceInk uses Accessibility to type transcriptions directly into any app.")
+                subtitle: String(localized: "Yo Max uses Accessibility to type transcriptions directly into any app.")
             )
 
         case .screenRecording:
             return OnboardingPermissionDescriptor(
                 title: String(localized: "Screen Recording"),
                 subtitle: String(
-                    localized: "VoiceInk reads visible screen content to improve the accuracy of transcripts.")
+                    localized: "Yo Max reads visible screen content to improve the accuracy of transcripts.")
             )
         }
     }

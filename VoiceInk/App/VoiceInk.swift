@@ -25,7 +25,7 @@ struct VoiceInkApp: App {
     @StateObject private var licenseViewModel = LicenseViewModel.shared
     @StateObject private var activeWindowService = ActiveWindowService.shared
     @AppStorage(OnboardingSettings.completedV2Key) private var hasCompletedOnboardingV2 = false
-    @AppStorage("enableAnnouncements") private var enableAnnouncements = true
+    @AppStorage("enableAnnouncements") private var enableAnnouncements = false
     @State private var showMenuBarIcon = true
     @State private var didShowLaunchReminders = false
 
@@ -74,7 +74,7 @@ struct VoiceInkApp: App {
                     alert.messageText = String(localized: "Storage Warning")
                     alert.informativeText = String(
                         localized:
-                            "VoiceInk couldn't access its storage location. Your transcriptions will not be saved between sessions."
+                            "Yo Max couldn't access its storage location. Your transcriptions will not be saved between sessions."
                     )
                     alert.alertStyle = .warning
                     alert.addButton(withTitle: String(localized: "OK"))
@@ -87,7 +87,7 @@ struct VoiceInkApp: App {
                     "❌ All ModelContainer init attempts failed.\nPersistent:\n\(persistentDetail, privacy: .public)\nIn-memory:\n\(memoryDetail, privacy: .public)"
                 )
                 fatalError(
-                    "VoiceInk failed to initialize storage.\nPersistent:\n\(persistentDetail)\nIn-memory:\n\(memoryDetail)"
+                    "Yo Max failed to initialize storage.\nPersistent:\n\(persistentDetail)\nIn-memory:\n\(memoryDetail)"
                 )
             }
         }
@@ -293,7 +293,7 @@ struct VoiceInkApp: App {
     }
 
     var body: some Scene {
-        Window("VoiceInk", id: AppWindowID.main) {
+        Window("Yo Max", id: AppWindowID.main) {
             Group {
                 if hasCompletedOnboardingV2 {
                     ContentView()
@@ -310,9 +310,7 @@ struct VoiceInkApp: App {
                         .environmentObject(enhancementService)
                         .modelContainer(container)
                         .onAppear {
-                            if enableAnnouncements {
-                                AnnouncementsService.shared.start()
-                            }
+                            // Yo Max: VoiceInk announcements are never fetched.
                             showLaunchRemindersIfNeeded()
 
                             GitHubStarPromptCoordinator.shared.scheduleIfNeeded(modelContainer: container)

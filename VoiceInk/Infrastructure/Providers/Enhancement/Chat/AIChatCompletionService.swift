@@ -56,7 +56,7 @@ extension AIService {
                 provider: policy.provider,
                 includeRouterMetadata: true,
                 appReferer: URL(string: "https://tryvoiceink.com"),
-                appTitle: "VoiceInk",
+                appTitle: "Yo Max",
                 timeout: timeout,
                 retryOnTimeout: retryOnTimeout
             )
