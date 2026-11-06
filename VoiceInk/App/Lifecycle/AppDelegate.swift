@@ -28,6 +28,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return false
     }
 
+    // Yo Max: the Whisper model stays loaded between dictations ("Keep Model Loaded").
+    // whisper.cpp aborts during process exit if its Metal resources are still alive,
+    // so release the model first and only then let the app quit.
+    weak var whisperModelManager: WhisperModelManager?
+    private var isReleasingWhisperForQuit = false
+
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        guard let whisperModelManager, whisperModelManager.whisperContext != nil else {
+            return .terminateNow
+        }
+        guard !isReleasingWhisperForQuit else { return .terminateLater }
+        isReleasingWhisperForQuit = true
+
+        Task { @MainActor in
+            await whisperModelManager.cleanupResources()
+            sender.reply(toApplicationShouldTerminate: true)
+        }
+        return .terminateLater
+    }
+
     // Stash URL when app cold-starts to avoid spawning a new window/tab
     var pendingOpenFileURL: URL?
 
