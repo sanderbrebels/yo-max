@@ -11,6 +11,23 @@ enum AppTheme {
         static let textMuted = Color(nsColor: rgb(0x657064))  // --green-500
         static let selectedBackground = dynamic(light: rgb(0xE9F6E5), dark: rgb(0x2F4A24))  // --green-75 / --green-775
 
+        // Elevation (Tarmax variant B): depth from tone, a shadow only for what floats.
+        static let elevPage = dynamic(light: rgb(0xF5F5F5), dark: rgb(0x000000))  // --elev-page
+        static let elevCard = dynamic(light: rgb(0xFFFFFF), dark: rgb(0x1C1C1E))  // --elev-card
+        static let elevFloat = dynamic(light: rgb(0xFFFFFF), dark: rgb(0x2C2C2E))  // --elev-float
+        static let elevInset = dynamic(light: rgb(0xF6FAF5), dark: rgb(0x242426))  // --elev-inset (--canvas)
+        static let fillStrong = dynamic(light: rgb(0xEEF4EC), dark: rgb(0x2C2C2E))  // --fill-strong
+        static let text = dynamic(light: rgb(0x121213), dark: rgb(0xF0F0F0))  // --text
+        static let textSecondary = dynamic(light: rgb(0x657064), dark: rgb(0xA3AAA2))  // --text-muted
+        static let separator = dynamic(light: rgb(0xE5E5E5), dark: rgb(0x38383A))  // --separator
+        static let borderOutline = dynamic(light: rgb(0xD1D1D1), dark: rgb(0x48484A))  // --border-outline
+        static let success = dynamic(light: rgb(0x2D5A1E), dark: rgb(0x8FD47A))  // --success-text
+        static let successIcon = dynamic(light: rgb(0x5FAD4D), dark: rgb(0x8FD47A))  // --success-icon
+        static let warning = dynamic(light: rgb(0x8A5300), dark: rgb(0xF2C94C))  // --warn-text
+        static let warningIcon = rgb(0xE8A735)  // --amber-450
+        static let danger = dynamic(light: rgb(0xD93326), dark: rgb(0xFF8A7A))  // --danger
+        static let info = dynamic(light: rgb(0x2F80ED), dark: rgb(0x60A5FA))  // --blue-500 / --blue-400
+
         /// The accent (also in AccentColor.colorset): ink on light, lime on dark.
         static let accent = dynamic(light: rgb(0x0B1F0D), dark: rgb(0x86F46D))
         /// Text on the accent: white on ink, ink on lime.
@@ -45,38 +62,42 @@ enum AppTheme {
     }
 
     enum Surface {
-        static let card = Color.secondary.opacity(0.10)
-        static let materialCard = Color(nsColor: .controlBackgroundColor).opacity(0.50)
-        static let subtle = Color.primary.opacity(0.06)
-        static let controlActive = Color.secondary.opacity(0.14)
-        static let control = Color(nsColor: .controlBackgroundColor)
-        static let window = Color(nsColor: .windowBackgroundColor)
-        static let sidePanelOverlay = Color(nsColor: .windowBackgroundColor).opacity(0.50)
+        // Yo Max: Tarmax elevation. Page → card (white, no border, no shadow) → inset fill.
+        static let card = Brand.elevCard
+        static let materialCard = Brand.elevCard
+        static let subtle = Brand.elevInset
+        static let controlActive = Brand.fillStrong
+        static let control = Brand.elevCard  // fields stay white (--surface)
+        static let window = Brand.elevPage
+        static let sidePanelOverlay = Brand.elevPage.opacity(0.50)
         static let clear = Color.clear
     }
 
     enum Border {
-        static let subtle = Color(nsColor: .separatorColor).opacity(0.28)
-        static let card = Color(nsColor: .separatorColor).opacity(0.35)
-        static let control = Color(nsColor: .separatorColor)
-        static let tint = Color.primary.opacity(0.12)
+        // Yo Max: Tarmax cards have no border; a line only marks a control or a separator.
+        static let subtle = Brand.separator
+        static let card = Color.clear
+        static let control = Brand.borderOutline
+        static let tint = Brand.separator
         static let sidePanelOuter = Color.white.opacity(0.12)
     }
 
     enum Selection {
-        static let fill = Color.primary.opacity(0.10)
-        static let border = Color.primary.opacity(0.14)
-        static let foreground = Color.primary.opacity(0.78)
+        // Yo Max: Tarmax --selected-bg (soft green) with the accent as edge.
+        static let fill = Brand.selectedBackground
+        static let border = Brand.accent.opacity(0.35)
+        static let foreground = Brand.text
     }
 
     enum Status {
-        static let success = Color(nsColor: .alternateSelectedControlTextColor).opacity(0.85)
-        static let positive = Color(nsColor: .systemGreen)
-        static let info = Color(nsColor: .alternateSelectedControlTextColor).opacity(0.75)
-        static let infoStrong = Color(nsColor: .systemBlue)
-        static let warning = Color(nsColor: .alternateSelectedControlTextColor).opacity(0.85)
-        static let warningStrong = Color(nsColor: .systemOrange)
-        static let error = Color(nsColor: .systemRed)
+        // Yo Max: Tarmax status colours.
+        static let success = Brand.success
+        static let positive = Brand.successIcon
+        static let info = Brand.textSecondary
+        static let infoStrong = Brand.info
+        static let warning = Brand.warning
+        static let warningStrong = Color(nsColor: Brand.warningIcon)
+        static let error = Brand.danger
     }
 
     enum Data {
@@ -89,9 +110,10 @@ enum AppTheme {
     }
 
     enum Insights {
-        static let page = neutral(light: 0.995, dark: 0.065)
-        static let card = neutral(light: 0.955, dark: 0.105)
-        static let elevated = neutral(light: 1.0, dark: 0.145)
+        // Yo Max: Tarmax elevation (page, card, and the soft inset for a card in a card).
+        static let page = Brand.elevPage
+        static let card = Brand.elevCard
+        static let elevated = Brand.elevInset
         static let hover = Color.primary.opacity(0.045)
         static let border = AppTheme.Border.tint
         // Yo Max: Tarmax colours instead of system blue/teal.
@@ -101,9 +123,6 @@ enum AppTheme {
         static let selectionText = Brand.accent
         static let grid = Color.primary.opacity(0.075)
 
-        private static func neutral(light: CGFloat, dark: CGFloat) -> Color {
-            dynamic(light: NSColor(white: light, alpha: 1), dark: NSColor(white: dark, alpha: 1))
-        }
 
         private static func dynamic(light: NSColor, dark: NSColor) -> Color {
             Color(nsColor: NSColor(name: nil) { appearance in
@@ -138,8 +157,8 @@ enum AppTheme {
     }
 
     enum Text {
-        static let primary = Color(nsColor: .labelColor)
-        static let secondary = Color(nsColor: .secondaryLabelColor)
+        static let primary = Brand.text  // Yo Max: Tarmax --text
+        static let secondary = Brand.textSecondary  // Yo Max: Tarmax --text-muted
         static let muted = secondary.opacity(0.70)
         static let disabled = Color(nsColor: .disabledControlTextColor)
         static let onAccent = Brand.onAccent  // Yo Max
@@ -161,7 +180,7 @@ enum AppTheme {
 
     enum Radius {
         static let control: CGFloat = 14
-        static let card: CGFloat = 16  // Yo Max: Tarmax --r-card-sm
+        static let card: CGFloat = 20  // Yo Max: Tarmax --r-card
         static let pill: CGFloat = 22
     }
 }

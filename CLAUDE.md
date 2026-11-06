@@ -53,6 +53,7 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - Mini-recorder: brand-dark `#212520` met een lime golfvorm (11 ronde streepjes, symmetrisch, rustiger). De notch-recorder blijft zwart (gaat op in de notch).
 - App-icoon: Tarmax-ruit met lime golfvorm op licht (`design/icoon/yo-max-icoon.svg`, exact gecentreerd). Menubalk: dezelfde ruit als template met 3 uitgespaarde streepjes (`design/icoon/menubalk-icoon.svg`). PNG's opnieuw maken: render de SVG naar 16–1024 px in `VoiceInk/Assets.xcassets/AppIcon.appiconset/`.
 - **Lettertype Aeonik** (`Font.yoMax`, `VoiceInk/App/YoMax/YoMaxTypography.swift`): wordt gebruikt als het op de Mac geïnstalleerd is (`~/Library/Fonts`), anders het systeemlettertype. **Aeonik is betaald: nooit in de app bundelen of in git zetten** (de repo is openbaar). Een vriend ziet dus gewoon SF Pro.
+- **Design system via de themalaag (keuze A, 2026-11-06):** de Tarmax-elevation zit in `AppTheme` (Surface, Border, Text, Status, Selection, Insights, Radius) en `AppSurfaces`, die de app al ±650 keer gebruikt. Pagina `#F5F5F5` (donker zwart), kaarten wit zonder rand en schaduw (radius 20), zachte vulling `#F6FAF5`, muted tekst `#657064`, Tarmax-statuskleuren. Het content-gebied is een dekkende pagina (geen doorschijnend materiaal meer). Dashboard-banner: `design/icoon/dashboard-banner.svg` → `momentum-hero-bg`. Schermen die nog "VoiceInk" ogen (losse kleuren in de view-code): één voor één omzetten wanneer nodig. Let op: in SVG-commentaar mag geen dubbel streepje staan, anders laadt macOS het bestand niet.
 - Aeonik zit nu in de zijbalk, de recorder en tekst zonder eigen lettertype. De ±530 vaste `.system(size:)`-letters in VoiceInk zijn bewust niet vervangen: dat zou elke VoiceInk-update laten botsen.
 
 ## Bouwen
@@ -122,6 +123,8 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 - [x] Eigen accentkleur en kleuren (`AccentColor.colorset`, `DesignSystem/Theme/AppTheme.swift`).
 - [x] Eigen opname-animatie en golfvorm (`Features/Recording/Components/AudioVisualizerView.swift`).
 - [x] Recorder-venster restylen (`Features/Recording/Views/MiniRecorderView.swift`; notch blijft zwart).
+- [x] Tarmax-elevation en tokens via de themalaag (pagina, kaarten, tekst, status).
+- [ ] Schermen met losse kleuren één voor één naar tokens omzetten (screenshot bekijken).
 - [ ] Aeonik in meer schermen (titels, instellingen), als het de moeite is tegenover de merge-conflicten.
 - [ ] Optioneel: geluidjes bij start/stop van de opname.
 

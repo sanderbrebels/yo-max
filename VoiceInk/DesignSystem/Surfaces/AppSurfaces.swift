@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AppCardBackground: View {
     var isSelected: Bool = false
-    var cornerRadius: CGFloat = 12
+    var cornerRadius: CGFloat = AppTheme.Radius.card  // Yo Max: Tarmax --r-card
 
     var body: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
@@ -10,7 +10,7 @@ struct AppCardBackground: View {
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(
-                        isSelected ? AppTheme.Selection.border : AppTheme.Border.subtle,
+                        isSelected ? AppTheme.Selection.border : Color.clear,  // Yo Max: no card border
                         lineWidth: isSelected ? 1.5 : 1
                     )
             )
@@ -19,7 +19,7 @@ struct AppCardBackground: View {
 
 struct AppMaterialCardBackground: View {
     var isSelected: Bool = false
-    var cornerRadius: CGFloat = 12
+    var cornerRadius: CGFloat = AppTheme.Radius.card  // Yo Max: Tarmax --r-card
 
     static let fill = AppTheme.Surface.materialCard
 
@@ -74,6 +74,6 @@ struct MetricTintBackground: View {
                         lineWidth: 1
                     )
             )
-            .shadow(color: Color.black.opacity(0.05), radius: 5, y: 3)
+            // Yo Max: no shadow; in Tarmax only floating things cast one.
     }
 }

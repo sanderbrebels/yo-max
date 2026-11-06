@@ -43,7 +43,7 @@ final class MainWindowNavigation: ObservableObject {
 
 struct ContentView: View {
     private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "ContentView")
-    private static let detailBackgroundTintOpacity = 0.50
+    private static let detailBackgroundTintOpacity = 1.0  // Yo Max: opaque Tarmax page
     @EnvironmentObject private var navigation: MainWindowNavigation
 
     var body: some View {
