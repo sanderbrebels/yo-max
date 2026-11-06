@@ -639,7 +639,7 @@
 				INFOPLIST_FILE = VoiceInk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Yo Max Dev";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Yo Max — gebaseerd op VoiceInk © Prakash Joshi Pax (GPL-3.0). Broncode: github.com/sanderbrebels/VoiceInk";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Yo Max — gebaseerd op VoiceInk © Prakash Joshi Pax (GPL-3.0). Broncode: github.com/sanderbrebels/yo-max";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -675,7 +675,7 @@
 				INFOPLIST_FILE = VoiceInk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Yo Max";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Yo Max — gebaseerd op VoiceInk © Prakash Joshi Pax (GPL-3.0). Broncode: github.com/sanderbrebels/VoiceInk";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Yo Max — gebaseerd op VoiceInk © Prakash Joshi Pax (GPL-3.0). Broncode: github.com/sanderbrebels/yo-max";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

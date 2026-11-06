@@ -17,8 +17,8 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 
 ## Repo
 
-- Map: `/Users/sanderbrebels/GIT/VoiceInk`, branch **`yo-max`**.
-- Remotes: `origin` = https://github.com/sanderbrebels/VoiceInk (eigen fork), `upstream` = https://github.com/Beingpax/VoiceInk.
+- Map: `/Users/sanderbrebels/GIT/yo-max`, branch **`yo-max`**.
+- Remotes: `origin` = https://github.com/sanderbrebels/yo-max (eigen fork), `upstream` = https://github.com/Beingpax/VoiceInk.
 - Swift-modulenaam en mapnamen blijven `VoiceInk` (minder merge-conflicten met upstream); alleen wat de gebruiker ziet heet "Yo Max".
 - Nieuwe Yo Max-code staat zoveel mogelijk apart in `VoiceInk/App/YoMax/`. Wijzigingen in bestaande VoiceInk-bestanden zijn klein en gemarkeerd met een `// Yo Max:`-commentaar.
 
@@ -26,7 +26,7 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 
 ### Naam en identiteit (fase 2)
 - App-naam "Yo Max", bundle-id `com.sanderbrebels.yomax` (Debug: "Yo Max Dev", `com.sanderbrebels.yomax.dev`).
-- Copyright in Info: "Yo Max — gebaseerd op VoiceInk © Prakash Joshi Pax (GPL-3.0). Broncode: github.com/sanderbrebels/VoiceInk".
+- Copyright in Info: "Yo Max — gebaseerd op VoiceInk © Prakash Joshi Pax (GPL-3.0). Broncode: github.com/sanderbrebels/yo-max".
 - **Sparkle-updates uit** (`UpdaterViewModel.updatesEnabled = false`, feed-URL en sleutel uit `Info.plist` verwijderd): Yo Max mag nooit automatisch naar een VoiceInk-versie updaten.
 - Aankondigingen van VoiceInk uit. Pagina "VoiceInk Pro" verborgen in lokale builds (die zijn altijd gelicentieerd via `LOCAL_BUILD`).
 - Datamap blijft gedeeld met VoiceInk: `~/Library/Application Support/com.prakashjoshipax.VoiceInk` (gedownloade modellen worden hergebruikt). Instellingen (UserDefaults) zijn wel apart per bundle-id.
@@ -48,7 +48,7 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 ## Bouwen
 
 ```bash
-cd /Users/sanderbrebels/GIT/VoiceInk
+cd /Users/sanderbrebels/GIT/yo-max
 make local
 ```
 
@@ -78,13 +78,13 @@ git merge upstream/main
 
 - Yo Max is een afgeleid werk van VoiceInk en valt dus ook onder **GPL-3.0**.
 - `LICENSE` en alle copyrightvermeldingen van VoiceInk blijven staan, ook in de app (Info/copyright, tekst "based on the open-source VoiceInk").
-- **Wie de app aan iemand anders geeft, moet ook de broncode aanbieden**: geef de link naar de fork https://github.com/sanderbrebels/VoiceInk en zorg dat de gedeelde versie daar gepusht staat (vraag dan eerst om te pushen).
+- **Wie de app aan iemand anders geeft, moet ook de broncode aanbieden**: geef de link naar de fork https://github.com/sanderbrebels/yo-max en zorg dat de gedeelde versie daar gepusht staat (vraag dan eerst om te pushen).
 - De naam/het merk "VoiceInk" en de betaalde Pro-licentie niet gebruiken als eigen product.
 
 ## Delen met een vriend
 
 1. `make local` en zip de app: rechtsklik op `Yo Max.app` → Comprimeer (of `ditto -c -k --keepParent "/Applications/Yo Max.app" ~/Desktop/YoMax.zip`).
-2. Stuur de zip en de broncodelink (https://github.com/sanderbrebels/VoiceInk).
+2. Stuur de zip en de broncodelink (https://github.com/sanderbrebels/yo-max).
 3. Op de Mac van de vriend: uitpakken, naar Programma's slepen en dan:
    ```bash
    xattr -cr "/Applications/Yo Max.app"
