@@ -18,7 +18,7 @@ Parallel waar het kan:
   - **Telt voor Yo Max:** Whisper of lokale transcriptie, plakken, fn/sneltoetsen, de recorder, crashfixes, beveiliging, nieuwe macOS-versies, geheugen of snelheid.
   - **Laten liggen:** cloudproviders (Soniox, ElevenLabs, Deepgram, …), betaalde functies, VoiceInk Pro of licenties, hun eigen branding en website.
   Meld per groep het aantal en de belangrijkste titels in gewone taal. **Niet zelf overnemen**: dat gebeurt pas als Sander kiest, meestal met `git cherry-pick <commit>` en daarna de scripts in `tools/tarmax-stijl/` (zie `CLAUDE.md` › "VoiceInk-updates binnenhalen").
-- Kwamen er commits binnen via de pull, of draait er een oudere build? Stel `make local` voor (en herinner aan de Toegankelijkheid-toestemming na elke build). Bouw niet ongevraagd.
+- Kwamen er commits binnen via de pull, of draait er een oudere build? Stel `make install` voor (bouwt, installeert in /Applications en opent; met het Apple Development-certificaat blijft de Toegankelijkheid-toestemming staan). Bouw niet ongevraagd.
 
 ## 2. Status
 

@@ -16,6 +16,10 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - Zet **nooit** API-sleutels of andere geheimen in code, config of git (sleutels staan in de macOS-sleutelhanger).
 - Laat `LICENSE` en de copyrightvermeldingen van VoiceInk altijd staan.
 - Bij een fout: lees de melding, zoek de oorzaak, los het op. Lukt het na 2 pogingen niet: stop en leg het eenvoudig uit.
+- **Eén vraag tegelijk.** Sander raakt het overzicht kwijt bij veel vragen in één bericht; loods hem stap voor stap door design- en motionkeuzes.
+- **Bij een bug eerst de logs lezen:** `/usr/bin/log show --last 15m --info --predicate 'subsystem BEGINSWITH "com.prakashjoshipax"'` (de categorieën `CursorPaster`, `PasteFocusDiagnostics`, `YoMax…` tonen wat er bij het plakken gebeurde). Dictaten staan in `~/Library/Application Support/com.prakashjoshipax.VoiceInk/default.store` (SQLite, alleen-lezen openen) om ruwe en opgeschoonde tekst te vergelijken.
+- **Testen na een build:** `make install` duurt soms langer dan 10 minuten: draai het op de achtergrond. Wat met fn moet gebeuren, test Sander zelf; zeg dat eerlijk.
+- Zeg nooit dat iets "genoteerd" is voor het echt in CLAUDE.md staat.
 
 ## Repo
 
@@ -111,8 +115,8 @@ make local
 - **Toegankelijkheid niet meer opnieuw geven:** maak één keer een gratis Apple Development-certificaat (Xcode → Settings → Accounts → Apple ID → Manage Certificates → + Apple Development). `make local` gebruikt het dan vanzelf (vaste handtekening), en macOS onthoudt de toestemming tussen builds. Zonder certificaat blijft het ad-hoc en meldt `make install` dat je de toestemming opnieuw moet geven.
 - Andere targets: `make check`, `make dev` (Debug, "Yo Max Dev"), `make clean`, `make help`.
 
-> ⚠️ **Na elke nieuwe build moet je de Toegankelijkheid-toestemming opnieuw geven.**
-> De app is ad-hoc ondertekend, dus macOS ziet elke build als een nieuwe app. Ga naar *Systeeminstellingen → Privacy en beveiliging → Toegankelijkheid*, verwijder "Yo Max" met het minteken, voeg hem opnieuw toe en zet hem aan. Doe hetzelfde bij Invoermonitoring/Microfoon als iets niet werkt. Zonder deze toestemming werken fn en plakken niet.
+> ✅ **Sinds 2026-11-07 blijft de Toegankelijkheid-toestemming staan** op Sanders Mac: daar staat een Apple Development-certificaat ("Apple Development: sander_brebels@hotmail.com", Personal Team) plus het tussencertificaat Apple WWDR G3 in de login-sleutelhanger. Controleren: `security find-identity -v -p codesigning` moet 1 geldige identiteit tonen.
+> Zonder certificaat (andere Mac, of het certificaat verloopt in nov 2027) is de app ad-hoc ondertekend en ziet macOS elke build als een nieuwe app: ga dan naar *Systeeminstellingen → Privacy en beveiliging → Toegankelijkheid*, verwijder "Yo Max" met het minteken, voeg hem opnieuw toe en zet hem aan (ook bij Invoermonitoring/Microfoon als iets niet werkt). Meldt "0 valid identities" ondanks een certificaat: dan ontbreekt meestal het G3-tussencertificaat (apple.com/certificateauthority).
 
 ## VoiceInk-updates binnenhalen
 
@@ -157,7 +161,7 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 
 ### Kwaliteit
 - [x] Testzinnen (`testzinnen.md`) dicteren met Groq en de prompt "Nederlands" bijstellen (v2).
-- [ ] Testzinnen opnieuw dicteren met prompt v3 en het gevulde woordenboek; ook de opmaakopdrachten testen (zie `design/schetsen/index.html` › 1).
+- [ ] Testzinnen opnieuw dicteren met prompt **v4** en het gevulde woordenboek; ook de opmaakopdrachten en de opdrachtmodus testen (zie `design/schetsen/index.html` › 1). Nog niet getest door Sander.
 - [ ] `qwen/qwen3.8-27b` vs. `openai/gpt-oss-120b` vergelijken op Nederlands en snelheid.
 - [ ] Snelheid en kwaliteit vergelijken: Whisper Turbo vs. Parakeet V3.
 - [ ] Woordenboek (Dictionary) vullen met eigen namen en vaktermen (Tarmax, MacBook, staging, …). Kan nu ook met rechtsklik en "Find Doubtful Words" in History.
@@ -182,9 +186,13 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 ### Portfolio (later, als app, motion en iconen af zijn)
 - [ ] Yo Max-pagina op https://work.sanderbrebels.be/own-work/, **onder Tarmax**. Geen nieuwe site: een projectpagina via de bestaande generator in `~/Library/CloudStorage/Dropbox/AI Brain in the Cloud/Showcase Portfolio 2026/Claude Folder/KBC Showcase (output)/03_website_v3_revolut/_build/` (`content.py`, `pages.py`; Tarmax-casestudy op `/work/tarmac/` als voorbeeld). Vormgeving = die van het portfolio, Yo Max in de Tarmax-branding als inhoud. Doelgroep: recruiters/design leads; tonen: prototypes en keuzes, design system, taalkwaliteit, microinteracties; niet te veel tekst, geen SaaS-landing. Alleen de GitHub-link als feit (VoiceInk-vermelding: nog beslissen, aangeraden). Werken in een eigen sessie in die map (eigen CLAUDE.md en deploy.sh); niets online zonder Sanders go. Zie ook `PRODUCT.md`.
 
-### Motion en iconen (eerst Sanders input, één vraag tegelijk)
-- [ ] Inspiratie voor de recorder-animatie verzamelen (Mobbin, Rive community, LottieFiles, Dribbble), dan een storyboard: rust → luisteren → spreken → verwerken → klaar.
-- [ ] Nieuwe voorstellen voor app-icoon en menubalkicoon, na Sanders input.
+### Motion en iconen
+- [x] Inspiratie en storyboard recorder (`design/schetsen/recorder-motion.html`): Sander koos **C · Lijn**, gebouwd.
+- [x] App- en menubalkicoon: Sander koos **B1 · Vijf** (`design/schetsen/icoon-b.html`), gebouwd.
+- [ ] Recorder: vinkje bij "klaar" en een rode foutstaat (de recorder moet daarvoor even blijven staan na het plakken).
+- [ ] Menubalk: opnamestip tijdens het opnemen (staat in de schets, niet gebouwd).
+- [ ] Optioneel: Icon Composer-versie (lagen) van icoon B1 voor macOS Tahoe.
 
 ### Delen
-- [ ] Branch `yo-max` naar de fork pushen (met `/yo-max-stop`) en de vriend de link geven.
+- [x] Branch `yo-max` naar de fork pushen (met `/yo-max-stop`).
+- [ ] De vriend de link geven (https://github.com/sanderbrebels/yo-max).
