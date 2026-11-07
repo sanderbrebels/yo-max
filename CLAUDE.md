@@ -69,6 +69,10 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - Nog niet gebouwd: de oranje golf met "Opdracht" in de recorder tijdens het opnemen (de selectie wordt pas na de opname gelezen).
 - Uitzetten: Settings → "Command Mode on Selected Text" (`YoMaxCommandMode.enabledKey`).
 
+### Auto-Learn in Yo Max-stijl (2026-11-07, schets 4B)
+- `AutoLearnSuggestionContent.swift`: donkere brand-dark kaart (radius 20) boven de recorder, oud woord doorstreept → nieuw woord op lime, knoppen No / Remember, lime timerbalk. Geen glas/materiaal meer.
+- `AutoLearnAIReviewer.instructions`: niet meer "English only", ook Nederlandse (Vlaamse) paren. Wordt alleen gebruikt als je in Dictionary → Auto-Learn een AI-beoordelaar kiest (standaard: lokaal).
+
 ### Tarmax-stijl (fase 5)
 - Bron: `~/GIT/tarmax/DESIGN_SYSTEMS.md` en `src/ui/theme/tokens.css`. Kleuren staan als palet in `AppTheme.Brand` (`DesignSystem/Theme/AppTheme.swift`); de rest van de app gebruikt alleen de betekenissen.
 - Accent: ink `#0B1F0D` in licht (zoals de hoofdknop van Tarmax), lime `#86F46D` in donker. Zijbalk: brand-dark tegels met lime iconen, gekozen rij = lime pil met ink-tekst.

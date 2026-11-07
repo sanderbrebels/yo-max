@@ -13,14 +13,19 @@ struct AutoLearnSuggestionContent: View {
     let onApprove: () -> Void
     let onDismiss: () -> Void
 
+    // Yo Max: dark Tarmax card that belongs to the recorder (sketch 4B):
+    // "tar max" crossed out → "Tarmax" on a lime highlight, No / Remember.
+    private let onDarkMuted = Color(nsColor: AppTheme.Brand.rgb(0xA3AEA1))
+    private let darkControl = Color(nsColor: AppTheme.Brand.rgb(0x2C312B))
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text("Learn this correction?")
-                .font(.yoMax(15, weight: .semibold))
-                .foregroundStyle(AppTheme.Text.primary)
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Remember this word?")
+                .font(.yoMax(12, weight: .medium))
+                .foregroundStyle(onDarkMuted)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 6) {
                 if let originalText {
                     ViewThatFits(in: .vertical) {
                         originalTerms(originalText)
@@ -35,14 +40,17 @@ struct AutoLearnSuggestionContent: View {
 
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     if originalText != nil {
-                        Image(systemName: "arrow.turn.down.right")
+                        Image(systemName: "arrow.right")
                             .font(.yoMax(12, weight: .medium))
-                            .foregroundStyle(AppTheme.Text.secondary)
+                            .foregroundStyle(onDarkMuted)
                             .accessibilityLabel("Replace with")
                     }
                     Text(correctedText)
-                        .font(.yoMax(18, weight: .semibold))
-                        .foregroundStyle(AppTheme.Text.primary)
+                        .font(.yoMax(16, weight: .medium))
+                        .foregroundStyle(AppTheme.Brand.ink)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 2)
+                        .background(RoundedRectangle(cornerRadius: 6, style: .continuous).fill(AppTheme.Brand.lime))
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -52,7 +60,7 @@ struct AutoLearnSuggestionContent: View {
             if let errorMessage {
                 Text(errorMessage)
                     .font(.yoMax(12))
-                    .foregroundStyle(AppTheme.Status.error)
+                    .foregroundStyle(Color(nsColor: AppTheme.Brand.rgb(0xFF8A7A)))
                     .fixedSize(horizontal: false, vertical: true)
             }
 
@@ -61,28 +69,18 @@ struct AutoLearnSuggestionContent: View {
                 if isApplying {
                     ProgressView()
                         .controlSize(.small)
+                        .colorScheme(.dark)
                 }
-                Button(action: onDismiss) {
-                    Text("Dismiss")
-                        .frame(minWidth: 60)
-                }
-                .buttonStyle(.bordered)
-                Button(action: onApprove) {
-                    Text("Add Correction")
-                        .frame(minWidth: 104)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(Color.accentColor)
-                .environment(\.controlActiveState, .key)
-                .disabled(!isValid)
+                pill("No", fill: darkControl, text: .white, action: onDismiss)
+                pill("Remember", fill: AppTheme.Brand.lime, text: AppTheme.Brand.ink, action: onApprove)
+                    .disabled(!isValid)
+                    .opacity(isValid ? 1 : 0.5)
             }
-            .font(.yoMax(13, weight: .medium))
-            .buttonBorderShape(.capsule)
-            .controlSize(.regular)
             .disabled(isApplying)
         }
         .padding(16)
-        .frame(width: 400)
+        .padding(.bottom, 2)
+        .frame(width: 360)
         .modifier(AutoLearnSuggestionSurface())
         .overlay(alignment: .bottom) {
             AutoLearnCountdownView(
@@ -91,37 +89,41 @@ struct AutoLearnSuggestionContent: View {
                 deadline: dismissalDeadline
             )
             .frame(maxHeight: .infinity, alignment: .bottom)
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             .allowsHitTesting(false)
         }
+        .environment(\.colorScheme, .dark)
         .fixedSize(horizontal: false, vertical: true)
     }
 
     private func originalTerms(_ text: String) -> some View {
         Text(text)
-            .font(.yoMax(13))
-            .foregroundStyle(AppTheme.Text.secondary)
+            .font(.yoMax(14))
+            .strikethrough()
+            .foregroundStyle(onDarkMuted)
             .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private func pill(_ title: LocalizedStringKey, fill: Color, text: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(title)
+                .font(.yoMax(13, weight: .medium))
+                .foregroundStyle(text)
+                .padding(.horizontal, 16)
+                .frame(minWidth: 64)
+                .frame(height: 32)
+                .background(Capsule().fill(fill))
+        }
+        .buttonStyle(.plain)
     }
 }
 
 private struct AutoLearnSuggestionSurface: ViewModifier {
-    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    private let shape = RoundedRectangle(cornerRadius: 16, style: .continuous)
+    // Yo Max: solid brand-dark card (radius 20) instead of glass/popover material.
+    private let shape = RoundedRectangle(cornerRadius: 20, style: .continuous)
 
-    @ViewBuilder
     func body(content: Content) -> some View {
-        if reduceTransparency {
-            content.background(Color(nsColor: .windowBackgroundColor), in: shape)
-        } else if #available(macOS 26.0, *) {
-            content.glassEffect(.regular, in: shape)
-        } else {
-            content.background {
-                AutoLearnSuggestionBackdrop()
-                    .clipShape(shape)
-                    .allowsHitTesting(false)
-            }
-        }
+        content.background(AppTheme.Brand.brandDark, in: shape)
     }
 }
 
@@ -148,16 +150,16 @@ private struct AutoLearnCountdownView: View {
             let remainingProgress = progress
             GeometryReader { geometry in
                 Rectangle()
-                    .fill(.primary.opacity(0.08))
+                    .fill(Color.white.opacity(0.08))  // Yo Max: lime timer on the dark card
                     .overlay(alignment: .leading) {
                         Rectangle()
-                            .fill(.primary.opacity(0.4))
+                            .fill(AppTheme.Brand.lime)
                             .frame(width: geometry.size.width * remainingProgress)
                     }
             }
         }
         .transaction { $0.animation = nil }
-        .frame(height: 2)
+        .frame(height: 3)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Dismisses automatically")
         .accessibilityValue(Text(Duration.seconds(max(0, secondsRemaining)).formatted(.units(allowed: [.seconds]))))
