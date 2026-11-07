@@ -178,7 +178,7 @@ struct AudioTranscribeView: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(yoMax: "stop.fill")
-                            .font(.yoMax(10, weight: .medium))
+                            .font(.yoMax(12, weight: .medium))  // Yo Max: icon 1 em, the size of its text
                         Text("Cancel")
                             .font(.yoMax(12, weight: .medium))
                     }
@@ -198,7 +198,7 @@ struct AudioTranscribeView: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(yoMax: "play.fill")
-                            .font(.yoMax(10, weight: .medium))
+                            .font(.yoMax(12, weight: .medium))  // Yo Max: icon 1 em, the size of its text
                         Text("Start")
                             .font(.yoMax(12, weight: .semibold))
                     }

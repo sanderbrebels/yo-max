@@ -169,7 +169,7 @@ struct DictionaryQuickAddView: View {
                 } label: {
                     HStack(spacing: 5) {
                         Image(yoMax: m.icon)
-                            .font(.yoMax(10, weight: .medium))
+                            .font(.yoMax(12, weight: .medium))  // Yo Max: icon 1 em, the size of its text
                         Text(m.label)
                             .font(.yoMax(12, weight: .medium))
                     }

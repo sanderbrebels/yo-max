@@ -18,6 +18,20 @@ enum YoMaxSymbols {
         table[systemName]
     }
 
+    /// The VoiceOver label: the system's own (localized) description of the SF Symbol, so a
+    /// Phosphor icon reads exactly like the SF Symbol it replaces ("Close", not "ph.x").
+    static func accessibilityLabel(for systemName: String) -> String {
+        if let cached = labelCache.object(forKey: systemName as NSString) { return cached as String }
+        let label =
+            NSImage(systemSymbolName: systemName, accessibilityDescription: nil)?.accessibilityDescription
+            ?? systemName.replacingOccurrences(of: ".", with: " ")
+        labelCache.setObject(label as NSString, forKey: systemName as NSString)
+        return label
+    }
+
+    /// NSCache is thread-safe.
+    nonisolated(unsafe) private static let labelCache = NSCache<NSString, NSString>()
+
     private static let table: [String: String] = [
         "app": "ph.app-window",
         "app.fill": "ph.app-window.fill",
@@ -60,6 +74,7 @@ enum YoMaxSymbols {
         "chart.bar.xaxis": "ph.chart-bar",
         "chart.line.uptrend.xyaxis": "ph.chart-line-up",
         "checkmark": "ph.check",
+        "circle": "ph.circle",
         "checkmark.circle": "ph.check-circle",
         "checkmark.circle.fill": "ph.check-circle.fill",
         "checkmark.seal": "ph.seal-check",
@@ -199,7 +214,7 @@ extension Image {
     /// Yo Max: the Phosphor icon for an SF Symbol name (falls back to the SF Symbol).
     init(yoMax systemName: String) {
         if let asset = YoMaxSymbols.asset(for: systemName) {
-            self.init(asset)
+            self.init(asset, label: Text(verbatim: YoMaxSymbols.accessibilityLabel(for: systemName)))
         } else {
             self.init(systemName: systemName)
         }

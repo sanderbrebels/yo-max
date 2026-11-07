@@ -224,7 +224,7 @@ private struct ModeReorderMeta: View {
     var body: some View {
         HStack(spacing: 4) {
             Image(yoMax: icon)
-                .font(.yoMax(9, weight: .medium))
+                .font(.yoMax(11, weight: .medium))  // Yo Max: icon 1 em, the size of its text
 
             Text(value)
                 .font(.yoMax(11))

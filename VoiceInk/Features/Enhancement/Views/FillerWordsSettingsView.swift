@@ -17,8 +17,11 @@ struct FillerWordChip: View {
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(isHovered ? AppTheme.Status.error : .secondary)
                     .font(.yoMax(10))
+                    .yoMaxIconHitTarget()  // Yo Max
             }
             .buttonStyle(.borderless)
+            .help("Remove filler word")  // Yo Max: label for VoiceOver and a tooltip
+            .accessibilityLabel("Remove filler word")
             .onHover { hover in
                 withAnimation(.easeInOut(duration: 0.2)) {
                     isHovered = hover

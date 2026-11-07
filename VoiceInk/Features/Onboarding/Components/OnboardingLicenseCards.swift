@@ -135,7 +135,7 @@ private struct OnboardingLicenseActionRow: View {
                         .fill(iconBackground)
 
                     Image(yoMax: systemImage)
-                        .font(.yoMax(16, weight: .semibold))
+                        .font(.yoMax(13, weight: .semibold))  // Yo Max: icon 1 em, the size of its text
                         .foregroundColor(iconForeground)
                 }
                 .frame(width: 34, height: 34)

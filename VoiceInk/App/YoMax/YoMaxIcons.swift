@@ -1,23 +1,23 @@
 import AVFoundation
 import SwiftUI
 
-/// Yo Max: Phosphor icons (MIT, see Phosphor-LICENSE.txt), the icon set of Tarmax.
-/// The SVGs live in `Assets.xcassets/Phosphor` as template images named `ph-<name>-<weight>`.
-/// Tarmax rule: beside text an icon is 1 em and bold; the chosen page in the navigation is fill.
-/// To add an icon: download `assets/<weight>/<name>-<weight>.svg` from @phosphor-icons/core,
-/// replace `fill="currentColor"` by `fill="#000000"` and add it as an imageset (template, vector).
+/// Yo Max: a Phosphor icon by its Phosphor name (MIT, see Phosphor-LICENSE.txt), the icon set of Tarmax.
+/// Uses the custom symbols in `Assets.xcassets/PhosphorSymbols` (see `YoMaxSymbols`), so it has the
+/// same weight and optical size as every other icon. Tarmax rule: beside text the icon is 1 em
+/// (the size of that text) and bold; the chosen page in the navigation is fill. Decorative: the
+/// text or the button around it carries the label.
 struct PhosphorIcon: View {
-    enum Weight: String {
+    enum Weight {
         case bold
         case fill
     }
 
-    /// The size of an icon beside 13–14 pt text (1 em).
-    static let textSize: CGFloat = 16
-    /// A small companion icon, such as the "opens outside" arrow (Tarmax --icon-sm).
-    static let smallSize: CGFloat = 12
-    /// The size of an icon in a small icon button.
-    static let buttonSize: CGFloat = 16
+    /// 1 em beside the 13.5 pt sidebar and row labels.
+    static let textSize: CGFloat = 13.5
+    /// An icon alone in a small icon button (28 pt).
+    static let buttonSize: CGFloat = 14
+    /// A small companion icon, such as the "opens outside" arrow.
+    static let smallSize: CGFloat = 11
 
     let name: String
     var weight: Weight = .bold
@@ -30,12 +30,8 @@ struct PhosphorIcon: View {
     }
 
     var body: some View {
-        Image("ph-\(name)-\(weight.rawValue)")
-            .renderingMode(.template)
-            .resizable()
-            .interpolation(.high)
-            .aspectRatio(contentMode: .fit)
-            .frame(width: size, height: size)
+        Image(weight == .fill ? "ph.\(name).fill" : "ph.\(name)")
+            .font(.yoMax(size))
             .accessibilityHidden(true)
     }
 }
@@ -51,6 +47,8 @@ struct YoMaxIconButton: View {
     @State private var isHovering = false
 
     static let side: CGFloat = 28
+    /// The smallest pointer target for an icon-only control.
+    static let minimumHitTarget: CGFloat = 24
 
     var body: some View {
         Button(action: action) {
@@ -103,5 +101,14 @@ final class YoMaxQuickAudioPlayer: NSObject, ObservableObject, AVAudioPlayerDele
 
     nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         Task { @MainActor in self.stop() }
+    }
+}
+
+extension View {
+    /// Yo Max: gives a small icon inside a button a hit area of at least 24 × 24 pt
+    /// (the macOS minimum for a pointer target), without changing how it looks.
+    func yoMaxIconHitTarget() -> some View {
+        frame(minWidth: YoMaxIconButton.minimumHitTarget, minHeight: YoMaxIconButton.minimumHitTarget)
+            .contentShape(Rectangle())
     }
 }

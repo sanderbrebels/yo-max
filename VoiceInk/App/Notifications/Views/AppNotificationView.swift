@@ -75,9 +75,12 @@ struct AppNotificationView: View {
                     Image(yoMax: "xmark")
                         .font(.yoMax(10, weight: .medium))
                         .foregroundColor(.white.opacity(0.6))
+                        .yoMaxIconHitTarget()  // Yo Max
                 }
                 .buttonStyle(PlainButtonStyle())
-                .frame(width: 16, height: 16)
+                .help("Close")  // Yo Max: label for VoiceOver and a tooltip
+                .accessibilityLabel("Close")
+                .frame(minWidth: 24, minHeight: 24)  // Yo Max: 24 pt hit target
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)

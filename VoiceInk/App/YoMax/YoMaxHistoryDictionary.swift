@@ -427,7 +427,7 @@ struct YoMaxDoubtWordsCard: View {
                     .strikethrough()
                     .foregroundStyle(AppTheme.Text.secondary)
                 Image(yoMax: "arrow.right")
-                    .font(.yoMax(10))
+                    .font(.yoMax(13))  // Yo Max: icon 1 em, the size of its text
                     .foregroundStyle(AppTheme.Text.secondary)
                 Text(suggestion.correct)
                     .font(.yoMax(13, weight: .medium))

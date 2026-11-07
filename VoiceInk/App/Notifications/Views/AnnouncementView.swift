@@ -21,8 +21,11 @@ struct AnnouncementView: View {
                     Image(yoMax: "xmark")
                         .font(.yoMax(11, weight: .medium))
                         .foregroundColor(.white.opacity(0.7))
+                        .yoMaxIconHitTarget()  // Yo Max
                 }
                 .buttonStyle(PlainButtonStyle())
+                .help("Close")  // Yo Max: label for VoiceOver and a tooltip
+                .accessibilityLabel("Close")
             }
 
             if !description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {

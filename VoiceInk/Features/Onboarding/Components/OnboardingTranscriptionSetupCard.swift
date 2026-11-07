@@ -133,7 +133,7 @@ struct OnboardingTranscriptionSetupCard: View {
     private var missingModelPanel: some View {
         HStack(spacing: 10) {
             Image(yoMax: "exclamationmark.triangle.fill")
-                .font(.yoMax(14, weight: .semibold))
+                .font(.yoMax(12, weight: .semibold))  // Yo Max: icon 1 em, the size of its text
                 .foregroundColor(AppTheme.Status.error)
 
             Text("Parakeet V3 is not available.")
@@ -301,7 +301,7 @@ struct OnboardingTranscriptionSetupCard: View {
     private var verifiedProviderSummary: some View {
         HStack(alignment: .center, spacing: 9) {
             Image(yoMax: "checkmark.circle.fill")
-                .font(.yoMax(14, weight: .semibold))
+                .font(.yoMax(12, weight: .semibold))  // Yo Max: icon 1 em, the size of its text
                 .foregroundColor(AppTheme.Status.positive)
 
             Text("Connection verified.")

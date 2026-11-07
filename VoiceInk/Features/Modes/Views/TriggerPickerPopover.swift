@@ -144,8 +144,11 @@ struct TriggerPickerPopover: View {
                     Image(yoMax: "xmark.circle.fill")
                         .foregroundColor(AppTheme.Text.secondary)
                         .font(.yoMax(12))
+                        .yoMaxIconHitTarget()  // Yo Max
                 }
                 .buttonStyle(.plain)
+                .help("Clear search")  // Yo Max: label for VoiceOver and a tooltip
+                .accessibilityLabel("Clear search")
             }
         }
         .padding(.horizontal, 12)

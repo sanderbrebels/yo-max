@@ -87,7 +87,7 @@ struct GitHubStarPromptCard: View {
     private var completionContent: some View {
         HStack(spacing: 8) {
             Image(yoMax: completionState == .starred ? "checkmark.circle.fill" : "arrow.up.right.circle.fill")
-                .font(.yoMax(15, weight: .semibold))
+                .font(.yoMax(13, weight: .semibold))  // Yo Max: icon 1 em, the size of its text
                 .foregroundStyle(completionState == .starred ? AppTheme.Sidebar.license : .secondary)
 
             Text(completionState == .starred ? "Starred — thank you!" : "GitHub opened")

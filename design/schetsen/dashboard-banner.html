@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yo Max dashboardbanner</title>
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+  :root {
+    /* palet */
+    --gray-0:#FFFFFF; --gray-50:#F5F5F5; --gray-100:#F0F0F0; --gray-200:#E5E5E5; --gray-950:#121213;
+    --green-950:#0B1F0D; --green-500:#657064; --green-25:#F6FAF5; --green-50:#EEF4EC; --lime-400:#86F46D;
+    /* betekenissen */
+    --elev-page:var(--gray-50); --elev-card:var(--gray-0); --elev-inset:var(--green-25); --fill-strong:var(--green-50);
+    --separator:var(--gray-200); --text:var(--gray-950); --text-muted:var(--green-500); --ink:var(--green-950); --on-dark:var(--gray-0);
+    --hover-darken:#1C3A20;
+    --r-card:16px; --r-panel:20px; --r-button:12px;
+    --font:'Aeonik', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --banner-art:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMzAwIiBoZWlnaHQ9IjU5NyIgdmlld0JveD0iMCAwIDIzMDAgNTk3Ij4KICA8IS0tIFlvIE1heCBkYXNoYm9hcmQtYmFubmVyIChtb21lbnR1bS1oZXJvLWJnKTogVGFybWF4IGZpbGwtc3Ryb25nIG1ldCBydWl0ZW4gaW4gbGltZS0xMDAgZW4gbGltZS00MDAuIC0tPgogIDxyZWN0IHdpZHRoPSIyMzAwIiBoZWlnaHQ9IjU5NyIgZmlsbD0iI0VFRjRFQyIvPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwNDAgMzAwKSBzY2FsZSg0LjIpIHRyYW5zbGF0ZSgtOTAuODU3NSAtOTAuODU3NSkiPjxwYXRoIGQ9Ik03Ny44MTEzIDUuNDAzOThMNS40MDM5OCA3Ny44MTEzQy0xLjgwMTMzIDg1LjAxNjYgLTEuODAxMzMgOTYuNjk4NyA1LjQwMzk4IDEwMy45MDRMNzcuODExMyAxNzYuMzExQzg1LjAxNjYgMTgzLjUxNyA5Ni42OTg3IDE4My41MTcgMTAzLjkwNCAxNzYuMzExTDE3Ni4zMTEgMTAzLjkwNEMxODMuNTE3IDk2LjY5ODcgMTgzLjUxNyA4NS4wMTY2IDE3Ni4zMTEgNzcuODExM0wxMDMuOTA0IDUuNDAzOThDOTYuNjk4NyAtMS44MDEzMyA4NS4wMTY2IC0xLjgwMTMzIDc3LjgxMTMgNS40MDM5OFoiIGZpbGw9IiNFMUZDREIiLz48L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTU2MCAxNzApIHNjYWxlKDAuNikgdHJhbnNsYXRlKC05MC44NTc1IC05MC44NTc1KSI+PHBhdGggZD0iTTc3LjgxMTMgNS40MDM5OEw1LjQwMzk4IDc3LjgxMTNDLTEuODAxMzMgODUuMDE2NiAtMS44MDEzMyA5Ni42OTg3IDUuNDAzOTggMTAzLjkwNEw3Ny44MTEzIDE3Ni4zMTFDODUuMDE2NiAxODMuNTE3IDk2LjY5ODcgMTgzLjUxNyAxMDMuOTA0IDE3Ni4zMTFMMTc2LjMxMSAxMDMuOTA0QzE4My41MTcgOTYuNjk4NyAxODMuNTE3IDg1LjAxNjYgMTc2LjMxMSA3Ny44MTEzTDEwMy45MDQgNS40MDM5OEM5Ni42OTg3IC0xLjgwMTMzIDg1LjAxNjYgLTEuODAxMzMgNzcuODExMyA1LjQwMzk4WiIgZmlsbD0iIzg2RjQ2RCIvPjwvZz4KPC9zdmc+Cg==");
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--gray-100);color:var(--text);font:400 14px/1.5 var(--font)}
+  header,section{max-width:1000px;margin:0 auto;padding:0 32px}
+  header{padding-top:40px}
+  h1{font-weight:500;font-size:30px;margin:0 0 6px}
+  h2{font-weight:500;font-size:19px;margin:0}
+  .lead,.sub{color:var(--text-muted);max-width:760px}
+  .lead{margin:0 0 28px}
+  .sub{margin:2px 0 12px;font-size:13.5px}
+  .variant{margin-bottom:40px}
+  .panel{background:var(--elev-card);border:1px solid var(--separator);border-radius:var(--r-panel);padding:28px 30px}
+  .panel h3{margin:0 0 20px;font-weight:500;font-size:26px}
+  .muted{color:var(--text-muted)}
+  .btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-button);border:0;
+       background:var(--ink);color:var(--on-dark);font:500 13.5px var(--font);cursor:pointer;white-space:nowrap}
+  .btn:hover{background:var(--hover-darken)}
+  .btn i{font-size:13.5px}
+  .link{display:inline-flex;align-items:center;gap:6px;color:var(--text);font-weight:500;font-size:13.5px;text-decoration:none}
+  .link:hover{text-decoration:underline}
+  .num{font-weight:500;font-variant-numeric:tabular-nums;color:var(--text)}
+  .unit{color:var(--text-muted)}
+  .banner{border-radius:var(--r-card);background:var(--fill-strong) var(--banner-art) right center/auto 100% no-repeat;overflow:hidden}
+
+  /* A: kop + strook */
+  .a{padding:24px 28px 0}
+  .a .top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+  .a .headline{font-size:22px;font-weight:500;line-height:1.25;margin:0}
+  .a .headline b{font-weight:500;font-size:30px}
+  .a .caption{margin:6px 0 0;font-size:14px}
+  .a .strip{display:grid;grid-template-columns:repeat(3,1fr);margin:22px -28px 0;background:color-mix(in srgb,var(--elev-card) 72%,transparent);border-top:1px solid var(--separator)}
+  .a .strip div{padding:14px 28px}
+  .a .strip div+div{border-left:1px solid var(--separator)}
+  .a .strip .num{font-size:22px;display:block;line-height:1.2}
+  .a .strip .unit{font-size:13px}
+
+  /* B: twee kolommen */
+  .b{display:grid;grid-template-columns:1fr 200px;min-height:176px}
+  .b .left{padding:24px 28px;display:flex;flex-direction:column;gap:6px}
+  .b .headline{font-size:22px;font-weight:500;line-height:1.25;margin:0}
+  .b .headline b{font-weight:500;font-size:30px}
+  .b .caption{margin:0 0 14px;font-size:14px}
+  .b .right{background:var(--elev-inset);border-left:1px solid var(--separator);padding:20px 22px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+  .b .right .num{font-size:22px} .b .right .unit{font-size:13px;margin-left:6px}
+  .b-plain{background:var(--fill-strong)}
+
+  /* C: één groot getal */
+  .c{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:28px;padding:24px 28px}
+  .c .hero .label{font-size:13px;margin:0}
+  .c .hero .big{font-size:44px;font-weight:500;line-height:1.05;margin:2px 0 4px;font-variant-numeric:tabular-nums}
+  .c .hero .caption{font-size:13px;margin:0 0 12px}
+  .c .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-self:stretch}
+  .c .stat{background:var(--elev-card);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:center}
+  .c .stat .num{font-size:24px;line-height:1.15}
+  .c .stat .unit{font-size:12.5px}
+  .c .stat i{font-size:13px;color:var(--text-muted);margin-bottom:6px}
+
+  .list{margin-top:22px;border:1px solid var(--separator);border-radius:var(--r-card);height:90px;display:grid;place-items:center;color:var(--text-muted);font-size:13px}
+  .notes{background:var(--elev-card);border-radius:20px;padding:20px 24px;margin-bottom:40px}
+  .notes ul{margin:8px 0 0;padding-left:18px;color:var(--text-muted)} .notes li+li{margin-top:4px} .notes strong{color:var(--text);font-weight:500}
+  @media (max-width:720px){header,section{padding:0 16px}.b{grid-template-columns:1fr}.b .right{border-left:0;border-top:1px solid var(--separator)}.c{grid-template-columns:1fr}.a .strip div{padding:12px 16px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Eén banner: tijdwinst en statistieken samen</h1>
+  <p class="lead">Wat je bespaarde is de kop, de cijfers staan eronder of ernaast. Het aantal woorden staat er maar één keer in (nu dubbel: "4.2K" in de banner en "4.194" in de kaart). Daaronder volgen de recente dictaten over de volle breedte.</p>
+</header>
+<section>
+  <div class="variant">
+    <h2>A · Kop met strook</h2>
+    <p class="sub">De zin bovenaan met de knop rechts, de drie cijfers in een witte strook onderaan de banner, gescheiden door fijne lijnen. Leest van boven naar onder: wat het opleverde, dan de details.</p>
+    <div class="panel"><h3>Welcome back, Sander</h3>
+      <div class="banner a">
+        <div class="top">
+          <div><p class="headline">You have saved <b>1h 13m</b> with Yo Max</p>
+          <p class="caption muted">That is a quarter of The Metamorphosis.</p></div>
+          <button class="btn">View Insights <i class="ph-bold ph-chart-line-up"></i></button>
+        </div>
+        <div class="strip">
+          <div><span class="num">4.194</span><span class="unit">words</span></div>
+          <div><span class="num">133</span><span class="unit">wpm</span></div>
+          <div><span class="num">2</span><span class="unit">day streak</span></div>
+        </div>
+      </div>
+      <div class="list">Today · recente dictaten</div>
+    </div>
+  </div>
+
+  <div class="variant">
+    <h2>B · Twee kolommen</h2>
+    <p class="sub">Links het verhaal met de knop, rechts de cijfers als vaste kolom, zoals de kaart nu, maar in de banner. Het dichtst bij wat je nu hebt. De ruiten van de banner verdwijnen, want de kolom staat op die plek.</p>
+    <div class="panel"><h3>Welcome back, Sander</h3>
+      <div class="banner b b-plain">
+        <div class="left">
+          <p class="headline">You have saved <b>1h 13m</b> with Yo Max</p>
+          <p class="caption muted">Dictated 4.194 words, a quarter of The Metamorphosis.</p>
+          <div><button class="btn">View Insights <i class="ph-bold ph-chart-line-up"></i></button></div>
+        </div>
+        <div class="right">
+          <div><span class="num">4.194</span><span class="unit">words</span></div>
+          <div><span class="num">133</span><span class="unit">wpm</span></div>
+          <div><span class="num">2</span><span class="unit">day streak</span></div>
+        </div>
+      </div>
+      <div class="list">Today · recente dictaten</div>
+    </div>
+  </div>
+
+  <div class="variant">
+    <h2>C · Eén groot getal</h2>
+    <p class="sub">De tijdwinst als groot cijfer, de drie andere als witte tegels met een Phosphor-icoon. Vier cijfers op één lijn, de knop wordt een rustige link. Het meest "dashboard".</p>
+    <div class="panel"><h3>Welcome back, Sander</h3>
+      <div class="banner c b-plain">
+        <div class="hero">
+          <p class="label muted">Time saved with Yo Max</p>
+          <p class="big">1h 13m</p>
+          <p class="caption muted">A quarter of The Metamorphosis.</p>
+          <a class="link" href="#">View Insights <i class="ph-bold ph-arrow-right"></i></a>
+        </div>
+        <div class="stats">
+          <div class="stat"><i class="ph-bold ph-text-aa"></i><span class="num">4.194</span><span class="unit">words</span></div>
+          <div class="stat"><i class="ph-bold ph-gauge"></i><span class="num">133</span><span class="unit">wpm</span></div>
+          <div class="stat"><i class="ph-bold ph-flame"></i><span class="num">2</span><span class="unit">day streak</span></div>
+        </div>
+      </div>
+      <div class="list">Today · recente dictaten</div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h2>Wat in alle drie zo is</h2>
+    <ul>
+      <li><strong>Eén blok</strong> bovenaan het dashboard; de losse kaart rechts van de dictaten verdwijnt, zodat de lijst de volle breedte krijgt.</li>
+      <li>Alleen tokens: <code>--fill-strong</code> voor de banner, <code>--elev-card</code> / <code>--elev-inset</code> voor wat erin ligt, <code>--separator</code> voor lijnen, inkt voor de knop, Aeonik 500 voor cijfers, 400 voor tekst.</li>
+      <li>Nog vergrendeld (te weinig dictaten)? Dan toont de banner alleen de drie cijfers, zonder kop en zonder knop.</li>
+    </ul>
+  </div>
+</section>
+</body>
+</html>

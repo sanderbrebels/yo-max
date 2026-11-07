@@ -81,8 +81,8 @@ struct WordReplacementView: View {
 
                 Image(yoMax: "arrow.right")
                     .foregroundColor(AppTheme.Text.secondary)
-                    .font(.yoMax(10))
-                    .frame(width: 10)
+                    .font(.yoMax(13))  // Yo Max: icon 1 em, the size of its text
+                    .frame(width: 14)
 
                 TextField("", text: $replacementWord, prompt: Text("Replacement text"))
                     .textFieldStyle(.roundedBorder)
@@ -137,8 +137,8 @@ struct WordReplacementView: View {
 
                         Image(yoMax: "arrow.right")
                             .foregroundColor(AppTheme.Text.secondary)
-                            .font(.yoMax(10))
-                            .frame(width: 10)
+                            .font(.yoMax(12))  // Yo Max: icon 1 em, the size of its text
+                            .frame(width: 14)
 
                         Button(action: { toggleSort(for: .replacement) }) {
                             HStack(spacing: 4) {

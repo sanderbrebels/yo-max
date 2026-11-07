@@ -231,8 +231,11 @@ private struct ModeIconButton: View {
                         .foregroundStyle(Color.white, AppTheme.Status.error)
                         .font(.yoMax(10))
                         .background(Circle().fill(Color.white.opacity(0.8)))
+                        .yoMaxIconHitTarget()  // Yo Max
                 }
                 .buttonStyle(.borderless)
+                .help("Remove icon")  // Yo Max: label for VoiceOver and a tooltip
+                .accessibilityLabel("Remove icon")
                 .offset(x: 6, y: -6)
             }
         }

@@ -129,7 +129,7 @@ private struct TriggerTextChip: View {
     var body: some View {
         HStack(spacing: 5) {
             Image(yoMax: systemName)
-                .font(.yoMax(9, weight: .semibold))
+                .font(.yoMax(12, weight: .semibold))  // Yo Max: icon 1 em, the size of its text
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Text(title)

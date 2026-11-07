@@ -176,7 +176,7 @@ struct AIProviderVerificationCard: View {
         HStack(alignment: .center, spacing: 12) {
             HStack(spacing: 9) {
                 Image(yoMax: "checkmark.circle.fill")
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(12, weight: .semibold))  // Yo Max: icon 1 em, the size of its text
                     .foregroundColor(AppTheme.Status.positive)
 
                 VStack(alignment: .leading, spacing: 2) {

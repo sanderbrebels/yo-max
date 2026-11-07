@@ -58,8 +58,11 @@ struct NativeAppleLanguageAssetControl: View {
             Button(action: downloadAsset) {
                 Image(yoMax: "arrow.down.circle.fill")
                     .font(.yoMax(14, weight: .semibold))
+                    .yoMaxIconHitTarget()  // Yo Max
             }
             .buttonStyle(.plain)
+            .help("Download language")  // Yo Max: label for VoiceOver and a tooltip
+            .accessibilityLabel("Download language")
             .controlSize(.small)
             .frame(width: 28, height: 24)
         case .downloading:
@@ -80,16 +83,22 @@ struct NativeAppleLanguageAssetControl: View {
             Button(action: refreshAssetState) {
                 Image(yoMax: "exclamationmark.circle")
                     .font(.yoMax(14, weight: .semibold))
+                    .yoMaxIconHitTarget()  // Yo Max
             }
             .buttonStyle(.plain)
+            .help("Check again")  // Yo Max: label for VoiceOver and a tooltip
+            .accessibilityLabel("Check again")
             .controlSize(.small)
             .frame(width: 28, height: 24)
         case .failed:
             Button(action: downloadAsset) {
                 Image(yoMax: "arrow.clockwise.circle.fill")
                     .font(.yoMax(14, weight: .semibold))
+                    .yoMaxIconHitTarget()  // Yo Max
             }
             .buttonStyle(.plain)
+            .help("Retry download")  // Yo Max: label for VoiceOver and a tooltip
+            .accessibilityLabel("Retry download")
             .controlSize(.small)
             .frame(width: 28, height: 24)
         }
