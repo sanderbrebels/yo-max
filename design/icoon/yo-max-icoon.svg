@@ -1,12 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-  <!-- Yo Max app-icoon: Tarmax-ruit (brand-dark #212520) met lime golfvorm (#86F46D) op de lichte pagina (#F5F5F5). Alles gecentreerd op 512,512. -->
-  <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="#F5F5F5"/>
-  <g transform="translate(512 512) scale(3.05) translate(-90.8575 -90.8575)">
-    <path d="M77.8113 5.40398L5.40398 77.8113C-1.80133 85.0166 -1.80133 96.6987 5.40398 103.904L77.8113 176.311C85.0166 183.517 96.6987 183.517 103.904 176.311L176.311 103.904C183.517 96.6987 183.517 85.0166 176.311 77.8113L103.904 5.40398C96.6987 -1.80133 85.0166 -1.80133 77.8113 5.40398Z" fill="#212520"/>
+  <!-- Yo Max app-icoon B1 (2026-11-07): vijf even brede lime streepjes (64 breed, 40 tussenruimte), symmetrisch op 512,512, op een brand-dark tegel in het macOS-raster (824 op 1024, radius 185). Afwerking: verloop van warm naar diep donker, lime licht achter de golf, fijne lichtrand bovenaan, streepjes bovenaan iets lichter. -->
+  <defs>
+    <linearGradient id="tile" x1="0" y1="100" x2="0" y2="924" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2D332C"/>
+      <stop offset="1" stop-color="#181B17"/>
+    </linearGradient>
+    <radialGradient id="ambient" cx="512" cy="552" r="346" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#86F46D" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#86F46D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="100" x2="0" y2="924" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.22"/>
+      <stop offset="0.18" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="292" x2="0" y2="732" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#A9F896"/>
+      <stop offset="0.5" stop-color="#86F46D"/>
+      <stop offset="1" stop-color="#6FDD57"/>
+    </linearGradient>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#tile)"/>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#ambient)"/>
+  <g fill="url(#bar)">
+    <rect x="272" y="432" width="64" height="160" rx="32"/>
+    <rect x="376" y="362" width="64" height="300" rx="32"/>
+    <rect x="480" y="292" width="64" height="440" rx="32"/>
+    <rect x="584" y="362" width="64" height="300" rx="32"/>
+    <rect x="688" y="432" width="64" height="160" rx="32"/>
   </g>
-  <rect x="382" y="464" width="36" height="96" rx="18" fill="#86F46D"/>
-  <rect x="438" y="424" width="36" height="176" rx="18" fill="#86F46D"/>
-  <rect x="494" y="384" width="36" height="256" rx="18" fill="#86F46D"/>
-  <rect x="550" y="424" width="36" height="176" rx="18" fill="#86F46D"/>
-  <rect x="606" y="464" width="36" height="96" rx="18" fill="#86F46D"/>
+  <rect x="101.5" y="101.5" width="821" height="821" rx="183.5" fill="none" stroke="url(#rim)" stroke-width="3"/>
 </svg>
