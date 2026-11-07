@@ -141,11 +141,10 @@ struct DashboardContent: View {
 
             greetingHeader
 
-            // Yo Max: no "Continue using Yo Max to unlock stats" block while insights are locked.
-            if !shouldShowLockedInsightsState {
-                nameEditorDismissArea {
-                    heroSection
-                }
+            // Yo Max: one banner with the time saved and the stats (dashboard-banner.html, B);
+            // while insights are locked it shows only the stats, never "Continue using Yo Max…".
+            nameEditorDismissArea {
+                heroSection
             }
 
             if hasAutoLearnFailure, isAutoLearnEnabled {
@@ -169,19 +168,9 @@ struct DashboardContent: View {
                 }
             }
 
-            // Yo Max: recent dictations with the stats card beside them (schets elevation-flow.html).
-            nameEditorDismissArea {
-                HStack(alignment: .top, spacing: DashboardLayout.columnSpacing) {
-                    if !recentDashboardTranscriptions.isEmpty {
-                        DashboardTranscriptCards(transcriptions: recentDashboardTranscriptions)
-                    } else {
-                        Spacer(minLength: 0)
-                    }
-
-                    YoMaxDashboardStatsCard(
-                        totals: statsSummary.totals(for: .allTime),
-                        dailyActivity: statsSummary.allTimeDailyActivity
-                    )
+            if !recentDashboardTranscriptions.isEmpty {
+                nameEditorDismissArea {
+                    DashboardTranscriptCards(transcriptions: recentDashboardTranscriptions)
                 }
             }
 
@@ -558,7 +547,9 @@ struct DashboardContent: View {
             canViewInsights: canViewInsights,
             actionHelp: insightsActionHelp,
             actionAccessibilityLabel: insightsActionAccessibilityLabel,
-            onViewInsights: openInsightsIfAvailable
+            onViewInsights: openInsightsIfAvailable,
+            totals: statsSummary.totals(for: .allTime),
+            dailyActivity: statsSummary.allTimeDailyActivity
         )
     }
 

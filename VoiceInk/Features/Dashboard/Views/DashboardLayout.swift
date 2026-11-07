@@ -9,6 +9,7 @@ enum DashboardLayout {
     static let footerTopSpacing: CGFloat = 20
     static let footerButtonHeight: CGFloat = 36
     static let cardCornerRadius: CGFloat = 16
+    static let bannerStatsColumnWidth: CGFloat = 200  // Yo Max: the stats column in the banner
 
     static func contentWidth(for availableWidth: CGFloat) -> CGFloat {
         max(0, availableWidth - (pageHorizontalPadding * 2))

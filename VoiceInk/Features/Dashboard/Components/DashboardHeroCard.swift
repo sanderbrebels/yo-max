@@ -20,14 +20,53 @@ struct DashboardHeroCard: View {
     let actionHelp: String
     let actionAccessibilityLabel: String
     let onViewInsights: () -> Void
+    // Yo Max: the stats in the banner (variant B of design/schetsen/dashboard-banner.html).
+    let totals: DashboardMetricTotals
+    let dailyActivity: [DashboardProductivityPoint]
+
+    private var bannerShape: RoundedRectangle {
+        RoundedRectangle(cornerRadius: DashboardLayout.cardCornerRadius, style: .continuous)
+    }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        Group {
             if isLocked {
-                lockedInsightsPrompt
+                // Still locked: only the numbers, no headline and no button.
+                YoMaxDashboardStats(totals: totals, dailyActivity: dailyActivity, axis: .horizontal)
+                    .padding(.horizontal, 28)
+                    .padding(.vertical, 22)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             } else {
-                heroCopy
+                HStack(spacing: 0) {
+                    storyColumn
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    statsColumn
+                }
+                .fixedSize(horizontal: false, vertical: true)
             }
+        }
+        .background(AppTheme.Surface.banner)
+        .clipShape(bannerShape)
+        .overlay(bannerShape.strokeBorder(AppTheme.Border.card, lineWidth: 1))
+    }
+
+    private var statsColumn: some View {
+        YoMaxDashboardStats(totals: totals, dailyActivity: dailyActivity)
+            .padding(.horizontal, 22)
+            .padding(.vertical, 20)
+            .frame(width: DashboardLayout.bannerStatsColumnWidth, alignment: .leading)
+            .frame(maxHeight: .infinity)
+            .background(AppTheme.Surface.subtle)
+            .overlay(alignment: .leading) {
+                Rectangle()
+                    .fill(AppTheme.Border.subtle)
+                    .frame(width: 1)
+            }
+    }
+
+    private var storyColumn: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            heroCopy
 
             HStack(spacing: 12) {
                 Button(action: onViewInsights) {
@@ -46,10 +85,7 @@ struct DashboardHeroCard: View {
             .padding(.top, 8)
         }
         .padding(.horizontal, 28)
-        .padding(.vertical, 18)
-        .frame(maxWidth: .infinity, minHeight: 160, alignment: .leading)
-        .background(DashboardImpactBackground(isLocked: isLocked))
-        .clipShape(RoundedRectangle(cornerRadius: DashboardLayout.cardCornerRadius, style: .continuous))
+        .padding(.vertical, 22)
     }
 
     private var heroCopy: some View {
@@ -58,7 +94,7 @@ struct DashboardHeroCard: View {
                 .frame(maxWidth: 720, alignment: .leading)
 
             Text(subtext)
-                .font(.yoMax(15, weight: .semibold))
+                .font(.yoMax(14))  // Yo Max: Tarmax body 400
                 .foregroundStyle(DashboardMomentumBackground.subtext)
                 .frame(maxWidth: 620, alignment: .leading)
         }
@@ -93,26 +129,6 @@ struct DashboardHeroCard: View {
         }
 
         return text
-    }
-
-    private var lockedInsightsPrompt: some View {
-        HStack(alignment: .center, spacing: 14) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(Color.white.opacity(0.78))
-
-                Image(yoMax: "lock.fill")
-                    .font(.yoMax(17, weight: .bold))
-                    .foregroundStyle(DashboardMomentumBackground.accent)
-            }
-            .frame(width: 42, height: 42)
-
-            Text("Continue using Yo Max to unlock stats and insights.")
-                .font(.yoMax(26, weight: .black))
-                .foregroundStyle(DashboardMomentumBackground.headline)
-                .frame(maxWidth: 540, alignment: .leading)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -173,29 +189,6 @@ private struct DashboardMomentumActionLabel: View {
 
     private var shadowColor: Color {
         isPrimary ? DashboardMomentumBackground.accent.opacity(0.18) : Color.black.opacity(0.06)
-    }
-}
-
-private struct DashboardImpactBackground: View {
-    var isLocked = false
-
-    var body: some View {
-        ZStack {
-            Image("momentum-hero-bg")
-                .resizable()
-                .scaledToFill()
-                .blur(radius: 0)  // Yo Max: the Tarmax banner stays sharp
-                .saturation(1)
-
-            if isLocked {
-                Color.white.opacity(0.32)
-            }
-        }
-        .clipShape(RoundedRectangle(cornerRadius: DashboardLayout.cardCornerRadius, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: DashboardLayout.cardCornerRadius, style: .continuous)
-                .stroke(AppTheme.Border.card, lineWidth: 1)
-        )
     }
 }
 

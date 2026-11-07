@@ -77,6 +77,7 @@ enum AppTheme {
         // Yo Max (Flow elevation, 2026-11-07): the sidebar lies flat on the window page,
         // the content sits in one card-white panel with a hairline.
         static let contentPanel = Brand.elevCard
+        static let banner = Brand.fillStrong  // Yo Max: the dashboard banner (--fill-strong)
         static let clear = Color.clear
     }
 
