@@ -170,5 +170,12 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 - [ ] Lokale opschoning via Ollama, zodat niets meer naar de cloud gaat.
 - [ ] Koppeling met Sanders app **Tarmax**.
 
+### Portfolio (later, als app, motion en iconen af zijn)
+- [ ] Yo Max-pagina op https://work.sanderbrebels.be/own-work/, **onder Tarmax**. Geen nieuwe site: een projectpagina via de bestaande generator in `~/Library/CloudStorage/Dropbox/AI Brain in the Cloud/Showcase Portfolio 2026/Claude Folder/KBC Showcase (output)/03_website_v3_revolut/_build/` (`content.py`, `pages.py`; Tarmax-casestudy op `/work/tarmac/` als voorbeeld). Vormgeving = die van het portfolio, Yo Max in de Tarmax-branding als inhoud. Doelgroep: recruiters/design leads; tonen: prototypes en keuzes, design system, taalkwaliteit, microinteracties; niet te veel tekst, geen SaaS-landing. Alleen de GitHub-link als feit (VoiceInk-vermelding: nog beslissen, aangeraden). Werken in een eigen sessie in die map (eigen CLAUDE.md en deploy.sh); niets online zonder Sanders go. Zie ook `PRODUCT.md`.
+
+### Motion en iconen (eerst Sanders input, één vraag tegelijk)
+- [ ] Inspiratie voor de recorder-animatie verzamelen (Mobbin, Rive community, LottieFiles, Dribbble), dan een storyboard: rust → luisteren → spreken → verwerken → klaar.
+- [ ] Nieuwe voorstellen voor app-icoon en menubalkicoon, na Sanders input.
+
 ### Delen
 - [ ] Branch `yo-max` naar de fork pushen (met `/yo-max-stop`) en de vriend de link geven.
