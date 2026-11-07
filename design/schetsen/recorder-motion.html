@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recorder motion</title>
+<style>
+  :root {
+    --page: #F5F5F5; --card: #FFFFFF; --soft: #F6FAF5; --ink: #0B1F0D; --muted: #657064;
+    --line: #E4E9E3; --lime: #86F46D; --dark: #212520; --dark-2: #2C312B; --on-dark: #A3AEA1;
+    --err: #FF8A7A;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --font: 'Aeonik', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  ::selection { background: var(--lime); color: var(--ink); }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 400 14px/1.5 var(--font); }
+  header, section, footer { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  header { padding-top: 40px; }
+  h1 { font-weight: 500; font-size: 30px; line-height: 1.2; margin: 0 0 6px; }
+  h2 { font-weight: 500; font-size: 17px; margin: 0 0 2px; }
+  p.lead { color: var(--muted); margin: 0 0 20px; max-width: 760px; }
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  button { font: 500 13px var(--font); border: 0; border-radius: 999px; padding: 8px 16px; cursor: pointer; background: var(--card); color: var(--ink); transition: background-color 160ms ease, color 160ms ease; }
+  button[aria-pressed="true"] { background: var(--ink); color: var(--lime); }
+  button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; }
+  .variant { background: var(--card); border-radius: 20px; padding: 20px; }
+  .variant .sub { color: var(--muted); margin: 0 0 14px; font-size: 13px; }
+  .stage { background: #DDE3DB; border-radius: 14px; height: 200px; position: relative; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 26px; }
+  .stage::before { content: ""; position: absolute; inset: 22px 26px 80px; background: #fff; border-radius: 10px; opacity: .85; }
+  .states { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-top: 12px; }
+  .states span { text-align: center; font-size: 11.5px; font-weight: 500; color: var(--muted); padding: 5px 0; border-radius: 999px; transition: background-color 160ms ease, color 160ms ease; }
+  .states span.on { background: var(--ink); color: var(--lime); }
+  dl { margin: 14px 0 0; display: grid; grid-template-columns: 82px 1fr; gap: 6px 10px; font-size: 13px; }
+  dt { font-weight: 500; }
+  dd { margin: 0; color: var(--muted); }
+
+  /* ---- the pill ---- */
+  .pill { position: relative; z-index: 1; height: 40px; min-width: 150px; padding: 0 16px; border-radius: 999px; background: var(--dark); display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 10px 28px rgba(0,0,0,.28); transition: box-shadow 240ms var(--ease-out); }
+  .bars { display: flex; align-items: center; gap: 3px; height: 22px; transition: opacity 200ms var(--ease-out); }
+  .bars i { display: block; width: 3px; height: 22px; border-radius: 3px; background: var(--lime); transform: scaleY(.14); transition: transform 120ms linear, background-color 200ms ease, opacity 200ms ease; }
+  .check { position: absolute; width: 18px; height: 18px; opacity: 0; transform: scale(.9); transition: opacity 180ms var(--ease-out), transform 220ms var(--ease-out); }
+  .check path { stroke: var(--lime); stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 260ms var(--ease-out) 60ms; }
+  .label { position: absolute; left: 50%; bottom: 74px; transform: translateX(-50%) translateY(4px); z-index: 1; background: var(--dark); color: #fff; font-size: 12px; font-weight: 500; border-radius: 999px; padding: 5px 12px; opacity: 0; transition: opacity 180ms var(--ease-out), transform 220ms var(--ease-out); white-space: nowrap; }
+
+  .pill[data-state="done"] .bars { opacity: 0; }
+  .pill[data-state="done"] .check { opacity: 1; transform: scale(1); }
+  .pill[data-state="done"] .check path { stroke-dashoffset: 0; }
+  .pill[data-state="error"] .bars i { background: var(--err); }
+  .pill[data-state="error"] ~ .label { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .pill.shake { animation: shake 240ms var(--ease-out); }
+  @keyframes shake { 25% { translate: -4px 0; } 50% { translate: 4px 0; } 75% { translate: -2px 0; } }
+
+  /* A: Bevriezen — idle is a dimmed row; processing freezes the last levels and sweeps light across them. */
+  .v-a .pill[data-state="idle"] .bars i { opacity: .35; }
+  .v-a .pill[data-state="processing"] .bars i { animation: sweep 900ms linear infinite; animation-delay: calc(var(--i) * 55ms); }
+  @keyframes sweep { 0%, 100% { opacity: .35; } 40% { opacity: 1; } }
+
+  /* B: Ademen — idle is one dot; processing pulls every bar into the centre and the pill breathes a lime glow. */
+  .v-b .pill[data-state="idle"] .bars i,
+  .v-b .pill[data-state="processing"] .bars i { transform: translateX(var(--dx)) scaleY(.14); transition: transform 260ms var(--ease-in-out), opacity 200ms ease; }
+  .v-b .pill[data-state="idle"] .bars i:not(:nth-child(6)) { opacity: 0; }
+  .v-b .pill[data-state="processing"] { animation: glow 1400ms ease-in-out infinite; }
+  .v-b .pill[data-state="processing"] .bars i:nth-child(6) { animation: breathe 1400ms ease-in-out infinite; }
+  @keyframes glow { 50% { box-shadow: 0 10px 28px rgba(0,0,0,.28), 0 0 0 6px rgba(134,244,109,.18); } }
+  @keyframes breathe { 50% { transform: translateX(0) scaleY(.32); } }
+
+  /* C: Lijn — idle is one thin line; it splits into bars when you speak and becomes a travelling line while processing. */
+  .v-c .line { position: absolute; left: 50%; top: 50%; width: 76px; height: 3px; margin: -1.5px 0 0 -38px; border-radius: 3px; background: linear-gradient(90deg, rgba(134,244,109,.35) 0 35%, var(--lime) 50%, rgba(134,244,109,.35) 65% 100%); background-size: 300% 100%; background-position: 100% 0; opacity: 0; transform: scaleX(.6); transition: opacity 200ms var(--ease-out), transform 260ms var(--ease-out); }
+  .v-c .pill[data-state="idle"] .line { opacity: 1; transform: scaleX(1); background: rgba(134,244,109,.55); }
+  .v-c .pill[data-state="processing"] .line { opacity: 1; transform: scaleX(1); animation: travel 1000ms linear infinite; }
+  .v-c .pill[data-state="idle"] .bars,
+  .v-c .pill[data-state="processing"] .bars { opacity: 0; }
+  @keyframes travel { from { background-position: 100% 0; } to { background-position: 0 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bars i { transition: opacity 200ms ease, background-color 200ms ease; }
+    .pill.shake { animation: none; }
+    .v-a .pill[data-state="processing"] .bars i { animation: none; opacity: .6; }
+    .v-b .pill[data-state="processing"], .v-b .pill[data-state="processing"] .bars i:nth-child(6) { animation: none; }
+    .v-c .pill[data-state="processing"] .line { animation: none; background: var(--lime); }
+    .check path { transition: none; stroke-dashoffset: 0; }
+  }
+  .notes { margin-top: 28px; background: var(--card); border-radius: 20px; padding: 20px 24px; }
+  .notes ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+  .notes li + li { margin-top: 4px; }
+  .notes strong { color: var(--ink); font-weight: 500; }
+  footer { color: var(--muted); font-size: 12.5px; padding: 28px 32px 40px; }
+  @media (max-width: 600px) { header, section, footer { padding-left: 16px; padding-right: 16px; } .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Recorder: drie bewegingen</h1>
+  <p class="lead">Dezelfde donkere pil met 11 lime streepjes, drie manieren om te bewegen. Ze spelen alle drie tegelijk de zes staten af. Kies een variant, of combineer ("A, met het vinkje van B").</p>
+  <div class="controls" role="group" aria-label="Afspelen">
+    <button id="play" aria-pressed="true">Automatisch afspelen</button>
+    <button data-go="idle">Rust</button>
+    <button data-go="listening">Luisteren</button>
+    <button data-go="speaking">Spreken</button>
+    <button data-go="processing">Verwerken</button>
+    <button data-go="done">Klaar</button>
+    <button data-go="error">Fout</button>
+  </div>
+</header>
+
+<section>
+  <div class="grid">
+    <article class="variant v-a">
+      <h2>A · Bevriezen</h2>
+      <p class="sub">Dicht bij Wispr Flow: rustig, zonder extra vormen.</p>
+      <div class="stage"><div class="pill" data-state="idle"><div class="bars"></div><svg class="check" viewBox="0 0 18 18"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg></div><div class="label">Geen geluid gehoord</div></div>
+      <div class="states"></div>
+      <dl>
+        <dt>Rust</dt><dd>Gedimde rij streepjes, altijd zichtbaar.</dd>
+        <dt>Spreken</dt><dd>Streepjes volgen je stem.</dd>
+        <dt>Verwerken</dt><dd>Laatste golf bevriest, een lichtstreep loopt erover.</dd>
+        <dt>Klaar</dt><dd>Streepjes vervagen, lime vinkje tekent zich.</dd>
+      </dl>
+    </article>
+
+    <article class="variant v-b">
+      <h2>B · Ademen</h2>
+      <p class="sub">Zoals Siri en ChatGPT voice: zacht en levend.</p>
+      <div class="stage"><div class="pill" data-state="idle"><div class="bars"></div><svg class="check" viewBox="0 0 18 18"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg></div><div class="label">Geen geluid gehoord</div></div>
+      <div class="states"></div>
+      <dl>
+        <dt>Rust</dt><dd>Eén lime stip.</dd>
+        <dt>Spreken</dt><dd>De stip wordt 11 streepjes die je stem volgen.</dd>
+        <dt>Verwerken</dt><dd>Alles trekt samen tot één stip die ademt, met een zachte lime gloed.</dd>
+        <dt>Klaar</dt><dd>Stip wordt vinkje.</dd>
+      </dl>
+    </article>
+
+    <article class="variant v-c">
+      <h2>C · Lijn</h2>
+      <p class="sub">Grafisch, het meest "Tarmax".</p>
+      <div class="stage"><div class="pill" data-state="idle"><span class="line"></span><div class="bars"></div><svg class="check" viewBox="0 0 18 18"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg></div><div class="label">Geen geluid gehoord</div></div>
+      <div class="states"></div>
+      <dl>
+        <dt>Rust</dt><dd>Eén dunne lijn.</dd>
+        <dt>Spreken</dt><dd>De lijn splitst in streepjes.</dd>
+        <dt>Verwerken</dt><dd>Terug een lijn, met een lime lichtpunt dat erover loopt.</dd>
+        <dt>Klaar</dt><dd>Lijn maakt plaats voor het vinkje.</dd>
+      </dl>
+    </article>
+  </div>
+
+  <div class="notes">
+    <h2>Wat voor alle drie geldt</h2>
+    <ul>
+      <li><strong>Echte stem, geen lus:</strong> de streepjes volgen het echte microfoonniveau. Een nep-animatie verbergt een microfoon die niets hoort.</li>
+      <li><strong>Snel:</strong> je ziet de recorder tientallen keren per dag, dus elke overgang duurt 120–260 ms, met een sterke ease-out. Alleen "verwerken" loopt door tot de tekst er is.</li>
+      <li><strong>Fout:</strong> rode streepjes, een kort schokje van 240 ms en een label "Geen geluid gehoord".</li>
+      <li><strong>Minder beweging</strong> (systeeminstelling): geen schok en geen lopend licht, alleen vervagen.</li>
+      <li><strong>In Swift:</strong> overgangen met <code>withAnimation(.easeOut(duration: 0.2))</code>, verwerken met een <code>TimelineView</code>; staten komen uit de bestaande <code>RecordingState</code>.</li>
+    </ul>
+  </div>
+</section>
+<footer>Yo Max · schets 7 november 2026 · bronnen: Wispr Flow Flow Bar, Superwhisper, Raycast Dictation, Siri, ChatGPT voice, Rive "Voice Input Animation"</footer>
+
+<script>
+  const ORDER = ["idle", "listening", "speaking", "processing", "done"];
+  const NAMES = { idle: "Rust", listening: "Luisteren", speaking: "Spreken", processing: "Verwerken", done: "Klaar", error: "Fout" };
+  const DUR = { idle: 1300, listening: 1300, speaking: 2400, processing: 1900, done: 1300, error: 1600 };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const variants = [...document.querySelectorAll(".variant")].map(root => {
+    const pill = root.querySelector(".pill"), bars = root.querySelector(".bars"), states = root.querySelector(".states");
+    const items = [];
+    for (let i = 0; i < 11; i++) {
+      const b = document.createElement("i");
+      b.style.setProperty("--i", i);
+      b.style.setProperty("--dx", ((5 - i) * 6) + "px");
+      bars.appendChild(b); items.push(b);
+    }
+    [...ORDER, "error"].forEach(s => { const el = document.createElement("span"); el.textContent = NAMES[s]; el.dataset.s = s; states.appendChild(el); });
+    return { root, pill, items, states, levels: new Array(11).fill(.14) };
+  });
+
+  let state = "idle", timer = null, auto = true;
+  function setState(s) {
+    state = s;
+    variants.forEach(v => {
+      v.pill.dataset.state = s;
+      v.states.querySelectorAll("span").forEach(el => el.classList.toggle("on", el.dataset.s === s));
+      if (s === "error" && !reduce) { v.pill.classList.remove("shake"); void v.pill.offsetWidth; v.pill.classList.add("shake"); }
+    });
+  }
+  function next() {
+    const i = ORDER.indexOf(state);
+    setState(ORDER[(i + 1) % ORDER.length] || "idle");
+    timer = setTimeout(next, DUR[state]);
+  }
+
+  // Simulated microphone level: quiet while listening, a voice-like envelope while speaking.
+  let t = 0;
+  function frame() {
+    t += 1;
+    const speaking = state === "speaking", listening = state === "listening", error = state === "error";
+    const live = speaking || listening || error;
+    variants.forEach(v => {
+      const isB = v.root.classList.contains("v-b");
+      v.items.forEach((b, i) => {
+        if (!live) {
+          // A freezes its last levels while processing; everything else hands control back to CSS.
+          const freeze = state === "processing" && !isB;
+          if (!freeze) b.style.transform = "";
+          return;
+        }
+        const centre = 1 - Math.abs(i - 5) / 6.5;
+        const voice = speaking ? (0.45 + 0.55 * Math.abs(Math.sin(t / 9 + i * 0.7) * Math.sin(t / 23))) : (error ? 0.08 : 0.12 + 0.08 * Math.random());
+        const target = Math.max(0.14, Math.min(1, voice * (0.35 + 0.65 * centre)));
+        v.levels[i] += (target - v.levels[i]) * 0.35;
+        b.style.transform = `scaleY(${v.levels[i].toFixed(3)})`;
+      });
+    });
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  document.getElementById("play").addEventListener("click", e => {
+    auto = !auto; e.currentTarget.setAttribute("aria-pressed", auto);
+    clearTimeout(timer); if (auto) timer = setTimeout(next, 400);
+  });
+  document.querySelectorAll("[data-go]").forEach(btn => btn.addEventListener("click", () => {
+    auto = false; document.getElementById("play").setAttribute("aria-pressed", "false"); clearTimeout(timer); setState(btn.dataset.go);
+  }));
+  setState("idle"); timer = setTimeout(next, DUR.idle);
+</script>
+</body>
+</html>

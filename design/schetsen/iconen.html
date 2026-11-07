@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yo Max iconen</title>
+<style>
+  :root {
+    --page: #F5F5F5; --card: #FFFFFF; --soft: #F6FAF5; --ink: #0B1F0D; --muted: #657064;
+    --line: #E4E9E3; --lime: #86F46D; --dark: #212520;
+    --font: 'Aeonik', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  ::selection { background: var(--lime); color: var(--ink); }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 400 14px/1.5 var(--font); }
+  header, section, footer { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  header { padding-top: 40px; }
+  h1 { font-weight: 500; font-size: 30px; line-height: 1.2; margin: 0 0 6px; }
+  h2 { font-weight: 500; font-size: 17px; margin: 0 0 2px; }
+  h3 { font-weight: 500; font-size: 12.5px; color: var(--muted); margin: 16px 0 8px; }
+  p.lead { color: var(--muted); margin: 0 0 24px; max-width: 760px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; }
+  .variant { background: var(--card); border-radius: 20px; padding: 20px; }
+  .variant .sub { color: var(--muted); margin: 0 0 14px; font-size: 13px; }
+  .hero { display: grid; place-items: center; background: var(--soft); border-radius: 14px; padding: 18px 0; }
+  .hero svg { width: 200px; height: 200px; filter: drop-shadow(0 10px 18px rgba(11,31,13,.18)); }
+  .sizes { display: flex; align-items: flex-end; gap: 14px; padding: 12px 4px 0; }
+  .sizes svg { filter: drop-shadow(0 2px 3px rgba(11,31,13,.18)); }
+  .dock { display: flex; gap: 10px; align-items: center; justify-content: center; border-radius: 18px; padding: 10px 14px; background: rgba(255,255,255,.35); border: 1px solid rgba(255,255,255,.5); }
+  .wall { border-radius: 14px; padding: 22px 12px; display: grid; place-items: center; }
+  .wall.light { background: linear-gradient(135deg, #cfd9e6, #e9dccd); }
+  .wall.darkw { background: linear-gradient(135deg, #1b2230, #3a2d3a); }
+  .wall.darkw .dock { background: rgba(40,40,40,.45); border-color: rgba(255,255,255,.12); }
+  .dock .other { width: 44px; height: 44px; border-radius: 11px; background: #fff; opacity: .7; }
+  .wall.darkw .dock .other { background: #555; }
+  .menubars { display: grid; gap: 8px; }
+  .menubar { height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; gap: 14px; padding: 0 12px; font-size: 13px; }
+  .menubar.light { background: rgba(246,246,246,.9); color: #000; border: 1px solid var(--line); }
+  .menubar.darkm { background: #2a2a2c; color: #fff; }
+  .menubar svg { width: 18px; height: 18px; }
+  .menubar .tpl { fill: currentColor; }
+  .menubar .clock { opacity: .85; }
+  .note { color: var(--muted); font-size: 13px; margin: 12px 0 0; }
+  .note strong { color: var(--ink); font-weight: 500; }
+  .notes { margin-top: 28px; background: var(--card); border-radius: 20px; padding: 20px 24px; }
+  .notes ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+  .notes li + li { margin-top: 4px; }
+  footer { color: var(--muted); font-size: 12.5px; padding: 28px 32px 40px; }
+  @media (max-width: 600px) { header, section, footer { padding-left: 16px; padding-right: 16px; } .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="rhomb" d="M77.8113 5.40398L5.40398 77.8113C-1.80133 85.0166 -1.80133 96.6987 5.40398 103.904L77.8113 176.311C85.0166 183.517 96.6987 183.517 103.904 176.311L176.311 103.904C183.517 96.6987 183.517 85.0166 176.311 77.8113L103.904 5.40398C96.6987 -1.80133 85.0166 -1.80133 77.8113 5.40398Z"/>
+    <!-- macOS icon grid: 824 x 824 body inside a 1024 canvas, corner radius 185 -->
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient>
+
+    <!-- A: diamond, made smaller so it sits inside the grid -->
+    <symbol id="icon-a" viewBox="0 0 1024 1024">
+      <rect x="100" y="100" width="824" height="824" rx="185" fill="#F5F5F5"/>
+      <g transform="translate(512 512) scale(2.55) translate(-90.8575 -90.8575)"><use href="#rhomb" fill="#212520"/></g>
+      <rect x="397" y="472" width="30" height="80" rx="15" fill="#86F46D"/>
+      <rect x="444" y="438" width="30" height="148" rx="15" fill="#86F46D"/>
+      <rect x="497" y="404" width="30" height="216" rx="15" fill="#86F46D"/>
+      <rect x="550" y="438" width="30" height="148" rx="15" fill="#86F46D"/>
+      <rect x="597" y="472" width="30" height="80" rx="15" fill="#86F46D"/>
+      <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#sheen)"/>
+    </symbol>
+
+    <!-- B: just the wave on brand-dark -->
+    <symbol id="icon-b" viewBox="0 0 1024 1024">
+      <rect x="100" y="100" width="824" height="824" rx="185" fill="#212520"/>
+      <rect x="302" y="452" width="56" height="120" rx="28" fill="#86F46D"/>
+      <rect x="386" y="382" width="56" height="260" rx="28" fill="#86F46D"/>
+      <rect x="470" y="302" width="84" height="420" rx="42" fill="#86F46D"/>
+      <rect x="582" y="382" width="56" height="260" rx="28" fill="#86F46D"/>
+      <rect x="666" y="452" width="56" height="120" rx="28" fill="#86F46D"/>
+      <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#sheen)"/>
+    </symbol>
+
+    <!-- C: lime tile, ink diamond with three cut-out bars (the menu-bar glyph, large) -->
+    <mask id="cut-c">
+      <rect width="1024" height="1024" fill="#fff"/>
+      <rect x="406" y="446" width="44" height="132" rx="22" fill="#000"/>
+      <rect x="490" y="380" width="44" height="264" rx="22" fill="#000"/>
+      <rect x="574" y="446" width="44" height="132" rx="22" fill="#000"/>
+    </mask>
+    <symbol id="icon-c" viewBox="0 0 1024 1024">
+      <rect x="100" y="100" width="824" height="824" rx="185" fill="#86F46D"/>
+      <g mask="url(#cut-c)"><g transform="translate(512 512) scale(2.7) translate(-90.8575 -90.8575)"><use href="#rhomb" fill="#0B1F0D"/></g></g>
+      <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#sheen)"/>
+    </symbol>
+
+    <!-- Menu-bar templates (alpha only, 18 pt) -->
+    <mask id="mb-cut"><rect width="18" height="18" fill="#fff"/><rect x="5.6" y="7.3" width="1.6" height="3.4" rx=".8" fill="#000"/><rect x="8.2" y="5.6" width="1.6" height="6.8" rx=".8" fill="#000"/><rect x="10.8" y="7.3" width="1.6" height="3.4" rx=".8" fill="#000"/></mask>
+    <symbol id="mb-a" viewBox="0 0 18 18"><g mask="url(#mb-cut)"><g transform="translate(9 9) scale(.088) translate(-90.8575 -90.8575)"><use href="#rhomb"/></g></g></symbol>
+    <symbol id="mb-b" viewBox="0 0 18 18"><rect x="3" y="7" width="2" height="4" rx="1"/><rect x="6.5" y="4.5" width="2" height="9" rx="1"/><rect x="10" y="2.5" width="2" height="13" rx="1"/><rect x="13.5" y="5.5" width="2" height="7" rx="1"/></symbol>
+    <symbol id="mb-rec" viewBox="0 0 18 18"><g mask="url(#mb-cut)"><g transform="translate(8 9) scale(.08) translate(-90.8575 -90.8575)"><use href="#rhomb"/></g></g><circle cx="16" cy="3.2" r="2"/></symbol>
+  </defs>
+</svg>
+
+<header>
+  <h1>Iconen: drie richtingen</h1>
+  <p class="lead">Telkens het app-icoon groot, in de Dock-groottes, op een lichte en een donkere achtergrond, en het menubalkicoon (met de opnamestaat). Alles past in het macOS-raster, zodat Tahoe niets afsnijdt.</p>
+</header>
+
+<section>
+  <div class="grid">
+    <article class="variant">
+      <h2>A · Ruit, aangescherpt</h2>
+      <p class="sub">Het huidige icoon, maar de ruit is kleiner en past in het raster.</p>
+      <div class="hero"><svg viewBox="0 0 1024 1024" role="img" aria-label="Voorstel A"><use href="#icon-a"/></svg></div>
+      <div class="sizes"><svg width="128" height="128"><use href="#icon-a"/></svg><svg width="64" height="64"><use href="#icon-a"/></svg><svg width="32" height="32"><use href="#icon-a"/></svg><svg width="16" height="16"><use href="#icon-a"/></svg></div>
+      <h3>Dock</h3>
+      <div class="wall light"><div class="dock"><span class="other"></span><svg width="48" height="48"><use href="#icon-a"/></svg><span class="other"></span></div></div>
+      <div class="wall darkw" style="margin-top:8px"><div class="dock"><span class="other"></span><svg width="48" height="48"><use href="#icon-a"/></svg><span class="other"></span></div></div>
+      <h3>Menubalk: rust en opnemen</h3>
+      <div class="menubars">
+        <div class="menubar light"><svg class="tpl"><use href="#mb-a"/></svg><svg class="tpl"><use href="#mb-rec"/></svg><span class="clock">za 7 nov 12:30</span></div>
+        <div class="menubar darkm"><svg class="tpl"><use href="#mb-a"/></svg><svg class="tpl"><use href="#mb-rec"/></svg><span class="clock">za 7 nov 12:30</span></div>
+      </div>
+      <p class="note"><strong>Voordeel:</strong> herkenbaar en duidelijk Tarmax. <strong>Nadeel:</strong> licht icoon, valt weinig op tussen andere lichte iconen.</p>
+    </article>
+
+    <article class="variant">
+      <h2>B · Alleen de golf</h2>
+      <p class="sub">Zonder ruit: vijf lime streepjes op brand-dark, zoals de recorder.</p>
+      <div class="hero"><svg viewBox="0 0 1024 1024" role="img" aria-label="Voorstel B"><use href="#icon-b"/></svg></div>
+      <div class="sizes"><svg width="128" height="128"><use href="#icon-b"/></svg><svg width="64" height="64"><use href="#icon-b"/></svg><svg width="32" height="32"><use href="#icon-b"/></svg><svg width="16" height="16"><use href="#icon-b"/></svg></div>
+      <h3>Dock</h3>
+      <div class="wall light"><div class="dock"><span class="other"></span><svg width="48" height="48"><use href="#icon-b"/></svg><span class="other"></span></div></div>
+      <div class="wall darkw" style="margin-top:8px"><div class="dock"><span class="other"></span><svg width="48" height="48"><use href="#icon-b"/></svg><span class="other"></span></div></div>
+      <h3>Menubalk: rust en opnemen</h3>
+      <div class="menubars">
+        <div class="menubar light"><svg class="tpl"><use href="#mb-b"/></svg><svg class="tpl"><use href="#mb-rec"/></svg><span class="clock">za 7 nov 12:30</span></div>
+        <div class="menubar darkm"><svg class="tpl"><use href="#mb-b"/></svg><svg class="tpl"><use href="#mb-rec"/></svg><span class="clock">za 7 nov 12:30</span></div>
+      </div>
+      <p class="note"><strong>Voordeel:</strong> zegt meteen "spraak", is één geheel met de recorder en blijft leesbaar op 16 px. <strong>Nadeel:</strong> minder Tarmax, en golfvormen zijn een veelgebruikt beeld.</p>
+    </article>
+
+    <article class="variant">
+      <h2>C · Lime tegel, uitgespaarde ruit</h2>
+      <p class="sub">Het menubalkicoon in het groot: inkt-ruit met drie open streepjes op lime.</p>
+      <div class="hero"><svg viewBox="0 0 1024 1024" role="img" aria-label="Voorstel C"><use href="#icon-c"/></svg></div>
+      <div class="sizes"><svg width="128" height="128"><use href="#icon-c"/></svg><svg width="64" height="64"><use href="#icon-c"/></svg><svg width="32" height="32"><use href="#icon-c"/></svg><svg width="16" height="16"><use href="#icon-c"/></svg></div>
+      <h3>Dock</h3>
+      <div class="wall light"><div class="dock"><span class="other"></span><svg width="48" height="48"><use href="#icon-c"/></svg><span class="other"></span></div></div>
+      <div class="wall darkw" style="margin-top:8px"><div class="dock"><span class="other"></span><svg width="48" height="48"><use href="#icon-c"/></svg><span class="other"></span></div></div>
+      <h3>Menubalk: rust en opnemen</h3>
+      <div class="menubars">
+        <div class="menubar light"><svg class="tpl"><use href="#mb-a"/></svg><svg class="tpl"><use href="#mb-rec"/></svg><span class="clock">za 7 nov 12:30</span></div>
+        <div class="menubar darkm"><svg class="tpl"><use href="#mb-a"/></svg><svg class="tpl"><use href="#mb-rec"/></svg><span class="clock">za 7 nov 12:30</span></div>
+      </div>
+      <p class="note"><strong>Voordeel:</strong> valt het meest op in de Dock, en app-icoon en menubalk zijn hetzelfde teken. <strong>Nadeel:</strong> veel lime; op een lichte achtergrond is dat fel.</p>
+    </article>
+  </div>
+
+  <div class="notes">
+    <h2>Wat voor alle drie geldt</h2>
+    <ul>
+      <li>Eén teken in het midden van het macOS-raster (824 op 1024). Rogue Amoeba merkte bij SoundSource 6 dat Tahoe alles wat buiten dat raster steekt afsnijdt.</li>
+      <li>Diepte met één zachte glans bovenaan, geen extra details. In Swift kan dat later met Icon Composer, met aparte lagen voor tegel, ruit en golf.</li>
+      <li>Menubalk: een template in alleen zwart en transparant, 18 pt, met een SVG. Bij het opnemen komt er een stipje bij (zoals Superwhisper), geen tweede icoon.</li>
+    </ul>
+  </div>
+</section>
+<footer>Yo Max · schets 7 november 2026 · bronnen: Bjango "Designing macOS menu bar extras", Rogue Amoeba SoundSource 6, Superwhisper, Apple Icon Composer</footer>
+</body>
+</html>
