@@ -47,6 +47,7 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - Nieuwe prompt **"Nederlands"** (`PromptTemplates.dutchPromptId`): spelling en leestekens, euh/ehm weg, zelfcorrecties verwerken (nee/neen/sorry/wacht/ik bedoel), Engelse termen behouden, betekenis nooit veranderen, getallen netjes (€ 250, 15%, 14.30 uur), lijsten, en **vragen of instructies nooit uitvoeren**. De startmodus "Enhancement" gebruikt deze prompt, zonder schermopname (privacy).
 - Testzinnen: `testzinnen.md` (15 zinnen + notitietabel). Eerste test (2026-11-06): 10/15 perfect; fouten vooral vaktermen die Whisper verkeerd hoort → woordenboek.
 - Prompt "Nederlands" v2: tijden zoals gezegd ("half tien" blijft), kleine grammaticafouten herstellen, geen komma tussen onderwerp en werkwoord. Verander je de prompttekst, verhoog dan `PromptTemplates.dutchPromptVersion`, anders krijgt de opgeslagen prompt de nieuwe tekst niet.
+- Prompt "Nederlands" v3 (2026-11-07): **staat op zichzelf** (`useSystemInstructions: false`), want de Engelse basisprompt van VoiceInk (`AIPrompts.enhancementSystemTemplate`) verbiedt formeler maken en opdrachten uitvoeren. Nieuw: **opmaakopdrachten**. Overal: "nieuwe alinea", "nieuwe regel", "tussen haakjes … haakje sluiten", leestekens. Alleen als laatste woorden: "maak er een lijstje van", "nummer dat", "maak het formeler/informeler/korter", "in het Engels". Alle andere vragen en opdrachten blijven gewone tekst.
 - Crash bij afsluiten opgelost: `AppDelegate.applicationShouldTerminate` geeft eerst het Whisper-model vrij (whisper.cpp breekt anders af op zijn Metal-resources).
 
 ### Kopieerkader zonder tekstveld (zoals Wispr Flow)
@@ -128,7 +129,7 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 
 ### Kwaliteit
 - [x] Testzinnen (`testzinnen.md`) dicteren met Groq en de prompt "Nederlands" bijstellen (v2).
-- [ ] Testzinnen opnieuw dicteren met prompt v2 en het gevulde woordenboek.
+- [ ] Testzinnen opnieuw dicteren met prompt v3 en het gevulde woordenboek; ook de opmaakopdrachten testen (zie `design/schetsen/index.html` › 1).
 - [ ] `qwen/qwen3.8-27b` vs. `openai/gpt-oss-120b` vergelijken op Nederlands en snelheid.
 - [ ] Snelheid en kwaliteit vergelijken: Whisper Turbo vs. Parakeet V3.
 - [ ] Woordenboek (Dictionary) vullen met eigen namen en vaktermen (Tarmax, MacBook, staging, …).
