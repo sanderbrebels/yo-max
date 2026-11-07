@@ -4,6 +4,10 @@ import SwiftUI
 enum AppWindowLayout {
     static let width: CGFloat = 950
     static let minimumHeight: CGFloat = 750
+    // Yo Max: the main window resizes freely (width and height) above this size.
+    // `width`/`minimumHeight` stay the default size and the fixed onboarding size.
+    static let resizableMinimumWidth: CGFloat = 820
+    static let resizableMinimumHeight: CGFloat = 560
 }
 
 enum AppWindowID {
@@ -88,8 +92,10 @@ class WindowManager: NSObject {
         window.level = .normal
         window.isOpaque = false
         window.isMovableByWindowBackground = false
-        window.minSize = NSSize(width: AppWindowLayout.width, height: AppWindowLayout.minimumHeight)
-        window.maxSize = NSSize(width: AppWindowLayout.width, height: CGFloat.greatestFiniteMagnitude)
+        // Yo Max: resizable in both directions.
+        window.minSize = NSSize(
+            width: AppWindowLayout.resizableMinimumWidth, height: AppWindowLayout.resizableMinimumHeight)
+        window.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
         window.setFrameAutosaveName(Self.mainWindowAutosaveName)
         applyInitialPlacementIfNeeded(to: window)
         registerMainWindowIfNeeded(window)
@@ -154,16 +160,20 @@ class WindowManager: NSObject {
 
     private func enforceMainWindowFrameIfNeeded(on window: NSWindow, preserveRestoredOrigin: Bool) {
         let currentFrame = window.frame
-        guard currentFrame.width != AppWindowLayout.width || currentFrame.height < AppWindowLayout.minimumHeight else {
+        // Yo Max: only grow a window that is smaller than the minimum; never force a fixed width.
+        guard currentFrame.width < AppWindowLayout.resizableMinimumWidth
+            || currentFrame.height < AppWindowLayout.resizableMinimumHeight
+        else {
             return
         }
 
-        let height = max(currentFrame.height, AppWindowLayout.minimumHeight)
-        let x = preserveRestoredOrigin ? currentFrame.origin.x : currentFrame.midX - (AppWindowLayout.width / 2)
+        let width = max(currentFrame.width, AppWindowLayout.resizableMinimumWidth)
+        let height = max(currentFrame.height, AppWindowLayout.resizableMinimumHeight)
+        let x = preserveRestoredOrigin ? currentFrame.origin.x : currentFrame.midX - (width / 2)
         let frame = NSRect(
             x: x,
             y: currentFrame.maxY - height,
-            width: AppWindowLayout.width,
+            width: width,
             height: height
         )
         window.setFrame(frame, display: true)

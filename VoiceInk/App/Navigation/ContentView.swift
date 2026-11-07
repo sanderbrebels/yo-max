@@ -52,8 +52,10 @@ struct ContentView: View {
 
             detailContent
         }
-        .frame(width: AppWindowLayout.width)
-        .frame(minHeight: AppWindowLayout.minimumHeight)
+        // Yo Max: resizable window instead of a fixed 950 pt width.
+        .frame(
+            minWidth: AppWindowLayout.resizableMinimumWidth, maxWidth: .infinity,
+            minHeight: AppWindowLayout.resizableMinimumHeight, maxHeight: .infinity)
         .onAppear {
             logger.notice("ContentView appeared")
         }

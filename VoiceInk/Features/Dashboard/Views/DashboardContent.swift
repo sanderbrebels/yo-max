@@ -141,8 +141,11 @@ struct DashboardContent: View {
 
             greetingHeader
 
-            nameEditorDismissArea {
-                heroSection
+            // Yo Max: no "Continue using Yo Max to unlock stats" block while insights are locked.
+            if !shouldShowLockedInsightsState {
+                nameEditorDismissArea {
+                    heroSection
+                }
             }
 
             if hasAutoLearnFailure, isAutoLearnEnabled {
