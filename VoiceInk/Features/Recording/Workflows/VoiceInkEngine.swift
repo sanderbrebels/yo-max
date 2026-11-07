@@ -260,6 +260,7 @@ class VoiceInkEngine: NSObject, ObservableObject {
             recordedFile = permanentURL
             activeRecordingStartID = startID
             recordingState = .starting
+            YoMaxPasteTarget.rememberFrontmostApp()  // Yo Max: paste where you started
 
             requestRecordPermission { [self] granted in
                 if granted {

@@ -51,6 +51,10 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - Prompt "Nederlands" v4 (2026-11-07): v3 herschreef te veel ("goeie" → "goede", andere woordvolgorde), omdat de strenge "zo weinig mogelijk veranderen"-regels van de VoiceInk-basisprompt wegvielen. v4 heeft bovenaan een blok `<PRESERVE>`: woorden, woordkeuze en woordvolgorde behouden, Vlaamse woorden letterlijk laten staan, bij twijfel niets veranderen, geen woorden toevoegen. Opmaakopdrachten werken nog.
 - Crash bij afsluiten opgelost: `AppDelegate.applicationShouldTerminate` geeft eerst het Whisper-model vrij (whisper.cpp breekt anders af op zijn Metal-resources).
 
+### Plakken waar je begon (2026-11-07)
+- VoiceInk plakt in de app die vooraan staat als de tekst klaar is. Wie tijdens het praten van venster of scherm wisselt, verliest de tekst. `YoMaxPasteTarget` (`VoiceInk/App/YoMax/YoMaxPasteTarget.swift`) onthoudt bij de start van de opname (`VoiceInkEngine.toggleRecord`, staat `.starting`) de app vooraan, en zet die vlak voor het plakken (`TranscriptionDelivery.paste`) terug vooraan als er intussen een andere app vooraan staat. Nooit Yo Max zelf.
+- Gevolg: je kan niet meer bewust tijdens het praten naar een andere app springen om daar te plakken.
+
 ### Kopieerkader zonder tekstveld (zoals Wispr Flow)
 - Na het dicteren kijkt `YoMaxTextFieldDetector` (`VoiceInk/App/YoMax/`) via Toegankelijkheid in de app vooraan (nooit Yo Max zelf: de recorder kan de focus krijgen) of er een tekstveld de focus heeft: `editable`, `notEditable` of `unknown`.
 - Alleen bij `notEditable` (geen focus, of een knop/lijst/venster…) plakt Yo Max niet: de tekst gaat op het klembord en `YoMaxCopyPanelController` toont een Tarmax-kaart onderaan, net boven de recorder, met Copy-knop (verdwijnt na 15 s, blijft zolang de muis erop staat). Bij `unknown` (vaak browsers/Electron) wordt gewoon geplakt.

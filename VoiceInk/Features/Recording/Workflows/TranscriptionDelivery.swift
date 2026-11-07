@@ -191,6 +191,9 @@ final class TranscriptionDelivery {
             return
         }
 
+        // Yo Max: you may have switched apps while talking; paste in the app you started in.
+        await YoMaxPasteTarget.restoreIfNeeded()
+
         let pasteTask = CursorPaster.startPasteAtCursor(pastedText, sendKey: sendKey)
 
         Task { @MainActor in
