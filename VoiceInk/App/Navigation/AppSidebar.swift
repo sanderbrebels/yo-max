@@ -164,7 +164,7 @@ private struct SidebarItemButton: View {
 
 // Yo Max: the brand block at the top of the sidebar.
 private struct SidebarBrand: View {
-    static let maker = "Sander Brebels"
+    static let maker = "by Sander Brebels"
     static let tarmaxURL = URL(string: "https://tarmax.app")!
     private static let iconSize: CGFloat = 34
 

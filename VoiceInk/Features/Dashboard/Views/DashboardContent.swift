@@ -169,9 +169,19 @@ struct DashboardContent: View {
                 }
             }
 
-            if !recentDashboardTranscriptions.isEmpty {
-                nameEditorDismissArea {
-                    DashboardTranscriptCards(transcriptions: recentDashboardTranscriptions)
+            // Yo Max: recent dictations with the stats card beside them (schets elevation-flow.html).
+            nameEditorDismissArea {
+                HStack(alignment: .top, spacing: DashboardLayout.columnSpacing) {
+                    if !recentDashboardTranscriptions.isEmpty {
+                        DashboardTranscriptCards(transcriptions: recentDashboardTranscriptions)
+                    } else {
+                        Spacer(minLength: 0)
+                    }
+
+                    YoMaxDashboardStatsCard(
+                        totals: statsSummary.totals(for: .allTime),
+                        dailyActivity: statsSummary.allTimeDailyActivity
+                    )
                 }
             }
 
