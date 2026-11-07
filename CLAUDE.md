@@ -61,6 +61,14 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - **"Find Doubtful Words"**: vraagt de gekozen AI-provider (Groq) welke namen/vaktermen fout gehoord zijn, onderstreept ze oranje en toont keuzepillen → "Add". Alleen op verzoek (geen automatische AI-oproep per dictaat).
 - VoiceInk heeft zelf al **Auto-Learn** (leert uit verbeteringen na het plakken, staat standaard aan). De AI-beoordelaar daarvan (`AutoLearnAIReviewer.instructions`) is Engelstalig opgesteld: nakijken in fase 4.
 
+### Opdrachtmodus (2026-11-07, schets 3C)
+- Code: `VoiceInk/App/YoMax/YoMaxCommandMode.swift`. Inhaakpunten: `TranscriptionPipeline.swift` (in het blok van de AI-opschoning) en `TranscriptionDelivery.swift` (`Request.yoMaxCommandPreview`).
+- Werkt als: AI-opschoning staat aan, er is **tekst geselecteerd** in de app vooraan en het dictaat is **≤ 40 woorden** → Yo Max voert het dictaat uit als opdracht op de selectie (eigen prompt, niet "Nederlands"). Langere dictaten over een selectie worden gewoon geplakt.
+- Resultaat in een **donkere kaart** boven de recorder: Cancel / Copy / **Replace** (plakt over de selectie). Het paneel activeert Yo Max niet, zodat de selectie blijft staan. Daarom kan **Enter niet**: dat zou naar de app vooraan gaan.
+- Mislukt de AI-oproep, dan wordt er niets geplakt (melding), zodat de selectie nooit overschreven wordt door het ingesproken commando.
+- Nog niet gebouwd: de oranje golf met "Opdracht" in de recorder tijdens het opnemen (de selectie wordt pas na de opname gelezen).
+- Uitzetten: Settings → "Command Mode on Selected Text" (`YoMaxCommandMode.enabledKey`).
+
 ### Tarmax-stijl (fase 5)
 - Bron: `~/GIT/tarmax/DESIGN_SYSTEMS.md` en `src/ui/theme/tokens.css`. Kleuren staan als palet in `AppTheme.Brand` (`DesignSystem/Theme/AppTheme.swift`); de rest van de app gebruikt alleen de betekenissen.
 - Accent: ink `#0B1F0D` in licht (zoals de hoofdknop van Tarmax), lime `#86F46D` in donker. Zijbalk: brand-dark tegels met lime iconen, gekozen rij = lime pil met ink-tekst.

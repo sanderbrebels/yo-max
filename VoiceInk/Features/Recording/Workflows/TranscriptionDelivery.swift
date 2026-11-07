@@ -14,6 +14,7 @@ final class TranscriptionDelivery {
         let responseError: String?
         let isAssistantFollowUp: Bool
         let sendAfterPaste: Bool
+        var yoMaxCommandPreview = false  // Yo Max: show the command-mode card instead of pasting
     }
 
     struct Actions {
@@ -44,6 +45,16 @@ final class TranscriptionDelivery {
 
         if request.output.outputMode == .customCommand {
             await deliverCustomCommand(request, actions: actions)
+            return
+        }
+
+        // Yo Max: command mode → preview card; "Replace" pastes over the selection.
+        if request.yoMaxCommandPreview, let text = request.text {
+            actions.setState(.idle)
+            SoundManager.shared.playStopSound()
+            await actions.dismiss()
+            YoMaxCommandPanelController.shared.show(
+                command: request.transcription.text, result: deliverableText(from: text))
             return
         }
 

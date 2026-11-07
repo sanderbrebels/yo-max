@@ -76,6 +76,7 @@ class TranscriptionPipeline {
         var finalText: String?
         var responseError: String?
         var outputForDelivery: OutputRuntimeConfiguration?
+        var yoMaxCommandPreview = false  // Yo Max: command mode result goes to the preview card
         var responseConfig: EnhancementRuntimeConfiguration?
 
         func finishCanceledTranscription() async {
@@ -206,7 +207,42 @@ class TranscriptionPipeline {
                         }
                         let selectedText = await SelectedTextService.fetchSelectedText(
                             isEnabled: resolvedEnhancementConfiguration.useSelectedTextContext
+                                || (YoMaxCommandMode.isEnabled && !shouldRespondInRecorder)  // Yo Max
                         )
+                        // Yo Max: text selected + short instruction → command mode (preview card, no paste).
+                        if !shouldRespondInRecorder,
+                            YoMaxCommandMode.shouldRun(command: textForAI, selection: selectedText),
+                            let selectedText,
+                            let aiService = enhancementService.getAIService()
+                        {
+                            transcription.aiEnhancementModelName =
+                                resolvedEnhancementConfiguration.modelName
+                                ?? resolvedEnhancementConfiguration.provider?.defaultModel
+                            transcription.promptName = "Yo Max Command"
+                            let started = Date()
+                            do {
+                                let result = try await YoMaxCommandMode.run(
+                                    command: textForAI,
+                                    selection: selectedText,
+                                    configuration: resolvedEnhancementConfiguration,
+                                    aiService: aiService
+                                )
+                                transcription.enhancedText = result
+                                transcription.enhancementDuration = Date().timeIntervalSince(started)
+                                finalText = result
+                                yoMaxCommandPreview = true
+                            } catch {
+                                // Never paste the spoken command over the selection.
+                                finalText = nil
+                                let description = EnhancementFailureFormatter.description(for: error)
+                                transcription.enhancedText = EnhancementFailureFormatter.message(description: description)
+                                let message = EnhancementFailureFormatter.message(description: description)
+                                await MainActor.run {
+                                    NotificationManager.shared.showNotification(title: message, type: .warning)
+                                }
+                            }
+                            throw YoMaxCommandMode.Done()
+                        }
                         if Task.isCancelled || shouldCancel() {
                             await finishCanceledTranscription()
                             return
@@ -239,6 +275,8 @@ class TranscriptionPipeline {
                         transcription.aiRequestSystemMessage = enhancementResult.systemMessage
                         transcription.aiRequestUserMessage = enhancementResult.userMessage
                         finalText = enhancementResult.text
+                    } catch is YoMaxCommandMode.Done {
+                        // Yo Max: command mode finished; skip the normal enhancement.
                     } catch {
                         let errorDescription = EnhancementFailureFormatter.description(for: error)
                         let failureMessage = EnhancementFailureFormatter.message(description: errorDescription)
@@ -318,7 +356,8 @@ class TranscriptionPipeline {
                 responseConfig: responseConfig,
                 responseError: responseError,
                 isAssistantFollowUp: assistant.isFollowUp,
-                sendAfterPaste: sendAfterPaste
+                sendAfterPaste: sendAfterPaste,
+                yoMaxCommandPreview: yoMaxCommandPreview
             ),
             actions: TranscriptionDelivery.Actions(
                 setState: onStateChange,

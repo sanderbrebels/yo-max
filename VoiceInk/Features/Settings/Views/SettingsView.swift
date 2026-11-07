@@ -18,6 +18,7 @@ struct SettingsView: View {
     @AppStorage("enableAnnouncements") private var enableAnnouncements = false
     @AppStorage(YoMaxDefaults.keepModelLoadedKey) private var keepModelLoaded = true
     @AppStorage(YoMaxDefaults.copyPanelKey) private var showCopyPanel = true
+    @AppStorage(YoMaxCommandMode.enabledKey) private var commandModeOnSelection = true
     @AppStorage("restoreClipboardAfterPaste") private var restoreClipboardAfterPaste = true
     @AppStorage("clipboardRestoreDelay") private var clipboardRestoreDelay = 2.0
     @AppStorage(SmartPunctuation.settingsKey) private var smartPunctuationEnabled = false
@@ -256,6 +257,9 @@ struct SettingsView: View {
 
                 Toggle("Show Copy Card Without Text Field", isOn: $showCopyPanel)
                     .help("When no text field has focus, Yo Max copies the text and shows it in a card at the top of the screen instead of pasting.")
+
+                Toggle("Command Mode on Selected Text", isOn: $commandModeOnSelection)
+                    .help("With text selected, a short spoken instruction (\"make a list of this\", \"translate to English\") rewrites the selection. You see the result first and choose Replace.")
 
                 // Yo Max: update and announcement controls removed (updates are disabled).
                 HStack {
