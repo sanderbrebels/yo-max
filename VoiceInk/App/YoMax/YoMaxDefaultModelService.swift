@@ -26,11 +26,12 @@ enum YoMaxDefaults {
         UserDefaults.standard.object(forKey: keepModelLoadedKey) as? Bool ?? true
     }
 
-    /// Show the copy card at the top of the screen when there is no text field (default on).
+    /// Show the copy card instead of pasting when there is clearly no text field.
+    /// Default off (2026-11-07): Yo Max pastes like VoiceInk; Electron apps report no focus.
     static let copyPanelKey = "YoMaxShowCopyPanelWithoutTextField"
 
     static var showCopyPanel: Bool {
-        UserDefaults.standard.object(forKey: copyPanelKey) as? Bool ?? true
+        UserDefaults.standard.object(forKey: copyPanelKey) as? Bool ?? false
     }
 }
 

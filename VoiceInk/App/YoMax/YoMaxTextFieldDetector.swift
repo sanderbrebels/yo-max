@@ -6,8 +6,8 @@ import os
 /// Yo Max: decides whether the focused element can take pasted text.
 ///
 /// It asks the frontmost app (never Yo Max itself: the recorder panel can become key and
-/// would otherwise answer). It only says `.notEditable` when that is clear (nothing has focus,
-/// or the focus is a button, list, window and so on). Browsers and Electron apps often report
+/// would otherwise answer). It only says `.notEditable` when the focus is clearly a control
+/// (button, checkbox, menu and so on); "nothing focused" counts as unknown. Browsers and Electron apps often report
 /// a generic group or web area; then the answer is `.unknown` and Yo Max pastes as before.
 enum YoMaxTextFieldDetector {
     enum Result: String {
@@ -24,12 +24,11 @@ enum YoMaxTextFieldDetector {
         "AXTextField", "AXTextArea", "AXComboBox", "AXSearchField", "AXSecureTextField",
     ]
 
-    /// Roles that never take typed text.
+    /// Roles that never take typed text. Kept short on purpose: tables and cells (Numbers,
+    /// Excel), scroll areas and static text can sit around or inside something you paste into.
     private static let nonTextRoles: Set<String> = [
         "AXButton", "AXCheckBox", "AXRadioButton", "AXPopUpButton", "AXMenuButton", "AXSlider",
-        "AXList", "AXOutline", "AXTable", "AXRow", "AXCell", "AXColumn", "AXBrowser",
-        "AXImage", "AXStaticText", "AXLink", "AXWindow", "AXScrollArea", "AXSplitGroup",
-        "AXToolbar", "AXTabGroup", "AXMenu", "AXMenuBar", "AXMenuItem", "AXDisclosureTriangle",
+        "AXImage", "AXLink", "AXToolbar", "AXMenu", "AXMenuBar", "AXMenuItem", "AXDisclosureTriangle",
     ]
 
     static func focusedElementState() -> Result {
@@ -49,8 +48,9 @@ enum YoMaxTextFieldDetector {
 
         let read = AccessibilityFocusReader.focusedElement(in: appElement)
         guard let element = read.element else {
-            // The app answers but has nothing focused (Finder desktop, an empty window).
-            return read.error == .noValue ? .notEditable : .unknown
+            // "Nothing focused" is not proof: Electron apps (Claude, Slack, Notion, VS Code)
+            // answer this while the caret is in a text field. Paste as VoiceInk does.
+            return .unknown
         }
         AXUIElementSetMessagingTimeout(element, messagingTimeout)
 

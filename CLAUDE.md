@@ -54,6 +54,7 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - Na het dicteren kijkt `YoMaxTextFieldDetector` (`VoiceInk/App/YoMax/`) via Toegankelijkheid in de app vooraan (nooit Yo Max zelf: de recorder kan de focus krijgen) of er een tekstveld de focus heeft: `editable`, `notEditable` of `unknown`.
 - Alleen bij `notEditable` (geen focus, of een knop/lijst/venster…) plakt Yo Max niet: de tekst gaat op het klembord en `YoMaxCopyPanelController` toont een Tarmax-kaart onderaan, net boven de recorder, met Copy-knop (verdwijnt na 15 s, blijft zolang de muis erop staat). Bij `unknown` (vaak browsers/Electron) wordt gewoon geplakt.
 - Inhaakpunt: `TranscriptionDelivery.paste`. Uitzetten: Settings → "Show Copy Card Without Text Field" (`YoMaxDefaults.copyPanelKey`).
+- **Sinds 2026-11-07 standaard UIT: Yo Max plakt altijd, zoals VoiceInk.** Reden: Electron-apps (Claude, Slack, Notion, VS Code) antwoorden "niets heeft focus" terwijl de cursor in een tekstveld staat, en dat werd gelezen als "geen tekstveld". Nu telt "niets heeft focus" als `unknown` (plakken), en de lijst "nooit tekst" bevat alleen nog echte bedieningselementen (knoppen, vinkjes, menu's, links…), geen tabellen/cellen/scrollgebieden/statische tekst. Aanzetten kan nog in Settings.
 
 ### Woordenboek vanuit de geschiedenis (2026-11-07, schets 2A + 2C)
 - Code: `VoiceInk/App/YoMax/YoMaxHistoryDictionary.swift`, ingehaakt in `TranscriptionDetailView.swift` (alleen het hoofdvenster, niet het snelle geschiedenispaneel).

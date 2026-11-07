@@ -17,7 +17,7 @@ struct SettingsView: View {
     @AppStorage(OnboardingSettings.completedV2Key) private var hasCompletedOnboardingV2 = true
     @AppStorage("enableAnnouncements") private var enableAnnouncements = false
     @AppStorage(YoMaxDefaults.keepModelLoadedKey) private var keepModelLoaded = true
-    @AppStorage(YoMaxDefaults.copyPanelKey) private var showCopyPanel = true
+    @AppStorage(YoMaxDefaults.copyPanelKey) private var showCopyPanel = false
     @AppStorage(YoMaxCommandMode.enabledKey) private var commandModeOnSelection = true
     @AppStorage("restoreClipboardAfterPaste") private var restoreClipboardAfterPaste = true
     @AppStorage("clipboardRestoreDelay") private var clipboardRestoreDelay = 2.0
