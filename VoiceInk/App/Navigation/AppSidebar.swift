@@ -18,10 +18,18 @@ struct AppSidebar: View {
 
     private var sidebarContent: some View {
         VStack(spacing: 0) {
+            SidebarBrand()  // Yo Max: app icon, name and maker
+                .padding(.top, 6)
+                .padding(.bottom, 14)
+
             sidebarSection(ViewType.primaryItems)
-                .padding(.top, 10)
 
             Spacer(minLength: 16)
+
+            // Yo Max: a link to Tarmax (schets zijbalk-merk.html, variant A).
+            SidebarLinkButton(title: "Tarmax", icon: "bicycle", url: SidebarBrand.tarmaxURL)
+                .padding(.horizontal, 10)
+                .padding(.bottom, 2)
 
             sidebarSection(ViewType.secondaryItems)
                 .padding(.bottom, 14)
@@ -151,5 +159,80 @@ private struct SidebarItemButton: View {
     private var rowBackground: some View {
         RoundedRectangle(cornerRadius: AppTheme.Radius.sidebarRow, style: .continuous)
             .fill(isSelected ? AppTheme.Sidebar.selectedRow : (isHovering ? AppTheme.Sidebar.hoverRow : .clear))
+    }
+}
+
+// Yo Max: the brand block at the top of the sidebar.
+private struct SidebarBrand: View {
+    static let maker = "Sander Brebels"
+    static let tarmaxURL = URL(string: "https://tarmax.app")!
+    private static let iconSize: CGFloat = 34
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(nsImage: NSApp.applicationIconImage)
+                .resizable()
+                .interpolation(.high)
+                .frame(width: Self.iconSize, height: Self.iconSize)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 0) {
+                Text(verbatim: "Yo Max")
+                    .font(.yoMax(15, weight: .medium))
+                    .foregroundStyle(AppTheme.Text.primary)
+                Text(verbatim: Self.maker)
+                    .font(.yoMax(11.5))
+                    .foregroundStyle(AppTheme.Text.secondary)
+            }
+            .lineLimit(1)
+
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 16)
+        .accessibilityElement(children: .combine)
+    }
+}
+
+// Yo Max: a sidebar row that opens a website; the arrow says it leaves Yo Max.
+private struct SidebarLinkButton: View {
+    let title: String
+    let icon: String
+    let url: URL
+
+    @State private var isHovering = false
+
+    var body: some View {
+        Button {
+            NSWorkspace.shared.open(url)
+        } label: {
+            HStack(spacing: 10) {
+                PhosphorIcon(icon, size: PhosphorIcon.textSize)
+                    .foregroundStyle(AppTheme.Sidebar.icon)
+
+                Text(verbatim: title)
+                    .font(.yoMax(13.5, weight: .medium))
+                    .foregroundStyle(AppTheme.Text.primary)
+                    .lineLimit(1)
+
+                Spacer(minLength: 0)
+
+                PhosphorIcon("arrow-up-right", size: PhosphorIcon.smallSize)
+                    .foregroundStyle(AppTheme.Sidebar.icon)
+            }
+            .padding(.horizontal, 10)
+            .frame(height: 36)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                RoundedRectangle(cornerRadius: AppTheme.Radius.sidebarRow, style: .continuous)
+                    .fill(isHovering ? AppTheme.Sidebar.hoverRow : .clear)
+            )
+            .contentShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sidebarRow, style: .continuous))
+        }
+        .buttonStyle(.plain)
+        .onHover { isHovering = $0 }
+        .animation(.easeOut(duration: 0.15), value: isHovering)
+        .help(url.absoluteString)
+        .accessibilityLabel(Text(verbatim: "\(title), \(url.host() ?? "")"))
+        .accessibilityAddTraits(.isLink)
     }
 }

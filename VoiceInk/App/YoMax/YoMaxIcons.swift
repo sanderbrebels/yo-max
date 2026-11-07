@@ -14,6 +14,8 @@ struct PhosphorIcon: View {
 
     /// The size of an icon beside 13–14 pt text (1 em).
     static let textSize: CGFloat = 16
+    /// A small companion icon, such as the "opens outside" arrow (Tarmax --icon-sm).
+    static let smallSize: CGFloat = 12
     /// The size of an icon in a small icon button.
     static let buttonSize: CGFloat = 16
 
