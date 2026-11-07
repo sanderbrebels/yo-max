@@ -355,10 +355,11 @@ struct RecorderStatusDisplay: View {
 
     var body: some View {
         Group {
-            if currentState == .enhancing {
-                ProcessingStatusDisplay(mode: .enhancing, color: AppTheme.Brand.lime)  // Yo Max.transition(.opacity)
-            } else if currentState == .transcribing {
-                ProcessingStatusDisplay(mode: .transcribing, color: .white).transition(.opacity)
+            // Yo Max: motion "C · Lijn": a travelling line while processing, a quiet line at rest.
+            if currentState == .enhancing || currentState == .transcribing {
+                YoMaxProcessingLine(isEnhancing: currentState == .enhancing)
+                    .scaleEffect(y: menuBarHeight != nil ? min(1.0, (menuBarHeight! - 8) / 25) : 1.0, anchor: .center)
+                    .transition(.opacity)
             } else if currentState == .recording {
                 AudioVisualizer(
                     audioMeterProvider: audioMeterProvider,
@@ -368,12 +369,12 @@ struct RecorderStatusDisplay: View {
                     .scaleEffect(y: menuBarHeight != nil ? min(1.0, (menuBarHeight! - 8) / 25) : 1.0, anchor: .center)
                     .transition(.opacity)
             } else {
-                StaticVisualizer(color: .white)
+                YoMaxIdleLine()  // Yo Max: replaces StaticVisualizer
                     .scaleEffect(y: menuBarHeight != nil ? min(1.0, (menuBarHeight! - 8) / 25) : 1.0, anchor: .center)
                     .transition(.opacity)
             }
         }
-        .animation(.easeInOut(duration: 0.2), value: currentState)
+        .animation(.easeOut(duration: 0.2), value: currentState)  // Yo Max: ease-out, Tarmax motion
     }
 }
 
