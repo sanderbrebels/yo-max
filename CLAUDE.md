@@ -55,6 +55,12 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - Alleen bij `notEditable` (geen focus, of een knop/lijst/venster…) plakt Yo Max niet: de tekst gaat op het klembord en `YoMaxCopyPanelController` toont een Tarmax-kaart onderaan, net boven de recorder, met Copy-knop (verdwijnt na 15 s, blijft zolang de muis erop staat). Bij `unknown` (vaak browsers/Electron) wordt gewoon geplakt.
 - Inhaakpunt: `TranscriptionDelivery.paste`. Uitzetten: Settings → "Show Copy Card Without Text Field" (`YoMaxDefaults.copyPanelKey`).
 
+### Woordenboek vanuit de geschiedenis (2026-11-07, schets 2A + 2C)
+- Code: `VoiceInk/App/YoMax/YoMaxHistoryDictionary.swift`, ingehaakt in `TranscriptionDetailView.swift` (alleen het hoofdvenster, niet het snelle geschiedenispaneel).
+- **Rechtsklik op een woord** in een dictaat → "Add … to Dictionary…" → kaart "Wat Whisper hoort" / "Juiste schrijfwijze". Zelfde schrijfwijze = alleen woordenlijst; anders = vervanging + woordenlijst. De tekst staat daarvoor in een `NSTextView` (platte tekst, geen Markdown-weergave meer in het detailscherm).
+- **"Find Doubtful Words"**: vraagt de gekozen AI-provider (Groq) welke namen/vaktermen fout gehoord zijn, onderstreept ze oranje en toont keuzepillen → "Add". Alleen op verzoek (geen automatische AI-oproep per dictaat).
+- VoiceInk heeft zelf al **Auto-Learn** (leert uit verbeteringen na het plakken, staat standaard aan). De AI-beoordelaar daarvan (`AutoLearnAIReviewer.instructions`) is Engelstalig opgesteld: nakijken in fase 4.
+
 ### Tarmax-stijl (fase 5)
 - Bron: `~/GIT/tarmax/DESIGN_SYSTEMS.md` en `src/ui/theme/tokens.css`. Kleuren staan als palet in `AppTheme.Brand` (`DesignSystem/Theme/AppTheme.swift`); de rest van de app gebruikt alleen de betekenissen.
 - Accent: ink `#0B1F0D` in licht (zoals de hoofdknop van Tarmax), lime `#86F46D` in donker. Zijbalk: brand-dark tegels met lime iconen, gekozen rij = lime pil met ink-tekst.
@@ -132,7 +138,7 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 - [ ] Testzinnen opnieuw dicteren met prompt v3 en het gevulde woordenboek; ook de opmaakopdrachten testen (zie `design/schetsen/index.html` › 1).
 - [ ] `qwen/qwen3.8-27b` vs. `openai/gpt-oss-120b` vergelijken op Nederlands en snelheid.
 - [ ] Snelheid en kwaliteit vergelijken: Whisper Turbo vs. Parakeet V3.
-- [ ] Woordenboek (Dictionary) vullen met eigen namen en vaktermen (Tarmax, MacBook, staging, …).
+- [ ] Woordenboek (Dictionary) vullen met eigen namen en vaktermen (Tarmax, MacBook, staging, …). Kan nu ook met rechtsklik en "Find Doubtful Words" in History.
 
 ### Branding en design
 - [x] Eigen app-icoon (`VoiceInk/Assets.xcassets/AppIcon.appiconset`).

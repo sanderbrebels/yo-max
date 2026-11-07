@@ -12,6 +12,8 @@ struct TranscriptionDetailView: View {
     let onTranscriptionUpdated: (Transcription) -> Void
     var presentation: HistoryDetailPresentation = .mainWindow
     var onPaste: (() -> Void)? = nil
+    // Yo Max: right-click → dictionary, and AI suggestions for misheard words.
+    @StateObject private var doubtWords = YoMaxDoubtWordsModel()
 
     private var audioURL: URL? { transcription.availableHistoryAudioURL }
     private var playbackURL: URL? { presentation == .mainWindow ? audioURL : nil }
@@ -43,6 +45,19 @@ struct TranscriptionDetailView: View {
             }
             .id(transcription.id)
         }
+        // Yo Max: dictionary sheet and reset suggestions per transcription.
+        .sheet(isPresented: Binding(
+            get: { doubtWords.pendingWord != nil },
+            set: { if !$0 { doubtWords.pendingWord = nil } }
+        )) {
+            YoMaxAddWordSheet(heard: doubtWords.pendingWord ?? "") { doubtWords.pendingWord = nil }
+        }
+        .onChange(of: transcription.id) { _, _ in doubtWords.dismiss() }
+    }
+
+    // Yo Max
+    private var addWordAction: ((String) -> Void)? {
+        rendersMarkdown ? { word in doubtWords.pendingWord = word } : nil
     }
 
     private var header: some View {
@@ -80,15 +95,27 @@ struct TranscriptionDetailView: View {
                     text: enhancementText,
                     title: "Enhanced",
                     surface: AppTheme.Surface.control,
-                    rendersMarkdown: rendersMarkdown
+                    rendersMarkdown: rendersMarkdown,
+                    highlights: doubtWords.highlightedWords,  // Yo Max
+                    onAddWord: addWordAction
                 )
             }
 
             HistoryTranscriptionTextCard(
                 text: transcription.text,
                 title: enhancementText == nil ? nil : "Original",
-                rendersMarkdown: rendersMarkdown
+                rendersMarkdown: rendersMarkdown,
+                highlights: doubtWords.highlightedWords,  // Yo Max
+                onAddWord: addWordAction
             )
+
+            // Yo Max: "Find doubtful words" (main window only).
+            if rendersMarkdown {
+                YoMaxDoubtWordsCard(
+                    model: doubtWords,
+                    text: [enhancementText, transcription.text].compactMap { $0 }.joined(separator: "\n\n")
+                )
+            }
         }
     }
 
@@ -117,6 +144,9 @@ private struct HistoryTranscriptionTextCard: View {
     var title: LocalizedStringKey? = nil
     var surface = AppTheme.Surface.window
     var rendersMarkdown = true
+    // Yo Max
+    var highlights: [String] = []
+    var onAddWord: ((String) -> Void)? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -151,7 +181,10 @@ private struct HistoryTranscriptionTextCard: View {
 
     private var textContent: some View {
         Group {
-            if rendersMarkdown {
+            if let onAddWord {
+                // Yo Max: selectable text with "Add to Dictionary…" in its context menu.
+                YoMaxDictionaryText(text: text, highlights: highlights, onAddWord: onAddWord)
+            } else if rendersMarkdown {
                 MarkdownContentView(text, fontSize: 14, foregroundColor: AppTheme.Text.primary)
             } else {
                 Text(text)
