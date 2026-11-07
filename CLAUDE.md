@@ -53,6 +53,7 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 
 ### Plakken waar je begon (2026-11-07)
 - VoiceInk plakt in de app die vooraan staat als de tekst klaar is. Wie tijdens het praten van venster of scherm wisselt, verliest de tekst. `YoMaxPasteTarget` (`VoiceInk/App/YoMax/YoMaxPasteTarget.swift`) onthoudt bij de start van de opname (`VoiceInkEngine.toggleRecord`, staat `.starting`) de app vooraan, en zet die vlak voor het plakken (`TranscriptionDelivery.paste`) terug vooraan als er intussen een andere app vooraan staat. Nooit Yo Max zelf.
+- **Terugzetten gaat via Toegankelijkheid**, niet via `NSRunningApplication.activate()`: sinds macOS 14 weigert macOS dat voor een app op de achtergrond (getest: tekst kwam in Notities). Bij de start wordt ook het venster onthouden (`kAXFocusedWindowAttribute`); voor het plakken: `kAXFrontmostAttribute` op de app, `kAXMainAttribute` + `AXRaise` op het venster, `activate()` alleen als terugval. Getest door Sander: Claude → Notities → plakt in Claude.
 - Gevolg: je kan niet meer bewust tijdens het praten naar een andere app springen om daar te plakken.
 
 ### Kopieerkader zonder tekstveld (zoals Wispr Flow)
