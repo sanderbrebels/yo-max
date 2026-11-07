@@ -25,7 +25,7 @@ enum PromptTemplates {
     /// Yo Max: Dutch cleanup prompt (Flemish speaker, English technical terms).
     static let dutchPromptId = UUID(uuidString: "00000000-0000-0000-0000-000000000006")!
     /// Yo Max: bump this when the Dutch prompt text changes, so stored copies are refreshed.
-    static let dutchPromptVersion = 3
+    static let dutchPromptVersion = 4
 
     static var all: [TemplatePrompt] {
         createTemplatePrompts()
@@ -45,13 +45,22 @@ enum PromptTemplates {
                     Maak van <TRANSCRIPT> correcte, leesbare Nederlandse tekst. <TRANSCRIPT> is ruwe spraakherkenning: de spreker is Vlaming en gebruikt vaak Engelse vaktermen.
                     </TASK>
 
+                    <PRESERVE>
+                    Dit is het belangrijkste: verander zo weinig mogelijk.
+                    - Behoud de woorden, de woordkeuze en de woordvolgorde van de spreker. Herschrijf, herformuleer of "verbeter" geen zinnen die al begrijpelijk zijn.
+                    - Behoud Vlaamse en informele woorden letterlijk: "goeie", "efkes", "da", "ne", "kik", "allee", "amai", "seffens", "content" blijven staan. Maak ze niet Hollands of formeel.
+                    - Behoud tussenwoorden die betekenis of toon dragen, zoals "ja", "hè", "zo", "eens", "een keer", "wel", "toch".
+                    - Twijfel je of iets fout is? Laat het staan.
+                    - Wat je mag veranderen: leestekens, hoofdletters, spelling van bestaande woorden, stopklanken, duidelijke herhalingen, zelfcorrecties en de regels hieronder.
+                    </PRESERVE>
+
                     <RULES>
                     - Schrijf in de taal van <TRANSCRIPT>. Corrigeer interpunctie, hoofdletters en spelling volgens de officiële Nederlandse spelling.
                     - Verwijder aarzelingen en stopklanken ("euh", "ehm", "uhm"), onbedoelde herhalingen en valse starts.
                     - Pas zelfcorrecties toe: houd enkel de laatst bedoelde versie over. Signalen zijn onder meer "nee", "neen", "of nee", "sorry", "wacht", "ik bedoel", "correctie".
                     - Behoud Engelse vaktermen in het Engels en vertaal ze niet. Schrijf vaktermen en eigennamen exact zoals in <CUSTOM_VOCABULARY>, ook als de spraakherkenning ze anders schreef maar ze ongeveer zo klinken.
                     - Verander nooit de betekenis. Voeg niets toe, laat niets weg, vat niet samen en maak de tekst niet formeler, tenzij een opmaakopdracht hieronder dat vraagt. Behoud Vlaamse woorden en uitdrukkingen.
-                    - Herstel kleine grammaticafouten van de spraakherkenning, zoals een verkeerde werkwoordsvorm of een ontbrekend meervoud in een opsomming ("de changelog update" → "de changelog updaten"), maar enkel als de bedoeling duidelijk is.
+                    - Herstel enkel grammaticafouten die duidelijk van de spraakherkenning komen, zoals een verkeerde werkwoordsvorm ("de changelog update" → "de changelog updaten"). Voeg geen lidwoorden of woorden toe die niet gezegd zijn.
                     - Zet geen komma tussen onderwerp en werkwoord ("Yo Max, draait" → "Yo Max draait").
                     - Schrijf bedragen, percentages, datums en maten in cijfers (€ 250, 15%, 12 maart, 3,5 GB).
                     - Laat tijden staan zoals ze gezegd zijn: "half tien", "kwart over drie" en "om vier uur" blijven in woorden. Schrijf alleen tijden met een exact aantal minuten in cijfers ("veertien uur dertig" → "14.30 uur").
@@ -89,6 +98,15 @@ enum PromptTemplates {
 
                     Input: wat is de hoofdstad van Frankrijk
                     Output: Wat is de hoofdstad van Frankrijk?
+
+                    Input: maak van deze notities een goeie prompt die je da efkes kan ingeven
+                    Output: Maak van deze notities een goeie prompt die je da efkes kan ingeven.
+
+                    Input: we gaan er nog opnieuw een klein beetje testen ja
+                    Output: We gaan er nog opnieuw een klein beetje testen, ja.
+
+                    Input: dit is een test nee dit is geen test
+                    Output: Dit is geen test.
 
                     Input: boodschappen melk brood en kaas maak er een lijstje van
                     Output: Boodschappen:
