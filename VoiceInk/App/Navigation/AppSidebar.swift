@@ -27,16 +27,9 @@ struct AppSidebar: View {
                 .padding(.bottom, 14)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        // Yo Max: the Tarmax laptop sidebar, a floating card 12 pt from the edges (radius 24, --shadow-float).
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(AppTheme.Brand.elevFloat)
-                .shadow(color: AppTheme.Brand.ink.opacity(0.08), radius: 8, y: 4)
-        )
-        .padding(12)
+        // Yo Max (Flow elevation, variant A): the sidebar lies flat on the window page; no card.
     }
 
-    // Yo Max: the Tarmax page behind the floating sidebar card, and no divider.
     private var sidebarBackground: some View {
         AppTheme.Surface.window
             .ignoresSafeArea(.container, edges: .top)
@@ -47,7 +40,7 @@ struct AppSidebar: View {
     }
 
     private func sidebarSection(_ items: [ViewType]) -> some View {
-        VStack(spacing: 3) {
+        VStack(spacing: 2) {
             ForEach(items) { viewType in
                 SidebarItemButton(
                     viewType: viewType,
@@ -102,47 +95,20 @@ private extension ViewType {
         #endif
     }
 
+    /// Yo Max: Phosphor icon names (see `PhosphorIcon`); bold beside text, fill when chosen.
     var icon: String {
         switch self {
-        case .dashboard: return "gauge.medium"
-        case .transcribeAudio: return "waveform.path"
-        case .history: return "doc.text.fill"
+        case .dashboard: return "squares-four"
+        case .transcribeAudio: return "waveform"
+        case .history: return "clock-counter-clockwise"
         case .models: return "cpu"
-        case .modes: return "sparkles.square.fill.on.square"
-        case .audio: return "mic.fill"
-        case .dictionary: return "text.book.closed.fill"
-        case .settings: return "gearshape.fill"
-        case .license: return "checkmark.seal.fill"
+        case .modes: return "sparkle"
+        case .audio: return "microphone"
+        case .dictionary: return "book-open-text"
+        case .settings: return "gear-six"
+        case .license: return "seal-check"
         }
     }
-
-    var sidebarIconStyle: SidebarIconStyle {
-        switch self {
-        case .dashboard:
-            return .init(background: AppTheme.Sidebar.dashboard)
-        case .modes:
-            return .init(background: AppTheme.Sidebar.modes)
-        case .models:
-            return .init(background: AppTheme.Sidebar.models)
-        case .audio:
-            return .init(background: AppTheme.Sidebar.fallback)
-        case .dictionary:
-            return .init(background: AppTheme.Sidebar.dictionary)
-        case .history:
-            return .init(background: AppTheme.Sidebar.audio)
-        case .transcribeAudio:
-            return .init(background: AppTheme.Sidebar.transcribeAudio)
-        case .settings:
-            return .init(background: AppTheme.Sidebar.fallback)
-        case .license:
-            return .init(background: AppTheme.Sidebar.license)
-        }
-    }
-}
-
-private struct SidebarIconStyle {
-    let background: Color
-    var foreground: Color = AppTheme.Sidebar.iconForeground  // Yo Max: lime sign on brand-dark
 }
 
 private struct SidebarItemButton: View {
@@ -150,13 +116,14 @@ private struct SidebarItemButton: View {
     let isSelected: Bool
     let action: () -> Void
 
+    @State private var isHovering = false
+
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 9) {
-                SidebarIconTile(
-                    systemName: viewType.icon,
-                    style: viewType.sidebarIconStyle
-                )
+            HStack(spacing: 10) {
+                // Yo Max: Phosphor, 1 em beside the label; bold, and fill for the chosen page (Tarmax).
+                PhosphorIcon(viewType.icon, weight: isSelected ? .fill : .bold, size: PhosphorIcon.textSize)
+                    .foregroundStyle(isSelected ? AppTheme.Sidebar.selectedIcon : AppTheme.Sidebar.icon)
 
                 Text(viewType.title)
                     .font(.yoMax(13.5, weight: .medium))  // Yo Max: Aeonik 500
@@ -164,69 +131,25 @@ private struct SidebarItemButton: View {
 
                 Spacer(minLength: 0)
             }
-            .foregroundStyle(isSelected ? selectedForegroundColor : AppTheme.Text.primary)
-            .padding(.leading, 8)
-            .padding(.trailing, 10)
-            .frame(height: 38)
+            .foregroundStyle(isSelected ? AppTheme.Sidebar.selectedRowText : AppTheme.Text.primary)
+            .padding(.horizontal, 10)
+            .frame(height: 36)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(rowBackground)
-            .contentShape(Capsule())  // Yo Max: Tarmax pill
+            .contentShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sidebarRow, style: .continuous))
         }
         .buttonStyle(.plain)
+        .onHover { isHovering = $0 }
         .help(viewType.title)
         .accessibilityLabel(viewType.title)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
-        .animation(.easeInOut(duration: 0.12), value: isSelected)
+        .animation(.easeOut(duration: 0.15), value: isSelected)
+        .animation(.easeOut(duration: 0.15), value: isHovering)
     }
 
+    // Yo Max (variant A "Zacht"): a soft neutral fill for the chosen page, half of it on hover.
     private var rowBackground: some View {
-        Capsule()  // Yo Max: the lime Tarmax pill
-            .fill(rowBackgroundColor)
-    }
-
-    private var rowBackgroundColor: Color {
-        if isSelected {
-            return AppTheme.Sidebar.selectedRow  // Yo Max: the lime Tarmax pill
-        }
-
-        return .clear
-    }
-
-    private var rowBorderColor: Color {
-        isSelected ? selectedForegroundColor.opacity(0.18) : .clear
-    }
-
-    private var selectedForegroundColor: Color {
-        AppTheme.Sidebar.selectedRowText  // Yo Max: ink on lime
-    }
-}
-
-private struct SidebarIconTile: View {
-    let systemName: String
-    let style: SidebarIconStyle
-
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 6, style: .continuous)
-                .fill(style.background)
-                .overlay(alignment: .top) {
-                    RoundedRectangle(cornerRadius: 6, style: .continuous)
-                        .fill(Color.white.opacity(0.18))
-                        .frame(height: 11)
-                        .blendMode(.screen)
-                }
-                .overlay {
-                    RoundedRectangle(cornerRadius: 6, style: .continuous)
-                        .strokeBorder(Color.white.opacity(0.24), lineWidth: 0.5)
-                }
-                .shadow(color: Color.black.opacity(0.18), radius: 1.2, y: 1)
-
-            Image(systemName: systemName)
-                .font(.yoMax(14.5, weight: .semibold))
-                .symbolRenderingMode(.monochrome)
-                .foregroundStyle(style.foreground)
-                .shadow(color: Color.black.opacity(0.16), radius: 0.5, y: 0.5)
-        }
-        .frame(width: 24, height: 24)
+        RoundedRectangle(cornerRadius: AppTheme.Radius.sidebarRow, style: .continuous)
+            .fill(isSelected ? AppTheme.Sidebar.selectedRow : (isHovering ? AppTheme.Sidebar.hoverRow : .clear))
     }
 }

@@ -28,13 +28,16 @@ struct DashboardTranscriptCards: View {
 private struct DashboardTranscriptCardRow: View {
     private static let iconFrameSize: CGFloat = 30
     private static let rowSpacing: CGFloat = 12
-    private static let copyButtonSize: CGFloat = 28
-    private static let copyButtonTopInset: CGFloat = 12
-    private static let copyButtonTrailingInset: CGFloat = 6
+    private static let actionsTopInset: CGFloat = 10
+    private static let actionsTrailingInset: CGFloat = 6
 
     let transcription: Transcription
     @State private var isHovering = false
     @State private var isExpanded = false
+    @State private var copied = false
+    @ObservedObject private var player = YoMaxQuickAudioPlayer.shared  // Yo Max
+
+    private var isPlaying: Bool { player.playingID == transcription.id }
 
     private var previewText: String {
         Self.normalizedPreviewText(displayText)
@@ -84,13 +87,17 @@ private struct DashboardTranscriptCardRow: View {
                 }
                 .accessibilityAddTraits(.isButton)
 
-            CopyIconButton(textToCopy: copyText, accessibilityLabel: "Copy transcript")
-                .frame(width: Self.copyButtonSize, height: Self.copyButtonSize)
-                .opacity(isHovering ? 1 : 0)
-                .allowsHitTesting(isHovering)
-                .padding(.top, Self.copyButtonTopInset)
-                .padding(.trailing, Self.copyButtonTrailingInset)
+            // Yo Max: Play and Copy (Phosphor) on hover; Play stays visible while it plays.
+            rowActions
+                .opacity(isHovering || isPlaying ? 1 : 0)
+                .allowsHitTesting(isHovering || isPlaying)
+                .padding(.top, Self.actionsTopInset)
+                .padding(.trailing, Self.actionsTrailingInset)
         }
+        .background(
+            RoundedRectangle(cornerRadius: AppTheme.Radius.sidebarRow, style: .continuous)
+                .fill(isHovering ? AppTheme.Brand.hoverSoft : .clear)
+        )
         .contentShape(Rectangle())
         .onHover { hovering in
             withAnimation(.easeInOut(duration: 0.15)) {
@@ -100,6 +107,31 @@ private struct DashboardTranscriptCardRow: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Transcript from \(metadataText)")
         .accessibilityValue(isExpanded ? copyText : previewText)
+    }
+
+    private var rowActions: some View {
+        HStack(spacing: 2) {
+            if let audioURL = transcription.availableHistoryAudioURL {
+                YoMaxIconButton(
+                    icon: isPlaying ? "pause" : "play",
+                    help: isPlaying ? "Stop audio" : "Play audio"
+                ) {
+                    player.toggle(id: transcription.id, url: audioURL)
+                }
+            }
+
+            YoMaxIconButton(
+                icon: copied ? "check" : "copy",
+                tint: copied ? AppTheme.Status.positive : AppTheme.Text.primary,
+                help: "Copy transcript"
+            ) {
+                _ = ClipboardManager.copyToClipboard(copyText)
+                withAnimation { copied = true }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    withAnimation { copied = false }
+                }
+            }
+        }
     }
 
     private var rowContent: some View {

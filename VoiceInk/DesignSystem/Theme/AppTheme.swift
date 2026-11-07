@@ -21,6 +21,10 @@ enum AppTheme {
         static let textSecondary = dynamic(light: rgb(0x657064), dark: rgb(0xA3AAA2))  // --text-muted
         static let separator = dynamic(light: rgb(0xE5E5E5), dark: rgb(0x38383A))  // --separator
         static let borderOutline = dynamic(light: rgb(0xD1D1D1), dark: rgb(0x48484A))  // --border-outline
+        // Yo Max: hover and press, ink over the surface (Tarmax --hover-surface 8 %, --press-surface 12 %).
+        static let hoverSurface = dynamic(light: rgb(0x0B1F0D, alpha: 0.08), dark: rgb(0xFFFFFF, alpha: 0.10))
+        static let hoverSoft = dynamic(light: rgb(0x0B1F0D, alpha: 0.04), dark: rgb(0xFFFFFF, alpha: 0.05))  // half a hover step
+        static let pressSurface = dynamic(light: rgb(0x0B1F0D, alpha: 0.12), dark: rgb(0xFFFFFF, alpha: 0.14))
         static let success = dynamic(light: rgb(0x2D5A1E), dark: rgb(0x8FD47A))  // --success-text
         static let successIcon = dynamic(light: rgb(0x5FAD4D), dark: rgb(0x8FD47A))  // --success-icon
         static let warning = dynamic(light: rgb(0x8A5300), dark: rgb(0xF2C94C))  // --warn-text
@@ -33,12 +37,12 @@ enum AppTheme {
         /// Text on the accent: white on ink, ink on lime.
         static let onAccent = dynamic(light: rgb(0xFFFFFF), dark: rgb(0x0B1F0D))
 
-        static func rgb(_ hex: UInt32) -> NSColor {
+        static func rgb(_ hex: UInt32, alpha: CGFloat = 1) -> NSColor {
             NSColor(
                 srgbRed: CGFloat((hex >> 16) & 0xFF) / 255,
                 green: CGFloat((hex >> 8) & 0xFF) / 255,
                 blue: CGFloat(hex & 0xFF) / 255,
-                alpha: 1
+                alpha: alpha
             )
         }
 
@@ -70,13 +74,17 @@ enum AppTheme {
         static let control = Brand.elevCard  // fields stay white (--surface)
         static let window = Brand.elevPage
         static let sidePanelOverlay = Brand.elevPage.opacity(0.50)
+        // Yo Max (Flow elevation, 2026-11-07): the sidebar lies flat on the window page,
+        // the content sits in one card-white panel with a hairline.
+        static let contentPanel = Brand.elevCard
         static let clear = Color.clear
     }
 
     enum Border {
         // Yo Max: Tarmax cards have no border; a line only marks a control or a separator.
         static let subtle = Brand.separator
-        static let card = Color.clear
+        static let card = Brand.separator  // Yo Max: a card on the white content panel gets a hairline (--border)
+        static let panel = Brand.separator  // Yo Max: the content panel's hairline
         static let control = Brand.borderOutline
         static let tint = Brand.separator
         static let sidePanelOuter = Color.white.opacity(0.12)
@@ -134,18 +142,16 @@ enum AppTheme {
     }
 
     enum Sidebar {
-        // Yo Max: every tile is the Tarmax brand-dark with a lime sign, like the Tarmax badge.
-        static let dashboard = Brand.brandDark
-        static let modes = Brand.brandDark
-        static let models = Brand.brandDark
-        static let audio = Brand.brandDark
-        static let dictionary = Brand.brandDark
-        static let transcribeAudio = Brand.brandDark
-        static let fallback = Brand.brandDark
-        static let license = Brand.brandDark
-        static let iconForeground = Brand.lime
-        static let selectedRow = Brand.lime
-        static let selectedRowText = Brand.ink
+        // Yo Max (variant A "Zacht", 2026-11-07): Phosphor icons without tiles, the chosen page
+        // a soft neutral fill on the page (like Flow). No lime.
+        static let modes = Brand.brandDark  // the onboarding tile
+        static let fallback = Brand.textSecondary  // footer actions on the dashboard
+        static let license = Brand.success
+        static let icon = Brand.textSecondary  // --icon-idle
+        static let selectedIcon = Brand.text
+        static let hoverRow = Brand.hoverSoft
+        static let selectedRow = Brand.hoverSurface
+        static let selectedRowText = Brand.text
     }
 
     enum Waveform {
@@ -183,5 +189,7 @@ enum AppTheme {
         static let control: CGFloat = 14
         static let card: CGFloat = 20  // Yo Max: Tarmax --r-card
         static let pill: CGFloat = 22
+        static let panel: CGFloat = 20  // Yo Max: the content panel (--r-card)
+        static let sidebarRow: CGFloat = 10  // Yo Max: a sidebar row
     }
 }

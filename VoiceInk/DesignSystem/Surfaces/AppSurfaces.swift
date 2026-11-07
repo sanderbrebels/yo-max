@@ -10,7 +10,7 @@ struct AppCardBackground: View {
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(
-                        isSelected ? AppTheme.Selection.border : Color.clear,  // Yo Max: no card border
+                        isSelected ? AppTheme.Selection.border : AppTheme.Border.card,  // Yo Max: hairline on the white panel
                         lineWidth: isSelected ? 1.5 : 1
                     )
             )

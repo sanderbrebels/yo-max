@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yo Max zijbalk</title>
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+  :root {
+    --gray-0: #FFFFFF; --gray-50: #F5F5F5; --gray-100: #F0F0F0; --gray-200: #E5E5E5;
+    --gray-950: #121213; --green-950: #0B1F0D; --green-500: #657064;
+    --elev-page: var(--gray-50); --elev-card: var(--gray-0); --separator: var(--gray-200);
+    --text: var(--gray-950); --text-muted: var(--green-500); --icon-idle: var(--green-500);
+    --hover-soft: rgba(11,31,13,.04); --hover-surface: rgba(11,31,13,.08);
+    --r-panel: 20px; --r-row: 10px;
+    --font: 'Aeonik', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--gray-100); color: var(--text); font: 400 14px/1.5 var(--font); }
+  header, section { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  header { padding-top: 40px; }
+  h1 { font-weight: 500; font-size: 30px; margin: 0 0 6px; }
+  h2 { font-weight: 500; font-size: 19px; margin: 0; }
+  p.lead, .sub { color: var(--text-muted); margin: 0 0 24px; max-width: 760px; }
+  .sub { margin: 2px 0 12px; font-size: 13.5px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 28px; padding-bottom: 40px; }
+  .win { background: var(--elev-page); border-radius: 14px; box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 24px 60px rgba(0,0,0,.14);
+         display: grid; grid-template-columns: 220px 1fr; height: 560px; overflow: hidden; }
+  .side { padding: 14px 10px 14px 12px; display: flex; flex-direction: column; }
+  .lights { display: flex; gap: 8px; padding: 2px 6px 16px; }
+  .lights i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+  .lights i:nth-child(1) { background: #FF5F57; } .lights i:nth-child(2) { background: #FEBC2E; } .lights i:nth-child(3) { background: #28C840; }
+  .brand { display: flex; align-items: center; gap: 10px; padding: 0 10px 18px; }
+  .brand img { width: 34px; height: 34px; margin: -2px; }
+  .brand b { display: block; font-weight: 500; font-size: 16px; line-height: 1.2; }
+  .brand span { display: block; color: var(--text-muted); font-size: 12px; line-height: 1.3; }
+  .brand a { color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 3px; font-size: 12px; }
+  .brand a:hover { color: var(--text); text-decoration: underline; }
+  nav { display: flex; flex-direction: column; gap: 2px; }
+  nav a { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: var(--r-row);
+          color: var(--text); text-decoration: none; font-size: 13.5px; font-weight: 500; cursor: pointer; }
+  nav a i { font-size: 16px; color: var(--icon-idle); }
+  nav a:hover { background: var(--hover-soft); }
+  nav a.on { background: var(--hover-surface); } nav a.on i { color: var(--text); }
+  nav a .ext { margin-left: auto; font-size: 12px; }
+  .bottom { margin-top: auto; }
+  .panel { margin: 10px 10px 10px 0; background: var(--elev-card); border: 1px solid var(--separator); border-radius: var(--r-panel); padding: 28px; }
+  .panel h3 { margin: 0; font-weight: 500; font-size: 24px; }
+  @media (max-width: 600px) { header, section { padding: 0 16px; } .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Merk en Tarmax-link in de zijbalk</h1>
+  <p class="lead">Bovenaan: het app-icoon, "Yo Max" en daaronder "Sander Brebels". De link opent <code>https://tarmax.app</code> in je browser. Alleen de plek van de link verschilt.</p>
+</header>
+<section class="grid" id="grid"></section>
+<script>
+  const pages = [['Dashboard','squares-four'],['Modes','sparkle'],['Transcribe','waveform'],['History','clock-counter-clockwise'],['Dictionary','book-open-text'],['AI Models','cpu'],['Audio','microphone']];
+  const nav = (n, ic, on) => `<a class="${on?'on':''}"><i class="${on?'ph-fill':'ph-bold'} ph-${ic}"></i>${n}</a>`;
+  const variants = [
+    ['A · Onderaan', 'Een gewone rij boven Settings, met een pijltje dat zegt: dit opent buiten Yo Max.', false],
+    ['B · Bij je naam', 'Een kleine link onder "Sander Brebels". De zijbalk blijft zoals hij was.', true],
+  ];
+  document.getElementById('grid').innerHTML = variants.map(([t, sub, inBrand]) => `
+    <div><h2>${t}</h2><p class="sub">${sub}</p>
+      <div class="win"><aside class="side">
+        <div class="lights"><i></i><i></i><i></i></div>
+        <div class="brand"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDI0IiBoZWlnaHQ9IjEwMjQiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPgogIDwhLS0gWW8gTWF4IGFwcC1pY29vbiBCMSAoMjAyNi0xMS0wNyk6IHZpamYgZXZlbiBicmVkZSBsaW1lIHN0cmVlcGplcyAoNjQgYnJlZWQsIDQwIHR1c3NlbnJ1aW10ZSksIHN5bW1ldHJpc2NoIG9wIDUxMiw1MTIsIG9wIGVlbiBicmFuZC1kYXJrIHRlZ2VsIGluIGhldCBtYWNPUy1yYXN0ZXIgKDgyNCBvcCAxMDI0LCByYWRpdXMgMTg1KS4gQWZ3ZXJraW5nOiB2ZXJsb29wIHZhbiB3YXJtIG5hYXIgZGllcCBkb25rZXIsIGxpbWUgbGljaHQgYWNodGVyIGRlIGdvbGYsIGZpam5lIGxpY2h0cmFuZCBib3ZlbmFhbiwgc3RyZWVwamVzIGJvdmVuYWFuIGlldHMgbGljaHRlci4gLS0+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InRpbGUiIHgxPSIwIiB5MT0iMTAwIiB4Mj0iMCIgeTI9IjkyNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyRDMzMkMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTgxQjE3Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJhbWJpZW50IiBjeD0iNTEyIiBjeT0iNTUyIiByPSIzNDYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjODZGNDZEIiBzdG9wLW9wYWNpdHk9IjAuMjIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjODZGNDZEIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJpbSIgeDE9IjAiIHkxPSIxMDAiIHgyPSIwIiB5Mj0iOTI0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwLjIyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMC4xOCIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiYXIiIHgxPSIwIiB5MT0iMjkyIiB4Mj0iMCIgeTI9IjczMiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNBOUY4OTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIwLjUiIHN0b3AtY29sb3I9IiM4NkY0NkQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNkZERDU3Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB4PSIxMDAiIHk9IjEwMCIgd2lkdGg9IjgyNCIgaGVpZ2h0PSI4MjQiIHJ4PSIxODUiIGZpbGw9InVybCgjdGlsZSkiLz4KICA8cmVjdCB4PSIxMDAiIHk9IjEwMCIgd2lkdGg9IjgyNCIgaGVpZ2h0PSI4MjQiIHJ4PSIxODUiIGZpbGw9InVybCgjYW1iaWVudCkiLz4KICA8ZyBmaWxsPSJ1cmwoI2JhcikiPgogICAgPHJlY3QgeD0iMjcyIiB5PSI0MzIiIHdpZHRoPSI2NCIgaGVpZ2h0PSIxNjAiIHJ4PSIzMiIvPgogICAgPHJlY3QgeD0iMzc2IiB5PSIzNjIiIHdpZHRoPSI2NCIgaGVpZ2h0PSIzMDAiIHJ4PSIzMiIvPgogICAgPHJlY3QgeD0iNDgwIiB5PSIyOTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI0NDAiIHJ4PSIzMiIvPgogICAgPHJlY3QgeD0iNTg0IiB5PSIzNjIiIHdpZHRoPSI2NCIgaGVpZ2h0PSIzMDAiIHJ4PSIzMiIvPgogICAgPHJlY3QgeD0iNjg4IiB5PSI0MzIiIHdpZHRoPSI2NCIgaGVpZ2h0PSIxNjAiIHJ4PSIzMiIvPgogIDwvZz4KICA8cmVjdCB4PSIxMDEuNSIgeT0iMTAxLjUiIHdpZHRoPSI4MjEiIGhlaWdodD0iODIxIiByeD0iMTgzLjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNyaW0pIiBzdHJva2Utd2lkdGg9IjMiLz4KPC9zdmc+Cg==" alt=""><div><b>Yo Max</b><span>Sander Brebels</span>
+          ${inBrand ? '<a href="https://tarmax.app">tarmax.app <i class="ph-bold ph-arrow-up-right"></i></a>' : ''}</div></div>
+        <nav>${pages.map(([n,ic],i)=>nav(n,ic,i===0)).join('')}</nav>
+        <nav class="bottom">${inBrand ? '' : '<a href="https://tarmax.app"><i class="ph-bold ph-bicycle"></i>Tarmax<i class="ph-bold ph-arrow-up-right ext"></i></a>'}${nav('Settings','gear-six',false)}</nav>
+      </aside><main class="panel"><h3>Good evening, Sander</h3></main></div>
+    </div>`).join('');
+</script>
+</body>
+</html>

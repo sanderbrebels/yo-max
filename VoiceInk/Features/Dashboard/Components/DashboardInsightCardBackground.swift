@@ -10,10 +10,9 @@ struct DashboardInsightCardBackground: View {
         shape
             .fill(AppTheme.Insights.card)
             .overlay {
-                if colorSchemeContrast == .increased {
-                    shape
-                        .strokeBorder(AppTheme.Insights.border, lineWidth: 1)
-                }
+                // Yo Max: always a hairline, the card sits on the white content panel.
+                shape
+                    .strokeBorder(AppTheme.Insights.border, lineWidth: colorSchemeContrast == .increased ? 1.5 : 1)
             }
     }
 }

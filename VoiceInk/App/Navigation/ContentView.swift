@@ -43,7 +43,6 @@ final class MainWindowNavigation: ObservableObject {
 
 struct ContentView: View {
     private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "ContentView")
-    private static let detailBackgroundTintOpacity = 1.0  // Yo Max: opaque Tarmax page
     @EnvironmentObject private var navigation: MainWindowNavigation
 
     var body: some View {
@@ -70,24 +69,27 @@ struct ContentView: View {
         }
     }
 
+    // Yo Max (Flow elevation, 2026-11-07): the pages sit in one white panel with a hairline,
+    // a step above the window page on which the sidebar lies.
     @ViewBuilder
     private var detailContent: some View {
+        let panel = RoundedRectangle(cornerRadius: AppTheme.Radius.panel, style: .continuous)
+
         detailView(for: navigation.selectedView)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(AppTheme.Surface.contentPanel)
+            .clipShape(panel)
+            .overlay(panel.strokeBorder(AppTheme.Border.panel, lineWidth: 1))
+            .padding(.trailing, Self.panelInset)
+            .padding(.bottom, Self.panelInset)
             .background(detailBackground)
     }
 
-    private var detailBackground: some View {
-        ZStack {
-            VisualEffectView(
-                material: .sidebar,
-                blendingMode: .behindWindow
-            )
+    private static let panelInset: CGFloat = 10
 
-            AppTheme.Surface.window
-                .opacity(Self.detailBackgroundTintOpacity)
-        }
-        .ignoresSafeArea(.container, edges: .top)
+    private var detailBackground: some View {
+        AppTheme.Surface.window
+            .ignoresSafeArea(.container, edges: .top)
     }
 
     @ViewBuilder
