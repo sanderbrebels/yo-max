@@ -167,6 +167,7 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 - [ ] Optioneel: geluidjes bij start/stop van de opname.
 
 ### Functies
+- [ ] Kopieerkader betrouwbaar maken zoals Wispr Flow (voorlopig uit): bij Electron-apps `AXManualAccessibility` aanzetten en opnieuw de focus vragen; "niets heeft focus" alleen geloven bij gewone Mac-apps.
 - [ ] Stijl per app (formeel in Mail, los in Slack/WhatsApp) via Modes met app-triggers.
 - [ ] Lokale opschoning via Ollama, zodat niets meer naar de cloud gaat.
 - [ ] Koppeling met Sanders app **Tarmax**.
