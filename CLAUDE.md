@@ -99,6 +99,8 @@ make local
   rm -rf "/Applications/Yo Max.app" && mv ~/Downloads/"Yo Max.app" /Applications/ && open "/Applications/Yo Max.app"
   ```
 - Ontbreekt de Metal Toolchain, dan: `xcodebuild -downloadComponent MetalToolchain`.
+- **Snelste weg: `make install`** bouwt, sluit de draaiende Yo Max, zet de nieuwe in `/Applications` en opent hem (één stap, niets meer slepen).
+- **Toegankelijkheid niet meer opnieuw geven:** maak één keer een gratis Apple Development-certificaat (Xcode → Settings → Accounts → Apple ID → Manage Certificates → + Apple Development). `make local` gebruikt het dan vanzelf (vaste handtekening), en macOS onthoudt de toestemming tussen builds. Zonder certificaat blijft het ad-hoc en meldt `make install` dat je de toestemming opnieuw moet geven.
 - Andere targets: `make check`, `make dev` (Debug, "Yo Max Dev"), `make clean`, `make help`.
 
 > ⚠️ **Na elke nieuwe build moet je de Toegankelijkheid-toestemming opnieuw geven.**

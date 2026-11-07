@@ -7,7 +7,7 @@ LOCAL_CODESIGN_IDENTITY ?=
 APP_NAME := Yo Max
 RUN_APP_NAME ?= $(APP_NAME)
 
-.PHONY: all clean whisper setup build local check healthcheck help dev run release release-setup
+.PHONY: all clean whisper setup build local install check healthcheck help dev run release release-setup
 
 # Default target
 all: check build
@@ -103,6 +103,24 @@ local: check setup
 		exit 1; \
 	fi
 
+# Yo Max: build, replace /Applications/Yo Max.app and open it (one step).
+# With an Apple Development certificate (Xcode > Settings > Accounts) the signature stays
+# the same between builds, so macOS keeps the Accessibility permission.
+install: local
+	@echo "Quitting $(APP_NAME) if it is running..."
+	@osascript -e 'tell application "$(APP_NAME)" to quit' >/dev/null 2>&1 || true
+	@for i in 1 2 3 4 5 6 7 8 9 10; do pgrep -xq "$(APP_NAME)" || break; sleep 0.5; done
+	@pgrep -xq "$(APP_NAME)" && pkill -x "$(APP_NAME)" || true
+	@rm -rf "/Applications/$(APP_NAME).app"
+	@mv "$$HOME/Downloads/$(APP_NAME).app" "/Applications/$(APP_NAME).app"
+	@open "/Applications/$(APP_NAME).app"
+	@echo "Installed and opened /Applications/$(APP_NAME).app"
+	@if codesign -dv "/Applications/$(APP_NAME).app" 2>&1 | grep -q "Signature=adhoc"; then \
+		echo ""; \
+		echo "Ad-hoc signed: give Accessibility permission again (System Settings > Privacy & Security)."; \
+		echo "Add an Apple Development certificate in Xcode once to stop this."; \
+	fi
+
 # Run application
 run:
 	@if [ -d "$$HOME/Downloads/$(RUN_APP_NAME).app" ]; then \
@@ -147,6 +165,7 @@ help:
 	@echo "  build              Build the VoiceInk Xcode project"
 	@echo "  local              Build locally with stable signing when available"
 	@echo "    LOCAL_CODESIGN_IDENTITY=<SHA or name> overrides automatic Apple Development detection"
+	@echo "  install            Yo Max: build, put in /Applications and open (one step)"
 	@echo "  run                Launch the built VoiceInk app"
 	@echo "  dev                Build and run the app (for development)"
 	@echo "  release            Build DMG and Appcast using release-notes/<version>.html"
