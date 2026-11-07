@@ -10,7 +10,9 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - Communiceer in het Nederlands, kort. Leg elke stap in één zin uit.
 - Toon eerst welke bestanden je wil aanpassen en waarom, vóór je broncode wijzigt.
 - Werk in fases; stop na elke fase, vat samen en wacht op "ok".
-- Commit na elke fase met een duidelijke boodschap. **Push niets zonder dat Sander het vraagt.**
+- Commit na elke fase met een duidelijke boodschap. **Push niets zonder dat Sander het vraagt.** `/yo-max-stop` is die vraag: die skill controleert en pusht naar `origin/yo-max`.
+- **Sessies:** begin met `/yo-max-start` (binnenhalen van GitHub, VoiceInk-updates melden, status en voorstellen) en eindig met `/yo-max-stop` (veiligheidscontrole, CLAUDE.md bijwerken, committen, pushen). Beide staan in `.claude/skills/`.
+- **Eerst een prototype, dan Swift:** voor elke zichtbare wijziging maakt Claude eerst een prototype in HTML (twee of drie varianten naast elkaar, in de Tarmax-stijl): als Artifact (privé link) of als bestand in `design/schetsen/`. Sander kiest, pas daarna wordt het in Swift gebouwd.
 - Zet **nooit** API-sleutels of andere geheimen in code, config of git (sleutels staan in de macOS-sleutelhanger).
 - Laat `LICENSE` en de copyrightvermeldingen van VoiceInk altijd staan.
 - Bij een fout: lees de melding, zoek de oorzaak, los het op. Lukt het na 2 pogingen niet: stop en leg het eenvoudig uit.
@@ -143,4 +145,4 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 - [ ] Koppeling met Sanders app **Tarmax**.
 
 ### Delen
-- [ ] Branch `yo-max` naar de fork pushen (pas als Sander het vraagt) en de vriend de link geven.
+- [ ] Branch `yo-max` naar de fork pushen (met `/yo-max-stop`) en de vriend de link geven.
