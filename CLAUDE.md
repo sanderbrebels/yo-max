@@ -96,7 +96,26 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
   - Alle lettertypes via `Font.yoMax` (±520 `.system(size:)` en 128 standaardstijlen in 104 bestanden, met een script). Rounded is weg; `monospaced` bleef. Typeschaal: macOS-groottes met Tarmax-gewichten (titels/koppen 500, tekst 400, alleen 400/500/700). Nieuwe code: altijd `.font(.yoMax(…))`, nooit `.system(size:)`.
   - `.secondary`/`.primary`/`.tertiary` en losse rood/grijs → `AppTheme.Text…`/`AppTheme.Status…` (niet in Recording, Notifications en Licensing: donkere grond). Grafiekkleuren (`AppTheme.Data`) uit het Tarmax-palet.
   - Zijbalk: zwevende witte kaart (12 pt marge, radius 24, schaduw) op de pagina, gekozen rij = lime pil. Pilknoppen via `.buttonBorderShape(.capsule)` op de root. Dashboard-titels 500 en de banner niet meer wazig.
-  - **VoiceInk-updates:** een merge raakt nu bijna altijd een paar van deze regels. Los conflicten op door hun nieuwe code te nemen en daarna opnieuw de lettertype- en kleurregels toe te passen (zelfde omzetting: `.system(size:` → `.yoMax(`, `.secondary` → `AppTheme.Text.secondary`). Of neem nieuwe VoiceInk-functies met de hand over.
+  - **VoiceInk-updates:** een merge raakt nu bijna altijd een paar van deze regels. Los conflicten op door hun nieuwe code te nemen en daarna opnieuw de lettertype- en kleurregels toe te passen (zelfde omzetting: `.system(size:` → `.yoMax(`, `.secondary` → `AppTheme.Text.secondary`, en sinds 2026-11-07 ook `Image(systemName:` → `Image(yoMax:` en `Label(…, systemImage:` → `Label(…, yoMax:`). Of neem nieuwe VoiceInk-functies met de hand over.
+
+### Flow-elevation, zijbalk en venster (2026-11-07, schetsen `elevation-flow.html` A, `zijbalk-merk.html` A)
+- **Elevation zoals Wispr Flow:** de zijbalk ligt plat op de pagina (`--elev-page`); elke pagina zit in één wit paneel met fijne rand, radius 20, 10 pt van de rand (`ContentView.detailContent`, tokens `Surface.contentPanel`, `Border.panel`, `Radius.panel`). Kaarten op dat paneel krijgen een fijne rand (`Border.card` = `--border`).
+- **Zijbalk variant A "Zacht":** geen tegels, geen lime. Phosphor bold, gekozen pagina fill; gekozen rij = 8 % inkt (`Sidebar.selectedRow` = `Brand.hoverSurface`), hover 4 % (`hoverSoft`). Nieuwe tokens: `Brand.hoverSurface`, `hoverSoft`, `pressSurface`, `Radius.sidebarRow`.
+- **Merkblok** bovenaan: app-icoon, "Yo Max", "by Sander Brebels". Onderaan boven Settings een rij **Tarmax ↗** die https://tarmax.app opent (`AppSidebar.swift`).
+- **Venster vrij schaalbaar** vanaf 820 × 560 (`AppWindowLayout.resizableMinimum…`); opent op 950 × 750; onboarding blijft vast.
+- **Paragraph breaks** (VoiceInk, per modus: Modes → Transcription Formatting) maakt de "automatische enters": alinea's per ±50 woorden/4 zinnen, niet per pauze. Sander wil dat zo houden.
+
+### Iconen: alles Phosphor (2026-11-07)
+- Alle iconen komen uit **Phosphor** (MIT), zoals Tarmax. 163 Phosphor-iconen staan als **custom symbols** in `Assets.xcassets/PhosphorSymbols` (`ph.<naam>` = bold, `ph.<naam>.fill`), gemaakt met `swiftdraw` (brew); alle gewichten zijn bold, dus overal hetzelfde gewicht. Ze schalen mee met `.font` zoals SF Symbols.
+- `VoiceInk/App/YoMax/YoMaxSymbols.swift`: tabel SF-naam → Phosphor, `Image(yoMax:)`, `Label(_:yoMax:)`, `NSImage.yoMax`. Onbekende namen vallen terug op het SF Symbol. VoiceOver krijgt het (gelokaliseerde) label van het SF Symbol. Hoe je een icoon toevoegt staat bovenaan dat bestand. `PhosphorIcon("naam", weight:, size:)` voor een Phosphor-naam.
+- Regels (Tarmax): naast tekst 1 em (zelfde grootte als de tekst) en bold; een knop met alleen een icoon heeft `.help` + `.accessibilityLabel` en minstens 24 pt trefoppervlak (`.yoMaxIconHitTarget()`). Grote iconen in tegels en lege staten mogen groter.
+- Recente dictaten op het dashboard: **Play/Pause en Copy** bij hover (`YoMaxQuickAudioPlayer`, `YoMaxIconButton` in `YoMaxIcons.swift`).
+
+### Dashboardbanner (2026-11-07, schets `dashboard-banner.html` variant B)
+- Eén banner: links "You have saved … with Yo Max", subtekst en View Insights; rechts een kolom met **woorden, wpm, day streak** (`YoMaxDashboardStats.swift`, `Surface.banner` = `--fill-strong`, kolom `--elev-inset`). Vergrendeld: alleen de drie cijfers, nooit meer "Continue using Yo Max to unlock…". De ruitenafbeelding `momentum-hero-bg` wordt niet meer gebruikt.
+
+### Waarom er nog dicteerfouten zijn (analyse 2026-11-07)
+- De AI-opschoning (qwen) verbetert goed; de fouten komen uit **Whisper** bij namen ("Till you max", "Sandoprebels", "darmax.app"). **Het woordenboek was leeg (0 woorden).** Whisper krijgt de woorden als hint (`initial_prompt`) en de AI krijgt ze ook mee. Eerst woordenboek en vervangingen vullen, dan pas een ander model.
 
 ## Bouwen
 
@@ -164,7 +183,7 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 - [ ] Testzinnen opnieuw dicteren met prompt **v4** en het gevulde woordenboek; ook de opmaakopdrachten en de opdrachtmodus testen (zie `design/schetsen/index.html` › 1). Nog niet getest door Sander.
 - [ ] `qwen/qwen3.8-27b` vs. `openai/gpt-oss-120b` vergelijken op Nederlands en snelheid.
 - [ ] Snelheid en kwaliteit vergelijken: Whisper Turbo vs. Parakeet V3.
-- [ ] Woordenboek (Dictionary) vullen met eigen namen en vaktermen (Tarmax, MacBook, staging, …). Kan nu ook met rechtsklik en "Find Doubtful Words" in History.
+- [ ] **Eerst:** Woordenboek (Dictionary) vullen met eigen namen en vaktermen (Yo Max, Sander Brebels, Tarmax, tarmax.app, Figma, Phosphor, Wispr Flow, Claude, Strava, Garmin, Wahoo, MacBook, staging, …) en vervangingen ("Till you max" → "Yo Max"). Stond op 2026-11-07 nog op 0 woorden. Kan ook met rechtsklik en "Find Doubtful Words" in History.
 
 ### Branding en design
 - [x] Eigen app-icoon (`VoiceInk/Assets.xcassets/AppIcon.appiconset`).
@@ -176,6 +195,11 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 - [ ] Schermen met losse kleuren één voor één naar tokens omzetten (screenshot bekijken).
 - [x] Aeonik en Tarmax-kleuren in alle schermen (fase 6).
 - [ ] Optioneel: geluidjes bij start/stop van de opname.
+- [x] Flow-elevation, zijbalk zonder lime, merkblok en Tarmax-link, vrij schaalbaar venster (2026-11-07).
+- [x] Alle iconen Phosphor, met VoiceOver-labels, 1 em en 24 pt trefoppervlak (impeccable-audit, 2026-11-07).
+- [x] Dashboard: één banner met tijdwinst en statistieken (variant B, 2026-11-07).
+- [ ] **Nog niet door Sander bekeken (2026-11-07):** zijbalk, wit paneel, Phosphor-iconen in alle schermen en menu's, banner B, Play/Copy. Bij afwijkingen een screenshot; Claude kan geen schermopname maken (geen toestemming Schermopname).
+- [ ] Ongebruikte asset `momentum-hero-bg` opruimen als banner B blijft.
 
 ### Functies
 - [ ] Kopieerkader betrouwbaar maken zoals Wispr Flow (voorlopig uit): bij Electron-apps `AXManualAccessibility` aanzetten en opnieuw de focus vragen; "niets heeft focus" alleen geloven bij gewone Mac-apps.
