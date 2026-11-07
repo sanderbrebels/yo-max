@@ -152,7 +152,7 @@ struct DashboardContent: View {
                 Button {
                     MainWindowNavigation.shared.openDictionarySettings()
                 } label: {
-                    Label("Auto-Learn needs attention. Open Dictionary Settings.", systemImage: "exclamationmark.triangle")
+                    Label("Auto-Learn needs attention. Open Dictionary Settings.", yoMax: "exclamationmark.triangle")
                 }
                 .buttonStyle(.link)
             }
@@ -841,7 +841,7 @@ private struct DashboardAccessibilityReminder: View {
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .fill(AppTheme.Accent.fill)
 
-                Image(systemName: "hand.raised")
+                Image(yoMax: "hand.raised")
                     .font(.yoMax(15, weight: .medium))
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(AppTheme.Accent.primary)
@@ -881,7 +881,7 @@ private struct DashboardNoModesReminder: View {
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .fill(AppTheme.Accent.fill)
 
-                Image(systemName: "square.grid.2x2")
+                Image(yoMax: "square.grid.2x2")
                     .font(.yoMax(15, weight: .medium))
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(AppTheme.Accent.primary)

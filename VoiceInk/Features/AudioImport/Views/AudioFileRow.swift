@@ -43,7 +43,7 @@ struct AudioFileRow: View {
 
     private var pendingRow: some View {
         HStack {
-            Image(systemName: "clock")
+            Image(yoMax: "clock")
                 .foregroundColor(AppTheme.Text.secondary)
 
             Text(item.filename)
@@ -59,7 +59,7 @@ struct AudioFileRow: View {
             Button {
                 onRemove()
             } label: {
-                Image(systemName: "xmark.circle.fill")
+                Image(yoMax: "xmark.circle.fill")
                     .symbolRenderingMode(.hierarchical)
                     .foregroundColor(AppTheme.Text.secondary)
             }
@@ -92,7 +92,7 @@ struct AudioFileRow: View {
     @ViewBuilder
     private var completedRows: some View {
         HStack {
-            Image(systemName: "checkmark.circle.fill")
+            Image(yoMax: "checkmark.circle.fill")
                 .foregroundColor(AppTheme.Status.positive)
 
             Text(item.filename)
@@ -124,7 +124,7 @@ struct AudioFileRow: View {
                 }
             }
 
-            Image(systemName: "chevron.right")
+            Image(yoMax: "chevron.right")
                 .font(.caption2.weight(.semibold))
                 .foregroundColor(AppTheme.Text.secondary)
                 .rotationEffect(.degrees(isExpanded ? 90 : 0))
@@ -153,12 +153,12 @@ struct AudioFileRow: View {
 
             HStack(spacing: 12) {
                 if let model = transcription.transcriptionModelName {
-                    Label(model, systemImage: "cpu")
+                    Label(model, yoMax: "cpu")
                         .font(.yoMax(10))
                         .foregroundColor(AppTheme.Text.secondary)
                 }
                 if let prompt = transcription.promptName {
-                    Label(prompt, systemImage: "sparkles")
+                    Label(prompt, yoMax: "sparkles")
                         .font(.yoMax(10))
                         .foregroundColor(AppTheme.Text.secondary)
                 }
@@ -188,7 +188,7 @@ struct AudioFileRow: View {
 
     private func failedRow(message: String) -> some View {
         HStack {
-            Image(systemName: "exclamationmark.circle.fill")
+            Image(yoMax: "exclamationmark.circle.fill")
                 .foregroundColor(AppTheme.Status.error)
 
             VStack(alignment: .leading, spacing: 2) {
@@ -207,7 +207,7 @@ struct AudioFileRow: View {
             Button {
                 onRetry()
             } label: {
-                Image(systemName: "arrow.counterclockwise")
+                Image(yoMax: "arrow.counterclockwise")
             }
             .buttonStyle(.bordered)
             .controlSize(.small)

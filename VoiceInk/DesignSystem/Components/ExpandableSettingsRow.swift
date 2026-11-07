@@ -60,7 +60,7 @@ struct ExpandableSettingsRow<Content: View>: View {
 
                 Spacer()
 
-                Image(systemName: "chevron.right")
+                Image(yoMax: "chevron.right")
                     .font(.yoMax(12, weight: .semibold))
                     .foregroundColor(AppTheme.Text.secondary)
                     .rotationEffect(.degrees(rowIsEnabled && isExpanded ? 90 : 0))

@@ -9,7 +9,7 @@ struct AddIconButton: View {
 
     var body: some View {
         Button(action: action) {
-            Image(systemName: "plus.circle.fill")
+            Image(yoMax: "plus.circle.fill")
                 .font(.yoMax(size))
                 .symbolRenderingMode(.hierarchical)
                 .foregroundStyle(isDisabled ? .tertiary : .secondary)

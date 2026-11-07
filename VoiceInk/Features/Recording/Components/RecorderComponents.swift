@@ -25,7 +25,7 @@ struct RecorderToggleButton: View {
                 if isEmoji {
                     Text(icon).font(.yoMax(14))
                 } else {
-                    Image(systemName: icon).font(.yoMax(13))
+                    Image(yoMax: icon).font(.yoMax(13))
                 }
             }
             .foregroundColor(disabled ? .white.opacity(0.3) : (isEnabled ? .white : .white.opacity(0.6)))
@@ -168,7 +168,7 @@ struct RecorderCloseButton: View {
                             .strokeBorder(Color.white.opacity(0.18), lineWidth: 0.6)
                     )
 
-                Image(systemName: "xmark")
+                Image(yoMax: "xmark")
                     .font(.yoMax(9, weight: .semibold))
                     .foregroundColor(.white.opacity(0.86))
             }
@@ -487,7 +487,7 @@ struct AssistantPanelView: View {
             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
 
             Button(action: sendDraftMessage) {
-                Image(systemName: "paperplane.fill")
+                Image(yoMax: "paperplane.fill")
                     .font(.yoMax(10, weight: .semibold))
                     .foregroundColor(canSendDraft ? .black : .white.opacity(0.35))
                     .frame(width: 24, height: 24)

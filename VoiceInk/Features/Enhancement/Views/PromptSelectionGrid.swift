@@ -64,7 +64,7 @@ struct PromptSelectionGrid: View {
 
                 // Helpful tip for users
                 HStack {
-                    Image(systemName: "info.circle")
+                    Image(yoMax: "info.circle")
                         .font(.yoMax(10))
                         .foregroundColor(AppTheme.Text.secondary)
 

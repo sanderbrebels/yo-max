@@ -40,7 +40,7 @@ struct AutoLearnSuggestionContent: View {
 
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     if originalText != nil {
-                        Image(systemName: "arrow.right")
+                        Image(yoMax: "arrow.right")
                             .font(.yoMax(12, weight: .medium))
                             .foregroundStyle(onDarkMuted)
                             .accessibilityLabel("Replace with")

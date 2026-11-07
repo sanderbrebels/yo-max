@@ -189,7 +189,7 @@ private struct YoMaxCommandPanelView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 8) {
-                Image(systemName: "wand.and.stars")
+                Image(yoMax: "wand.and.stars")
                     .font(.yoMax(12, weight: .medium))
                     .foregroundStyle(AppTheme.Brand.lime)
                 Text("Command: “\(command)”")

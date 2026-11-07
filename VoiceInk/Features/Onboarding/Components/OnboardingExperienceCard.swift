@@ -79,7 +79,7 @@ struct OnboardingExperienceCard: View {
         HStack(spacing: 8) {
             trafficLights
 
-            Image(systemName: "note.text")
+            Image(yoMax: "note.text")
                 .font(.yoMax(12, weight: .semibold))
                 .foregroundColor(AppTheme.Text.secondary)
 
@@ -89,7 +89,7 @@ struct OnboardingExperienceCard: View {
 
             Spacer(minLength: 0)
 
-            Image(systemName: "square.and.pencil")
+            Image(yoMax: "square.and.pencil")
                 .font(.yoMax(12, weight: .semibold))
                 .foregroundColor(AppTheme.Text.muted)
         }
@@ -128,7 +128,7 @@ struct OnboardingExperienceCard: View {
     }
 
     private var transformArrow: some View {
-        Image(systemName: "arrow.right")
+        Image(yoMax: "arrow.right")
             .font(.yoMax(15, weight: .semibold))
             .foregroundColor(AppTheme.Text.muted)
             .frame(width: 46)

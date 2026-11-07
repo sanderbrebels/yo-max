@@ -83,7 +83,7 @@ struct ModeTriggerSection: View {
 
     private var emptyTriggerState: some View {
         HStack(spacing: 8) {
-            Image(systemName: "circle.dashed")
+            Image(yoMax: "circle.dashed")
                 .font(.yoMax(13, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
 

@@ -99,7 +99,7 @@ private struct CustomProviderEmptyState: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: systemImage)
+            Image(yoMax: systemImage)
                 .font(.yoMax(32))
                 .symbolRenderingMode(.hierarchical)
                 .foregroundStyle(AppTheme.Text.secondary)
@@ -122,7 +122,7 @@ private struct CustomEnhancementModelRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            Image(systemName: "sparkles")
+            Image(yoMax: "sparkles")
                 .font(.yoMax(15, weight: .semibold))
                 .foregroundStyle(AppTheme.Text.secondary)
                 .frame(width: 28, height: 28)
@@ -158,7 +158,7 @@ private struct CustomEnhancementModelRow: View {
                 Button("Edit", action: onEdit)
                 Button("Delete", role: .destructive, action: onDelete)
             } label: {
-                Image(systemName: "ellipsis.circle")
+                Image(yoMax: "ellipsis.circle")
                     .font(.yoMax(14))
             }
             .menuStyle(.borderlessButton)
@@ -666,7 +666,7 @@ private struct ConnectionTestRow: View {
 
             Button(action: action) {
                 HStack(spacing: 5) {
-                    Image(systemName: "wifi")
+                    Image(yoMax: "wifi")
                         .font(.yoMax(11))
                     Text("Test")
                         .font(.yoMax(12))
@@ -695,7 +695,7 @@ private struct ConnectionTestRow: View {
             .font(.yoMax(12))
             .foregroundStyle(AppTheme.Text.secondary)
         case .success:
-            Label("Test successful", systemImage: "checkmark.circle")
+            Label("Test successful", yoMax: "checkmark.circle")
                 .font(.yoMax(12))
                 .foregroundStyle(AppTheme.Status.positive)
                 .lineLimit(1)

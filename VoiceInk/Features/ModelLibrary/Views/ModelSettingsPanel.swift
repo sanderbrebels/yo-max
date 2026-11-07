@@ -46,7 +46,7 @@ private struct ModelSettingsTabBar: View {
                     }
                 } label: {
                     HStack(spacing: 8) {
-                        Image(systemName: tab.systemImage)
+                        Image(yoMax: tab.systemImage)
                             .font(.yoMax(13, weight: .semibold))
                             .symbolRenderingMode(.hierarchical)
 

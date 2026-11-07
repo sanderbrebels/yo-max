@@ -191,7 +191,7 @@ struct DictionarySettingsPanel: View {
             }
 
             if dataHealth.needsRepair {
-                Label("Auto-Learn data needs repair.", systemImage: "exclamationmark.triangle")
+                Label("Auto-Learn data needs repair.", yoMax: "exclamationmark.triangle")
                 Button("Repair Auto-Learn") { showRepairConfirmation = true }
                     .disabled(isCheckingData || isRepairingData)
                 if isRepairingData {
@@ -263,18 +263,18 @@ struct DictionarySettingsPanel: View {
         if reviewCompleted {
             if let learnedReplacementCount {
                 if learnedReplacementCount == 0 {
-                    Label("No new replacements learned", systemImage: "checkmark.circle")
+                    Label("No new replacements learned", yoMax: "checkmark.circle")
                         .foregroundStyle(AppTheme.Text.secondary)
                 } else {
                     Label {
                         Text("Learned \(learnedReplacementCount) replacements")
                     } icon: {
-                        Image(systemName: "checkmark.circle")
+                        Image(yoMax: "checkmark.circle")
                     }
                     .foregroundStyle(AppTheme.Text.secondary)
                 }
             } else {
-                Label("Review complete", systemImage: "checkmark.circle")
+                Label("Review complete", yoMax: "checkmark.circle")
                     .foregroundStyle(AppTheme.Text.secondary)
             }
         }

@@ -24,7 +24,7 @@ struct OnboardingHeroHeader: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Image(systemName: systemImage)
+            Image(yoMax: systemImage)
                 .font(.yoMax(24, weight: .semibold))
                 .foregroundColor(AppTheme.Text.primary)
                 .frame(width: 56, height: 56)

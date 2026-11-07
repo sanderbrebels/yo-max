@@ -40,12 +40,12 @@ struct TriggerTemplateRow: View {
                 }
 
                 if isAdded {
-                    Image(systemName: "checkmark.circle.fill")
+                    Image(yoMax: "checkmark.circle.fill")
                         .font(.yoMax(16, weight: .medium))
                         .foregroundStyle(Color.accentColor)
                         .frame(width: 22, height: 22)
                 } else if !isDisabled {
-                    Image(systemName: "plus.circle.fill")
+                    Image(yoMax: "plus.circle.fill")
                         .font(.yoMax(14, weight: .medium))
                         .symbolRenderingMode(.hierarchical)
                         .foregroundStyle(AppTheme.Text.secondary)
@@ -78,7 +78,7 @@ struct TriggerSymbol: View {
                 .fill(AppTheme.Surface.control)
                 .frame(width: 28, height: 28)
 
-            Image(systemName: systemName)
+            Image(yoMax: systemName)
                 .font(.yoMax(13, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
         }

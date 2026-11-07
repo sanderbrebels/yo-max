@@ -37,19 +37,19 @@ struct CustomModelCardView: View {
 
     private var metadataSection: some View {
         HStack(spacing: 12) {
-            Label(model.modelName, systemImage: "cube")
+            Label(model.modelName, yoMax: "cube")
                 .font(.yoMax(11))
                 .foregroundColor(Color(.secondaryLabelColor))
                 .lineLimit(1)
 
             // Language
-            Label(model.language, systemImage: "globe")
+            Label(model.language, yoMax: "globe")
                 .font(.yoMax(11))
                 .foregroundColor(Color(.secondaryLabelColor))
                 .lineLimit(1)
 
             // OpenAI Compatible
-            Label("OpenAI Compatible", systemImage: "checkmark.seal")
+            Label("OpenAI Compatible", yoMax: "checkmark.seal")
                 .font(.yoMax(11))
                 .foregroundColor(Color(.secondaryLabelColor))
                 .lineLimit(1)
@@ -74,16 +74,16 @@ struct CustomModelCardView: View {
                 Button {
                     editAction(model)
                 } label: {
-                    Label("Edit Model", systemImage: "pencil")
+                    Label("Edit Model", yoMax: "pencil")
                 }
 
                 Button(role: .destructive) {
                     deleteAction()
                 } label: {
-                    Label("Delete Model", systemImage: "trash")
+                    Label("Delete Model", yoMax: "trash")
                 }
             } label: {
-                Image(systemName: "ellipsis.circle")
+                Image(yoMax: "ellipsis.circle")
                     .font(.yoMax(14))
             }
             .menuStyle(.borderlessButton)

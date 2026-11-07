@@ -75,11 +75,11 @@ struct MenuBarView: View {
                 }
             } label: {
                 HStack {
-                    Image(systemName: "sparkles.square.fill.on.square")
+                    Image(yoMax: "sparkles.square.fill.on.square")
                         .font(.yoMax(11, weight: .medium))
                     let activeMode = modeManager.currentEffectiveConfiguration
                     Text(String(format: String(localized: "Mode: %@"), activeMode?.name ?? String(localized: "None")))
-                    Image(systemName: "chevron.up.chevron.down")
+                    Image(yoMax: "chevron.up.chevron.down")
                         .font(.yoMax(10))
                 }
             }
@@ -100,10 +100,10 @@ struct MenuBarView: View {
                 }
             } label: {
                 HStack {
-                    Image(systemName: "mic.fill")
+                    Image(yoMax: "mic.fill")
                         .font(.yoMax(11, weight: .medium))
                     Text("Audio Input")
-                    Image(systemName: "chevron.up.chevron.down")
+                    Image(yoMax: "chevron.up.chevron.down")
                         .font(.yoMax(10))
                 }
             }

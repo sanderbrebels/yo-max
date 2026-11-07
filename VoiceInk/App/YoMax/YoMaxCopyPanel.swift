@@ -123,7 +123,7 @@ private struct YoMaxCopyPanelView: View {
                 Spacer(minLength: 8)
 
                 Button(action: onClose) {
-                    Image(systemName: "xmark")
+                    Image(yoMax: "xmark")
                         .font(.yoMax(11, weight: .medium))
                         .foregroundStyle(AppTheme.Brand.ink)
                         .frame(width: 26, height: 26)
@@ -149,7 +149,7 @@ private struct YoMaxCopyPanelView: View {
                     copied = true
                     onCopy()
                 } label: {
-                    Label(copied ? "Copied" : "Copy", systemImage: copied ? "checkmark" : "doc.on.doc")
+                    Label(copied ? "Copied" : "Copy", yoMax: copied ? "checkmark" : "doc.on.doc")
                         .font(.yoMax(13, weight: .medium))
                         .foregroundStyle(AppTheme.Brand.onAccent)
                         .padding(.horizontal, 16)

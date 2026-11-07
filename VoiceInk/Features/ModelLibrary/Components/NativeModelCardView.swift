@@ -35,25 +35,25 @@ struct NativeAppleModelCardView: View {
     private var metadataSection: some View {
         HStack(spacing: 12) {
             // Native Apple
-            Label("Native Apple", systemImage: "apple.logo")
+            Label("Native Apple", yoMax: "apple.logo")
                 .font(.yoMax(11))
                 .foregroundColor(Color(.secondaryLabelColor))
                 .lineLimit(1)
 
             // Language
-            Label(model.language, systemImage: "globe")
+            Label(model.language, yoMax: "globe")
                 .font(.yoMax(11))
                 .foregroundColor(Color(.secondaryLabelColor))
                 .lineLimit(1)
 
             // On-Device
-            Label("On-Device", systemImage: "checkmark.shield")
+            Label("On-Device", yoMax: "checkmark.shield")
                 .font(.yoMax(11))
                 .foregroundColor(Color(.secondaryLabelColor))
                 .lineLimit(1)
 
             // Requires macOS 26+
-            Label("macOS 26+", systemImage: "macbook")
+            Label("macOS 26+", yoMax: "macbook")
                 .font(.yoMax(11))
                 .foregroundColor(Color(.secondaryLabelColor))
                 .lineLimit(1)

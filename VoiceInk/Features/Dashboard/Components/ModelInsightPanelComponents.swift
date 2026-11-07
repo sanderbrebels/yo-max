@@ -12,7 +12,7 @@ struct ModelInsightPanelHeader: View {
             Spacer()
 
             Button(action: onClose) {
-                Image(systemName: "xmark")
+                Image(yoMax: "xmark")
                     .font(.yoMax(12, weight: .semibold))
                     .frame(width: 30, height: 30)
             }
@@ -128,7 +128,7 @@ struct ModelInsightPanelEmptyState: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            Image(systemName: "chart.bar.xaxis")
+            Image(yoMax: "chart.bar.xaxis")
                 .font(.yoMax(32, weight: .light))
                 .foregroundColor(AppTheme.Text.secondary)
 

@@ -9,7 +9,7 @@ struct ModeIconView: View {
         Group {
             switch icon.kind {
             case .symbol:
-                Image(systemName: icon.value)
+                Image(yoMax: icon.value)
                     .font(.yoMax(size, weight: .medium))
                     .foregroundStyle(color)
             case .emoji:
@@ -226,7 +226,7 @@ private struct ModeIconButton: View {
 
             if isRemovable {
                 Button(action: removeAction) {
-                    Image(systemName: "xmark.circle.fill")
+                    Image(yoMax: "xmark.circle.fill")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(Color.white, AppTheme.Status.error)
                         .font(.yoMax(10))
@@ -244,7 +244,7 @@ private struct AddEmojiButton: View {
 
     var body: some View {
         Button(action: action) {
-            Image(systemName: "plus.circle.fill")
+            Image(yoMax: "plus.circle.fill")
                 .font(.yoMax(17, weight: .medium))
                 .symbolRenderingMode(.hierarchical)
                 .foregroundStyle(AppTheme.Text.secondary)

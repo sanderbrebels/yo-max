@@ -14,7 +14,7 @@ struct TrialMessageView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            Image(systemName: icon)
+            Image(yoMax: icon)
                 .font(.yoMax(20))
                 .foregroundColor(iconColor)
 

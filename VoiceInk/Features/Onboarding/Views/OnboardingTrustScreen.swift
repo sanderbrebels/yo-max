@@ -47,7 +47,7 @@ private struct OnboardingTrustContent: View {
 private struct TrustHeader: View {
     var body: some View {
         VStack(spacing: 16) {
-            Image(systemName: "lock.shield")
+            Image(yoMax: "lock.shield")
                 .font(.yoMax(24, weight: .semibold))
                 .foregroundColor(AppTheme.Text.primary)
                 .frame(width: 56, height: 56)
@@ -156,7 +156,7 @@ private struct TrustPill: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            Image(systemName: systemImage)
+            Image(yoMax: systemImage)
                 .font(.yoMax(13, weight: .semibold))
                 .foregroundColor(AppTheme.Text.secondary)
 
@@ -181,7 +181,7 @@ private struct TrustPill: View {
 private struct TrustShield: View {
     var body: some View {
         ZStack {
-            Image(systemName: "shield.fill")
+            Image(yoMax: "shield.fill")
                 .font(.yoMax(96, weight: .regular))
                 .foregroundStyle(
                     LinearGradient(
@@ -194,7 +194,7 @@ private struct TrustShield: View {
                     )
                 )
                 .overlay(
-                    Image(systemName: "shield")
+                    Image(yoMax: "shield")
                         .font(.yoMax(96, weight: .regular))
                         .foregroundColor(AppTheme.Border.control)
                 )

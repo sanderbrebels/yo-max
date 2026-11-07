@@ -83,7 +83,7 @@ struct AudioSetupView: View {
             Label {
                 Text("Refresh Microphones")
             } icon: {
-                Image(systemName: "arrow.clockwise")
+                Image(yoMax: "arrow.clockwise")
                     .rotationEffect(.degrees(refreshIconRotation))
             }
         }
@@ -138,7 +138,7 @@ struct AudioSetupView: View {
             audioDeviceManager.addPrioritizedDevice(uid: device.uid, name: device.name)
         } label: {
             HStack(spacing: 8) {
-                Label(device.name, systemImage: "plus.circle")
+                Label(device.name, yoMax: "plus.circle")
                     .lineLimit(1)
 
                 Spacer()
@@ -178,7 +178,7 @@ struct AudioSetupView: View {
                 Spacer()
 
                 if isActive {
-                    Label("Active", systemImage: "checkmark.circle.fill")
+                    Label("Active", yoMax: "checkmark.circle.fill")
                         .font(.yoMax(10))
                         .foregroundStyle(AppTheme.Text.secondary)
                         .labelStyle(.titleAndIcon)
@@ -188,7 +188,7 @@ struct AudioSetupView: View {
                     Button {
                         movePrioritizedDeviceUp(prioritizedDevice)
                     } label: {
-                        Image(systemName: "chevron.up")
+                        Image(yoMax: "chevron.up")
                     }
                     .disabled(prioritizedDevice.id == prioritizedDevicesInDisplayOrder.first?.id)
                     .help("Move up")
@@ -196,7 +196,7 @@ struct AudioSetupView: View {
                     Button {
                         movePrioritizedDeviceDown(prioritizedDevice)
                     } label: {
-                        Image(systemName: "chevron.down")
+                        Image(yoMax: "chevron.down")
                     }
                     .disabled(prioritizedDevice.id == prioritizedDevicesInDisplayOrder.last?.id)
                     .help("Move down")
@@ -204,7 +204,7 @@ struct AudioSetupView: View {
                     Button {
                         audioDeviceManager.removePrioritizedDevice(id: prioritizedDevice.id)
                     } label: {
-                        Image(systemName: "minus.circle")
+                        Image(yoMax: "minus.circle")
                     }
                     .help("Remove")
                 }

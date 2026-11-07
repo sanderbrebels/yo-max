@@ -194,7 +194,7 @@ private struct ReducedMotionCelebrationOverlay: View {
         ZStack {
             Color.clear
 
-            Image(systemName: "checkmark.seal.fill")
+            Image(yoMax: "checkmark.seal.fill")
                 .font(.yoMax(54, weight: .semibold))
                 .foregroundStyle(AppTheme.Status.positive)
                 .padding(22)

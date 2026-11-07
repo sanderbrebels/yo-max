@@ -134,7 +134,7 @@ private struct OnboardingLicenseActionRow: View {
                     RoundedRectangle(cornerRadius: 9, style: .continuous)
                         .fill(iconBackground)
 
-                    Image(systemName: systemImage)
+                    Image(yoMax: systemImage)
                         .font(.yoMax(16, weight: .semibold))
                         .foregroundColor(iconForeground)
                 }
@@ -155,7 +155,7 @@ private struct OnboardingLicenseActionRow: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                Image(systemName: "chevron.right")
+                Image(yoMax: "chevron.right")
                     .font(.yoMax(10, weight: .bold))
                     .foregroundColor(AppTheme.Text.disabled)
                     .frame(width: 24, height: 24)
@@ -208,7 +208,7 @@ private struct OnboardingLicensePrimaryButton: View {
                     ProgressView()
                         .controlSize(.small)
                 } else {
-                    Image(systemName: systemImage)
+                    Image(yoMax: systemImage)
                         .font(.yoMax(12, weight: .semibold))
                 }
 
@@ -244,7 +244,7 @@ private struct OnboardingLicenseStatusMessage: View {
                 .font(.yoMax(12, weight: .medium))
                 .fixedSize(horizontal: false, vertical: true)
         } icon: {
-            Image(systemName: isSuccess ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
+            Image(yoMax: isSuccess ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
                 .font(.yoMax(12, weight: .semibold))
         }
         .foregroundColor(isSuccess ? AppTheme.Status.positive : AppTheme.Status.error)

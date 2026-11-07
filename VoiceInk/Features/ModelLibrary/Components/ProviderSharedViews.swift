@@ -28,7 +28,7 @@ struct ProviderBrandIcon: View {
                     .scaledToFit()
                     .padding(size * 0.24)
             } else {
-                Image(systemName: fallbackSystemImage)
+                Image(yoMax: fallbackSystemImage)
                     .font(.yoMax(iconSize, weight: .semibold))
                     .foregroundStyle(isSelected ? AppTheme.Accent.primary : Color.secondary)
             }

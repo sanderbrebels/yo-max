@@ -64,7 +64,7 @@ struct SettingsView: View {
                             Button {
                                 withAnimation { recordingShortcutManager.secondaryRecordingShortcut = .none }
                             } label: {
-                                Image(systemName: "minus.circle.fill")
+                                Image(yoMax: "minus.circle.fill")
                                     .foregroundColor(AppTheme.Text.secondary)
                             }
                             .buttonStyle(.plain)
@@ -121,7 +121,7 @@ struct SettingsView: View {
                             ShortcutStore.setShortcut(nil, for: .cancelRecorder)
                             cancelRecordingShortcutRecorderResetID += 1
                         } label: {
-                            Image(systemName: "arrow.counterclockwise")
+                            Image(yoMax: "arrow.counterclockwise")
                         }
                         .buttonStyle(.plain)
                         .help("Reset to default")

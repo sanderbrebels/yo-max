@@ -66,7 +66,7 @@ struct AudioTranscribeView: View {
                     .animation(.easeInOut(duration: 0.15), value: isDropTargeted)
 
                 VStack(spacing: 14) {
-                    Image(systemName: "arrow.down.doc")
+                    Image(yoMax: "arrow.down.doc")
                         .font(.yoMax(32))
                         .foregroundColor(isDropTargeted ? AppTheme.Accent.primary : .gray)
 
@@ -152,7 +152,7 @@ struct AudioTranscribeView: View {
                 selectFiles()
             } label: {
                 HStack(spacing: 4) {
-                    Image(systemName: "plus")
+                    Image(yoMax: "plus")
                         .font(.yoMax(12, weight: .medium))
                     Text("Add")
                         .font(.yoMax(12, weight: .medium))
@@ -177,7 +177,7 @@ struct AudioTranscribeView: View {
                     transcriptionManager.cancelProcessing()
                 } label: {
                     HStack(spacing: 4) {
-                        Image(systemName: "stop.fill")
+                        Image(yoMax: "stop.fill")
                             .font(.yoMax(10, weight: .medium))
                         Text("Cancel")
                             .font(.yoMax(12, weight: .medium))
@@ -197,7 +197,7 @@ struct AudioTranscribeView: View {
                     startProcessing()
                 } label: {
                     HStack(spacing: 4) {
-                        Image(systemName: "play.fill")
+                        Image(yoMax: "play.fill")
                             .font(.yoMax(10, weight: .medium))
                         Text("Start")
                             .font(.yoMax(12, weight: .semibold))
@@ -224,7 +224,7 @@ struct AudioTranscribeView: View {
                 }
             } label: {
                 HStack(spacing: 4) {
-                    Image(systemName: "xmark.bin")
+                    Image(yoMax: "xmark.bin")
                         .font(.yoMax(12, weight: .medium))
                     Text("Clear")
                         .font(.yoMax(12, weight: .medium))
@@ -269,7 +269,7 @@ struct AudioTranscribeView: View {
                             .font(.yoMax(12, weight: .medium))
                             .lineLimit(1)
                             .truncationMode(.tail)
-                        Image(systemName: "chevron.up.chevron.down")
+                        Image(yoMax: "chevron.up.chevron.down")
                             .font(.yoMax(9, weight: .semibold))
                             .foregroundColor(AppTheme.Text.secondary)
                     }

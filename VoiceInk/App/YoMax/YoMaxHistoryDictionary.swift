@@ -340,7 +340,7 @@ struct YoMaxDoubtWordsCard: View {
                     Button {
                         model.search(in: text)
                     } label: {
-                        Label("Find Doubtful Words", systemImage: "text.magnifyingglass")
+                        Label("Find Doubtful Words", yoMax: "text.magnifyingglass")
                             .font(.yoMax(12, weight: .medium))
                     }
                     .buttonStyle(.bordered)
@@ -421,12 +421,12 @@ struct YoMaxDoubtWordsCard: View {
             if isOn { model.selected.remove(suggestion.id) } else { model.selected.insert(suggestion.id) }
         } label: {
             HStack(spacing: 6) {
-                Image(systemName: isOn ? "checkmark.circle.fill" : "circle")
+                Image(yoMax: isOn ? "checkmark.circle.fill" : "circle")
                     .foregroundStyle(isOn ? AppTheme.Brand.ink : AppTheme.Text.secondary)
                 Text(suggestion.heard)
                     .strikethrough()
                     .foregroundStyle(AppTheme.Text.secondary)
-                Image(systemName: "arrow.right")
+                Image(yoMax: "arrow.right")
                     .font(.yoMax(10))
                     .foregroundStyle(AppTheme.Text.secondary)
                 Text(suggestion.correct)

@@ -68,7 +68,7 @@ struct HistoryEmptyState: View {
     var body: some View {
         VStack(spacing: 10) {
             Spacer()
-            Image(systemName: hasSearchQuery ? "magnifyingglass" : "text.bubble")
+            Image(yoMax: hasSearchQuery ? "magnifyingglass" : "text.bubble")
                 .font(.yoMax(28))
                 .foregroundStyle(AppTheme.Text.muted)
             Text(hasSearchQuery ? "No matching transcriptions" : "No transcriptions yet")
@@ -211,7 +211,7 @@ struct HistoryIconButton: View {
                     ProgressView()
                         .controlSize(.small)
                 } else {
-                    Image(systemName: systemName)
+                    Image(yoMax: systemName)
                         .font(.yoMax(12, weight: .medium))
                 }
             }
@@ -253,7 +253,7 @@ struct HistoryCommandButton: View {
         Button(role: isDestructive ? .destructive : nil, action: action) {
             HStack(spacing: 7) {
                 if let systemImage {
-                    Image(systemName: systemImage)
+                    Image(yoMax: systemImage)
                 }
                 Text(title)
                     .lineLimit(1)

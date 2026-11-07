@@ -27,7 +27,7 @@ struct ModeEmptyStateView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Image(systemName: "bolt.circle.fill")
+            Image(yoMax: "bolt.circle.fill")
                 .font(.yoMax(48))
                 .foregroundColor(AppTheme.Text.secondary)
 
@@ -71,7 +71,7 @@ struct ModeConfigurationsGrid: View {
 struct DefaultModeIndicator: View {
     var body: some View {
         HStack(spacing: 5) {
-            Image(systemName: "checkmark.seal.fill")
+            Image(yoMax: "checkmark.seal.fill")
                 .font(.yoMax(11, weight: .semibold))
                 .symbolRenderingMode(.hierarchical)
                 .foregroundStyle(AppTheme.Text.primary)
@@ -280,7 +280,7 @@ struct ConfigurationRow: View {
                         HStack(spacing: 12) {
                             if appCount > 0 {
                                 HStack(spacing: 4) {
-                                    Image(systemName: "app.fill")
+                                    Image(yoMax: "app.fill")
                                         .font(.yoMax(10))
                                     Text(appText)
                                         .font(.yoMax(10))
@@ -289,7 +289,7 @@ struct ConfigurationRow: View {
 
                             if websiteCount > 0 {
                                 HStack(spacing: 4) {
-                                    Image(systemName: "globe")
+                                    Image(yoMax: "globe")
                                         .font(.yoMax(10))
                                     Text(websiteText)
                                         .font(.yoMax(10))
@@ -339,7 +339,7 @@ struct ConfigurationRow: View {
             HStack(spacing: 8) {
                 let modelMetadata = transcriptionModelMetadata
                 HStack(spacing: 4) {
-                    Image(systemName: "waveform")
+                    Image(yoMax: "waveform")
                         .font(.yoMax(10))
                     Text(modelMetadata.label)
                         .font(.yoMax(10))
@@ -364,7 +364,7 @@ struct ConfigurationRow: View {
 
                 if let language = selectedLanguage, language != "Default" {
                     HStack(spacing: 4) {
-                        Image(systemName: "globe")
+                        Image(yoMax: "globe")
                             .font(.yoMax(10))
                         Text(language)
                             .font(.yoMax(10))
@@ -387,7 +387,7 @@ struct ConfigurationRow: View {
                     !modelName.isEmpty
                 {
                     HStack(spacing: 4) {
-                        Image(systemName: "cpu")
+                        Image(yoMax: "cpu")
                             .font(.yoMax(10))
                         Text(modelName.count > 20 ? String(modelName.prefix(18)) + "..." : modelName)
                             .font(.yoMax(10))
@@ -406,7 +406,7 @@ struct ConfigurationRow: View {
 
                 if config.outputMode != .paste {
                     HStack(spacing: 4) {
-                        Image(systemName: config.outputMode.iconName)
+                        Image(yoMax: config.outputMode.iconName)
                             .font(.yoMax(10))
                         Text(config.outputMode.displayName)
                             .font(.yoMax(10))
@@ -425,7 +425,7 @@ struct ConfigurationRow: View {
 
                 if config.outputMode == .paste && config.autoSendKey.isEnabled {
                     HStack(spacing: 4) {
-                        Image(systemName: "keyboard")
+                        Image(yoMax: "keyboard")
                             .font(.yoMax(10))
                         Text(config.autoSendKey.displayName)
                             .font(.yoMax(10))
@@ -443,7 +443,7 @@ struct ConfigurationRow: View {
                 }
                 if config.isAIEnhancementEnabled {
                     HStack(spacing: 4) {
-                        Image(systemName: "sparkles")
+                        Image(yoMax: "sparkles")
                             .font(.yoMax(10))
                         Text(
                             config.selectedAIProvider == AIProvider.voiceInkRefine.rawValue
@@ -536,7 +536,7 @@ struct ModeAppIcon: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 20, height: 20)
         } else {
-            Image(systemName: "app.fill")
+            Image(yoMax: "app.fill")
                 .font(.yoMax(14))
                 .foregroundColor(AppTheme.Text.secondary)
                 .frame(width: 20, height: 20)

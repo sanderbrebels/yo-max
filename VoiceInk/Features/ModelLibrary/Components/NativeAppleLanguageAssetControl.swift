@@ -56,7 +56,7 @@ struct NativeAppleLanguageAssetControl: View {
             EmptyView()
         case .needsDownload:
             Button(action: downloadAsset) {
-                Image(systemName: "arrow.down.circle.fill")
+                Image(yoMax: "arrow.down.circle.fill")
                     .font(.yoMax(14, weight: .semibold))
             }
             .buttonStyle(.plain)
@@ -67,18 +67,18 @@ struct NativeAppleLanguageAssetControl: View {
                 .controlSize(.small)
                 .frame(width: 28, height: 24)
         case .notSupported:
-            Image(systemName: "exclamationmark.triangle")
+            Image(yoMax: "exclamationmark.triangle")
                 .font(.yoMax(10))
                 .foregroundColor(AppTheme.Text.secondary)
                 .frame(width: 28, height: 24)
         case .assetManagementUnavailable:
-            Image(systemName: "exclamationmark.triangle")
+            Image(yoMax: "exclamationmark.triangle")
                 .font(.yoMax(10))
                 .foregroundColor(AppTheme.Text.secondary)
                 .frame(width: 28, height: 24)
         case .reservationLimitReached:
             Button(action: refreshAssetState) {
-                Image(systemName: "exclamationmark.circle")
+                Image(yoMax: "exclamationmark.circle")
                     .font(.yoMax(14, weight: .semibold))
             }
             .buttonStyle(.plain)
@@ -86,7 +86,7 @@ struct NativeAppleLanguageAssetControl: View {
             .frame(width: 28, height: 24)
         case .failed:
             Button(action: downloadAsset) {
-                Image(systemName: "arrow.clockwise.circle.fill")
+                Image(yoMax: "arrow.clockwise.circle.fill")
                     .font(.yoMax(14, weight: .semibold))
             }
             .buttonStyle(.plain)

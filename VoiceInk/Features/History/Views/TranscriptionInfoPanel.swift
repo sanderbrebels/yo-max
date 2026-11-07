@@ -167,7 +167,7 @@ struct TranscriptionInfoPanel: View {
 
     private var aiRequestTokenEstimate: some View {
         HStack(spacing: 6) {
-            Image(systemName: "number")
+            Image(yoMax: "number")
                 .font(.yoMax(11, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
 
@@ -220,7 +220,7 @@ private struct TranscriptionMetadataRow: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            Image(systemName: icon)
+            Image(yoMax: icon)
                 .font(.yoMax(11, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
                 .frame(width: 20, height: 20)

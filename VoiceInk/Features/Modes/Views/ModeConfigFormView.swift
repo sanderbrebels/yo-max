@@ -254,7 +254,7 @@ struct ModeConfigFormView: View {
             draft.selectedTranscriptionModelName = model.selectionKey
         } label: {
             if draft.selectedTranscriptionModelName == model.selectionKey {
-                Label(model.displayName, systemImage: "checkmark")
+                Label(model.displayName, yoMax: "checkmark")
             } else {
                 Text(model.displayName)
             }
@@ -527,7 +527,7 @@ struct ModeConfigFormView: View {
                 Button {
                     openPromptEditor(.edit(selectedPrompt))
                 } label: {
-                    Image(systemName: "pencil.circle.fill")
+                    Image(yoMax: "pencil.circle.fill")
                         .font(.yoMax(18))
                         .symbolRenderingMode(.hierarchical)
                         .foregroundStyle(AppTheme.Text.secondary)
@@ -607,7 +607,7 @@ struct ModeConfigFormView: View {
         Section("Advanced") {
             Picker("Output", selection: $draft.outputMode) {
                 ForEach(outputChoices, id: \.self) { outputMode in
-                    Label(outputMode.displayName, systemImage: outputMode.iconName)
+                    Label(outputMode.displayName, yoMax: outputMode.iconName)
                         .tag(outputMode)
                 }
             }
@@ -661,7 +661,7 @@ struct ModeConfigFormView: View {
                         }
                     }
                 } label: {
-                    Label("Template", systemImage: "doc.on.doc")
+                    Label("Template", yoMax: "doc.on.doc")
                 }
                 .menuStyle(.button)
                 .buttonStyle(.bordered)

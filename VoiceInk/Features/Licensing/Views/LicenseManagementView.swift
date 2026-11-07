@@ -584,7 +584,7 @@ private struct ReportFeedbackBottomPanel: View {
             .frame(maxWidth: .infinity)
 
             Button(action: onClose) {
-                Image(systemName: "xmark")
+                Image(yoMax: "xmark")
                     .font(.yoMax(11, weight: .semibold))
                     .foregroundStyle(.secondary)
                     .frame(width: 28, height: 28)
@@ -626,7 +626,7 @@ private struct BenefitPill: View {
 
     var body: some View {
         HStack(spacing: 7) {
-            Image(systemName: systemImage)
+            Image(yoMax: systemImage)
                 .font(.yoMax(13, weight: .semibold))
                 .foregroundStyle(tint)
 
@@ -653,7 +653,7 @@ private struct BenefitPill: View {
 private struct CopiedStatePill: View {
     var body: some View {
         HStack(spacing: 5) {
-            Image(systemName: "checkmark")
+            Image(yoMax: "checkmark")
                 .font(.yoMax(11, weight: .semibold))
 
             Text("Copied")
@@ -683,7 +683,7 @@ private struct FullWidthDisclosureGroupStyle: DisclosureGroupStyle {
 
                     Spacer(minLength: 12)
 
-                    Image(systemName: "chevron.down")
+                    Image(yoMax: "chevron.down")
                         .font(.yoMax(12, weight: .semibold))
                         .foregroundStyle(.secondary)
                         .rotationEffect(.degrees(configuration.isExpanded ? 180 : 0))
@@ -709,7 +709,7 @@ private struct ResourceLinkRow: View {
     var body: some View {
         Button(action: action) {
             HStack(alignment: .center, spacing: 12) {
-                Image(systemName: systemImage)
+                Image(yoMax: systemImage)
                     .font(.yoMax(14, weight: .semibold))
                     .foregroundStyle(tint)
                     .frame(width: 18, height: 18)
@@ -729,7 +729,7 @@ private struct ResourceLinkRow: View {
 
                 Spacer(minLength: 8)
 
-                Image(systemName: "arrow.up.right")
+                Image(yoMax: "arrow.up.right")
                     .font(.yoMax(11, weight: .semibold))
                     .foregroundStyle(.tertiary)
             }
@@ -829,7 +829,7 @@ private struct LicenseActionLabel: View {
 
     var body: some View {
         HStack(spacing: 7) {
-            Image(systemName: systemImage)
+            Image(yoMax: systemImage)
                 .font(.yoMax(13, weight: .semibold))
                 .foregroundStyle(iconColor)
 
@@ -865,7 +865,7 @@ private struct ValidationMessage: View {
                 .font(.yoMax(12))
                 .fixedSize(horizontal: false, vertical: true)
         } icon: {
-            Image(systemName: isSuccess ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
+            Image(yoMax: isSuccess ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
         }
         .foregroundStyle(isSuccess ? AppTheme.Status.positive : AppTheme.Status.error)
     }

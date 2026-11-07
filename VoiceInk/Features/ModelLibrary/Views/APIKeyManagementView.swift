@@ -102,7 +102,7 @@ struct APIKeyManagementView: View {
                                     await aiService.fetchOpenRouterModels()
                                 }
                             }) {
-                                Label("Refresh", systemImage: "arrow.clockwise")
+                                Label("Refresh", yoMax: "arrow.clockwise")
                             }
                         }
                     } else {
@@ -126,7 +126,7 @@ struct APIKeyManagementView: View {
                                     await aiService.fetchOpenRouterModels()
                                 }
                             }) {
-                                Label("Refresh", systemImage: "arrow.clockwise")
+                                Label("Refresh", yoMax: "arrow.clockwise")
                             }
                         }
                     }
@@ -167,7 +167,7 @@ struct APIKeyManagementView: View {
                                 aiService.updateOllamaBaseURL(ollamaBaseURL)
                                 checkOllamaConnection()
                             }) {
-                                Image(systemName: "arrow.counterclockwise")
+                                Image(yoMax: "arrow.counterclockwise")
                             }
                             .help("Reset to default")
                         }
@@ -272,7 +272,7 @@ struct APIKeyManagementView: View {
                             if let url = getAPIKeyURL() {
                                 Link(destination: url) {
                                     HStack {
-                                        Image(systemName: "key.fill")
+                                        Image(yoMax: "key.fill")
                                         Text("Get API Key")
                                     }
                                     .font(.yoMax(10))

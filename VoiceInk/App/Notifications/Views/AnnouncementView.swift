@@ -18,7 +18,7 @@ struct AnnouncementView: View {
                 Spacer()
 
                 Button(action: onClose) {
-                    Image(systemName: "xmark")
+                    Image(yoMax: "xmark")
                         .font(.yoMax(11, weight: .medium))
                         .foregroundColor(.white.opacity(0.7))
                 }

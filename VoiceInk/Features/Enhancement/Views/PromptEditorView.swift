@@ -115,7 +115,7 @@ struct PromptEditorView: View {
             Button {
                 dismissPanel()
             } label: {
-                Image(systemName: "chevron.left")
+                Image(yoMax: "chevron.left")
                     .font(.yoMax(14, weight: .semibold))
                     .foregroundColor(AppTheme.Text.secondary)
                     .frame(width: 28, height: 28)
@@ -164,7 +164,7 @@ struct PromptEditorView: View {
                 }
             }
         } label: {
-            Label("Template", systemImage: "sparkles")
+            Label("Template", yoMax: "sparkles")
                 .font(.yoMax(13, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
         }

@@ -44,7 +44,7 @@ struct DashboardInsightsView: View {
     private var header: some View {
         HStack(alignment: .center, spacing: 14) {
             Button(action: onBack) {
-                Image(systemName: "chevron.left")
+                Image(yoMax: "chevron.left")
                     .font(.yoMax(12, weight: .semibold))
                     .frame(width: 36, height: 36)
             }

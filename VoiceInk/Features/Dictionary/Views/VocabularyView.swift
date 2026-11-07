@@ -57,7 +57,7 @@ struct VocabularyView: View {
                 Button {
                     showInfoPopover.toggle()
                 } label: {
-                    Image(systemName: "info.circle")
+                    Image(yoMax: "info.circle")
                 }
                 .buttonStyle(.borderless)
                 .help("Vocabulary examples")
@@ -75,7 +75,7 @@ struct VocabularyView: View {
                                 .font(.yoMax(12, weight: .medium))
                                 .foregroundColor(AppTheme.Text.secondary)
 
-                            Image(systemName: sortIconName)
+                            Image(yoMax: sortIconName)
                                 .font(.yoMax(10))
                                 .foregroundColor(AppTheme.Text.secondary)
                         }

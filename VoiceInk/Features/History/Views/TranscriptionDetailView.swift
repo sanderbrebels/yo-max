@@ -63,7 +63,7 @@ struct TranscriptionDetailView: View {
     private var header: some View {
         HStack(spacing: 12) {
             Button(action: onBack) {
-                Image(systemName: "chevron.left")
+                Image(yoMax: "chevron.left")
                     .font(.yoMax(14, weight: .semibold))
             }
             .buttonStyle(.plain)

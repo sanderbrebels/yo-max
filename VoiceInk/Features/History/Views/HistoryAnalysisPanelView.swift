@@ -79,7 +79,7 @@ struct HistoryAnalysisPanelView: View {
 
     private var emptyState: some View {
         VStack(spacing: 8) {
-            Image(systemName: "chart.bar.xaxis")
+            Image(yoMax: "chart.bar.xaxis")
                 .font(.yoMax(32, weight: .light))
                 .foregroundStyle(AppTheme.Text.secondary)
 
@@ -299,7 +299,7 @@ private struct HistoryPerformanceEmptyRow: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            Image(systemName: icon)
+            Image(yoMax: icon)
                 .font(.yoMax(12, weight: .semibold))
                 .foregroundStyle(AppTheme.Text.secondary)
 

@@ -48,13 +48,13 @@ struct WhisperModelCardView: View {
     private var metadataSection: some View {
         HStack(spacing: 12) {
             // Language
-            Label(model.language, systemImage: "globe")
+            Label(model.language, yoMax: "globe")
                 .font(.yoMax(11))
                 .foregroundColor(Color(.secondaryLabelColor))
                 .lineLimit(1)
 
             // Size
-            Label(model.size, systemImage: "internaldrive")
+            Label(model.size, yoMax: "internaldrive")
                 .font(.yoMax(11))
                 .foregroundColor(Color(.secondaryLabelColor))
                 .lineLimit(1)
@@ -114,7 +114,7 @@ struct WhisperModelCardView: View {
                     HStack(spacing: 4) {
                         Text(LocalizedStringKey(isDownloading ? "Cancel" : "Download"))
                             .font(.yoMax(12, weight: .medium))
-                        Image(systemName: isDownloading ? "xmark.circle" : "arrow.down.circle")
+                        Image(yoMax: isDownloading ? "xmark.circle" : "arrow.down.circle")
                             .font(.yoMax(12, weight: .medium))
                     }
                     .foregroundColor(.white)
@@ -132,7 +132,7 @@ struct WhisperModelCardView: View {
             if isDownloaded {
                 Menu {
                     Button(action: deleteAction) {
-                        Label("Delete Model", systemImage: "trash")
+                        Label("Delete Model", yoMax: "trash")
                     }
 
                     Button {
@@ -140,10 +140,10 @@ struct WhisperModelCardView: View {
                             NSWorkspace.shared.selectFile(modelURL.path, inFileViewerRootedAtPath: "")
                         }
                     } label: {
-                        Label("Show in Finder", systemImage: "folder")
+                        Label("Show in Finder", yoMax: "folder")
                     }
                 } label: {
-                    Image(systemName: "ellipsis.circle")
+                    Image(yoMax: "ellipsis.circle")
                         .font(.yoMax(14))
                 }
                 .menuStyle(.borderlessButton)
@@ -189,17 +189,17 @@ struct ImportedWhisperModelCardView: View {
                 if isDownloaded {
                     Menu {
                         Button(action: deleteAction) {
-                            Label("Delete Model", systemImage: "trash")
+                            Label("Delete Model", yoMax: "trash")
                         }
                         Button {
                             if let modelURL = modelURL {
                                 NSWorkspace.shared.selectFile(modelURL.path, inFileViewerRootedAtPath: "")
                             }
                         } label: {
-                            Label("Show in Finder", systemImage: "folder")
+                            Label("Show in Finder", yoMax: "folder")
                         }
                     } label: {
-                        Image(systemName: "ellipsis.circle")
+                        Image(yoMax: "ellipsis.circle")
                             .font(.yoMax(14))
                     }
                     .menuStyle(.borderlessButton)
@@ -244,7 +244,7 @@ func performanceColor(value: Double) -> Color {
 }
 
 func modelStatusPill(_ text: LocalizedStringKey, systemImage: String) -> some View {
-    Label(text, systemImage: systemImage)
+    Label(text, yoMax: systemImage)
         .font(.yoMax(11, weight: .medium))
         .foregroundColor(Color(.secondaryLabelColor))
         .padding(.horizontal, 8)
