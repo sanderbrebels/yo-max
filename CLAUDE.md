@@ -87,14 +87,19 @@ make local
 
 ## VoiceInk-updates binnenhalen
 
+**Keuze (2026-11-07): aanpak A, kiezen en overnemen.** Automatische app-updates (Sparkle) blijven uit: die zouden VoiceInk over Yo Max installeren. Verbeteringen in de broncode van VoiceInk komen nooit vanzelf binnen. `/yo-max-start` meldt wat er nieuw is bij `upstream/main` en zegt welke commits voor Sander tellen (Whisper/lokale transcriptie, plakken, fn/sneltoetsen, crashfixes, beveiliging, nieuwe macOS-versies). Alleen wat hij kiest wordt overgenomen, meestal met `git cherry-pick <commit>`. Cloudproviders, betaalde functies en VoiceInk Pro laten we liggen.
+
+Een volledige merge (aanpak B) blijft mogelijk voor een grote update:
+
 ```bash
 git fetch upstream
 git checkout yo-max
 git merge upstream/main
 ```
 
-- Los conflicten op en behoud daarbij de Yo Max-aanpassingen (zoek op `Yo Max`). Let vooral op `project.pbxproj` (naam/bundle-id), `Info.plist` (Sparkle uit), `Localizable.xcstrings` en `RecordingShortcutManager.swift`.
-- Daarna `make local`, testen met `testzinnen.md` en committen. Niet pushen zonder te vragen.
+- Bij conflicten in schermbestanden: neem hun versie, en draai daarna de scripts uit `tools/tarmax-stijl/` (lettertypes, kleuren, naam; zie de README daar). Die zetten de Tarmax-look en de naam Yo Max terug en zijn veilig om opnieuw te draaien.
+- Let daarnaast met de hand op `project.pbxproj` (naam/bundle-id), `Info.plist` (Sparkle uit), `AppTheme.swift`, `RecordingShortcutManager.swift`, `TranscriptionDelivery.swift` en `AppDelegate.swift` (zoek op `Yo Max`).
+- Daarna `make local`, testen met `testzinnen.md` en committen. Pushen met `/yo-max-stop`.
 
 ## Licentie (GPL-3.0)
 

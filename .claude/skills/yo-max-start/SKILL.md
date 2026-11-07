@@ -14,7 +14,10 @@ Parallel waar het kan:
 - `git status -sb`: staat er niet-gecommit werk open? Meld het en gooi nooit iets weg.
 - `git fetch origin` en `git fetch upstream`.
 - Bestaat `origin/yo-max` en loopt die voor? Dan `git pull --ff-only origin yo-max`. Lukt fast-forward niet (de twee kanten liepen uiteen): niets forceren, toon het verschil (`git log --oneline HEAD..origin/yo-max` en `origin/yo-max..HEAD`) en vraag wat Sander wil.
-- Nieuwe VoiceInk-updates: `git log --oneline HEAD..upstream/main | wc -l` en de laatste vijf titels. **Niet zelf mergen**: Yo Max wijkt sterk af (volledige Tarmax-look), dus een merge is werk. Meld het aantal en wat er interessant uitziet; mergen gebeurt alleen als Sander het vraagt, volgens `CLAUDE.md` › "VoiceInk-updates binnenhalen".
+- **Nieuwe VoiceInk-updates (aanpak A, kiezen en overnemen):** `git log --oneline HEAD..upstream/main`. Lees de titels (en bij twijfel `git show --stat <commit>`) en deel ze in twee groepen:
+  - **Telt voor Yo Max:** Whisper of lokale transcriptie, plakken, fn/sneltoetsen, de recorder, crashfixes, beveiliging, nieuwe macOS-versies, geheugen of snelheid.
+  - **Laten liggen:** cloudproviders (Soniox, ElevenLabs, Deepgram, …), betaalde functies, VoiceInk Pro of licenties, hun eigen branding en website.
+  Meld per groep het aantal en de belangrijkste titels in gewone taal. **Niet zelf overnemen**: dat gebeurt pas als Sander kiest, meestal met `git cherry-pick <commit>` en daarna de scripts in `tools/tarmax-stijl/` (zie `CLAUDE.md` › "VoiceInk-updates binnenhalen").
 - Kwamen er commits binnen via de pull, of draait er een oudere build? Stel `make local` voor (en herinner aan de Toegankelijkheid-toestemming na elke build). Bouw niet ongevraagd.
 
 ## 2. Status
