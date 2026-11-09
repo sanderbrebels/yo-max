@@ -108,7 +108,8 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 ### Iconen: alles Phosphor (2026-11-07)
 - Alle iconen komen uit **Phosphor** (MIT), zoals Tarmax. 163 Phosphor-iconen staan als **custom symbols** in `Assets.xcassets/PhosphorSymbols` (`ph.<naam>` = bold, `ph.<naam>.fill`), gemaakt met `swiftdraw` (brew); alle gewichten zijn bold, dus overal hetzelfde gewicht. Ze schalen mee met `.font` zoals SF Symbols.
 - `VoiceInk/App/YoMax/YoMaxSymbols.swift`: tabel SF-naam → Phosphor, `Image(yoMax:)`, `Label(_:yoMax:)`, `NSImage.yoMax`. Onbekende namen vallen terug op het SF Symbol. VoiceOver krijgt het (gelokaliseerde) label van het SF Symbol. Hoe je een icoon toevoegt staat bovenaan dat bestand. `PhosphorIcon("naam", weight:, size:)` voor een Phosphor-naam.
-- Regels (Tarmax): naast tekst 1 em (zelfde grootte als de tekst) en bold; een knop met alleen een icoon heeft `.help` + `.accessibilityLabel` en minstens 24 pt trefoppervlak (`.yoMaxIconHitTarget()`). Grote iconen in tegels en lege staten mogen groter.
+- **Grootte (keuze B, 2026-11-09, schets `icoon-grootte.html`): een icoon is 4/3 van zijn lettergrootte, dus tekst + 4** (13,5 pt tekst → 18 pt icoon); een knop met alleen een icoon krijgt dezelfde 18 pt. Dat zit in de symbolen zelf: `swiftdraw … --insets 58,58,58,58` (nooit `auto`, dat maakt ze 0,7 em). Phosphor-bron: `npm pack @phosphor-icons/core`.
+- Regels (Tarmax): bold naast tekst; een knop met alleen een icoon heeft `.help` + `.accessibilityLabel` en minstens 24 pt trefoppervlak (`.yoMaxIconHitTarget()`). Grote iconen in tegels en lege staten mogen groter.
 - Recente dictaten op het dashboard: **Play/Pause en Copy** bij hover (`YoMaxQuickAudioPlayer`, `YoMaxIconButton` in `YoMaxIcons.swift`).
 
 ### Dashboardbanner (2026-11-07, schets `dashboard-banner.html` variant B)

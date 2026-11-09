@@ -10,8 +10,14 @@ import SwiftUI
 ///
 /// Add an icon: download `assets/<bold|fill>/<name>-<weight>.svg` from @phosphor-icons/core,
 /// replace `fill="currentColor"` by `fill="#000000"`, run
-/// `swiftdraw in.svg --format sfsymbol --size medium --insets auto --output ph.<name>.svg`
+/// `swiftdraw in.svg --format sfsymbol --size medium --insets 58,58,58,58 --output ph.<name>.svg`
 /// (brew install swiftdraw), put it in a `.symbolset` and add a line to the table.
+///
+/// Principle (Sander chose B, 2026-11-09, `design/schetsen/icoon-grootte.html`): an icon is 4/3 of
+/// its font size, so text + 4 beside 13.5 pt text (an 18 pt Phosphor box). The fixed insets of 58
+/// on the 256 grid build that into every symbol, so `.font(.yoMax(13.5))` gives an 18 pt icon and
+/// Phosphor keeps its own proportions. Never `--insets auto`: that crops every glyph to cap height
+/// (about 0.7 em), which looks small and thin beside text.
 enum YoMaxSymbols {
     /// The asset name for an SF Symbol name, or nil when there is no Phosphor counterpart.
     static func asset(for systemName: String) -> String? {
