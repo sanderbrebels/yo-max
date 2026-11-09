@@ -106,15 +106,15 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - **Paragraph breaks** (VoiceInk, per modus: Modes → Transcription Formatting) maakt de "automatische enters": alinea's per ±50 woorden/4 zinnen, niet per pauze. Sander wil dat zo houden.
 
 ### Iconen: alles Phosphor (2026-11-07)
-- Alle iconen komen uit **Phosphor** (MIT), zoals Tarmax. 163 Phosphor-iconen staan als **custom symbols** in `Assets.xcassets/PhosphorSymbols` (`ph.<naam>` = bold, `ph.<naam>.fill`), gemaakt met `swiftdraw` (brew); `ph.<naam>` is **regular** (sinds 2026-11-09, schets `icoon-gewicht.html`: bold was bij 4/3 em te zwaar; regular heeft dan de lijn van Aeonik 400), de gekozen pagina fill. Ze schalen mee met `.font` zoals SF Symbols.
+- Alle iconen komen uit **Phosphor** (MIT), zoals Tarmax. 163 Phosphor-iconen staan als **custom symbols** in `Assets.xcassets/PhosphorSymbols` (`ph.<naam>` = **bold**, `ph.<naam>.fill` voor de gekozen pagina), gemaakt met `swiftdraw` (brew). Regular is op 2026-11-09 geprobeerd (`icoon-gewicht.html`) en weer teruggezet: Sander wil bold. Ze schalen mee met `.font` zoals SF Symbols.
 - `VoiceInk/App/YoMax/YoMaxSymbols.swift`: tabel SF-naam → Phosphor, `Image(yoMax:)`, `Label(_:yoMax:)`, `NSImage.yoMax`. Onbekende namen vallen terug op het SF Symbol. VoiceOver krijgt het (gelokaliseerde) label van het SF Symbol. Hoe je een icoon toevoegt staat bovenaan dat bestand. `PhosphorIcon("naam", weight:, size:)` voor een Phosphor-naam.
 - **Grootte (keuze B, 2026-11-09, schets `icoon-grootte.html`): een icoon is 4/3 van zijn lettergrootte, dus tekst + 4** (13,5 pt tekst → 18 pt icoon); een knop met alleen een icoon krijgt dezelfde 18 pt. Dat zit in de symbolen zelf: `swiftdraw … --insets 58,58,58,58` (nooit `auto`, dat maakt ze 0,7 em). Phosphor-bron: `npm pack @phosphor-icons/core`.
-- Regels (Tarmax): het gewicht waarvan de lijn het dichtst bij die van de letters ligt (bij 4/3 em: regular); een knop met alleen een icoon heeft `.help` + `.accessibilityLabel` en minstens 24 pt trefoppervlak (`.yoMaxIconHitTarget()`). Grote iconen in tegels en lege staten mogen groter.
+- Regels (Tarmax): bold naast tekst; een knop met alleen een icoon heeft `.help` + `.accessibilityLabel` en minstens 24 pt trefoppervlak (`.yoMaxIconHitTarget()`). Grote iconen in tegels en lege staten mogen groter.
 - Recente dictaten op het dashboard: **Play/Pause en Copy** bij hover (`YoMaxQuickAudioPlayer`, `YoMaxIconButton` in `YoMaxIcons.swift`).
 
 ### Dashboard (2026-11-09, schetsen `dashboard-banner-3.html` A, `dashboard-kop.html` B, `icoon-gewicht.html`)
 - **Kop:** "Good morning, Sander" zonder emoji (naam aanklikbaar), eronder een feit over vandaag ("3 dictations today, 412 words"), geen aanmoediging.
-- **Banner:** donker podium (brand-dark, ±140 pt) met "Time saved with Yo Max", de tijd groot in lime, een vergelijking in ritten van een uur (`YoMaxRideComparison`) en een lime knop **View Insights**; rechts de laatste 30 dagen als lime golf (`YoMaxDayWave.swift`). Code: `DashboardHeroCard.swift`.
+- **Banner:** donker podium (brand-dark, ±140 pt) met "Time saved with Yo Max", de tijd groot in lime, een vergelijking in ritten van een uur (`YoMaxRideComparison`) en **het hele podium opent Insights** (klein pijltje rechtsboven, lime bij hover; een lime knop is geprobeerd en teruggezet); rechts de laatste 30 dagen als lime golf (`YoMaxDayWave.swift`). Code: `DashboardHeroCard.swift`.
 - **Drie tegels** eronder (`YoMaxDashboardStats.swift`): woorden (Aa), words per minute (meter), days in a row (de week als stipjes); getal 28 pt, `Radius.tile` 12.
 - Geen "Star on GitHub" of "Copy System Info" meer onderaan het dashboard. De ruitenafbeelding `momentum-hero-bg` wordt niet gebruikt.
 

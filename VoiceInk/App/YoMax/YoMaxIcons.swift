@@ -4,11 +4,11 @@ import SwiftUI
 /// Yo Max: a Phosphor icon by its Phosphor name (MIT, see Phosphor-LICENSE.txt), the icon set of Tarmax.
 /// Uses the custom symbols in `Assets.xcassets/PhosphorSymbols` (see `YoMaxSymbols`), so it has the
 /// same weight and optical size as every other icon. Yo Max rule (B, 2026-11-09): an icon is 4/3 of
-/// its font size, so text + 4 beside the text it labels, and regular; the chosen page in the navigation is fill. Decorative: the
+/// its font size, so text + 4 beside the text it labels, and bold; the chosen page in the navigation is fill. Decorative: the
 /// text or the button around it carries the label.
 struct PhosphorIcon: View {
     enum Weight {
-        case bold  // the regular Phosphor symbols (`ph.<name>`); the name stayed from the first version
+        case bold
         case fill
     }
 
