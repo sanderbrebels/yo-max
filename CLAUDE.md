@@ -20,6 +20,7 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - **Bij een bug eerst de logs lezen:** `/usr/bin/log show --last 15m --info --predicate 'subsystem BEGINSWITH "com.prakashjoshipax"'` (de categorieën `CursorPaster`, `PasteFocusDiagnostics`, `YoMax…` tonen wat er bij het plakken gebeurde). Dictaten staan in `~/Library/Application Support/com.prakashjoshipax.VoiceInk/default.store` (SQLite, alleen-lezen openen) om ruwe en opgeschoonde tekst te vergelijken.
 - **Testen na een build:** `make install` duurt soms langer dan 10 minuten: draai het op de achtergrond. Wat met fn moet gebeuren, test Sander zelf; zeg dat eerlijk.
 - Zeg nooit dat iets "genoteerd" is voor het echt in CLAUDE.md staat.
+- **Visuele keuzes eerst klein proberen:** Sander keurt soms een richting af nadat hij ze in de app ziet (2026-11-09: regular-iconen en een lime knop werden teruggezet). Eén wijziging per commit houdt terugzetten makkelijk.
 
 ## Repo
 
@@ -121,6 +122,10 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 ### Unslop (2026-11-09)
 - Geen emoji, uitroeptekens of "unlock" in de interface; Aeonik alleen 400/500 (`.semibold`/`.bold` → `.medium`); geen hoofdletterlabels of negatieve tracking; geen kleurverlopen of glas op vlakken (maskers die een rand laten vervagen mogen). Ook afgerond: geen AI-sparkle meer (Modes = schuifjes `sliders-horizontal`, schets `modes-icoon.html` A; elders `sparkles` → potlood `pencil-simple-line` via de tabel in `YoMaxSymbols`), vlakke keycaps in `ShortcutPreviewView`, `MetricTintBackground` weg.
 
+### Woordenboek gevuld (2026-11-09)
+- 30 woorden en 11 vervangingen, opgesteld uit 301 eigen dictaten (o.a. Tamax/Darmax → Tarmax, Sandoprebels → Sander Brebels, Komoto/Commode → Komoot, Whisperflow → Wispr Flow, Trava → Strava). Geïmporteerd via Dictionary → Import. Test door Sander: alle namen juist.
+- Het bestand staat **niet in git** (privénamen, openbare repo): `~/Downloads/yo-max-woordenboek.json` (formaat `voiceink.dictionary`, schemaVersion 1). Nog niet erin: de club achter **DZVG** en de lus "Coerso's Kapellke" (schrijfwijze vragen).
+
 ### Waarom er nog dicteerfouten zijn (analyse 2026-11-07)
 - De AI-opschoning (qwen) verbetert goed; de fouten komen uit **Whisper** bij namen ("Till you max", "Sandoprebels", "darmax.app"). **Het woordenboek was leeg (0 woorden).** Whisper krijgt de woorden als hint (`initial_prompt`) en de AI krijgt ze ook mee. Eerst woordenboek en vervangingen vullen, dan pas een ander model.
 
@@ -190,7 +195,8 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 - [ ] Testzinnen opnieuw dicteren met prompt **v4** en het gevulde woordenboek; ook de opmaakopdrachten en de opdrachtmodus testen (zie `design/schetsen/index.html` › 1). Nog niet getest door Sander.
 - [ ] `qwen/qwen3.8-27b` vs. `openai/gpt-oss-120b` vergelijken op Nederlands en snelheid.
 - [ ] Snelheid en kwaliteit vergelijken: Whisper Turbo vs. Parakeet V3.
-- [ ] **Eerst:** Woordenboek (Dictionary) vullen met eigen namen en vaktermen (Yo Max, Sander Brebels, Tarmax, tarmax.app, Figma, Phosphor, Wispr Flow, Claude, Strava, Garmin, Wahoo, MacBook, staging, …) en vervangingen ("Till you max" → "Yo Max"). Stond op 2026-11-07 nog op 0 woorden. Kan ook met rechtsklik en "Find Doubtful Words" in History.
+- [x] Woordenboek gevuld (30 woorden, 11 vervangingen, 2026-11-09; getest door Sander).
+- [ ] DZVG (club) en "Coerso's Kapellke" aan het woordenboek toevoegen: eerst de juiste schrijfwijze aan Sander vragen.
 
 ### Branding en design
 - [x] Eigen app-icoon (`VoiceInk/Assets.xcassets/AppIcon.appiconset`).
@@ -205,7 +211,8 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 - [x] Flow-elevation, zijbalk zonder lime, merkblok en Tarmax-link, vrij schaalbaar venster (2026-11-07).
 - [x] Alle iconen Phosphor, met VoiceOver-labels, 1 em en 24 pt trefoppervlak (impeccable-audit, 2026-11-07).
 - [x] Dashboard: één banner met tijdwinst en statistieken (variant B, 2026-11-07).
-- [ ] **Nog niet door Sander bekeken (2026-11-07):** zijbalk, wit paneel, Phosphor-iconen in alle schermen en menu's, banner B, Play/Copy. Bij afwijkingen een screenshot; Claude kan geen schermopname maken (geen toestemming Schermopname).
+- [x] Icoongrootte 4/3 em, donkere dashboardbanner met tegels, begroeting zonder emoji, unslop (2026-11-09).
+- [ ] **Nog niet door Sander bekeken (2026-11-09):** het Modes-icoon (schuifjes), het potlood waar vroeger het AI-sterretje stond, de vlakke keycaps in Sneltoetsen, grote iconen in tegels en lege staten (die groeiden 1,29× mee), en dark mode van de nieuwe banner. Bij afwijkingen een screenshot; Claude kan geen schermopname maken.
 - [ ] Ongebruikte asset `momentum-hero-bg` opruimen als banner B blijft.
 
 ### Functies
