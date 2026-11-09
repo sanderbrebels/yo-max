@@ -174,15 +174,7 @@ struct DashboardContent: View {
                 }
             }
 
-            Spacer(minLength: DashboardLayout.footerTopSpacing)
-
-            nameEditorDismissArea {
-                HStack {
-                    Spacer()
-                    footerActionsView
-                }
-                .frame(maxWidth: .infinity)
-            }
+            // Yo Max: no "Star on GitHub" or "Copy System Info" on the dashboard (VoiceInk's own).
         }
         .frame(width: availableWidth, alignment: .topLeading)
     }

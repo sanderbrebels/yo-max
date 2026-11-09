@@ -22,11 +22,11 @@ struct DashboardHeroCard: View {
     let onViewInsights: () -> Void
     // Yo Max: the banner (variant A of design/schetsen/dashboard-banner-3.html): a dark stage with
     // the time saved in lime and the last 30 days as the wave of the app icon, and the three stats
-    // as tiles under it. The whole stage opens Insights.
+    // as tiles under it. A lime "View Insights" button under the figure (icoon-gewicht.html).
     let totals: DashboardMetricTotals
     let dailyActivity: [DashboardProductivityPoint]
 
-    @State private var isHovering = false
+    @State private var isHoveringButton = false
 
     private var stageShape: RoundedRectangle {
         RoundedRectangle(cornerRadius: DashboardLayout.cardCornerRadius, style: .continuous)
@@ -34,44 +34,49 @@ struct DashboardHeroCard: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            if isLocked {
-                stage
-            } else {
-                Button(action: onViewInsights) { stage }
-                    .buttonStyle(.plain)
-                    .disabled(!canViewInsights)
-                    .help(actionHelp)
-                    .accessibilityLabel(Text(actionAccessibilityLabel))
-                    .onHover { isHovering = $0 && canViewInsights }
-            }
-
+            stage
             YoMaxDashboardStats(totals: totals, dailyActivity: dailyActivity)
         }
     }
 
     private var stage: some View {
         HStack(alignment: .center, spacing: 24) {
-            heroCopy
-                .frame(maxWidth: .infinity, alignment: .leading)
-            YoMaxDayWave(dailyActivity: dailyActivity)
+            VStack(alignment: .leading, spacing: 14) {
+                heroCopy
+                if !isLocked, canViewInsights {
+                    insightsButton
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            YoMaxDayWave(dailyActivity: dailyActivity, height: 96)
                 .frame(maxWidth: 320)
         }
         .padding(.horizontal, 26)
         .padding(.vertical, 22)
-        .frame(minHeight: 132)
         .background(AppTheme.Brand.brandDark, in: stageShape)
-        .overlay(alignment: .topTrailing) {
-            if !isLocked, canViewInsights {
-                Image(yoMax: "arrow.up.right")
-                    .font(.yoMax(11))
-                    .foregroundStyle(isHovering ? AppTheme.Brand.lime : DashboardMomentumBackground.onDarkMuted)
-                    .padding(12)
-                    .accessibilityHidden(true)
+    }
+
+    /// Lime on the dark stage: the one action of the dashboard (lime = action on dark, as in Tarmax).
+    private var insightsButton: some View {
+        Button(action: onViewInsights) {
+            HStack(spacing: 8) {
+                Text(actionTitle)
+                PhosphorIcon("arrow-right", size: 13)
             }
+            .font(.yoMax(13, weight: .medium))
+            .foregroundStyle(AppTheme.Brand.ink)
+            .padding(.horizontal, 16)
+            .frame(height: 36)
+            .background(
+                AppTheme.Brand.lime.mix(with: .white, by: isHoveringButton ? 0.25 : 0), in: Capsule())
+            .contentShape(Capsule())
         }
-        .overlay(stageShape.strokeBorder(Color.white.opacity(isHovering ? 0.16 : 0), lineWidth: 1))
-        .contentShape(stageShape)
-        .animation(.easeOut(duration: 0.15), value: isHovering)
+        .buttonStyle(.plain)
+        .help(actionHelp)
+        .accessibilityLabel(Text(actionAccessibilityLabel))
+        .onHover { isHoveringButton = $0 }
+        .animation(.easeOut(duration: 0.15), value: isHoveringButton)
     }
 
     @ViewBuilder

@@ -3,12 +3,13 @@ import SwiftUI
 
 /// Yo Max: every icon comes from Phosphor (the icon set of Tarmax), not from SF Symbols.
 ///
-/// The Phosphor icons are custom symbols in `Assets.xcassets/PhosphorSymbols` (`ph.<name>` is bold,
+/// The Phosphor icons are custom symbols in `Assets.xcassets/PhosphorSymbols` (`ph.<name>` is regular,
 /// `ph.<name>.fill` is fill), so they size with the font like an SF Symbol. Code keeps using the
 /// SF Symbol names it already has; `Image(yoMax:)` and `Label(_:yoMax:)` translate them here.
 /// A name that is not in the table falls back to the SF Symbol, so nothing ever goes missing.
 ///
-/// Add an icon: download `assets/<bold|fill>/<name>-<weight>.svg` from @phosphor-icons/core,
+/// Add an icon: take `assets/regular/<name>.svg` (or `assets/fill/<name>-fill.svg`) from
+/// @phosphor-icons/core (`npm pack @phosphor-icons/core`),
 /// replace `fill="currentColor"` by `fill="#000000"`, run
 /// `swiftdraw in.svg --format sfsymbol --size medium --insets 58,58,58,58 --output ph.<name>.svg`
 /// (brew install swiftdraw), put it in a `.symbolset` and add a line to the table.
@@ -16,7 +17,8 @@ import SwiftUI
 /// Principle (Sander chose B, 2026-11-09, `design/schetsen/icoon-grootte.html`): an icon is 4/3 of
 /// its font size, so text + 4 beside 13.5 pt text (an 18 pt Phosphor box). The fixed insets of 58
 /// on the 256 grid build that into every symbol, so `.font(.yoMax(13.5))` gives an 18 pt icon and
-/// Phosphor keeps its own proportions. Never `--insets auto`: that crops every glyph to cap height
+/// Phosphor keeps its own proportions. Weight: regular (Sander, 2026-11-09, `icoon-gewicht.html`):
+/// at 4/3 em its line is 8.4 % of the text size, like Aeonik 400; bold (12.5 %) looked too heavy. Never `--insets auto`: that crops every glyph to cap height
 /// (about 0.7 em), which looks small and thin beside text.
 enum YoMaxSymbols {
     /// The asset name for an SF Symbol name, or nil when there is no Phosphor counterpart.
