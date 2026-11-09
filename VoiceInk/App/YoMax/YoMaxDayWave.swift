@@ -1,52 +1,44 @@
 import SwiftUI
 
-/// Yo Max (schets dashboard-banner-2.html, variant A "Golf"): the last 30 days as the wave of the
-/// app icon. One rounded bar per day, its height the words dictated that day; a day without
-/// dictation is a small grey dot, and today is ink.
+/// Yo Max (schets dashboard-banner-3.html, variant A): the last 30 days as the wave of the app
+/// icon, on the dark banner. One rounded lime bar per day, its height the words dictated that day;
+/// a day without dictation is a small dot.
 struct YoMaxDayWave: View {
     static let dayCount = 30
 
     let dailyActivity: [DashboardProductivityPoint]
-    var height: CGFloat = 64
+    var height: CGFloat = 88
 
-    private static let barWidth: CGFloat = 6
-    private static let minimumBar: CGFloat = 8
+    private static let barWidth: CGFloat = 5
+    private static let minimumBar: CGFloat = 6
+    /// A day without dictation on the dark banner (--dark-700).
+    private static let idle = Color(nsColor: AppTheme.Brand.rgb(0x424841))
 
     var body: some View {
         let days = Self.lastDays(from: dailyActivity)
         let maximum = max(days.map(\.words).max() ?? 0, 1)
 
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .bottom, spacing: 0) {
-                ForEach(Array(days.enumerated()), id: \.offset) { index, day in
-                    if index > 0 { Spacer(minLength: 2) }
-                    bar(words: day.words, maximum: maximum, isToday: index == days.count - 1)
-                }
+        HStack(alignment: .bottom, spacing: 0) {
+            ForEach(Array(days.enumerated()), id: \.offset) { index, day in
+                if index > 0 { Spacer(minLength: 2) }
+                bar(words: day.words, maximum: maximum)
             }
-            .frame(height: height, alignment: .bottom)
-
-            HStack {
-                Text(days.first?.date ?? Date(), format: .dateTime.day().month(.abbreviated))
-                Spacer()
-                Text("Today")
-            }
-            .font(.yoMax(11.5))
-            .foregroundStyle(AppTheme.Text.secondary)
         }
+        .frame(height: height, alignment: .bottom)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text("Words per day, last 30 days"))
         .accessibilityValue(Text(accessibilitySummary(days)))
     }
 
     @ViewBuilder
-    private func bar(words: Int, maximum: Int, isToday: Bool) -> some View {
+    private func bar(words: Int, maximum: Int) -> some View {
         if words == 0 {
             Circle()
-                .fill(AppTheme.Brand.borderOutline)
+                .fill(Self.idle)
                 .frame(width: Self.barWidth, height: Self.barWidth)
         } else {
             Capsule()
-                .fill(isToday ? AppTheme.Brand.ink : AppTheme.Brand.lime)
+                .fill(AppTheme.Brand.lime)
                 .frame(
                     width: Self.barWidth,
                     height: max(Self.minimumBar, height * CGFloat(words) / CGFloat(maximum)))

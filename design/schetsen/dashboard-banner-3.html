@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboardbanner 3</title>
+<style>
+  @font-face{font-family:Aeonik;src:local("Aeonik Regular"),local("Aeonik-Regular");font-weight:400}
+  @font-face{font-family:Aeonik;src:local("Aeonik Medium"),local("Aeonik-Medium");font-weight:500}
+  :root{
+    --page:#F5F5F5; --card:#FFFFFF; --border:#DDE7DA; --text:#121213; --muted:#657064;
+    --ink:#0B1F0D; --dark:#212520; --dark-2:#2B302A; --lime:#86F46D; --lime-tint:#E1FCDB;
+    --on-dark-muted:#A9B3A8; --font:Aeonik,-apple-system,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:var(--text);font:400 14px/1.45 var(--font);padding:32px}
+  h1{font-weight:500;font-size:24px;margin:0 0 4px}
+  .intro{color:var(--muted);margin:0 0 28px;max-width:760px}
+  .variant{margin:0 0 44px}
+  .variant h2{font-size:17px;font-weight:500;margin:0}
+  .variant .why{color:var(--muted);margin:2px 0 12px;font-size:13px;max-width:760px}
+  .panel{background:var(--card);border:1px solid #E5E5E5;border-radius:20px;padding:24px;max-width:780px}
+  .num{font-variant-numeric:tabular-nums}
+  .pill{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:999px;font:500 12.5px var(--font);white-space:nowrap}
+  .ride{display:flex;align-items:center;gap:6px;font-size:13px}
+  .ride svg{width:17px;height:17px}
+  .wave{display:flex;align-items:flex-end;justify-content:space-between}
+  .wave i{display:block;border-radius:99px}
+  /* context under the banner */
+  .ctx{margin-top:16px;border:1px solid var(--border);border-radius:16px;padding:12px 16px;color:var(--muted);font-size:12.5px}
+  .ctx b{display:block;color:var(--text);font-weight:400;font-size:13px;margin-top:2px}
+
+  /* A: dark stage + stat tiles */
+  .a .stage{position:relative;background:var(--dark);border-radius:16px;padding:22px 26px;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:132px;overflow:hidden}
+  .a .label{color:var(--on-dark-muted);font-size:13px;margin:0}
+  .a .big{font-size:46px;font-weight:500;line-height:1.05;color:var(--lime);margin:2px 0 6px}
+  .a .ride svg path{fill:var(--on-dark-muted)}
+  .a .wave{width:46%;height:88px;gap:3px}
+  .a .wave i{width:5px;background:var(--lime)} .a .wave i.off{background:#424841;height:5px!important}
+  .a .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  .a .tile{background:var(--page);border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-end}
+  .a .tile b{display:block;font-size:28px;font-weight:500;line-height:1.05}
+  .a .tile span{font-size:12.5px;color:var(--muted)}
+  .a .tile svg{width:20px;height:20px} .a .tile svg path{fill:var(--muted)}
+  .a .dots{display:flex;gap:4px} .a .dots i{width:9px;height:9px;border-radius:50%;background:#D9DED8} .a .dots i.on{background:var(--ink)}
+
+  /* B: lime */
+  .b .stage{background:var(--lime);border-radius:16px;padding:22px 26px;color:var(--ink);display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;position:relative;overflow:hidden;min-height:140px}
+  .b .label{font-size:13px;margin:0;opacity:.75}
+  .b .big{font-size:46px;font-weight:500;line-height:1.05;margin:2px 0 6px}
+  .b .ride svg path{fill:var(--ink)}
+  .b .wave{position:absolute;left:26px;right:330px;bottom:0;height:42px;gap:3px;opacity:1}
+  .b .wave i{width:5px;background:rgba(11,31,13,.16);border-radius:99px 99px 0 0} .b .wave i.today{background:var(--ink)} .b .wave i.off{height:4px!important}
+  .b .stats{display:flex;background:rgba(255,255,255,.55);border-radius:14px}
+  .b .stats div{padding:14px 18px;min-width:96px} .b .stats div+div{border-left:1px solid rgba(11,31,13,.12)}
+  .b .stats b{display:block;font-size:28px;font-weight:500;line-height:1.05}
+  .b .stats span{font-size:12px;opacity:.75}
+
+  /* C: wave as the backdrop */
+  .c .stage{position:relative;background:var(--dark);border-radius:16px;color:#fff;overflow:hidden;min-height:150px;padding:22px 26px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px}
+  .c .back{position:absolute;inset:auto 0 0 0;height:100%;padding:18px 18px 0;gap:4px}
+  .c .back i{width:auto;flex:1;background:rgba(134,244,109,.13);border-radius:6px 6px 0 0} .c .back i.today{background:var(--lime)} .c .back i.off{height:4px!important}
+  .c .front{position:relative}
+  .c .label{color:var(--on-dark-muted);font-size:13px;margin:0}
+  .c .big{font-size:46px;font-weight:500;line-height:1.05;color:#fff;margin:2px 0 6px}
+  .c .big em{font-style:normal;color:var(--lime)}
+  .c .ride svg path{fill:var(--on-dark-muted)}
+  .c .stats{position:relative;display:flex;gap:8px}
+  .c .stats div{background:rgba(33,37,32,.82);border:1px solid #3A403A;border-radius:14px;padding:12px 16px;min-width:100px}
+  .c .stats b{display:block;font-size:26px;font-weight:500;line-height:1.05;color:var(--lime)}
+  .c .stats span{font-size:12px;color:var(--on-dark-muted)}
+</style>
+</head>
+<body>
+<h1>Dashboardbanner, ronde 3</h1>
+<p class="intro">Lager (± 140 pt i.p.v. ± 300), niet wit, en de drie cijfers als eigen elementen. Elk voorbeeld staat in het witte paneel met een dictaat eronder, zodat je ziet of de banner eruit springt. Voorbeelddata: 4 u 12 min, 18 430 woorden, 142 wpm, 6 dagen.</p>
+
+<section class="variant a">
+  <h2>A · Donker podium + drie tegels</h2>
+  <p class="why">Een donkere brand-banner (zoals de recorder) met de tijdwinst in lime en de golf rechts. De cijfers krijgen elk een eigen tegel eronder, groot, met een klein teken: woorden, snelheid en je week als stipjes.</p>
+  <div class="panel">
+    <div class="stage">
+      <div>
+        <p class="label">Time saved with Yo Max</p>
+        <div class="big num">4 h 12 min</div>
+        <div class="ride" data-bike>Enough for 4 one-hour rides</div>
+      </div>
+      <div class="wave" data-days="30"></div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div><b class="num">18,430</b><span>words</span></div><span data-icon="text-aa"></span></div>
+      <div class="tile"><div><b class="num">142</b><span>words per minute</span></div><span data-icon="gauge"></span></div>
+      <div class="tile"><div><b class="num">6</b><span>days in a row</span></div><div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+    </div>
+    <div class="ctx">10 minutes ago<b>Oké, op de detailpagina van een blokkenroute vind ik dat het nog steeds zeer chaotisch uitziet.</b></div>
+  </div>
+</section>
+
+<section class="variant b">
+  <h2>B · Lime</h2>
+  <p class="why">De volle merkkleur, inkt erop. De golf loopt onderaan uit de rand, vandaag in inkt. De drie cijfers rechts in een lichte strook, groot. Het luidst, één knaller per scherm.</p>
+  <div class="panel">
+    <div class="stage">
+      <div>
+        <p class="label">Time saved with Yo Max</p>
+        <div class="big num">4 h 12 min</div>
+        <div class="ride" data-bike>Enough for 4 one-hour rides</div>
+      </div>
+      <div class="stats">
+        <div><b class="num">18,430</b><span>words</span></div>
+        <div><b class="num">142</b><span>wpm</span></div>
+        <div><b class="num">6</b><span>days in a row</span></div>
+      </div>
+      <div class="wave" data-days="30" data-today></div>
+    </div>
+    <div class="ctx">10 minutes ago<b>Oké, op de detailpagina van een blokkenroute vind ik dat het nog steeds zeer chaotisch uitziet.</b></div>
+  </div>
+</section>
+
+<section class="variant c">
+  <h2>C · De golf als decor</h2>
+  <p class="why">Donker, en de 30 dagen vullen de hele banner als zachte lime zuilen, vandaag fel. De tekst ligt erover, de cijfers in donkere kaartjes met lime getallen. Het meest "beeld", het meest Yo Max.</p>
+  <div class="panel">
+    <div class="stage">
+      <div class="wave back" data-days="30" data-today></div>
+      <div class="front">
+        <p class="label">Time saved with Yo Max</p>
+        <div class="big num"><em>4 h 12 min</em></div>
+        <div class="ride" data-bike>Enough for 4 one-hour rides</div>
+      </div>
+      <div class="stats">
+        <div><b class="num">18,430</b><span>words</span></div>
+        <div><b class="num">142</b><span>wpm</span></div>
+        <div><b class="num">6</b><span>days in a row</span></div>
+      </div>
+    </div>
+    <div class="ctx">10 minutes ago<b>Oké, op de detailpagina van een blokkenroute vind ik dat het nog steeds zeer chaotisch uitziet.</b></div>
+  </div>
+</section>
+
+<script>
+  const ICONS = {"bicycle": "<svg viewBox=\"0 0 256 256\"><path d=\"M204,108a51.82,51.82,0,0,0-15.13,2.25L168.89,76H192a4,4,0,0,1,4,4,12,12,0,0,0,24,0,28,28,0,0,0-28-28H148a12,12,0,0,0-10.37,18l8.14,14H109.56L94.37,58A12,12,0,0,0,84,52H52a12,12,0,0,0,0,24H77.11L88.18,95,74,112.89a52.17,52.17,0,1,0,18.8,14.92l8.37-10.57L118,146.05A12,12,0,1,0,138.7,134L123.56,108h36.21l8.39,14.38A52,52,0,1,0,204,108ZM80,160a28,28,0,1,1-21.71-27.28l-15.7,19.83a12,12,0,0,0,18.82,14.9l15.7-19.83A27.84,27.84,0,0,1,80,160Zm124,28a28,28,0,0,1-23.11-43.79l12.74,21.84A12,12,0,0,0,214.37,154l-12.75-21.84c.79-.07,1.58-.11,2.38-.11a28,28,0,0,1,0,56Z\"/></svg>", "text-aa": "<svg viewBox=\"0 0 256 256\"><path d=\"M90.86,50.89a12,12,0,0,0-21.72,0l-64,136a12,12,0,0,0,21.71,10.22L42.44,164h75.12l15.58,33.11a12,12,0,0,0,21.72-10.22ZM53.74,140,80,84.18,106.27,140ZM200,84c-13.85,0-24.77,3.86-32.45,11.48a12,12,0,1,0,16.9,17c3-3,8.26-4.52,15.55-4.52,11,0,20,7.18,20,16v4.39A47.28,47.28,0,0,0,200,124c-24.26,0-44,17.94-44,40s19.74,40,44,40a47.18,47.18,0,0,0,22-5.38A12,12,0,0,0,244,192V124C244,101.94,224.26,84,200,84Zm0,96c-11,0-20-7.18-20-16s9-16,20-16,20,7.18,20,16S211,180,200,180Z\"/></svg>", "gauge": "<svg viewBox=\"0 0 256 256\"><path d=\"M209.88,69.83A115.19,115.19,0,0,0,128,36h-.41C63.85,36.22,12,88.76,12,153.13V176a20,20,0,0,0,20,20H224a20,20,0,0,0,20-20V152A115.25,115.25,0,0,0,209.88,69.83ZM220,172H127.32l46.44-65A12,12,0,1,0,154.24,93L97.82,172H36V153.13c0-1.72,0-3.43.14-5.13H56a12,12,0,0,0,0-24H40.62c10.91-33.39,40-58.52,75.38-63.21V80a12,12,0,0,0,24,0V60.8A92,92,0,0,1,215.66,124H200a12,12,0,0,0,0,24h19.9c.06,1.33.1,2.66.1,4Z\"/></svg>"};
+  const days=[320,540,0,210,880,640,0,0,460,720,390,0,150,610,930,500,0,280,670,810,0,0,350,590,740,420,610,880,530,700];
+  document.querySelectorAll('.wave').forEach(el=>{
+    const h=el.clientHeight, max=950, today=el.hasAttribute('data-today');
+    days.forEach((w,i)=>{const b=document.createElement('i');
+      if(!w)b.className='off'; else b.style.height=Math.max(6,Math.round(w/max*h*(el.classList.contains('back')?0.85:1)))+'px';
+      if(today&&i===days.length-1)b.classList.add('today'); el.appendChild(b)});
+  });
+  document.querySelectorAll('[data-bike]').forEach(el=>el.insertAdjacentHTML('afterbegin',ICONS.bicycle));
+  document.querySelectorAll('[data-icon]').forEach(el=>el.outerHTML=ICONS[el.dataset.icon]);
+</script>
+</body>
+</html>

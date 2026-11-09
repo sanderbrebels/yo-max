@@ -192,5 +192,6 @@ enum AppTheme {
         static let pill: CGFloat = 22
         static let panel: CGFloat = 20  // Yo Max: the content panel (--r-card)
         static let sidebarRow: CGFloat = 10  // Yo Max: a sidebar row
+        static let tile: CGFloat = 12  // Yo Max: Tarmax --r-tile (the stat tiles on the dashboard)
     }
 }

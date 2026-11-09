@@ -20,86 +20,90 @@ struct DashboardHeroCard: View {
     let actionHelp: String
     let actionAccessibilityLabel: String
     let onViewInsights: () -> Void
-    // Yo Max: the banner (variant A "Golf" of design/schetsen/dashboard-banner-2.html): the time
-    // saved, the last 30 days as the wave of the app icon, and the stats in a row.
+    // Yo Max: the banner (variant A of design/schetsen/dashboard-banner-3.html): a dark stage with
+    // the time saved in lime and the last 30 days as the wave of the app icon, and the three stats
+    // as tiles under it. The whole stage opens Insights.
     let totals: DashboardMetricTotals
     let dailyActivity: [DashboardProductivityPoint]
 
-    private var bannerShape: RoundedRectangle {
+    @State private var isHovering = false
+
+    private var stageShape: RoundedRectangle {
         RoundedRectangle(cornerRadius: DashboardLayout.cardCornerRadius, style: .continuous)
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            if !isLocked {
-                HStack(alignment: .top, spacing: 24) {
-                    heroCopy
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    insightsButton
-                }
-                .padding(.bottom, 24)
+        VStack(spacing: 10) {
+            if isLocked {
+                stage
+            } else {
+                Button(action: onViewInsights) { stage }
+                    .buttonStyle(.plain)
+                    .disabled(!canViewInsights)
+                    .help(actionHelp)
+                    .accessibilityLabel(Text(actionAccessibilityLabel))
+                    .onHover { isHovering = $0 && canViewInsights }
             }
-
-            YoMaxDayWave(dailyActivity: dailyActivity)
-
-            Rectangle()
-                .fill(AppTheme.Border.card)
-                .frame(height: 1)
-                .padding(.vertical, 16)
 
             YoMaxDashboardStats(totals: totals, dailyActivity: dailyActivity)
         }
-        .padding(.horizontal, 28)
-        .padding(.vertical, 24)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppTheme.Surface.card)
-        .clipShape(bannerShape)
-        .overlay(bannerShape.strokeBorder(AppTheme.Border.card, lineWidth: 1))
     }
 
-    private var insightsButton: some View {
-        Button(action: onViewInsights) {
-            DashboardMomentumActionLabel(title: actionTitle, icon: actionIcon, isLocked: !canViewInsights)
+    private var stage: some View {
+        HStack(alignment: .center, spacing: 24) {
+            heroCopy
+                .frame(maxWidth: .infinity, alignment: .leading)
+            YoMaxDayWave(dailyActivity: dailyActivity)
+                .frame(maxWidth: 320)
         }
-        .buttonStyle(.plain)
-        .disabled(!canViewInsights)
-        .help(actionHelp)
-        .accessibilityLabel(Text(actionAccessibilityLabel))
+        .padding(.horizontal, 26)
+        .padding(.vertical, 22)
+        .frame(minHeight: 132)
+        .background(AppTheme.Brand.brandDark, in: stageShape)
+        .overlay(alignment: .topTrailing) {
+            if !isLocked, canViewInsights {
+                Image(yoMax: "arrow.up.right")
+                    .font(.yoMax(11))
+                    .foregroundStyle(isHovering ? AppTheme.Brand.lime : DashboardMomentumBackground.onDarkMuted)
+                    .padding(12)
+                    .accessibilityHidden(true)
+            }
+        }
+        .overlay(stageShape.strokeBorder(Color.white.opacity(isHovering ? 0.16 : 0), lineWidth: 1))
+        .contentShape(stageShape)
+        .animation(.easeOut(duration: 0.15), value: isHovering)
     }
 
     @ViewBuilder
     private var heroCopy: some View {
         if case .savedTime(let value) = headline {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text("Time saved with Yo Max")
-                    .font(.yoMax(13.5))
-                    .foregroundStyle(DashboardMomentumBackground.subtext)
+                    .font(.yoMax(13))
+                    .foregroundStyle(DashboardMomentumBackground.onDarkMuted)
 
                 Text(verbatim: value)
-                    .font(.yoMax(44, weight: .medium))
-                    .foregroundStyle(DashboardMomentumBackground.headline)
+                    .font(.yoMax(46, weight: .medium))
+                    .foregroundStyle(AppTheme.Brand.lime)
                     .monospacedDigit()
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
 
                 HStack(spacing: 6) {
-                    PhosphorIcon("bicycle")
-                        .foregroundStyle(DashboardMomentumBackground.subtext)
+                    PhosphorIcon("bicycle", size: 13)
+                        .foregroundStyle(DashboardMomentumBackground.onDarkMuted)
                     Text(YoMaxRideComparison.text(for: timeSaved))
-                        .font(.yoMax(13.5))
-                        .foregroundStyle(DashboardMomentumBackground.headline)
+                        .font(.yoMax(13))
+                        .foregroundStyle(Color.white)
                 }
-                .padding(.top, 2)
+                .padding(.top, 4)
             }
         } else {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 8) {
                 headlineText
-                    .frame(maxWidth: 720, alignment: .leading)
-
                 Text(subtext)
-                    .font(.yoMax(14))  // Yo Max: Tarmax body 400
-                    .foregroundStyle(DashboardMomentumBackground.subtext)
-                    .frame(maxWidth: 620, alignment: .leading)
+                    .font(.yoMax(13.5))
+                    .foregroundStyle(DashboardMomentumBackground.onDarkMuted)
             }
         }
     }
@@ -140,32 +144,10 @@ struct DashboardHeroCard: View {
     }
 }
 
-private struct DashboardMomentumActionLabel: View {
-    // Yo Max: a quiet outline pill (Tarmax outline button), weight 500, no shadow.
-    let title: LocalizedStringKey
-    let icon: String
-    var isLocked = false
-
-    var body: some View {
-        HStack(spacing: 8) {
-            Text(title)
-                .lineLimit(1)
-
-            Image(yoMax: icon)
-        }
-        .font(.yoMax(13, weight: .medium))
-        .foregroundStyle(isLocked ? DashboardMomentumBackground.subtext : DashboardMomentumBackground.headline)
-        .padding(.horizontal, 16)
-        .frame(height: 36)
-        .background(AppTheme.Surface.card, in: Capsule())
-        .overlay(Capsule().strokeBorder(AppTheme.Border.card, lineWidth: 1))
-        .contentShape(Capsule())
-    }
-}
-
 private struct DashboardMomentumBackground {
-    // Yo Max: Tarmax colours on the new banner (ink and muted text).
-    static let accent = AppTheme.Brand.ink
-    static let headline = AppTheme.Brand.ink
+    // Yo Max: the dark banner (brand-dark): white text, lime for the figure, a soft grey beside it.
+    static let accent = AppTheme.Brand.lime
+    static let headline = Color.white
     static let subtext = AppTheme.Brand.textMuted
+    static let onDarkMuted = Color(nsColor: AppTheme.Brand.rgb(0xA9B3A8))
 }
