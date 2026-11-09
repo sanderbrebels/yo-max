@@ -20,7 +20,8 @@ struct DashboardHeroCard: View {
     let actionHelp: String
     let actionAccessibilityLabel: String
     let onViewInsights: () -> Void
-    // Yo Max: the stats in the banner (variant B of design/schetsen/dashboard-banner.html).
+    // Yo Max: the banner (variant A "Golf" of design/schetsen/dashboard-banner-2.html): the time
+    // saved, the last 30 days as the wave of the app icon, and the stats in a row.
     let totals: DashboardMetricTotals
     let dailyActivity: [DashboardProductivityPoint]
 
@@ -29,75 +30,82 @@ struct DashboardHeroCard: View {
     }
 
     var body: some View {
-        Group {
-            if isLocked {
-                // Still locked: only the numbers, no headline and no button.
-                YoMaxDashboardStats(totals: totals, dailyActivity: dailyActivity, axis: .horizontal)
-                    .padding(.horizontal, 28)
-                    .padding(.vertical, 22)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            } else {
-                HStack(spacing: 0) {
-                    storyColumn
+        VStack(alignment: .leading, spacing: 0) {
+            if !isLocked {
+                HStack(alignment: .top, spacing: 24) {
+                    heroCopy
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    statsColumn
+                    insightsButton
                 }
-                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 24)
             }
+
+            YoMaxDayWave(dailyActivity: dailyActivity)
+
+            Rectangle()
+                .fill(AppTheme.Border.card)
+                .frame(height: 1)
+                .padding(.vertical, 16)
+
+            YoMaxDashboardStats(totals: totals, dailyActivity: dailyActivity)
         }
-        .background(AppTheme.Surface.banner)
+        .padding(.horizontal, 28)
+        .padding(.vertical, 24)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(AppTheme.Surface.card)
         .clipShape(bannerShape)
         .overlay(bannerShape.strokeBorder(AppTheme.Border.card, lineWidth: 1))
     }
 
-    private var statsColumn: some View {
-        YoMaxDashboardStats(totals: totals, dailyActivity: dailyActivity)
-            .padding(.horizontal, 22)
-            .padding(.vertical, 20)
-            .frame(width: DashboardLayout.bannerStatsColumnWidth, alignment: .leading)
-            .frame(maxHeight: .infinity)
-            .background(AppTheme.Surface.subtle)
-            .overlay(alignment: .leading) {
-                Rectangle()
-                    .fill(AppTheme.Border.subtle)
-                    .frame(width: 1)
-            }
-    }
-
-    private var storyColumn: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            heroCopy
-
-            HStack(spacing: 12) {
-                Button(action: onViewInsights) {
-                    DashboardMomentumActionLabel(
-                        title: actionTitle,
-                        icon: actionIcon,
-                        isPrimary: canViewInsights,
-                        isLocked: !canViewInsights
-                    )
-                }
-                .buttonStyle(.plain)
-                .disabled(!canViewInsights)
-                .help(actionHelp)
-                .accessibilityLabel(Text(actionAccessibilityLabel))
-            }
-            .padding(.top, 8)
+    private var insightsButton: some View {
+        Button(action: onViewInsights) {
+            DashboardMomentumActionLabel(title: actionTitle, icon: actionIcon, isLocked: !canViewInsights)
         }
-        .padding(.horizontal, 28)
-        .padding(.vertical, 22)
+        .buttonStyle(.plain)
+        .disabled(!canViewInsights)
+        .help(actionHelp)
+        .accessibilityLabel(Text(actionAccessibilityLabel))
     }
 
+    @ViewBuilder
     private var heroCopy: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            headlineText
-                .frame(maxWidth: 720, alignment: .leading)
+        if case .savedTime(let value) = headline {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Time saved with Yo Max")
+                    .font(.yoMax(13.5))
+                    .foregroundStyle(DashboardMomentumBackground.subtext)
 
-            Text(subtext)
-                .font(.yoMax(14))  // Yo Max: Tarmax body 400
-                .foregroundStyle(DashboardMomentumBackground.subtext)
-                .frame(maxWidth: 620, alignment: .leading)
+                Text(verbatim: value)
+                    .font(.yoMax(44, weight: .medium))
+                    .foregroundStyle(DashboardMomentumBackground.headline)
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+
+                HStack(spacing: 6) {
+                    PhosphorIcon("bicycle")
+                        .foregroundStyle(DashboardMomentumBackground.subtext)
+                    Text(YoMaxRideComparison.text(for: timeSaved))
+                        .font(.yoMax(13.5))
+                        .foregroundStyle(DashboardMomentumBackground.headline)
+                }
+                .padding(.top, 2)
+            }
+        } else {
+            VStack(alignment: .leading, spacing: 10) {
+                headlineText
+                    .frame(maxWidth: 720, alignment: .leading)
+
+                Text(subtext)
+                    .font(.yoMax(14))  // Yo Max: Tarmax body 400
+                    .foregroundStyle(DashboardMomentumBackground.subtext)
+                    .frame(maxWidth: 620, alignment: .leading)
+            }
         }
+    }
+
+    private var timeSaved: TimeInterval {
+        DashboardTimeSaving.timeSaved(words: totals.words, duration: totals.duration)
     }
 
     private var headlineText: Text {
@@ -133,62 +141,25 @@ struct DashboardHeroCard: View {
 }
 
 private struct DashboardMomentumActionLabel: View {
-    private static let cornerRadius: CGFloat = 12
-
+    // Yo Max: a quiet outline pill (Tarmax outline button), weight 500, no shadow.
     let title: LocalizedStringKey
     let icon: String
-    let isPrimary: Bool
     var isLocked = false
 
     var body: some View {
-        HStack(spacing: 9) {
+        HStack(spacing: 8) {
             Text(title)
-                .lineLimit(2)
+                .lineLimit(1)
 
             Image(yoMax: icon)
-                .font(.yoMax(13, weight: .semibold))
         }
-        .font(.yoMax(13, weight: .semibold))
-        .foregroundStyle(foregroundColor)
-        .padding(.horizontal, 18)
-        .frame(minHeight: 40)
-        .background(backgroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: Self.cornerRadius, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: Self.cornerRadius, style: .continuous)
-                .stroke(borderColor, lineWidth: 1)
-        )
-        .shadow(color: shadowColor, radius: 5, y: 2)
-    }
-
-    private var foregroundColor: Color {
-        if isPrimary {
-            return Color.white
-        }
-
-        return isLocked
-            ? DashboardMomentumBackground.subtext
-            : DashboardMomentumBackground.headline
-    }
-
-    private var backgroundColor: Color {
-        if isPrimary {
-            return DashboardMomentumBackground.accent
-        }
-
-        return isLocked ? Color.white.opacity(0.64) : Color.white.opacity(0.82)
-    }
-
-    private var borderColor: Color {
-        if isPrimary {
-            return Color.clear
-        }
-
-        return isLocked ? DashboardMomentumBackground.accent.opacity(0.22) : Color.black.opacity(0.08)
-    }
-
-    private var shadowColor: Color {
-        isPrimary ? DashboardMomentumBackground.accent.opacity(0.18) : Color.black.opacity(0.06)
+        .font(.yoMax(13, weight: .medium))
+        .foregroundStyle(isLocked ? DashboardMomentumBackground.subtext : DashboardMomentumBackground.headline)
+        .padding(.horizontal, 16)
+        .frame(height: 36)
+        .background(AppTheme.Surface.card, in: Capsule())
+        .overlay(Capsule().strokeBorder(AppTheme.Border.card, lineWidth: 1))
+        .contentShape(Capsule())
     }
 }
 

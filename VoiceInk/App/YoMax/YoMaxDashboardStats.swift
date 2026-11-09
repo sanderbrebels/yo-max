@@ -1,34 +1,28 @@
 import SwiftUI
 
-/// Yo Max (schets dashboard-banner.html, variant B): total words, words per minute and the day
-/// streak. The dashboard banner shows them as its right column, or as a row while VoiceInk's
-/// insights are still locked.
+/// Yo Max (schets dashboard-banner-2.html, variant A): total words, words per minute and the day
+/// streak as a row under the wave, each figure above its label.
 struct YoMaxDashboardStats: View {
     let totals: DashboardMetricTotals
     let dailyActivity: [DashboardProductivityPoint]
-    var axis: Axis = .vertical
 
     var body: some View {
-        let layout = axis == .vertical
-            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
-            : AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 28))
-
-        layout {
+        HStack(alignment: .top, spacing: 32) {
             stat(totals.words.formatted(), label: "words")
-            stat(wordsPerMinute.map { $0.formatted() } ?? "–", label: "wpm")
-            stat(streak.formatted(), label: "day streak")
+            stat(wordsPerMinute.map { $0.formatted() } ?? "–", label: "words per minute")
+            stat(streak.formatted(), label: streak == 1 ? "day in a row" : "days in a row")
         }
         .accessibilityElement(children: .combine)
     }
 
     private func stat(_ value: String, label: LocalizedStringKey) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 6) {
+        VStack(alignment: .leading, spacing: 2) {
             Text(verbatim: value)
-                .font(.yoMax(22, weight: .medium))
+                .font(.yoMax(20, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
                 .monospacedDigit()
             Text(label)
-                .font(.yoMax(13))
+                .font(.yoMax(12.5))
                 .foregroundStyle(AppTheme.Text.secondary)
         }
         .lineLimit(1)

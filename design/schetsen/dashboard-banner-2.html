@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboardbanner 2</title>
+<style>
+  @font-face{font-family:Aeonik;src:local("Aeonik Regular"),local("Aeonik-Regular");font-weight:400}
+  @font-face{font-family:Aeonik;src:local("Aeonik Medium"),local("Aeonik-Medium");font-weight:500}
+  @font-face{font-family:Aeonik;src:local("Aeonik Bold"),local("Aeonik-Bold");font-weight:700}
+  :root{
+    --page:#F5F5F5; --card:#FFFFFF; --inset:#F6FAF5; --fill-strong:#EEF4EC; --border:#DDE7DA;
+    --text:#121213; --muted:#657064; --ink:#0B1F0D; --dark:#212520; --lime:#86F46D; --lime-tint:#E1FCDB;
+    --idle:#D9DED8; --on-dark-muted:#A9B3A8;
+    --font:Aeonik, -apple-system, system-ui, sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:var(--text);font:400 14px/1.45 var(--font);padding:32px}
+  h1{font-weight:500;font-size:24px;margin:0 0 4px}
+  .intro{color:var(--muted);margin:0 0 28px;max-width:760px}
+  .variant{margin:0 0 40px}
+  .variant h2{font-size:17px;font-weight:500;margin:0}
+  .variant .why{color:var(--muted);margin:2px 0 12px;font-size:13px;max-width:760px}
+  .stage{background:var(--page);border-radius:24px;padding:20px;max-width:760px}
+  .num{font-variant-numeric:tabular-nums}
+  .btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:999px;border:0;
+       background:var(--ink);color:#fff;font:500 13px var(--font)}
+  .btn.light{background:#fff;color:var(--ink)}
+  .waves{display:flex;align-items:flex-end;justify-content:space-between;gap:4px}
+  .waves i{display:block;width:6px;border-radius:3px;background:var(--lime)}
+  .waves i.off{background:var(--idle);height:6px!important}
+
+  /* A */
+  .a{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px 28px}
+  .a .top{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
+  .a .label{font-size:13.5px;color:var(--muted);margin:0}
+  .a .big{font-size:44px;font-weight:500;line-height:1.05;margin:4px 0 6px;letter-spacing:-0.01em}
+  .a .cmp{font-size:13.5px;color:var(--text);margin:0;display:flex;align-items:center;gap:6px}
+  .a .cmp svg{width:18px;height:18px}
+  .a .waves{height:64px;margin:22px 0 8px}
+  .a .waves i.today{background:var(--ink)}
+  .a .axis{display:flex;justify-content:space-between;color:var(--muted);font-size:11.5px}
+  .a .stats{display:flex;gap:32px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+  .a .stats b{display:block;font-size:20px;font-weight:500}
+  .a .stats span{font-size:12.5px;color:var(--muted)}
+
+  /* B */
+  .b{display:grid;grid-template-columns:1fr 220px;gap:12px}
+  .b .left{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px 28px;display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+  .b .big{font-size:40px;font-weight:500;line-height:1.05;margin:4px 0 6px}
+  .b .label{font-size:13.5px;color:var(--muted);margin:0}
+  .b .cmp{margin:0;font-size:13.5px}
+  .b .right{background:var(--dark);border-radius:20px;padding:20px;color:#fff;display:flex;flex-direction:column;gap:14px}
+  .b .streak{font-size:52px;font-weight:500;line-height:1;color:var(--lime)}
+  .b .streak small{font-size:14px;color:#fff;font-weight:400;margin-left:6px}
+  .b .week{display:flex;gap:6px}
+  .b .week span{flex:1;display:grid;place-items:center;gap:4px;font-size:10.5px;color:var(--on-dark-muted)}
+  .b .week span::before{content:"";width:18px;height:18px;border-radius:50%;background:#3A403A}
+  .b .week span.on::before{background:var(--lime)}
+  .b .week span.today::before{background:var(--lime);box-shadow:0 0 0 2px var(--dark),0 0 0 3.5px var(--lime)}
+  .b .mini{display:flex;gap:18px;border-top:1px solid #343A33;padding-top:12px}
+  .b .mini b{display:block;font-size:17px;font-weight:500}
+  .b .mini span{font-size:11.5px;color:var(--on-dark-muted)}
+
+  /* C */
+  .c{background:var(--dark);border-radius:20px;padding:26px 28px;color:#fff;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;overflow:hidden;position:relative}
+  .c .label{font-size:13.5px;color:var(--on-dark-muted);margin:0}
+  .c .big{font-size:64px;font-weight:500;line-height:1;margin:8px 0 10px;color:var(--lime);letter-spacing:-0.01em}
+  .c .big small{font-size:28px;color:#fff;font-weight:400;letter-spacing:0}
+  .c .cmp{margin:0 0 18px;font-size:14px}
+  .c .stats{display:flex;gap:28px}
+  .c .stats b{display:block;font-size:18px;font-weight:500}
+  .c .stats span{font-size:12px;color:var(--on-dark-muted)}
+  .c .waves{height:120px;gap:6px}
+  .c .waves i{width:10px;border-radius:5px}
+  .c .waves i.off{background:#3A403A}
+  .c .cap{font-size:11.5px;color:var(--on-dark-muted);text-align:right;margin-top:8px}
+</style>
+</head>
+<body>
+<h1>Dashboardbanner, ronde 2</h1>
+<p class="intro">Inspiratie: Wispr Flow (heatmap en reeks, maar geen tijdwinst), Spotify Wrapped (groot getal als affiche), Duolingo (reeks als weekrij), UI8 Widgets Bundle (dunne streepjesgrafiek, één kleur licht op). Het eigen idee: <b>je dagen zijn de golf uit het app-icoon</b>, en de tijdwinst vergeleken met iets uit jouw wereld (een rit van een uur). Voorbeelddata: 4 u 12 min, 18 430 woorden, 142 wpm, 6 dagen op rij.</p>
+
+<section class="variant">
+  <h2>A · De golf van je maand</h2>
+  <p class="why">Witte kaart, rustig. De ster is de golf: één streepje per dag (30 dagen), hoogte = woorden, gemiste dagen een grijs stipje, vandaag in inkt. Cijfers eronder als rij.</p>
+  <div class="stage"><div class="a">
+    <div class="top">
+      <div>
+        <p class="label">Time saved with Yo Max</p>
+        <div class="big num">4 h 12 min</div>
+        <p class="cmp"><svg viewBox="0 0 256 256"><path fill="#657064" d="M204,108a51.82,51.82,0,0,0-15.13,2.25L168.89,76H192a4,4,0,0,1,4,4,12,12,0,0,0,24,0,28,28,0,0,0-28-28H148a12,12,0,0,0-10.37,18l8.14,14H109.56L94.37,58A12,12,0,0,0,84,52H52a12,12,0,0,0,0,24H77.11L88.18,95,74,112.89a52.17,52.17,0,1,0,18.8,14.92l8.37-10.57L118,146.05A12,12,0,1,0,138.7,134L123.56,108h36.21l8.39,14.38A52,52,0,1,0,204,108ZM80,160a28,28,0,1,1-21.71-27.28l-15.7,19.83a12,12,0,0,0,18.82,14.9l15.7-19.83A27.84,27.84,0,0,1,80,160Zm124,28a28,28,0,0,1-23.11-43.79l12.74,21.84A12,12,0,0,0,214.37,154l-12.75-21.84c.79-.07,1.58-.11,2.38-.11a28,28,0,0,1,0,56Z"/></svg>Enough for four one-hour rides</p>
+      </div>
+      <span class="btn light" style="border:1px solid var(--border)">View Insights</span>
+    </div>
+    <div class="waves" id="wa"></div>
+    <div class="axis"><span>10 Oct</span><span>Today</span></div>
+    <div class="stats">
+      <div><b class="num">18,430</b><span>words</span></div>
+      <div><b class="num">142</b><span>words per minute</span></div>
+      <div><b class="num">6</b><span>days in a row</span></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="variant">
+  <h2>B · Licht + donkere reeks</h2>
+  <p class="why">Links de tijdwinst op wit, rechts een donkere brand-kaart met de reeks groot in lime en een weekrij (Duolingo zonder vlam). Lime alleen op donker.</p>
+  <div class="stage"><div class="b">
+    <div class="left">
+      <div>
+        <p class="label">Time saved with Yo Max</p>
+        <div class="big num">4 h 12 min</div>
+        <p class="cmp">Enough for four one-hour rides</p>
+      </div>
+      <div class="waves" id="wb" style="height:44px"></div>
+    </div>
+    <div class="right">
+      <div class="streak num">6<small>days in a row</small></div>
+      <div class="week"><span class="on">M</span><span class="on">T</span><span class="on">W</span><span class="on">T</span><span class="on">F</span><span class="today">S</span><span>S</span></div>
+      <div class="mini"><div><b class="num">18,430</b><span>words</span></div><div><b class="num">142</b><span>wpm</span></div></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="variant">
+  <h2>C · Affiche (Wrapped)</h2>
+  <p class="why">Eén donkere banner, het getal is de held: groot in lime. Rechts de laatste 14 dagen als grote golf, net het app-icoon. Het meest uitgesproken, het meest "Yo Max".</p>
+  <div class="stage"><div class="c">
+    <div>
+      <p class="label">You made room for</p>
+      <div class="big num">4<small> h </small>12<small> min</small></div>
+      <p class="cmp">Enough for four one-hour rides</p>
+      <div class="stats">
+        <div><b class="num">18,430</b><span>words</span></div>
+        <div><b class="num">142</b><span>wpm</span></div>
+        <div><b class="num">6</b><span>days in a row</span></div>
+      </div>
+    </div>
+    <div><div class="waves" id="wc"></div><div class="cap">Last 14 days</div></div>
+  </div></div>
+</section>
+
+<script>
+  const days=[320,540,0,210,880,640,0,0,460,720,390,0,150,610,930,500,0,280,670,810,0,0,350,590,740,420,610,880,530,700];
+  function fill(id,arr,max,todayClass){
+    const el=document.getElementById(id), h=el.clientHeight;
+    arr.forEach((w,i)=>{const b=document.createElement('i');
+      if(!w){b.className='off'}else{b.style.height=Math.max(8,Math.round(w/max*h))+'px'}
+      if(todayClass&&i===arr.length-1)b.classList.add('today');el.appendChild(b)});
+  }
+  fill('wa',days,950,true);
+  fill('wb',days.slice(-21),950,false);
+  fill('wc',days.slice(-14),950,false);
+</script>
+</body>
+</html>
