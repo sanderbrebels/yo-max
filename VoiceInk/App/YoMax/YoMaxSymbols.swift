@@ -177,9 +177,10 @@ enum YoMaxSymbols {
         "shield.fill": "ph.shield.fill",
         "slash.circle.fill": "ph.prohibit.fill",
         "slider.horizontal.3": "ph.sliders-horizontal",
-        "sparkle": "ph.sparkle",
-        "sparkles": "ph.sparkle",
-        "sparkles.square.fill.on.square": "ph.sparkle.fill",
+        // Yo Max (unslop, 2026-11-09): no AI sparkle; AI cleanup is rewriting, so a pencil.
+        "sparkle": "ph.pencil-simple-line",
+        "sparkles": "ph.pencil-simple-line",
+        "sparkles.square.fill.on.square": "ph.pencil-simple-line.fill",
         "square.and.arrow.down": "ph.download-simple",
         "square.and.arrow.up": "ph.export",
         "square.and.pencil": "ph.note-pencil",

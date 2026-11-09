@@ -110,7 +110,7 @@ private extension ViewType {
         case .transcribeAudio: return "waveform"
         case .history: return "clock-counter-clockwise"
         case .models: return "cpu"
-        case .modes: return "sparkle"
+        case .modes: return "sliders-horizontal"  // Yo Max: settings per app, not an AI sparkle (modes-icoon.html A)
         case .audio: return "microphone"
         case .dictionary: return "book-open-text"
         case .settings: return "gear-six"

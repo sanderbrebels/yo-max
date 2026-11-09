@@ -43,37 +43,3 @@ struct AppMaterialCardBackground: View {
             )
     }
 }
-
-struct MetricTintBackground: View {
-    let color: Color
-    var cornerRadius: CGFloat = AppTheme.Radius.card
-
-    var body: some View {
-        RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-            .fill(
-                LinearGradient(
-                    gradient: Gradient(stops: [
-                        .init(color: color.opacity(0.15), location: 0),
-                        .init(color: AppTheme.Surface.window.opacity(0.1), location: 0.6),
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .stroke(
-                        LinearGradient(
-                            gradient: Gradient(colors: [
-                                AppTheme.Border.subtle,
-                                AppTheme.Border.subtle.opacity(0.4),
-                            ]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        ),
-                        lineWidth: 1
-                    )
-            )
-            // Yo Max: no shadow; in Tarmax only floating things cast one.
-    }
-}

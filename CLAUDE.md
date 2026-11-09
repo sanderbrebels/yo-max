@@ -119,7 +119,7 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 - Geen "Star on GitHub" of "Copy System Info" meer onderaan het dashboard. De ruitenafbeelding `momentum-hero-bg` wordt niet gebruikt.
 
 ### Unslop (2026-11-09)
-- Geen emoji, uitroeptekens of "unlock" in de interface; Aeonik alleen 400/500 (`.semibold`/`.bold` → `.medium`); geen hoofdletterlabels of negatieve tracking; geen kleurverlopen of glas op vlakken (maskers die een rand laten vervagen mogen). Nog open: sparkle-icoon voor AI (25 bestanden, o.a. Modes in de zijbalk), keycap-gradiënten in `ShortcutPreviewView`, ongebruikte `MetricTintBackground`.
+- Geen emoji, uitroeptekens of "unlock" in de interface; Aeonik alleen 400/500 (`.semibold`/`.bold` → `.medium`); geen hoofdletterlabels of negatieve tracking; geen kleurverlopen of glas op vlakken (maskers die een rand laten vervagen mogen). Ook afgerond: geen AI-sparkle meer (Modes = schuifjes `sliders-horizontal`, schets `modes-icoon.html` A; elders `sparkles` → potlood `pencil-simple-line` via de tabel in `YoMaxSymbols`), vlakke keycaps in `ShortcutPreviewView`, `MetricTintBackground` weg.
 
 ### Waarom er nog dicteerfouten zijn (analyse 2026-11-07)
 - De AI-opschoning (qwen) verbetert goed; de fouten komen uit **Whisper** bij namen ("Till you max", "Sandoprebels", "darmax.app"). **Het woordenboek was leeg (0 woorden).** Whisper krijgt de woorden als hint (`initial_prompt`) en de AI krijgt ze ook mee. Eerst woordenboek en vervangingen vullen, dan pas een ander model.
