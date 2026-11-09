@@ -29,7 +29,7 @@ struct ProviderBrandIcon: View {
                     .padding(size * 0.24)
             } else {
                 Image(yoMax: fallbackSystemImage)
-                    .font(.yoMax(iconSize, weight: .semibold))
+                    .font(.yoMax(iconSize, weight: .medium))
                     .foregroundStyle(isSelected ? AppTheme.Accent.primary : Color.secondary)
             }
         }
@@ -58,7 +58,7 @@ struct ProviderSectionHeader: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
             Text(title)
-                .font(.yoMax(15, weight: .semibold))
+                .font(.yoMax(15, weight: .medium))
             Text(subtitle)
                 .font(.yoMax(10))
                 .foregroundStyle(AppTheme.Text.secondary)
@@ -79,7 +79,7 @@ struct ProviderConfigurationGroup<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             content()
@@ -99,7 +99,7 @@ struct ProviderModelListSection<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             VStack(alignment: .leading, spacing: 0) {

@@ -3,7 +3,7 @@ import SwiftUI
 struct ProBadge: View {
     var body: some View {
         Text("PRO")
-            .font(.yoMax(10, weight: .semibold))
+            .font(.yoMax(10, weight: .medium))
             .foregroundColor(.white)
             .padding(.horizontal, 6)
             .padding(.vertical, 2)

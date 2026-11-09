@@ -288,7 +288,7 @@ private struct CircleIconButton: View {
     let icon: String
     let action: () -> Void
     var fill: Color = AppTheme.Surface.subtle
-    var iconFont: Font = .yoMax(14, weight: .semibold)
+    var iconFont: Font = .yoMax(14, weight: .medium)
 
     var body: some View {
         Button(action: action) {
@@ -323,11 +323,11 @@ private struct AsyncCircleButton: View {
                                 .controlSize(.small)
                         } else if showSuccess {
                             Image(yoMax: "checkmark")
-                                .font(.yoMax(14, weight: .semibold))
+                                .font(.yoMax(14, weight: .medium))
                                 .foregroundStyle(AppTheme.Status.success)
                         } else {
                             Image(yoMax: defaultIcon)
-                                .font(.yoMax(14, weight: .semibold))
+                                .font(.yoMax(14, weight: .medium))
                                 .foregroundStyle(AppTheme.Text.primary)
                         }
                     }
@@ -418,7 +418,7 @@ struct AudioPlayerView: View {
                                     playerManager.playbackRate == 1.0
                                         ? "1×" : playerManager.playbackRate == 1.5 ? "1.5×" : "2×"
                                 )
-                                .font(.yoMax(11, weight: .semibold))
+                                .font(.yoMax(11, weight: .medium))
                                 .foregroundStyle(AppTheme.Text.primary)
                             )
                     }
@@ -502,7 +502,7 @@ struct AudioPlayerView: View {
                         ModeIconView(icon: selectedMode.icon, size: selectedMode.icon.kind == .emoji ? 14 : 12)
                     } else {
                         Image(yoMax: "square.grid.2x2")
-                            .font(.yoMax(13, weight: .semibold))
+                            .font(.yoMax(13, weight: .medium))
                             .foregroundStyle(.primary.opacity(0.6))
                     }
                 }

@@ -116,7 +116,7 @@ struct PromptEditorView: View {
                 dismissPanel()
             } label: {
                 Image(yoMax: "chevron.left")
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(14, weight: .medium))
                     .foregroundColor(AppTheme.Text.secondary)
                     .frame(width: 28, height: 28)
                     .background(AppTheme.Surface.card)
@@ -128,7 +128,7 @@ struct PromptEditorView: View {
 
             TextField("Prompt name", text: $title)
                 .textFieldStyle(.plain)
-                .font(.yoMax(16, weight: .semibold))
+                .font(.yoMax(16, weight: .medium))
 
             Spacer()
         }

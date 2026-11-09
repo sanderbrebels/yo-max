@@ -28,7 +28,6 @@ struct OnboardingLicenseSetupCard: View {
                 TextField("License key", text: $licenseKey)
                     .textFieldStyle(.plain)
                     .font(.system(size: 13, weight: .medium, design: .monospaced))
-                    .textCase(.uppercase)
                     .padding(.horizontal, 14)
                     .frame(height: 44)
                     .background(
@@ -135,14 +134,14 @@ private struct OnboardingLicenseActionRow: View {
                         .fill(iconBackground)
 
                     Image(yoMax: systemImage)
-                        .font(.yoMax(13, weight: .semibold))  // Yo Max: icon 1 em, the size of its text
+                        .font(.yoMax(13, weight: .medium))  // Yo Max: icon 1 em, the size of its text
                         .foregroundColor(iconForeground)
                 }
                 .frame(width: 34, height: 34)
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(LocalizedStringKey(title))
-                        .font(.yoMax(13, weight: .semibold))
+                        .font(.yoMax(13, weight: .medium))
                         .foregroundColor(AppTheme.Text.primary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.88)
@@ -156,7 +155,7 @@ private struct OnboardingLicenseActionRow: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 Image(yoMax: "chevron.right")
-                    .font(.yoMax(10, weight: .bold))
+                    .font(.yoMax(10, weight: .medium))
                     .foregroundColor(AppTheme.Text.disabled)
                     .frame(width: 24, height: 24)
                     .background(
@@ -209,11 +208,11 @@ private struct OnboardingLicensePrimaryButton: View {
                         .controlSize(.small)
                 } else {
                     Image(yoMax: systemImage)
-                        .font(.yoMax(12, weight: .semibold))
+                        .font(.yoMax(12, weight: .medium))
                 }
 
                 Text(isLoading ? LocalizedStringKey("Activating") : title)
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
             }
             .foregroundColor(isEnabled ? AppTheme.Text.primary : AppTheme.Text.disabled)
             .frame(maxWidth: .infinity)
@@ -245,7 +244,7 @@ private struct OnboardingLicenseStatusMessage: View {
                 .fixedSize(horizontal: false, vertical: true)
         } icon: {
             Image(yoMax: isSuccess ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
         }
         .foregroundColor(isSuccess ? AppTheme.Status.positive : AppTheme.Status.error)
     }

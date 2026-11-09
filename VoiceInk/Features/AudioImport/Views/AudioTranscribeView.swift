@@ -200,7 +200,7 @@ struct AudioTranscribeView: View {
                         Image(yoMax: "play.fill")
                             .font(.yoMax(12, weight: .medium))  // Yo Max: icon 1 em, the size of its text
                         Text("Start")
-                            .font(.yoMax(12, weight: .semibold))
+                            .font(.yoMax(12, weight: .medium))
                     }
                     .foregroundColor(.white)
                     .padding(.horizontal, 12)
@@ -247,7 +247,7 @@ struct AudioTranscribeView: View {
     private var modePicker: some View {
         HStack(spacing: 6) {
             Text("Mode")
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
                 .lineLimit(1)
                 .fixedSize(horizontal: true, vertical: false)
@@ -270,7 +270,7 @@ struct AudioTranscribeView: View {
                             .lineLimit(1)
                             .truncationMode(.tail)
                         Image(yoMax: "chevron.up.chevron.down")
-                            .font(.yoMax(9, weight: .semibold))
+                            .font(.yoMax(9, weight: .medium))
                             .foregroundColor(AppTheme.Text.secondary)
                     }
                     .foregroundColor(AppTheme.Text.primary)

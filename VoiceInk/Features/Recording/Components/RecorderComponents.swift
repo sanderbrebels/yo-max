@@ -169,7 +169,7 @@ struct RecorderCloseButton: View {
                     )
 
                 Image(yoMax: "xmark")
-                    .font(.yoMax(9, weight: .semibold))
+                    .font(.yoMax(9, weight: .medium))
                     .foregroundColor(.white.opacity(0.86))
             }
             .frame(width: 21, height: 21)
@@ -488,7 +488,7 @@ struct AssistantPanelView: View {
 
             Button(action: sendDraftMessage) {
                 Image(yoMax: "paperplane.fill")
-                    .font(.yoMax(10, weight: .semibold))
+                    .font(.yoMax(10, weight: .medium))
                     .foregroundColor(canSendDraft ? .black : .white.opacity(0.35))
                     .frame(width: 24, height: 24)
                     .background(canSendDraft ? Color.white.opacity(0.88) : Color.white.opacity(0.10))

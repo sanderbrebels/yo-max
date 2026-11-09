@@ -16,7 +16,7 @@ struct TranscriptionInfoSidePanel: View {
         HStack(spacing: 12) {
             Text("Info")
                 .font(.yoMax(13, weight: .medium))
-                .fontWeight(.semibold)
+                .fontWeight(.medium)
 
             Spacer()
 
@@ -155,7 +155,7 @@ struct TranscriptionInfoPanel: View {
     ) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
-                .font(.yoMax(11, weight: .semibold))
+                .font(.yoMax(11, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             content()
@@ -202,7 +202,7 @@ struct TranscriptionInfoPanel: View {
     private func requestMessageBlock(title: LocalizedStringKey, message: String) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title)
-                .font(.yoMax(11, weight: .semibold))
+                .font(.yoMax(11, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
             Text(message)
                 .font(.system(size: 11, weight: .regular, design: .monospaced))
@@ -235,7 +235,7 @@ private struct TranscriptionMetadataRow: View {
             Spacer(minLength: 0)
 
             Text(value)
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
                 .lineLimit(1)
                 .truncationMode(.tail)

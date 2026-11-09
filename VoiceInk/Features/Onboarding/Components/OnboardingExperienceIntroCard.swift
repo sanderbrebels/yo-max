@@ -12,7 +12,7 @@ struct OnboardingExperienceIntroCard: View {
         HStack(alignment: .center, spacing: 14) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(LocalizedStringKey(introText))
-                    .font(.yoMax(17, weight: .semibold))
+                    .font(.yoMax(17, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
                     .fixedSize(horizontal: false, vertical: true)
             }

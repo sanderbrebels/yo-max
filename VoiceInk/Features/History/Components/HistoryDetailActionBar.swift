@@ -169,7 +169,7 @@ struct HistoryDetailActionBar: View {
                 .lineLimit(1)
                 .truncationMode(.tail)
             Image(yoMax: "chevron.down")
-                .font(.yoMax(8, weight: .semibold))
+                .font(.yoMax(8, weight: .medium))
                 .foregroundStyle(AppTheme.Text.muted)
         }
         .font(.yoMax(11, weight: .medium))

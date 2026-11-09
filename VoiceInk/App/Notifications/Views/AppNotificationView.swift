@@ -61,7 +61,7 @@ struct AppNotificationView: View {
                         onClose()
                     }) {
                         Text(actionButton.label)
-                            .font(.yoMax(11, weight: .semibold))
+                            .font(.yoMax(11, weight: .medium))
                             .foregroundColor(.white)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
@@ -90,24 +90,8 @@ struct AppNotificationView: View {
             RoundedRectangle(cornerRadius: AppTheme.Radius.card, style: .continuous)
                 .fill(.clear)
                 .background(
-                    ZStack {
-                        // Base dark background
-                        Color.black.opacity(0.9)
-
-                        // Subtle gradient overlay
-                        LinearGradient(
-                            colors: [
-                                Color.black.opacity(0.95),
-                                Color(red: 0.15, green: 0.15, blue: 0.15).opacity(0.9),
-                            ],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-
-                        // Very subtle visual effect for depth
-                        VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
-                            .opacity(0.05)
-                    }
+                    // Yo Max: one flat brand-dark surface, like the recorder (no gradient, no glass).
+                    AppTheme.Brand.brandDark
                     .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.card, style: .continuous))
                 )
         )

@@ -15,7 +15,7 @@ struct CompactHeroSection: View {
 
             VStack(spacing: 6) {
                 Text(title)
-                    .font(.yoMax(22, weight: .bold))
+                    .font(.yoMax(22, weight: .medium))
                 Text(description)
                     .font(.yoMax(14))
                     .foregroundStyle(AppTheme.Text.secondary)

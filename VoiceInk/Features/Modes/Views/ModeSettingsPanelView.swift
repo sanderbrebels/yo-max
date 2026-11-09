@@ -15,7 +15,7 @@ struct ModeSettingsPanelView: View {
             HStack(spacing: 12) {
                 Text("Modes Settings")
                     .font(.yoMax(13, weight: .medium))
-                    .fontWeight(.semibold)
+                    .fontWeight(.medium)
                     .foregroundColor(AppTheme.Text.primary)
                 Spacer()
                 Button(action: onDismiss) {
@@ -36,7 +36,7 @@ struct ModeSettingsPanelView: View {
 
             HStack {
                 Text("Reorder Modes")
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
                     + Text(" (drag to reorder)")
                     .font(.yoMax(12))
@@ -134,7 +134,7 @@ private struct ModeReorderRow: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(config.name)
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(14, weight: .medium))
                     .lineLimit(1)
                     .truncationMode(.tail)
 
@@ -242,7 +242,7 @@ private struct ModeReorderBadge: View {
         HStack(spacing: 5) {
             if let systemImage {
                 Image(yoMax: systemImage)
-                    .font(.yoMax(10, weight: .semibold))
+                    .font(.yoMax(10, weight: .medium))
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(AppTheme.Text.primary)
             }
@@ -273,12 +273,12 @@ private struct ModeReorderDragPreview: View {
             ModeIconView(icon: config.icon, size: config.icon.kind == .emoji ? 18 : 14)
 
             Text(config.name)
-                .font(.yoMax(14, weight: .semibold))
+                .font(.yoMax(14, weight: .medium))
                 .lineLimit(1)
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(AppTheme.Surface.card, in: RoundedRectangle(cornerRadius: 8))  // Yo Max: no glass
         .overlay {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(AppTheme.Border.control, lineWidth: 0.5)

@@ -218,14 +218,14 @@ private struct HistoryPerformanceSection: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(valueTitle)
-                    .font(.yoMax(11, weight: .semibold))
+                    .font(.yoMax(11, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.82)
                     .frame(width: 96, alignment: .trailing)
                     .padding(.trailing, 4)
             }
-            .font(.yoMax(13, weight: .semibold))
+            .font(.yoMax(13, weight: .medium))
             .foregroundStyle(AppTheme.Text.primary)
             .lineLimit(1)
 
@@ -252,7 +252,7 @@ private struct HistoryPerformanceRow: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(row.name)
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
@@ -300,7 +300,7 @@ private struct HistoryPerformanceEmptyRow: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(yoMax: icon)
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Text(title)

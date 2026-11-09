@@ -28,7 +28,7 @@ struct CustomModelCardView: View {
     private var headerSection: some View {
         HStack(alignment: .firstTextBaseline) {
             Text(model.displayName)
-                .font(.yoMax(13, weight: .semibold))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(Color(.labelColor))
 
             Spacer()

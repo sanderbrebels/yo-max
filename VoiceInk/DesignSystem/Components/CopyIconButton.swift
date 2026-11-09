@@ -8,7 +8,7 @@ struct CopyIconButton: View {
     var body: some View {
         Button(action: copy) {
             Image(yoMax: copied ? "checkmark" : "doc.on.doc")
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundColor(copied ? AppTheme.Status.positive : AppTheme.Selection.foreground)
                 .frame(width: 28, height: 28)
                 .background(

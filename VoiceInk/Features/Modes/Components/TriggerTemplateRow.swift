@@ -28,7 +28,7 @@ struct TriggerTemplateRow: View {
                 TriggerSymbol(systemName: template.systemImage)
 
                 Text(template.name)
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
                     .lineLimit(1)
 

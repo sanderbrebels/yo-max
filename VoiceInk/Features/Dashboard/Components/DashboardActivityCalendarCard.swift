@@ -27,7 +27,7 @@ struct DashboardActivityCalendarCard: View {
         VStack(alignment: .leading, spacing: 22) {
             HStack(alignment: .center, spacing: 10) {
                 Text("Consistency, at a glance")
-                    .font(.yoMax(16, weight: .semibold))
+                    .font(.yoMax(16, weight: .medium))
                     .foregroundStyle(AppTheme.Text.primary)
 
                 Spacer()
@@ -42,7 +42,7 @@ struct DashboardActivityCalendarCard: View {
                     legendSwatch(opacity: 0.85)
                     Text("More")
                 }
-                .font(.yoMax(10, weight: .semibold))
+                .font(.yoMax(10, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
                 .accessibilityHidden(true)
             }
@@ -228,11 +228,11 @@ struct DashboardActivityCalendarCard: View {
     private func metric(label: LocalizedStringKey, value: String) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             Text(label)
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Text(value)
-                .font(.yoMax(20, weight: .semibold))
+                .font(.yoMax(20, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
                 .monospacedDigit()
                 .lineLimit(1)
@@ -272,11 +272,11 @@ private struct DashboardActivityCalendarTooltip: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(point.accessibilityLabel)
-                .font(.yoMax(10, weight: .bold))
+                .font(.yoMax(10, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Text(wordsText)
-                .font(.yoMax(12, weight: .bold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
                 .monospacedDigit()
         }

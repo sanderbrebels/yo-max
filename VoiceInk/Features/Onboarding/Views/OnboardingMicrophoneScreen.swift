@@ -59,7 +59,7 @@ struct OnboardingMicrophoneScreen: View {
     private var listHeader: some View {
         HStack {
             Text("Available Microphones")
-                .font(.yoMax(13, weight: .semibold))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
 
             Spacer()
@@ -77,7 +77,7 @@ struct OnboardingMicrophoneScreen: View {
         } label: {
             HStack(spacing: 14) {
                 Image(yoMax: isSelected ? "checkmark" : "mic")
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
                     .foregroundColor(isSelected ? AppTheme.Text.primary : AppTheme.Text.muted)
                     .frame(width: 30, height: 30)
                     .background(
@@ -86,7 +86,7 @@ struct OnboardingMicrophoneScreen: View {
                     )
 
                 Text(device.name)
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(14, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
                     .lineLimit(1)
 
@@ -108,12 +108,12 @@ struct OnboardingMicrophoneScreen: View {
     private var emptyState: some View {
         VStack(spacing: 14) {
             Image(yoMax: "mic.slash")
-                .font(.yoMax(22, weight: .semibold))
+                .font(.yoMax(22, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
 
             VStack(spacing: 4) {
                 Text("No microphones found")
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(14, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
 
                 Text("Connect a microphone or allow microphone access, then refresh.")
@@ -136,10 +136,10 @@ struct OnboardingMicrophoneScreen: View {
         } label: {
             Label {
                 Text("Refresh")
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
             } icon: {
                 Image(yoMax: "arrow.clockwise")
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .rotationEffect(.degrees(refreshIconRotation))
             }
             .foregroundColor(AppTheme.Text.secondary)

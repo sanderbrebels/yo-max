@@ -38,7 +38,7 @@ struct WhisperModelCardView: View {
     private var headerSection: some View {
         HStack(alignment: .firstTextBaseline) {
             Text(model.displayName)
-                .font(.yoMax(13, weight: .semibold))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(Color(.labelColor))
 
             Spacer()
@@ -167,7 +167,7 @@ struct ImportedWhisperModelCardView: View {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(model.displayName)
-                        .font(.yoMax(13, weight: .semibold))
+                        .font(.yoMax(13, weight: .medium))
                         .foregroundColor(Color(.labelColor))
                     Spacer()
                 }

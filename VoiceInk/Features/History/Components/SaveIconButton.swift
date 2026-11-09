@@ -16,7 +16,7 @@ struct SaveIconButton: View {
             }
         } label: {
             Image(yoMax: saved ? "checkmark" : "square.and.arrow.down")
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundColor(saved ? AppTheme.Status.positive : .secondary)
                 .frame(width: 28, height: 28)
                 .background(AppTheme.Surface.control.opacity(0.9))

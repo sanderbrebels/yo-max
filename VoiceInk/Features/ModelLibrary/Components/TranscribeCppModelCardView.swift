@@ -12,7 +12,7 @@ struct TranscribeCppModelCardView: View {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(model.displayName)
-                        .font(.yoMax(13, weight: .semibold))
+                        .font(.yoMax(13, weight: .medium))
                         .foregroundColor(Color(.labelColor))
 
                     Spacer()

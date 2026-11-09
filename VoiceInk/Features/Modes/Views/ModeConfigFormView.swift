@@ -111,7 +111,7 @@ struct ModeConfigFormView: View {
 
             TextField("Mode name", text: $draft.name)
                 .textFieldStyle(.plain)
-                .font(.yoMax(16, weight: .semibold))
+                .font(.yoMax(16, weight: .medium))
                 .focused($isNameFieldFocused)
 
             Spacer()

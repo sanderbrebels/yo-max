@@ -34,7 +34,7 @@ struct GitHubStarPromptCard: View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Help people discover VoiceInk")
-                    .font(.yoMax(14.5, weight: .bold))
+                    .font(.yoMax(14.5, weight: .medium))
                     .foregroundStyle(AppTheme.Text.primary)
 
                 Text("If VoiceInk has been useful, a star on GitHub helps others find it.")
@@ -53,12 +53,12 @@ struct GitHubStarPromptCard: View {
                                 .tint(.secondary)
                         } else {
                             Image(yoMax: openFailed ? "exclamationmark.triangle.fill" : "star")
-                                .font(.yoMax(11, weight: .semibold))
+                                .font(.yoMax(11, weight: .medium))
                                 .foregroundStyle(openFailed ? .orange : .primary)
                         }
 
                         Text(openFailed ? "Couldn't open — try again" : "Star on GitHub")
-                            .font(.yoMax(12, weight: .semibold))
+                            .font(.yoMax(12, weight: .medium))
                     }
                     .foregroundStyle(AppTheme.Text.primary)
                     .padding(.horizontal, 11)
@@ -87,11 +87,11 @@ struct GitHubStarPromptCard: View {
     private var completionContent: some View {
         HStack(spacing: 8) {
             Image(yoMax: completionState == .starred ? "checkmark.circle.fill" : "arrow.up.right.circle.fill")
-                .font(.yoMax(13, weight: .semibold))  // Yo Max: icon 1 em, the size of its text
+                .font(.yoMax(13, weight: .medium))  // Yo Max: icon 1 em, the size of its text
                 .foregroundStyle(completionState == .starred ? AppTheme.Sidebar.license : .secondary)
 
-            Text(completionState == .starred ? "Starred — thank you!" : "GitHub opened")
-                .font(.yoMax(13, weight: .semibold))
+            Text(completionState == .starred ? "Starred, thanks" : "GitHub opened")
+                .font(.yoMax(13, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
 
             Spacer(minLength: 0)

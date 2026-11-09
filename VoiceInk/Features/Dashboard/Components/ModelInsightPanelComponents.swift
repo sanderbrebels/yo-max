@@ -13,7 +13,7 @@ struct ModelInsightPanelHeader: View {
 
             Button(action: onClose) {
                 Image(yoMax: "xmark")
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .frame(width: 30, height: 30)
             }
             .buttonStyle(DashboardInsightButtonStyle())
@@ -99,14 +99,14 @@ struct ModelInsightSection<Row: Identifiable, RowContent: View>: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(valueTitle)
-                    .font(.yoMax(11, weight: .semibold))
+                    .font(.yoMax(11, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(1)
                     .minimumScaleFactor(presentation == .preview ? 1 : 0.82)
                     .frame(width: valueColumnWidth, alignment: .trailing)
                     .padding(.trailing, ModelInsightRowLayout.horizontalPadding)
             }
-            .font(.yoMax(presentation == .preview ? 11 : 13, weight: .semibold))
+            .font(.yoMax(presentation == .preview ? 11 : 13, weight: .medium))
             .foregroundStyle(presentation == .preview ? AppTheme.Text.secondary : AppTheme.Text.primary)
             .lineLimit(1)
 

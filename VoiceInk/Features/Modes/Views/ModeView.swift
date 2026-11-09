@@ -203,7 +203,7 @@ struct SectionHeader: View {
 
     var body: some View {
         Text(title)
-            .font(.yoMax(16, weight: .bold))
+            .font(.yoMax(16, weight: .medium))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom, 8)
     }

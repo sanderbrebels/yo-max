@@ -64,7 +64,7 @@ struct TranscriptionDetailView: View {
         HStack(spacing: 12) {
             Button(action: onBack) {
                 Image(yoMax: "chevron.left")
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(14, weight: .medium))
             }
             .buttonStyle(.plain)
             .keyboardShortcut("[", modifiers: .command)
@@ -72,7 +72,7 @@ struct TranscriptionDetailView: View {
             .accessibilityLabel("Back to history")
 
             Text("Transcription Details")
-                .font(.yoMax(14, weight: .semibold))
+                .font(.yoMax(14, weight: .medium))
 
             Spacer()
 
@@ -153,7 +153,7 @@ private struct HistoryTranscriptionTextCard: View {
             if let title {
                 HStack(spacing: 12) {
                     Text(title)
-                        .font(.yoMax(11, weight: .semibold))
+                        .font(.yoMax(11, weight: .medium))
                         .foregroundStyle(AppTheme.Text.secondary)
 
                     Spacer()

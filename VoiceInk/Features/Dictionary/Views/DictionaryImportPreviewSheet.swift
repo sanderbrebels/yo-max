@@ -95,7 +95,7 @@ struct DictionaryImportPreviewSheet: View {
     private var importModeSection: some View {
         HStack(spacing: 4) {
             Text("Import Mode")
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
 
             InfoTip(
                 message: importModeHelp,
@@ -126,7 +126,7 @@ struct DictionaryImportPreviewSheet: View {
     private func summarySection(_ summary: DictionaryImportSummary) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Import Preview")
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
 
             VStack(spacing: 8) {
                 summaryRow(

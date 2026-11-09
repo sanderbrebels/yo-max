@@ -21,8 +21,7 @@ struct DashboardEditorialSummaryCard: View {
 
             HStack(alignment: .lastTextBaseline, spacing: 10) {
                 Text(summary.hasData ? Formatters.formattedSavedTime(summary.timeSaved) : "--")
-                    .font(.yoMax(52, weight: .bold))
-                    .tracking(-1)
+                    .font(.yoMax(52, weight: .medium))
                     .foregroundStyle(AppTheme.Insights.productivity)
                     .monospacedDigit()
                     .lineLimit(1)
@@ -73,8 +72,7 @@ struct DashboardEditorialSummaryCard: View {
     private func fact(value: String, caption: LocalizedStringKey) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(value)
-                .font(.yoMax(24, weight: .bold))
-                .tracking(-0.4)
+                .font(.yoMax(24, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
                 .monospacedDigit()
                 .lineLimit(1)

@@ -87,7 +87,7 @@ private struct ModelPerformanceDetailRow: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(row.name)
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
                     .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)

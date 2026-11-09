@@ -16,7 +16,7 @@ struct TriggerGroupRow: View {
             TriggerSymbol(systemName: groupSystemImage)
 
             Text(group.name)
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
                 .lineLimit(1)
                 .layoutPriority(1)
@@ -129,7 +129,7 @@ private struct TriggerTextChip: View {
     var body: some View {
         HStack(spacing: 5) {
             Image(yoMax: systemName)
-                .font(.yoMax(12, weight: .semibold))  // Yo Max: icon 1 em, the size of its text
+                .font(.yoMax(12, weight: .medium))  // Yo Max: icon 1 em, the size of its text
                 .foregroundStyle(AppTheme.Text.secondary)
 
             Text(title)
@@ -140,7 +140,7 @@ private struct TriggerTextChip: View {
 
             Button(action: onRemove) {
                 Image(yoMax: "xmark")
-                    .font(.yoMax(9, weight: .bold))
+                    .font(.yoMax(9, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .frame(width: 14, height: 14)
             }
@@ -188,7 +188,7 @@ struct TriggerGroupPreviewStack: View {
 
             if overflowCount > 0 {
                 Text("+\(overflowCount)")
-                    .font(.yoMax(tileSize * 0.30, weight: .semibold))
+                    .font(.yoMax(tileSize * 0.30, weight: .medium))
                     .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
@@ -222,7 +222,7 @@ struct TriggerGroupPreviewStack: View {
                         .fill(AppTheme.Surface.card)
                         .frame(width: tileSize - 8, height: tileSize - 8)
                     Image(yoMax: "globe")
-                        .font(.yoMax(tileSize * 0.38, weight: .semibold))
+                        .font(.yoMax(tileSize * 0.38, weight: .medium))
                         .foregroundStyle(AppTheme.Text.primary)
                 }
             case .empty:

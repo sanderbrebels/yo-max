@@ -273,7 +273,7 @@ struct DashboardContent: View {
             return String(localized: "View dashboard insights")
         }
 
-        return String(localized: "Continue using Yo Max to unlock these stats.")
+        return String(localized: "These stats appear after a few more dictations")
     }
 
     private var insightsActionAccessibilityLabel: String {
@@ -287,10 +287,7 @@ struct DashboardContent: View {
     private var greetingHeader: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(greetingEmoji)
-                    .font(.yoMax(25))
-                    .accessibilityHidden(true)
-
+                // Yo Max: no emoji (schets dashboard-kop.html, B).
                 Text("\(greetingText),")
                     .font(displayNameFont)
                     .foregroundStyle(AppTheme.Text.primary)
@@ -306,7 +303,7 @@ struct DashboardContent: View {
 
             HStack(alignment: .top, spacing: 0) {
                 Text(headerSubtitle)
-                    .font(.yoMax(13, weight: .medium))
+                    .font(.yoMax(13.5))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(2)
 
@@ -560,7 +557,7 @@ struct DashboardContent: View {
         } else {
             switch starPrompt.completionState {
             case .starred:
-                footerActionLabel(icon: "checkmark", title: "Starred — thank you!", color: AppTheme.Sidebar.license)
+                footerActionLabel(icon: "checkmark", title: "Starred, thanks", color: AppTheme.Sidebar.license)
             case .opened:
                 footerActionLabel(icon: "arrow.up.right", title: "GitHub opened", color: AppTheme.Sidebar.fallback)
             case .none:
@@ -584,7 +581,7 @@ struct DashboardContent: View {
             Button(action: copySystemInfo) {
                 footerActionLabel(
                     icon: isSystemInfoCopied ? "checkmark" : "doc.on.doc",
-                    title: isSystemInfoCopied ? "Copied!" : "Copy System Info",
+                    title: isSystemInfoCopied ? "Copied" : "Copy System Info",
                     color: isSystemInfoCopied ? AppTheme.Sidebar.license : AppTheme.Sidebar.fallback
                 )
             }
@@ -731,39 +728,26 @@ struct DashboardContent: View {
         }
     }
 
-    private var greetingEmoji: String {
-        let hour = Calendar.current.component(.hour, from: Date())
-
-        switch hour {
-        case 5..<12:
-            return "☀️"
-        case 12..<17:
-            return "👋"
-        case 17..<24:
-            return "🌙"
-        default:
-            return "👋"
-        }
-    }
-
+    /// Yo Max: a plain fact about today instead of a pep talk (schets dashboard-kop.html, B).
     private var headerSubtitle: String {
         guard hasLoadedStatsSnapshot else {
-            return String(localized: "Pulling together your Yo Max activity.")
+            return String(localized: "Loading today’s dictations")
         }
 
-        guard statsSummary.totalCount > 0 else {
-            return String(localized: "Record your first session to start building momentum.")
+        let today = statsSummary.totals(for: .today)
+        guard today.count > 0 else {
+            return statsSummary.totalCount > 0
+                ? String(localized: "No dictations yet today")
+                : String(localized: "Hold fn to dictate your first sentence")
         }
 
-        if statsSummary.recentSevenDayCount >= 5 {
-            return String(localized: "You’re on a roll this week. Keep the momentum going.")
-        }
-
-        if statsSummary.recentSevenDayCount > 0 {
-            return String(localized: "You’re building momentum this week. Keep it going.")
-        }
-
-        return String(localized: "Your data is not ready yet. Keep the momentum going.")
+        let dictations = today.count == 1
+            ? String(localized: "1 dictation today")
+            : String(localized: "\(today.count) dictations today")
+        let words = today.words == 1
+            ? String(localized: "1 word")
+            : String(localized: "\(today.words.formatted()) words")
+        return "\(dictations), \(words)"
     }
 
     private var momentumHeadline: DashboardHeroHeadline {
@@ -851,7 +835,7 @@ private struct DashboardAccessibilityReminder: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text("Enable Accessibility Access")
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
                     .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
 
@@ -891,7 +875,7 @@ private struct DashboardNoModesReminder: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text("Set Up a Mode")
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
                     .foregroundStyle(AppTheme.Text.primary)
                     .lineLimit(1)
 

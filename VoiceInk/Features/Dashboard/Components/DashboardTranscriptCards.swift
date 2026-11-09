@@ -6,7 +6,7 @@ struct DashboardTranscriptCards: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             Text("Recent Transcripts")
-                .font(.yoMax(18, weight: .bold))
+                .font(.yoMax(18, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
                 .lineLimit(1)
 
@@ -146,7 +146,7 @@ private struct DashboardTranscriptCardRow: View {
 
             VStack(alignment: .leading, spacing: 5) {
                 Text(metadataText)
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)

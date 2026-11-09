@@ -132,7 +132,7 @@ private struct ShortcutKeyCap: View {
 
     var body: some View {
         Text(title)
-            .font(.yoMax(isCompact ? 9 : 11, weight: .semibold))
+            .font(.yoMax(isCompact ? 9 : 11, weight: .medium))
             .lineLimit(1)
             .minimumScaleFactor(0.75)
             .foregroundStyle(foregroundColor)

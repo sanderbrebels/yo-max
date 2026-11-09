@@ -195,7 +195,7 @@ private struct ReducedMotionCelebrationOverlay: View {
             Color.clear
 
             Image(yoMax: "checkmark.seal.fill")
-                .font(.yoMax(54, weight: .semibold))
+                .font(.yoMax(54, weight: .medium))
                 .foregroundStyle(AppTheme.Status.positive)
                 .padding(22)
                 .background(

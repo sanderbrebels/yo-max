@@ -24,7 +24,7 @@ struct VoiceInkRefineModelCardView: View {
     private var headerSection: some View {
         HStack(alignment: .firstTextBaseline) {
             Text(VoiceInkRefineService.modelName)
-                .font(.yoMax(14, weight: .semibold))
+                .font(.yoMax(14, weight: .medium))
                 .foregroundStyle(Color(.labelColor))
 
             Text("New")

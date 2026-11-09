@@ -297,7 +297,7 @@ struct ModelManagementView: View {
                 HStack(spacing: 8) {
                     Image(yoMax: "square.and.arrow.down")
                     Text("Import Local Model…")
-                        .font(.yoMax(12, weight: .semibold))
+                        .font(.yoMax(12, weight: .medium))
                 }
                 .frame(maxWidth: .infinity)
                 .padding(16)
@@ -316,7 +316,7 @@ struct ModelManagementView: View {
     private var intelMacWarningBanner: some View {
         HStack(spacing: 10) {
             Image(yoMax: "exclamationmark.triangle.fill")
-                .font(.yoMax(14, weight: .semibold))
+                .font(.yoMax(14, weight: .medium))
                 .foregroundColor(AppTheme.Status.warningStrong)
 
             Text("Local models don't work reliably on Intel Macs")
@@ -332,9 +332,9 @@ struct ModelManagementView: View {
             }) {
                 HStack(spacing: 4) {
                     Text("Use Cloud")
-                        .font(.yoMax(12, weight: .semibold))
+                        .font(.yoMax(12, weight: .medium))
                     Image(yoMax: "arrow.right")
-                        .font(.yoMax(10, weight: .bold))
+                        .font(.yoMax(10, weight: .medium))
                 }
                 .foregroundColor(AppTheme.Status.warningStrong)
                 .padding(.horizontal, 12)

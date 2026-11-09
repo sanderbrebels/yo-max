@@ -158,7 +158,7 @@ struct TriggerPickerPopover: View {
     private var suggestedGroups: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Suggested")
-                .font(.yoMax(11, weight: .semibold))
+                .font(.yoMax(11, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
                 .padding(.horizontal, 6)
                 .padding(.top, 2)
@@ -319,7 +319,7 @@ struct TriggerPickerPopover: View {
 
                 if isSelected {
                     Image(yoMax: "checkmark.circle.fill")
-                        .font(.yoMax(14, weight: .semibold))
+                        .font(.yoMax(14, weight: .medium))
                         .foregroundStyle(Color.accentColor)
                 }
             }

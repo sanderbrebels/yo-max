@@ -28,7 +28,7 @@ struct TranscriptionModelDownloadCard: View {
 
                 VStack(alignment: .leading, spacing: 6) {
                     Text(model.displayName)
-                        .font(.yoMax(17, weight: .semibold))
+                        .font(.yoMax(17, weight: .medium))
                         .foregroundColor(AppTheme.Text.primary)
 
                     Text("Fast multilingual transcription that runs locally on Mac.")
@@ -126,7 +126,7 @@ struct TranscriptionModelDownloadCard: View {
                 Text(downloadButtonTitle)
                 Image(yoMax: isDownloading ? "xmark.circle" : "arrow.down.circle")
             }
-            .font(.yoMax(12, weight: .semibold))
+            .font(.yoMax(12, weight: .medium))
             .foregroundColor(
                 isDownloading ? AppTheme.Action.destructiveForeground : AppTheme.Action.primaryForeground
             )
@@ -142,7 +142,7 @@ struct TranscriptionModelDownloadCard: View {
 
     private var statusBadge: some View {
         Text("Downloaded")
-            .font(.yoMax(11, weight: .semibold))
+            .font(.yoMax(11, weight: .medium))
             .foregroundColor(AppTheme.Text.secondary)
             .padding(.horizontal, 9)
             .padding(.vertical, 5)

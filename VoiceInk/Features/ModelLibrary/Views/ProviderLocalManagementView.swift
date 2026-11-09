@@ -291,7 +291,7 @@ private struct LocalProviderDisclosureRow<Content: View>: View {
 
                     VStack(alignment: .leading, spacing: 2) {
                         title
-                            .font(.yoMax(13, weight: .semibold))
+                            .font(.yoMax(13, weight: .medium))
                             .foregroundStyle(AppTheme.Text.primary)
 
                         subtitle
@@ -308,7 +308,7 @@ private struct LocalProviderDisclosureRow<Content: View>: View {
                         .lineLimit(1)
 
                     Image(yoMax: "chevron.right")
-                        .font(.yoMax(11, weight: .semibold))
+                        .font(.yoMax(11, weight: .medium))
                         .foregroundStyle(AppTheme.Text.muted)
                         .rotationEffect(.degrees(isExpanded ? 90 : 0))
                 }

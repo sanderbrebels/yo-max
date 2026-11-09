@@ -19,7 +19,7 @@ struct PermissionStepRow: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(LocalizedStringKey(descriptor.title))
-                        .font(.yoMax(14, weight: .semibold))
+                        .font(.yoMax(14, weight: .medium))
                         .foregroundColor(AppTheme.Text.primary)
 
                     Text(LocalizedStringKey(descriptor.subtitle))
@@ -64,11 +64,11 @@ struct PermissionStepRow: View {
 
             if status.isGranted {
                 Image(yoMax: "checkmark")
-                    .font(.yoMax(12, weight: .bold))
+                    .font(.yoMax(12, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
             } else {
                 Text("\(stepNumber)")
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .foregroundColor(isActive && !isLocked ? AppTheme.Text.primary : AppTheme.Text.muted)
             }
         }
@@ -78,7 +78,7 @@ struct PermissionStepRow: View {
     private var actionButton: some View {
         Button(action: onAction) {
             Text(LocalizedStringKey(actionTitle))
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundColor(AppTheme.Action.primaryForeground)
                 .frame(minWidth: 94)
                 .padding(.horizontal, 12)
@@ -93,7 +93,7 @@ struct PermissionStepRow: View {
 
     private var statusBadge: some View {
         Text(isLocked ? LocalizedStringKey("Locked") : LocalizedStringKey(status.label))
-            .font(.yoMax(12, weight: .semibold))
+            .font(.yoMax(12, weight: .medium))
             .foregroundColor(isLocked ? AppTheme.Text.muted : statusTone)
             .padding(.horizontal, 10)
             .padding(.vertical, 7)
@@ -120,7 +120,7 @@ struct PermissionStepRow: View {
             Button("Quit") {
                 onQuit()
             }
-            .font(.yoMax(12, weight: .semibold))
+            .font(.yoMax(12, weight: .medium))
             .buttonStyle(.plain)
             .foregroundColor(AppTheme.Action.secondaryForeground)
         }

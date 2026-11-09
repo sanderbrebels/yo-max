@@ -57,7 +57,7 @@ struct NativeAppleLanguageAssetControl: View {
         case .needsDownload:
             Button(action: downloadAsset) {
                 Image(yoMax: "arrow.down.circle.fill")
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(14, weight: .medium))
                     .yoMaxIconHitTarget()  // Yo Max
             }
             .buttonStyle(.plain)
@@ -82,7 +82,7 @@ struct NativeAppleLanguageAssetControl: View {
         case .reservationLimitReached:
             Button(action: refreshAssetState) {
                 Image(yoMax: "exclamationmark.circle")
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(14, weight: .medium))
                     .yoMaxIconHitTarget()  // Yo Max
             }
             .buttonStyle(.plain)
@@ -93,7 +93,7 @@ struct NativeAppleLanguageAssetControl: View {
         case .failed:
             Button(action: downloadAsset) {
                 Image(yoMax: "arrow.clockwise.circle.fill")
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(14, weight: .medium))
                     .yoMaxIconHitTarget()  // Yo Max
             }
             .buttonStyle(.plain)

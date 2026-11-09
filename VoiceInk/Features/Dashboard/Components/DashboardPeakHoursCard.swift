@@ -43,7 +43,7 @@ struct DashboardPeakHoursCard: View {
     private var header: some View {
         HStack(alignment: .firstTextBaseline, spacing: 12) {
             Text("Peak Dictation Hours")
-                .font(.yoMax(18, weight: .bold))
+                .font(.yoMax(18, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.84)
@@ -52,11 +52,11 @@ struct DashboardPeakHoursCard: View {
 
             HStack(spacing: 5) {
                 Image(yoMax: "clock")
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary.opacity(0.78))
 
                 Text(canShowPattern ? windowText : "--")
-                    .font(.yoMax(13, weight: .bold))
+                    .font(.yoMax(13, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.76)
@@ -70,7 +70,7 @@ struct DashboardPeakHoursCard: View {
 
     private var accessibilityValue: String {
         if isLocked {
-            return String(localized: "Continue using Yo Max to unlock peak hours.")
+            return String(localized: "Peak hours appear after a few more dictations")
         }
 
         guard summary.hasData else {
@@ -83,14 +83,14 @@ struct DashboardPeakHoursCard: View {
     private var lockedOverlay: some View {
         VStack(spacing: 8) {
             Image(yoMax: "lock.fill")
-                .font(.yoMax(16, weight: .bold))
+                .font(.yoMax(16, weight: .medium))
                 .foregroundStyle(AppTheme.Accent.primary)
                 .frame(width: 34, height: 34)
                 .background(AppTheme.Accent.fill)
                 .clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
 
-            Text("Continue using Yo Max to unlock peak hours.")
-                .font(.yoMax(13, weight: .semibold))
+            Text("Peak hours appear after a few more dictations")
+                .font(.yoMax(13, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
@@ -190,16 +190,7 @@ private struct DashboardPeakHoursHistogram: View {
     private func barStyle(for point: DashboardHourlyActivityPoint) -> AnyShapeStyle {
         let opacity = barOpacity(for: point)
 
-        return AnyShapeStyle(
-            LinearGradient(
-                colors: [
-                    peakTintSoft.opacity(opacity),
-                    peakTint.opacity(opacity * 0.94),
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        )
+        return AnyShapeStyle(peakTint.opacity(opacity))  // Yo Max: one flat colour, no gradient
     }
 
     private func barHeight(for point: DashboardHourlyActivityPoint, in size: CGSize) -> CGFloat {
@@ -213,7 +204,7 @@ private struct DashboardPeakHoursHistogram: View {
 
     private func axisLabel(_ label: LocalizedStringKey) -> some View {
         Text(label)
-            .font(.yoMax(10, weight: .semibold))
+            .font(.yoMax(10, weight: .medium))
             .foregroundStyle(AppTheme.Text.secondary)
             .lineLimit(1)
     }

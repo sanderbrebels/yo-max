@@ -7,7 +7,7 @@ struct ModeSettingsQuickSwitchTip: View {
         HStack(alignment: .top, spacing: 10) {
             VStack(alignment: .leading, spacing: 6) {
                 Text("Mode shortcuts")
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
                     .lineLimit(1)
 
@@ -22,7 +22,7 @@ struct ModeSettingsQuickSwitchTip: View {
 
             Button(action: onDismiss) {
                 Image(yoMax: "xmark")
-                    .font(.yoMax(10, weight: .semibold))
+                    .font(.yoMax(10, weight: .medium))
                     .foregroundColor(AppTheme.Text.secondary)
                     .frame(width: 22, height: 22)
                     .background(AppTheme.Surface.control)

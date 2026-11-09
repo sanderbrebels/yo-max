@@ -33,7 +33,7 @@ struct ModeEmptyStateView: View {
 
             Text("No Modes")
                 .font(.yoMax(17, weight: .medium))
-                .fontWeight(.semibold)
+                .fontWeight(.medium)
 
             Text("Add customized modes for different contexts")
                 .foregroundColor(AppTheme.Text.secondary)
@@ -72,12 +72,12 @@ struct DefaultModeIndicator: View {
     var body: some View {
         HStack(spacing: 5) {
             Image(yoMax: "checkmark.seal.fill")
-                .font(.yoMax(11, weight: .semibold))
+                .font(.yoMax(11, weight: .medium))
                 .symbolRenderingMode(.hierarchical)
                 .foregroundStyle(AppTheme.Text.primary)
 
             Text("Default")
-                .font(.yoMax(11, weight: .semibold))
+                .font(.yoMax(11, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
                 .lineLimit(1)
         }
@@ -273,7 +273,7 @@ struct ConfigurationRow: View {
 
                     VStack(alignment: .leading, spacing: 3) {
                         Text(config.name)
-                            .font(.yoMax(15, weight: .semibold))
+                            .font(.yoMax(15, weight: .medium))
                             .lineLimit(1)
                             .truncationMode(.tail)
 

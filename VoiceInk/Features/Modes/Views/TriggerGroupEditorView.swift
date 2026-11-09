@@ -23,7 +23,7 @@ struct TriggerGroupEditorView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(group.name)
-                .font(.yoMax(14, weight: .semibold))
+                .font(.yoMax(14, weight: .medium))
                 .foregroundStyle(AppTheme.Text.primary)
             Text("Edit the apps and websites in this group.")
                 .font(.yoMax(11))

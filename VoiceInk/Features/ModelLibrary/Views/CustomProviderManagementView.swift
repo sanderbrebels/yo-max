@@ -123,7 +123,7 @@ private struct CustomEnhancementModelRow: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(yoMax: "sparkles")
-                .font(.yoMax(15, weight: .semibold))
+                .font(.yoMax(15, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
                 .frame(width: 28, height: 28)
                 .background(
@@ -137,7 +137,7 @@ private struct CustomEnhancementModelRow: View {
 
             VStack(alignment: .leading, spacing: 5) {
                 Text(provider.name)
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
 
                 if provider.modelName.isEmpty {
                     Text("No model configured")
@@ -590,7 +590,7 @@ private struct CustomModelEditorSection<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundStyle(AppTheme.Text.secondary)
 
             VStack(spacing: 0) {
@@ -763,7 +763,7 @@ private struct CustomModelEditorHeader: View {
         HStack(spacing: 12) {
             Text(title)
                 .font(.yoMax(13, weight: .medium))
-                .fontWeight(.semibold)
+                .fontWeight(.medium)
                 .foregroundColor(AppTheme.Text.primary)
 
             Spacer()

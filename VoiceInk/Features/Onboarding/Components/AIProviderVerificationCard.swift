@@ -67,7 +67,7 @@ struct AIProviderVerificationCard: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(selectedProvider.rawValue)
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
             }
 
@@ -80,9 +80,9 @@ struct AIProviderVerificationCard: View {
                     HStack(spacing: 6) {
                         Text("Switch AI provider")
                         Image(yoMax: isSwitchingProvider ? "chevron.up" : "chevron.down")
-                            .font(.yoMax(9, weight: .bold))
+                            .font(.yoMax(9, weight: .medium))
                     }
-                    .font(.yoMax(11, weight: .semibold))
+                    .font(.yoMax(11, weight: .medium))
                     .foregroundColor(AppTheme.Text.secondary)
                     .padding(.horizontal, 11)
                     .padding(.vertical, 7)
@@ -105,7 +105,7 @@ struct AIProviderVerificationCard: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .center) {
                 Text(String(format: String(localized: "%@ API Key"), selectedProvider.rawValue))
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
 
                 Spacer()
@@ -117,9 +117,9 @@ struct AIProviderVerificationCard: View {
                         HStack(spacing: 4) {
                             Text("Get API key")
                             Image(yoMax: "arrow.up.right")
-                                .font(.yoMax(9, weight: .semibold))
+                                .font(.yoMax(9, weight: .medium))
                         }
-                        .font(.yoMax(11, weight: .semibold))
+                        .font(.yoMax(11, weight: .medium))
                         .foregroundColor(AppTheme.Text.secondary)
                     }
                     .buttonStyle(.plain)
@@ -157,7 +157,7 @@ struct AIProviderVerificationCard: View {
 
                     Text(isVerifying ? LocalizedStringKey("Testing...") : LocalizedStringKey("Test connection"))
                 }
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundColor(canVerify ? AppTheme.Action.primaryForeground : AppTheme.Action.disabledForeground)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 8)
@@ -176,12 +176,12 @@ struct AIProviderVerificationCard: View {
         HStack(alignment: .center, spacing: 12) {
             HStack(spacing: 9) {
                 Image(yoMax: "checkmark.circle.fill")
-                    .font(.yoMax(12, weight: .semibold))  // Yo Max: icon 1 em, the size of its text
+                    .font(.yoMax(12, weight: .medium))  // Yo Max: icon 1 em, the size of its text
                     .foregroundColor(AppTheme.Status.positive)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Connection verified.")
-                        .font(.yoMax(12, weight: .semibold))
+                        .font(.yoMax(12, weight: .medium))
                         .foregroundColor(AppTheme.Text.primary)
                 }
             }
@@ -196,7 +196,7 @@ struct AIProviderVerificationCard: View {
         if let verificationMessage {
             HStack(alignment: .top, spacing: 7) {
                 Image(yoMax: verificationSucceeded ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .foregroundColor(verificationSucceeded ? AppTheme.Status.positive : AppTheme.Status.error)
                     .padding(.top, 1)
 
@@ -358,7 +358,7 @@ private struct ProviderChoiceButton: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(provider.rawValue)
-                        .font(.yoMax(12, weight: .semibold))
+                        .font(.yoMax(12, weight: .medium))
                         .foregroundColor(AppTheme.Text.primary)
                         .lineLimit(1)
 
@@ -371,7 +371,7 @@ private struct ProviderChoiceButton: View {
 
                 if isSelected {
                     Image(yoMax: "checkmark.circle.fill")
-                        .font(.yoMax(13, weight: .semibold))
+                        .font(.yoMax(13, weight: .medium))
                         .foregroundColor(AppTheme.Text.secondary)
                 }
             }
@@ -389,7 +389,7 @@ private struct ProviderChoiceButton: View {
 private struct RecommendedProviderPill: View {
     var body: some View {
         Text("Recommended")
-            .font(.yoMax(9, weight: .semibold))
+            .font(.yoMax(9, weight: .medium))
             .foregroundColor(AppTheme.Text.muted)
             .lineLimit(1)
             .fixedSize(horizontal: true, vertical: false)

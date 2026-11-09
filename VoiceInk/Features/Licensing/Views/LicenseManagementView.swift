@@ -10,7 +10,7 @@ struct LicenseManagementView: View {
 
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
     private let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
-    private let licenseTitleFont = Font.yoMax(28, weight: .semibold)
+    private let licenseTitleFont = Font.yoMax(28, weight: .medium)
     private let neutralIconColor = AppTheme.Text.secondary
 
     private var reportPanelAnimation: Animation {
@@ -173,7 +173,6 @@ struct LicenseManagementView: View {
                 TextField("License key", text: $licenseKeyDraft)
                     .textFieldStyle(.roundedBorder)
                     .font(.system(.body, design: .monospaced))
-                    .textCase(.uppercase)
 
                 LicenseActionButton(
                     title: "Activate",
@@ -232,7 +231,7 @@ struct LicenseManagementView: View {
                 .padding(.top, 8)
         } label: {
             Text("Resources")
-                .font(.yoMax(20, weight: .semibold))
+                .font(.yoMax(20, weight: .medium))
                 .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -408,7 +407,7 @@ struct LicenseActiveSummaryCard<Actions: View>: View {
 
                 VStack(alignment: .leading, spacing: 6) {
                     Text(title)
-                        .font(.yoMax(28, weight: .semibold))
+                        .font(.yoMax(28, weight: .medium))
 
                     Text(subtitle)
                         .font(.yoMax(11))
@@ -438,9 +437,8 @@ struct LicenseActiveSummaryCard<Actions: View>: View {
         HStack(spacing: 10) {
             Text("License Key")
                 .font(.yoMax(10))
-                .fontWeight(.semibold)
+                .fontWeight(.medium)
                 .foregroundStyle(.secondary)
-                .textCase(.uppercase)
                 .frame(width: 82, alignment: .leading)
 
             Button(action: onCopyLicenseKey) {
@@ -510,7 +508,7 @@ struct LicenseProMark: View {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("PRO")
                             .font(.yoMax(10))
-                            .fontWeight(.semibold)
+                            .fontWeight(.medium)
                         RoundedRectangle(cornerRadius: 2)
                             .fill(AppTheme.Border.control)
                             .frame(width: 48, height: 4)
@@ -541,7 +539,7 @@ private struct ReportFeedbackBottomPanel: View {
             VStack(spacing: 20) {
                 VStack(spacing: 18) {
                     Text("Thank you for using VoiceInk")
-                        .font(.yoMax(24, weight: .semibold))
+                        .font(.yoMax(24, weight: .medium))
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
 
@@ -557,9 +555,8 @@ private struct ReportFeedbackBottomPanel: View {
 
                 Text("REACH OUT")
                     .font(.yoMax(10))
-                    .fontWeight(.semibold)
+                    .fontWeight(.medium)
                     .foregroundStyle(.secondary)
-                    .tracking(0.6)
 
                 HStack(spacing: 10) {
                     ReportPanelButton(
@@ -585,7 +582,7 @@ private struct ReportFeedbackBottomPanel: View {
 
             Button(action: onClose) {
                 Image(yoMax: "xmark")
-                    .font(.yoMax(11, weight: .semibold))
+                    .font(.yoMax(11, weight: .medium))
                     .foregroundStyle(.secondary)
                     .frame(width: 28, height: 28)
                     .contentShape(Circle())
@@ -627,7 +624,7 @@ private struct BenefitPill: View {
     var body: some View {
         HStack(spacing: 7) {
             Image(yoMax: systemImage)
-                .font(.yoMax(13, weight: .semibold))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundStyle(tint)
 
             Text(title)
@@ -654,7 +651,7 @@ private struct CopiedStatePill: View {
     var body: some View {
         HStack(spacing: 5) {
             Image(yoMax: "checkmark")
-                .font(.yoMax(11, weight: .semibold))
+                .font(.yoMax(11, weight: .medium))
 
             Text("Copied")
                 .font(.yoMax(11, weight: .medium))
@@ -684,7 +681,7 @@ private struct FullWidthDisclosureGroupStyle: DisclosureGroupStyle {
                     Spacer(minLength: 12)
 
                     Image(yoMax: "chevron.down")
-                        .font(.yoMax(12, weight: .semibold))
+                        .font(.yoMax(12, weight: .medium))
                         .foregroundStyle(.secondary)
                         .rotationEffect(.degrees(configuration.isExpanded ? 180 : 0))
                 }
@@ -710,13 +707,13 @@ private struct ResourceLinkRow: View {
         Button(action: action) {
             HStack(alignment: .center, spacing: 12) {
                 Image(yoMax: systemImage)
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(14, weight: .medium))
                     .foregroundStyle(tint)
                     .frame(width: 18, height: 18)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .font(.yoMax(13, weight: .semibold))
+                        .font(.yoMax(13, weight: .medium))
                         .foregroundStyle(.primary)
                         .lineLimit(1)
 
@@ -730,7 +727,7 @@ private struct ResourceLinkRow: View {
                 Spacer(minLength: 8)
 
                 Image(yoMax: "arrow.up.right")
-                    .font(.yoMax(11, weight: .semibold))
+                    .font(.yoMax(11, weight: .medium))
                     .foregroundStyle(.tertiary)
             }
             .padding(.horizontal, 12)
@@ -830,7 +827,7 @@ private struct LicenseActionLabel: View {
     var body: some View {
         HStack(spacing: 7) {
             Image(yoMax: systemImage)
-                .font(.yoMax(13, weight: .semibold))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundStyle(iconColor)
 
             Text(title)

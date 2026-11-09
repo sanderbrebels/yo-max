@@ -48,7 +48,7 @@ private struct TrustHeader: View {
     var body: some View {
         VStack(spacing: 16) {
             Image(yoMax: "lock.shield")
-                .font(.yoMax(24, weight: .semibold))
+                .font(.yoMax(24, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
                 .frame(width: 56, height: 56)
                 .background(
@@ -57,7 +57,7 @@ private struct TrustHeader: View {
                 )
 
             Text("Yo Max is private by default")
-                .font(.yoMax(32, weight: .bold))
+                .font(.yoMax(32, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
@@ -75,7 +75,7 @@ private struct TrustBody: View {
 
             VStack(spacing: 10) {
                 Text("Your data never has to leave your device.")
-                    .font(.yoMax(18, weight: .semibold))
+                    .font(.yoMax(18, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
                     .multilineTextAlignment(.center)
 
@@ -157,11 +157,11 @@ private struct TrustPill: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(yoMax: systemImage)
-                .font(.yoMax(13, weight: .semibold))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
 
             Text(LocalizedStringKey(title))
-                .font(.yoMax(13, weight: .semibold))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
                 .lineLimit(1)
         }

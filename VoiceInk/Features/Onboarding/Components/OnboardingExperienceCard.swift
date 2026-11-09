@@ -80,17 +80,17 @@ struct OnboardingExperienceCard: View {
             trafficLights
 
             Image(yoMax: "note.text")
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
 
             Text("Notes")
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
 
             Spacer(minLength: 0)
 
             Image(yoMax: "square.and.pencil")
-                .font(.yoMax(12, weight: .semibold))
+                .font(.yoMax(12, weight: .medium))
                 .foregroundColor(AppTheme.Text.muted)
         }
         .padding(.horizontal, 12)
@@ -129,7 +129,7 @@ struct OnboardingExperienceCard: View {
 
     private var transformArrow: some View {
         Image(yoMax: "arrow.right")
-            .font(.yoMax(15, weight: .semibold))
+            .font(.yoMax(15, weight: .medium))
             .foregroundColor(AppTheme.Text.muted)
             .frame(width: 46)
     }
@@ -153,9 +153,7 @@ struct OnboardingExperienceCard: View {
     ) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(LocalizedStringKey(kicker))
-                .font(.yoMax(11, weight: .semibold))
-                .textCase(.uppercase)
-                .tracking(1.0)
+                .font(.yoMax(11, weight: .medium))
                 .foregroundColor(AppTheme.Text.muted)
 
             content()

@@ -58,7 +58,7 @@ struct CloudProviderManagementView: View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 3) {
                 Text("Cloud Providers")
-                    .font(.yoMax(15, weight: .semibold))
+                    .font(.yoMax(15, weight: .medium))
                 HStack(alignment: .firstTextBaseline, spacing: 4) {
                     Text("Cloud providers process audio and text under their own privacy policies.")
                         .foregroundStyle(AppTheme.Text.secondary)
@@ -252,7 +252,7 @@ private struct ProviderListRow: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(descriptor.displayName)
-                        .font(.yoMax(13, weight: .semibold))
+                        .font(.yoMax(13, weight: .medium))
                         .foregroundStyle(AppTheme.Text.primary)
 
                     Text(capabilitySummary)
@@ -266,7 +266,7 @@ private struct ProviderListRow: View {
                 ProviderStatusBadge(title: statusText, color: statusColor)
 
                 Image(yoMax: "chevron.right")
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .foregroundStyle(AppTheme.Text.secondary)
             }
             .contentShape(Rectangle())

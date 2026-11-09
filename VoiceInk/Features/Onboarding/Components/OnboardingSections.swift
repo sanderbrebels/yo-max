@@ -25,7 +25,7 @@ struct OnboardingHeroHeader: View {
     var body: some View {
         VStack(spacing: 16) {
             Image(yoMax: systemImage)
-                .font(.yoMax(24, weight: .semibold))
+                .font(.yoMax(24, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
                 .frame(width: 56, height: 56)
                 .background(
@@ -35,7 +35,7 @@ struct OnboardingHeroHeader: View {
 
             VStack(spacing: 8) {
                 Text(LocalizedStringKey(title))
-                    .font(.yoMax(30, weight: .bold))
+                    .font(.yoMax(30, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
@@ -129,7 +129,7 @@ struct OnboardingBottomBar: View {
     private var primaryButton: some View {
         Button(action: onPrimary) {
             Text(LocalizedStringKey(primaryTitle))
-                .font(.yoMax(14, weight: .semibold))
+                .font(.yoMax(14, weight: .medium))
                 .foregroundColor(
                     isPrimaryEnabled ? AppTheme.Action.primaryForeground : AppTheme.Action.disabledForeground
                 )
@@ -259,7 +259,7 @@ private struct SegmentedProgressRing: View {
             }
 
             Text(progress, format: .percent.precision(.fractionLength(0)))
-                .font(.yoMax(10, weight: .semibold))
+                .font(.yoMax(10, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
         }
         .frame(width: 46, height: 46)

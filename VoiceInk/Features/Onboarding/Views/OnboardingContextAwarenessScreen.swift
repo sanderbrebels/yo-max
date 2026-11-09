@@ -32,7 +32,7 @@ private struct OnboardingContextAwarenessContent: View {
         ZStack {
             VStack(spacing: 18) {
                 Image(yoMax: "sparkles.square.fill.on.square")
-                    .font(.yoMax(24, weight: .semibold))
+                    .font(.yoMax(24, weight: .medium))
                     .foregroundColor(AppTheme.Text.primary)
                     .frame(width: 56, height: 56)
                     .background(
@@ -42,7 +42,7 @@ private struct OnboardingContextAwarenessContent: View {
 
                 VStack(spacing: 10) {
                     Text("Yo Max is context-aware.")
-                        .font(.yoMax(32, weight: .bold))
+                        .font(.yoMax(32, weight: .medium))
                         .foregroundColor(AppTheme.Text.primary)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
@@ -146,11 +146,11 @@ private struct ContextAwarenessModePill: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(yoMax: model.systemImage)
-                .font(.yoMax(13, weight: .semibold))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
 
             Text(LocalizedStringKey(model.title))
-                .font(.yoMax(13, weight: .semibold))
+                .font(.yoMax(13, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
                 .lineLimit(1)
         }
@@ -168,17 +168,16 @@ private struct ContextAwarenessModePill: View {
 }
 
 private struct ContextAwarenessModeHub: View {
-    @State private var borderRotation = Angle.degrees(0)
 
     var body: some View {
         HStack(spacing: 8) {
             Image(yoMax: "sparkles.square.fill.on.square")
-                .font(.yoMax(14, weight: .semibold))
+                .font(.yoMax(14, weight: .medium))
                 .foregroundColor(AppTheme.Text.secondary)
                 .frame(width: 18)
 
             Text("Yo Max Modes")
-                .font(.yoMax(14, weight: .semibold))
+                .font(.yoMax(14, weight: .medium))
                 .foregroundColor(AppTheme.Text.primary)
                 .lineLimit(1)
         }
@@ -192,34 +191,6 @@ private struct ContextAwarenessModeHub: View {
             Capsule()
                 .stroke(AppTheme.Border.subtle.opacity(0.88), lineWidth: 1)
         )
-        .overlay(
-            Capsule()
-                .stroke(
-                    AngularGradient(
-                        colors: [
-                            AppTheme.Border.subtle.opacity(0.20),
-                            Color.white.opacity(0.72),
-                            AppTheme.Sidebar.modes.opacity(0.86),
-                            Color.white.opacity(0.54),
-                            AppTheme.Border.subtle.opacity(0.20),
-                        ],
-                        center: .center,
-                        angle: borderRotation
-                    ),
-                    lineWidth: 1.6
-                )
-        )
-        .overlay(
-            Capsule()
-                .stroke(Color.white.opacity(0.28), lineWidth: 0.7)
-                .padding(1.5)
-        )
-        .shadow(color: AppTheme.Sidebar.modes.opacity(0.22), radius: 16, y: 8)
-        .shadow(color: Color.white.opacity(0.18), radius: 7, y: -1)
-        .onAppear {
-            withAnimation(.linear(duration: 2.6).repeatForever(autoreverses: false)) {
-                borderRotation = .degrees(360)
-            }
-        }
+        // Yo Max: no spinning gradient border or coloured glow; the hairline above is enough.
     }
 }

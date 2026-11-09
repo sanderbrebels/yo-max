@@ -434,7 +434,7 @@ struct DictionarySettingsPanel: View {
         HStack(spacing: 12) {
             Text("Dictionary Settings")
                 .font(.yoMax(13, weight: .medium))
-                .fontWeight(.semibold)
+                .fontWeight(.medium)
 
             Spacer()
 

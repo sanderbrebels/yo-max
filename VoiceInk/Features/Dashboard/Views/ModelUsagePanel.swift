@@ -108,7 +108,7 @@ private struct ModelUsageDistributionRow: View {
             VStack(alignment: .leading, spacing: 7) {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     Text(row.name)
-                        .font(.yoMax(13, weight: .semibold))
+                        .font(.yoMax(13, weight: .medium))
                         .foregroundStyle(AppTheme.Text.primary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.72)

@@ -58,7 +58,7 @@ struct OnboardingAPIScreen: View {
 
                 Button(action: onContinue) {
                     Text("Continue")
-                        .font(.yoMax(14, weight: .semibold))
+                        .font(.yoMax(14, weight: .medium))
                         .foregroundColor(
                             canContinue && isSelectedProviderVerified
                                 ? AppTheme.Action.primaryForeground : AppTheme.Action.disabledForeground

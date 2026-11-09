@@ -60,7 +60,7 @@ struct KeyCapView: View {
 
     var body: some View {
         Text(text)
-            .font(.yoMax(25, weight: .semibold))
+            .font(.yoMax(25, weight: .medium))
             .foregroundColor(colorScheme == .dark ? .white : .black)
             .padding(.horizontal, 12)
             .padding(.vertical, 8)

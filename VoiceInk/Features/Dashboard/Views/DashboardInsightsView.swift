@@ -45,7 +45,7 @@ struct DashboardInsightsView: View {
         HStack(alignment: .center, spacing: 14) {
             Button(action: onBack) {
                 Image(yoMax: "chevron.left")
-                    .font(.yoMax(12, weight: .semibold))
+                    .font(.yoMax(12, weight: .medium))
                     .frame(width: 36, height: 36)
             }
             .buttonStyle(DashboardInsightButtonStyle())
@@ -54,7 +54,7 @@ struct DashboardInsightsView: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text("Yo Max Insights")
-                    .font(.yoMax(26, weight: .bold))
+                    .font(.yoMax(26, weight: .medium))
                     .foregroundStyle(AppTheme.Text.primary)
 
                 Text("A closer look at your Yo Max usage.")

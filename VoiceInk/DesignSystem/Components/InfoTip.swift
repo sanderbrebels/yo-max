@@ -19,7 +19,7 @@ struct InfoTip: View {
         Image(yoMax: iconName)
             .imageScale(iconSize)
             .foregroundColor(iconColor)
-            .fontWeight(.semibold)
+            .fontWeight(.medium)
             .padding(5)
             .contentShape(Rectangle())
             .popover(isPresented: $isShowingTip) {

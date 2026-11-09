@@ -10,7 +10,7 @@ struct AnnouncementView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top) {
                 Text(title)
-                    .font(.yoMax(14, weight: .semibold))
+                    .font(.yoMax(14, weight: .medium))
                     .foregroundColor(.white)
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
@@ -68,20 +68,8 @@ struct AnnouncementView: View {
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .fill(.clear)
                 .background(
-                    ZStack {
-                        // Match Mini Recorder background layers
-                        Color.black.opacity(0.9)
-                        LinearGradient(
-                            colors: [
-                                Color.black.opacity(0.95),
-                                Color(red: 0.15, green: 0.15, blue: 0.15).opacity(0.9),
-                            ],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                        VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
-                            .opacity(0.05)
-                    }
+                    // Yo Max: one flat brand-dark surface, like the recorder (no gradient, no glass).
+                    AppTheme.Brand.brandDark
                     .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                 )
         )

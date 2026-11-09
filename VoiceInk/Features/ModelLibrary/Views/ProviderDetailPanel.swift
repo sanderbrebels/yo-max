@@ -66,7 +66,7 @@ struct ProviderDetailPanel: View {
 
             Text(descriptor.displayName)
                 .font(.yoMax(13, weight: .medium))
-                .fontWeight(.semibold)
+                .fontWeight(.medium)
 
             Spacer()
 
@@ -123,7 +123,7 @@ struct ProviderDetailPanel: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text("Key verified")
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
                     .foregroundStyle(AppTheme.Text.primary)
 
                 if let obfuscatedKey {
@@ -140,7 +140,7 @@ struct ProviderDetailPanel: View {
                 isShowingRemoveAPIKeyConfirmation = true
             } label: {
                 Image(yoMax: "xmark.circle.fill")
-                    .font(.yoMax(13, weight: .semibold))
+                    .font(.yoMax(13, weight: .medium))
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(AppTheme.Text.secondary)
             }
@@ -170,7 +170,7 @@ struct ProviderDetailPanel: View {
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text("API Key")
-                        .font(.yoMax(13, weight: .semibold))
+                        .font(.yoMax(13, weight: .medium))
                         .foregroundStyle(AppTheme.Text.primary)
                 }
             }
@@ -210,7 +210,7 @@ struct ProviderDetailPanel: View {
                 Link(destination: consoleURL) {
                     HStack(spacing: 7) {
                         Image(yoMax: "link")
-                            .font(.yoMax(11, weight: .semibold))
+                            .font(.yoMax(11, weight: .medium))
 
                         Text(String(format: String(localized: "Get %@ API Key"), descriptor.displayName))
                             .font(.yoMax(12, weight: .medium))
@@ -235,7 +235,7 @@ struct ProviderDetailPanel: View {
 
     private func providerDetailIcon(_ systemName: String) -> some View {
         Image(yoMax: systemName)
-            .font(.yoMax(14, weight: .semibold))
+            .font(.yoMax(14, weight: .medium))
             .foregroundStyle(AppTheme.Text.primary)
             .frame(width: 30, height: 30)
             .background(
@@ -398,7 +398,7 @@ struct ProviderDetailPanel: View {
 
     private func modelTypeIcon(_ systemName: String) -> some View {
         Image(yoMax: systemName)
-            .font(.yoMax(11, weight: .semibold))
+            .font(.yoMax(11, weight: .medium))
             .foregroundStyle(AppTheme.Text.primary)
             .frame(width: 24, height: 24)
             .background(
