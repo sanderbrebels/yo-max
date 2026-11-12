@@ -122,6 +122,13 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 ### Unslop (2026-11-09)
 - Geen emoji, uitroeptekens of "unlock" in de interface; Aeonik alleen 400/500 (`.semibold`/`.bold` → `.medium`); geen hoofdletterlabels of negatieve tracking; geen kleurverlopen of glas op vlakken (maskers die een rand laten vervagen mogen). Ook afgerond: geen AI-sparkle meer (Modes = schuifjes `sliders-horizontal`, schets `modes-icoon.html` A; elders `sparkles` → potlood `pencil-simple-line` via de tabel in `YoMaxSymbols`), vlakke keycaps in `ShortcutPreviewView`, `MetricTintBackground` weg.
 
+### Engels dicteren met rechter Option (2026-11-12)
+- Probleem: met de taal vast op `nl` vertaalt Whisper hele Engelse zinnen naar het Nederlands (losse Engelse vaktermen gaan wel goed). Keuze: **aparte modus + sneltoets**, geen automatische taalherkenning (die kiest één taal per dictaat en houdt Vlaams soms voor Afrikaans/Duits).
+- Modus **"English"**: Whisper `en`, AI-opschoning aan met de nieuwe prompt **"English"** (`PromptTemplates.englishPromptId`, versie `englishPromptVersion`; zelfde aanpak als "Nederlands" v4, vertaalt nooit). Zelfde AI-model als de standaardmodus, geen schermopname.
+- **Rechter Option** = Engels (houden of dubbeltikken, zoals fn); fn blijft Nederlands (zonder modus-sneltoets valt Yo Max terug op de standaardmodus).
+- `YoMaxEnglishMode` (`VoiceInk/App/YoMax/YoMaxEnglishMode.swift`) doet dit één keer bij het opstarten (`YoMaxDidSetUpEnglishMode`); een bestaande modus "English" wordt hergebruikt. Daarna blijven eigen wijzigingen in Modes staan.
+- Een dictaat met Nederlands én Engels door elkaar blijft lastig: spreek het Engelse stuk als apart dictaat in.
+
 ### Woordenboek gevuld (2026-11-09)
 - 30 woorden en 11 vervangingen, opgesteld uit 301 eigen dictaten (o.a. Tamax/Darmax → Tarmax, Sandoprebels → Sander Brebels, Komoto/Commode → Komoot, Whisperflow → Wispr Flow, Trava → Strava). Geïmporteerd via Dictionary → Import. Test door Sander: alle namen juist.
 - Het bestand staat **niet in git** (privénamen, openbare repo): `~/Downloads/yo-max-woordenboek.json` (formaat `voiceink.dictionary`, schemaVersion 1). Nog niet erin: de club achter **DZVG** en de lus "Coerso's Kapellke" (schrijfwijze vragen).
@@ -193,6 +200,7 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 ### Kwaliteit
 - [x] Testzinnen (`testzinnen.md`) dicteren met Groq en de prompt "Nederlands" bijstellen (v2).
 - [ ] Testzinnen opnieuw dicteren met prompt **v4** en het gevulde woordenboek; ook de opmaakopdrachten en de opdrachtmodus testen (zie `design/schetsen/index.html` › 1). Nog niet getest door Sander.
+- [ ] Engels dicteren met rechter Option testen (mail in het Engels, opmaakopdrachten zoals "new paragraph"). Nog niet getest door Sander.
 - [ ] `qwen/qwen3.8-27b` vs. `openai/gpt-oss-120b` vergelijken op Nederlands en snelheid.
 - [ ] Snelheid en kwaliteit vergelijken: Whisper Turbo vs. Parakeet V3.
 - [x] Woordenboek gevuld (30 woorden, 11 vervangingen, 2026-11-09; getest door Sander).

@@ -50,20 +50,24 @@ class AIEnhancementService: ObservableObject {
             self.customPrompts = []
         }
 
-        // Yo Max: always offer the Dutch cleanup prompt, and refresh the stored copy
-        // whenever the built-in version is bumped (PromptTemplates.dutchPromptVersion).
-        if let dutchPrompt = PromptTemplates.seedPrompts.first(where: { $0.id == PromptTemplates.dutchPromptId }) {
-            let versionKey = "YoMaxDutchPromptVersion"
-            if let index = customPrompts.firstIndex(where: { $0.id == PromptTemplates.dutchPromptId }) {
-                if UserDefaults.standard.integer(forKey: versionKey) < PromptTemplates.dutchPromptVersion {
-                    customPrompts[index] = dutchPrompt
+        // Yo Max: always offer the Dutch and English cleanup prompts, and refresh the stored
+        // copy whenever the built-in version is bumped (PromptTemplates.*PromptVersion).
+        let yoMaxPrompts: [(id: UUID, version: Int, versionKey: String)] = [
+            (PromptTemplates.dutchPromptId, PromptTemplates.dutchPromptVersion, "YoMaxDutchPromptVersion"),
+            (PromptTemplates.englishPromptId, PromptTemplates.englishPromptVersion, "YoMaxEnglishPromptVersion"),
+        ]
+        for entry in yoMaxPrompts {
+            guard let seed = PromptTemplates.seedPrompts.first(where: { $0.id == entry.id }) else { continue }
+            if let index = customPrompts.firstIndex(where: { $0.id == entry.id }) {
+                if UserDefaults.standard.integer(forKey: entry.versionKey) < entry.version {
+                    customPrompts[index] = seed
                 }
             } else {
-                customPrompts.append(dutchPrompt)
+                customPrompts.append(seed)
             }
-            savePrompts()  // didSet does not fire during init
-            UserDefaults.standard.set(PromptTemplates.dutchPromptVersion, forKey: versionKey)
+            UserDefaults.standard.set(entry.version, forKey: entry.versionKey)
         }
+        savePrompts()  // didSet does not fire during init
 
         repairModePromptSelections()
 

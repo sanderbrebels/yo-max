@@ -316,6 +316,8 @@ struct VoiceInkApp: App {
                             // Yo Max: VoiceInk announcements are never fetched.
                             // Yo Max: download Whisper Turbo and make it the Dutch default after onboarding.
                             YoMaxDefaultModelService.shared.start(whisperModelManager: whisperModelManager)
+                            // Yo Max: "English" mode on right Option (Whisper en, English prompt).
+                            YoMaxEnglishMode.setUpIfNeeded()
                             YoMaxDefaultModelService.shared.preloadCurrentModel(
                                 transcriptionModelManager: transcriptionModelManager,
                                 whisperModelManager: whisperModelManager
