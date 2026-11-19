@@ -132,6 +132,7 @@ Doel: de beste Nederlandse kwaliteit (Vlaams accent, Engelse vaktermen), snel, v
 ### Woordenboek gevuld (2026-11-09)
 - 30 woorden en 11 vervangingen, opgesteld uit 301 eigen dictaten (o.a. Tamax/Darmax → Tarmax, Sandoprebels → Sander Brebels, Komoto/Commode → Komoot, Whisperflow → Wispr Flow, Trava → Strava). Geïmporteerd via Dictionary → Import. Test door Sander: alle namen juist.
 - Het bestand staat **niet in git** (privénamen, openbare repo): `~/Downloads/yo-max-woordenboek.json` (formaat `voiceink.dictionary`, schemaVersion 1). Nog niet erin: de club achter **DZVG** en de lus "Coerso's Kapellke" (schrijfwijze vragen).
+- **Aangevuld 2026-11-19** uit 415 dictaten sinds 9/11: nu 50 woorden en 30 vervangingen (o.a. kloot/cloud code → Claude/Claude Code, Tarmac/Tarmak → Tarmax, firma → Figma, mobben → Mobbin, plus namen uit Sanders werk; die staan alleen in het bestand, niet hier: openbare repo). Schrijfwijzen bevestigd door Sander, import gecontroleerd in `dictionary.store`. Werkwijze: kandidaten vinden door per dictaat `ZTEXT` (Whisper) met `ZENHANCEDTEXT` (AI) te vergelijken; Sander bevestigt de twijfelgevallen. Importeren: Dictionary → Import, kies `yo-max-woordenboek.json` (zonder datum; met datum = oude kopie). Het bestand bevat altijd het volledige woordenboek, dus Merge en Replace geven hetzelfde. Een vervanging die alleen hoofdletters verandert (PON → Pon) wordt overgeslagen: zulke woorden alleen in de woordenlijst.
 
 ### Waarom er nog dicteerfouten zijn (analyse 2026-11-07)
 - De AI-opschoning (qwen) verbetert goed; de fouten komen uit **Whisper** bij namen ("Till you max", "Sandoprebels", "darmax.app"). **Het woordenboek was leeg (0 woorden).** Whisper krijgt de woorden als hint (`initial_prompt`) en de AI krijgt ze ook mee. Eerst woordenboek en vervangingen vullen, dan pas een ander model.
@@ -199,12 +200,13 @@ Volgorde = voorstel van prioriteit. Vink af met [x] als het klaar is.
 
 ### Kwaliteit
 - [x] Testzinnen (`testzinnen.md`) dicteren met Groq en de prompt "Nederlands" bijstellen (v2).
+- [ ] VoiceInk 2.27: de slaapfix (`ScreenSleepPreventer`, commits dfa6a098 + c9e2544d) overnemen met cherry-pick; Sander wil dat nog beslissen. Dashboardfixes van 2.27 laten liggen (conflicten met ons dashboard).
 - [ ] Testzinnen opnieuw dicteren met prompt **v4** en het gevulde woordenboek; ook de opmaakopdrachten en de opdrachtmodus testen (zie `design/schetsen/index.html` › 1). Nog niet getest door Sander.
 - [ ] Engels dicteren met rechter Option testen (mail in het Engels, opmaakopdrachten zoals "new paragraph"). Nog niet getest door Sander.
 - [ ] `qwen/qwen3.8-27b` vs. `openai/gpt-oss-120b` vergelijken op Nederlands en snelheid.
 - [ ] Snelheid en kwaliteit vergelijken: Whisper Turbo vs. Parakeet V3.
 - [x] Woordenboek gevuld (30 woorden, 11 vervangingen, 2026-11-09; getest door Sander).
-- [ ] DZVG (club) en "Coerso's Kapellke" aan het woordenboek toevoegen: eerst de juiste schrijfwijze aan Sander vragen.
+- [x] DZVG en Koersels Kapelleke plus 19 nieuwe vervangingen toegevoegd en geïmporteerd (2026-11-19). Nog niet in de praktijk getest.
 
 ### Branding en design
 - [x] Eigen app-icoon (`VoiceInk/Assets.xcassets/AppIcon.appiconset`).
